@@ -1,7 +1,7 @@
 ﻿
 namespace MultiWaveDecoder
 {
-  public class AacDecoder
+  public sealed class AacDecoder
   {
     //// AAC profiles
     //AOT_AAC_MAIN = 1; // no

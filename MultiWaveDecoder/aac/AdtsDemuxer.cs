@@ -1,30 +1,32 @@
 ﻿
 namespace MultiWaveDecoder
 {
-  public class AdtsDemuxer
+  public sealed class AdtsDemuxer
   {
-    //  this.probe = function (stream)
-    //  {
-    //    var offset = stream.offset;
+    readonly BitstreamReader bitstream;
 
-    //    // attempt to find ADTS syncword
-    //    while (stream.available(2))
-    //    {
-    //      if ((stream.readUInt16() & 0xfff6) === 0xfff0)
-    //      {
-    //        stream.seek(offset);
-    //        return true;
-    //      }
-    //    }
+    public AdtsDemuxer(DirectStreamReader stream)
+    {
+      bitstream = new BitstreamReader(stream);
+    }
 
-    //    stream.seek(offset);
-    //    return false;
-    //  };
+    public static bool Probe(DirectStreamReader stream)
+    {
+      int offset = stream.offset;
 
-    //  this.prototype.init = function ()
-    //  {
-    //    this.bitstream = new AV.Bitstream(this.stream);
-    //  };
+      // attempt to find ADTS syncword
+      while (stream.Available(2))
+      {
+        if ((stream.ReadUInt16() & 0xfff6) == 0xfff0)
+        {
+          stream.Seek(offset);
+          return true;
+        }
+      }
+
+      stream.Seek(offset);
+      return false;
+    }
 
     //  // Reads an ADTS header
     //  // See http://wiki.multimedia.cx/index.php?title=ADTS

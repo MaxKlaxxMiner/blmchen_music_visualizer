@@ -1,13 +1,16 @@
 ﻿
 namespace MultiWaveDecoder
 {
-  public class BitstreamReader
+  public sealed class BitstreamReader
   {
-    //export default class BitstreamReader {
-    //  constructor(stream) {
-    //    this.stream = stream;
-    //    this.bitPosition = 0;
-    //  }
+    readonly DirectStreamReader stream;
+    int bitPosition;
+
+    public BitstreamReader(DirectStreamReader stream)
+    {
+      this.stream = stream;
+      bitPosition = 0;
+    }
 
     //  static fromBuffer(buffer) {
     //    return new BitstreamReader(StreamReader.fromBuffer(buffer));
