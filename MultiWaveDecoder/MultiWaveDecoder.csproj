@@ -41,6 +41,20 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="aac-js\adts_demuxer.js" />
+    <Content Include="aac-js\cce.js" />
+    <Content Include="aac-js\cpe.js" />
+    <Content Include="aac-js\decoder.js" />
+    <Content Include="aac-js\fft.js" />
+    <Content Include="aac-js\filter_bank.js" />
+    <Content Include="aac-js\huffman.js" />
+    <Content Include="aac-js\ics.js" />
+    <Content Include="aac-js\mdct.js" />
+    <Content Include="aac-js\mdct_tables.js" />
+    <Content Include="aac-js\tables.js" />
+    <Content Include="aac-js\tns.js" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
