@@ -43,13 +43,38 @@ namespace MultiWaveDecoder
     }
 
     /// <summary>
-    /// liest einen UInt16-Wert aus dem Stream
+    /// liest einen Big-Endian Int-Wert aus, mit einer bestimmten Anzahl von Bytes, ohne den Offset zu verändern
     /// </summary>
+    /// <param name="bytes">Anzahl der Bytes, welche gelesen werden sollen (0-8)</param>
     /// <returns></returns>
-    public ushort ReadUInt16()
+    public long PeekInt(int bytes)
     {
-      offset += 2;
-      return (ushort)(data[offset - 2] + (data[offset - 1] << 8));
+      long result = 0;
+
+      int ofs = offset;
+      while (--bytes >= 0)
+      {
+        result = (long)data[ofs++] << bytes * 8;
+      }
+
+      return result;
+    }
+
+    /// <summary>
+    /// liest einen Big-Endian Int-Wert aus, mit einer bestimmten Anzahl von Bytes
+    /// </summary>
+    /// <param name="bytes">Anzahl der Bytes, welche gelesen werden sollen (0-8)</param>
+    /// <returns></returns>
+    public long ReadInt(int bytes)
+    {
+      long result = 0;
+
+      while (--bytes >= 0)
+      {
+        result += (long)data[offset++] << bytes * 8;
+      }
+
+      return result;
     }
 
     /// <summary>
@@ -63,12 +88,21 @@ namespace MultiWaveDecoder
     }
 
     /// <summary>
+    /// springt eine bestimmte Anzahl von Bytes weiter
+    /// </summary>
+    /// <param name="bytes">Anzahl der Bytes, welche übersprungen werden sollen (darf auch negativ sein)</param>
+    public void Advance(int bytes)
+    {
+      Seek(offset + bytes);
+    }
+
+    /// <summary>
     /// gibt den Status als lesbare Zeichenkette zurück
     /// </summary>
     /// <returns>lesbare Zeichenkette</returns>
     public override string ToString()
     {
-      return (new { offset, length = data.Length }).ToString();
+      return (new { offset, length = data.Length, avail = data.Length - offset }).ToString();
     }
   }
 }

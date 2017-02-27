@@ -1,4 +1,12 @@
 ﻿
+#region # using *.*
+
+using System;
+
+// ReSharper disable MemberCanBePrivate.Global
+
+#endregion
+
 namespace MultiWaveDecoder
 {
   public sealed class AdtsDemuxer
@@ -7,6 +15,8 @@ namespace MultiWaveDecoder
 
     public AdtsDemuxer(DirectStreamReader stream)
     {
+      if (!Probe(stream)) throw new Exception("no ADTS-Stream");
+
       bitstream = new BitstreamReader(stream);
     }
 
@@ -17,9 +27,9 @@ namespace MultiWaveDecoder
       // attempt to find ADTS syncword
       while (stream.Available(2))
       {
-        if ((stream.ReadUInt16() & 0xfff6) == 0xfff0)
+        if ((stream.ReadInt(2) & 0xfff6) == 0xfff0)
         {
-          stream.Seek(offset);
+          stream.Seek(stream.offset - 2);
           return true;
         }
       }
@@ -28,34 +38,46 @@ namespace MultiWaveDecoder
       return false;
     }
 
-    //  // Reads an ADTS header
-    //  // See http://wiki.multimedia.cx/index.php?title=ADTS
-    //  this.readHeader = function (stream)
-    //  {
-    //    if (stream.read(12) !== 0xfff)
-    //      throw new Error('Invalid ADTS header.');
+    public class AdtsHeader
+    {
+      public int profile;
+      public int samplingIndex;
+      public int chanConfig;
+      public int frameLength;
+      public int numFrames;
+    }
 
-    //    var ret = {};
-    //    stream.advance(3); // mpeg version and layer
-    //    var protectionAbsent = !!stream.read(1);
+    /// <summary>
+    /// Reads an ADTS header
+    /// See http://wiki.multimedia.cx/index.php?title=ADTS
+    /// </summary>
+    /// <returns></returns>
+    public AdtsHeader ReadHeader()
+    {
+      var stream = bitstream;
 
-    //    ret.profile = stream.read(2) + 1;
-    //    ret.samplingIndex = stream.read(4);
+      if (stream.Read(12) != 0xfff) throw new Exception("Invalid ADTS header.");
 
-    //    stream.advance(1); // private
-    //    ret.chanConfig = stream.read(3);
-    //    stream.advance(4); // original/copy, home, copywrite, and copywrite start
+      var ret = new AdtsHeader();
+      stream.Advance(3); // mpeg version and layer
+      var protectionAbsent = stream.Read(1) == 1;
 
-    //    ret.frameLength = stream.read(13);
-    //    stream.advance(11); // fullness
+      ret.profile = (int)stream.Read(2) + 1;
+      ret.samplingIndex = (int)stream.Read(4);
 
-    //    ret.numFrames = stream.read(2) + 1;
+      stream.Advance(1); // private
+      ret.chanConfig = (int)stream.Read(3);
+      stream.Advance(4); // original/copy, home, copywrite, and copywrite start
 
-    //    if (!protectionAbsent)
-    //      stream.advance(16);
+      ret.frameLength = (int)stream.Read(13);
+      stream.Advance(11); // fullness
 
-    //    return ret;
-    //  };
+      ret.numFrames = (int)stream.Read(2) + 1;
+
+      if (!protectionAbsent) stream.Advance(16);
+
+      return ret;
+    }
 
     //  this.prototype.readChunk = function ()
     //  {
@@ -64,8 +86,8 @@ namespace MultiWaveDecoder
     //      var offset = this.stream.offset;
     //      var header = ADTSDemuxer.readHeader(this.bitstream);
 
-    //      this.emit('format', {
-    //        formatID: 'aac ',
+    //      this.emit("format", {
+    //        formatID: "aac ",
     //        sampleRate: tables.SAMPLE_RATES[header.samplingIndex],
     //        channelsPerFrame: header.chanConfig,
     //        bitsPerChannel: 16
@@ -75,7 +97,7 @@ namespace MultiWaveDecoder
     //      var cookie = new Uint8Array(2);
     //      cookie[0] = (header.profile << 3) | ((header.samplingIndex >> 1) & 7);
     //      cookie[1] = ((header.samplingIndex & 1) << 7) | (header.chanConfig << 3);
-    //      this.emit('cookie', new AV.Buffer(cookie));
+    //      this.emit("cookie", new AV.Buffer(cookie));
 
     //      this.stream.seek(offset);
     //      this.sentHeader = true;
@@ -84,7 +106,7 @@ namespace MultiWaveDecoder
     //    while (this.stream.available(1))
     //    {
     //      var buffer = this.stream.readSingleBuffer(this.stream.remainingBytes());
-    //      this.emit('data', buffer);
+    //      this.emit("data", buffer);
     //    }
     //  };
   }

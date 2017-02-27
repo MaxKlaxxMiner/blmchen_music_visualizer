@@ -19,11 +19,6 @@ namespace MultiWaveDecoder
     //CHANNEL_CONFIG_FIVE_PLUS_ONE = 6;
     //CHANNEL_CONFIG_SEVEN_PLUS_ONE = 8;
 
-    //this.prototype.init = function ()
-    //{
-    //  this.format.floatingPoint = true;
-    //}
-
     //this.prototype.setCookie = function (buffer)
     //{
     //  var data = AV.Stream.fromBuffer(buffer),
@@ -61,7 +56,7 @@ namespace MultiWaveDecoder
     //    case AOT_AAC_LC:
     //    case AOT_AAC_LTP:
     //      if (stream.read(1)) // frameLengthFlag
-    //        throw new Error('frameLengthFlag not supported');
+    //        throw new Error("frameLengthFlag not supported");
 
     //      this.config.frameLength = 1024;
 
@@ -83,13 +78,13 @@ namespace MultiWaveDecoder
     //      if (this.config.chanConfig === CHANNEL_CONFIG_NONE)
     //      {
     //        stream.advance(4) // element_instance_tag
-    //        throw new Error('PCE unimplemented');
+    //        throw new Error("PCE unimplemented");
     //      }
 
     //      break;
 
     //    default:
-    //      throw new Error('AAC profile ' + this.config.profile + ' not supported.');
+    //      throw new Error("AAC profile " + this.config.profile + " not supported.");
     //  }
 
     //  this.filter_bank = new FilterBank(false, this.config.chanConfig);
@@ -179,7 +174,7 @@ namespace MultiWaveDecoder
     //        break;
 
     //      default:
-    //        throw new Error('Unknown element')
+    //        throw new Error("Unknown element")
     //    }
     //  }
 
@@ -418,7 +413,7 @@ namespace MultiWaveDecoder
     //{
     //  var cces = this.cces,
     //      isChannelPair = element instanceof CPEElement,
-    //      applyCoupling = couplingPoint === CCEElement.AFTER_IMDCT ? 'applyIndependentCoupling' : 'applyDependentCoupling';
+    //      applyCoupling = couplingPoint === CCEElement.AFTER_IMDCT ? "applyIndependentCoupling" : "applyDependentCoupling";
 
     //  for (var i = 0; i < cces.length; i++)
     //  {

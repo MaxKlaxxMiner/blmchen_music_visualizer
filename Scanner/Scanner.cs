@@ -43,11 +43,8 @@ namespace Scanner
       if (hash != "778DC42CF8DAF6C6008E332757030C50") throw new FileLoadException("MD5 error!");
 
       var reader = new DirectStreamReader(mp4Data);
-      bool probe = AdtsDemuxer.Probe(reader);
-      if (!probe) throw new Exception("Probe Error!");
-
       var demuxer = new AdtsDemuxer(reader);
-
+      var header = demuxer.ReadHeader();
 
     }
 

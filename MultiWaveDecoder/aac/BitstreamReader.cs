@@ -1,4 +1,7 @@
 ﻿
+using System;
+// ReSharper disable MemberCanBePrivate.Global
+
 namespace MultiWaveDecoder
 {
   public sealed class BitstreamReader
@@ -30,11 +33,12 @@ namespace MultiWaveDecoder
     //    return this.stream.available((bits + 8 - this.bitPosition) / 8);
     //  }
 
-    //  advance(bits) {
-    //    let pos = this.bitPosition + bits;
-    //    this.stream.advance(pos >> 3);
-    //    this.bitPosition = pos & 7;
-    //  }
+    public void Advance(int bits)
+    {
+      int pos = bitPosition + bits;
+      stream.Advance(pos >> 3);
+      bitPosition = pos & 7;
+    }
 
     //  rewind(bits) {
     //    let pos = this.bitPosition - bits;
@@ -60,58 +64,52 @@ namespace MultiWaveDecoder
     //    }
     //  }
 
-    //  read(bits, signed) {
-    //    if (bits === 0) {
-    //      return 0;
-    //    }
+    public long Read(int bits, bool signed = false)
+    {
+      if (bits == 0) return 0;
 
-    //    let mBits = bits + this.bitPosition;
-    //    let a = 0;
+      int mBits = bits + bitPosition;
+      long a;
 
-    //    if (mBits <= 8) {
-    //      a = ((this.stream.peekUInt8() << this.bitPosition) & 0xff) >>> (8 - bits);
+      if (mBits <= 8)
+      {
+        a = ((stream.PeekInt(1) << bitPosition) & 0xff) >> (8 - bits);
+      }
+      else if (mBits <= 16)
+      {
+        a = ((stream.PeekInt(2) << bitPosition) & 0xffff) >> (16 - bits);
+      }
+      else if (mBits <= 24)
+      {
+        a = ((stream.PeekInt(3) << bitPosition) & 0xffffff) >> (24 - bits);
+      }
+      else if (mBits <= 32)
+      {
+        a = ((stream.PeekInt(4) << bitPosition) & 0xffffffff) >> (32 - bits);
+      }
+      else if (mBits <= 40)
+      {
+        a = ((stream.PeekInt(5) << bitPosition) & 0xffffffffff) >> (40 - bits);
+      }
+      else
+      {
+        throw new Exception("Too many bits!");
+      }
 
-    //    } else if (mBits <= 16) {
-    //      a = ((this.stream.peekUInt16() << this.bitPosition) & 0xffff) >>> (16 - bits);
+      if (signed)
+      {
+        // if the sign bit is turned on, flip the bits and 
+        // add one to convert to a negative value
+        if ((a >> (bits - 1)) != 0)
+        {
+          a = ((1L << bits) - a) * -1;
+        }
+      }
 
-    //    } else if (mBits <= 24) {
-    //      a = ((this.stream.peekUInt24() << this.bitPosition) & 0xffffff) >>> (24 - bits);
+      Advance(bits);
 
-    //    } else if (mBits <= 32) {
-    //      a = (this.stream.peekUInt32() << this.bitPosition) >>> (32 - bits);
-
-    //    } else if (mBits <= 40) {
-    //      let a0 = this.stream.peekUInt8(0) * 0x0100000000; // same as a << 32
-    //      let a1 = this.stream.peekUInt8(1) << 24 >>> 0;
-    //      let a2 = this.stream.peekUInt8(2) << 16;
-    //      let a3 = this.stream.peekUInt8(3) << 8;
-    //      let a4 = this.stream.peekUInt8(4);
-
-    //      a = a0 + a1 + a2 + a3 + a4;
-    //      a %= Math.pow(2, 40 - this.bitPosition);                        // (a << bitPosition) & 0xffffffffff
-    //      a = Math.floor(a / Math.pow(2, 40 - this.bitPosition - bits));  // a >>> (40 - bits)
-
-    //    } else {
-    //      throw new Error("Too many bits!");
-    //    }
-
-    //    if (signed) {
-    //      // if the sign bit is turned on, flip the bits and 
-    //      // add one to convert to a negative value
-    //      if (mBits < 32) {
-    //        if (a >>> (bits - 1)) {
-    //          a = ((1 << bits >>> 0) - a) * -1;
-    //        }
-    //      } else {
-    //        if (a / Math.pow(2, bits - 1) | 0) {
-    //          a = (Math.pow(2, bits) - a) * -1;
-    //        }
-    //      }
-    //    }
-
-    //    this.advance(bits);
-    //    return a;
-    //  }
+      return a;
+    }
 
     //  peek(bits, signed) {
     //    if (bits === 0) {
