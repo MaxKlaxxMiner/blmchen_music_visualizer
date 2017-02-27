@@ -1,12 +1,18 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MultiWaveDecoder
 {
   public sealed class M4ADemuxer
   {
-    M4AStream stream;
+    readonly M4AStream stream;
+    bool readHeaders;
+    int len;
+    string type;
+    readonly List<string> atoms = new List<string>();
+    readonly List<int> offsets = new List<int>();
 
     public M4ADemuxer(M4AStream stream)
     {
@@ -73,52 +79,51 @@ namespace MultiWaveDecoder
     //      return atoms[name].after = fn;
     //    };
 
-    //    M4ADemuxer.prototype.readChunk = function() {
-    //      var handler, path, type;
-    //      this["break"] = false;
-    //      while (this.stream.available(1) && !this["break"]) {
-    //        if (!this.readHeaders) {
-    //          if (!this.stream.available(8)) {
-    //            return;
-    //          }
-    //          this.len = this.stream.readUInt32() - 8;
-    //          this.type = this.stream.readString(4);
-    //          if (this.len === 0) {
-    //            continue;
-    //          }
-    //          this.atoms.push(this.type);
-    //          this.offsets.push(this.stream.offset + this.len);
-    //          this.readHeaders = true;
-    //        }
-    //        path = this.atoms.join(".");
-    //        handler = atoms[path];
-    //        if (handler != null ? handler.fn : void 0) {
-    //          if (!(this.stream.available(this.len) || path === "mdat")) {
-    //            return;
-    //          }
-    //          handler.fn.call(this);
-    //          if (path in containers) {
-    //            this.readHeaders = false;
-    //          }
-    //        } else if (path in containers) {
-    //          this.readHeaders = false;
-    //        } else {
-    //          if (!this.stream.available(this.len)) {
-    //            return;
-    //          }
-    //          this.stream.advance(this.len);
-    //        }
-    //        while (this.stream.offset >= this.offsets[this.offsets.length - 1]) {
-    //          handler = atoms[this.atoms.join(".")];
-    //          if (handler != null ? handler.after : void 0) {
-    //            handler.after.call(this);
-    //          }
-    //          type = this.atoms.pop();
-    //          this.offsets.pop();
-    //          this.readHeaders = false;
-    //        }
-    //      }
-    //    };
+    public void ReadChunk()
+    {
+      //      var handler, path, type;
+      while (stream.Available(1))
+      {
+        if (!readHeaders)
+        {
+          if (!stream.Available(8)) return;
+          len = (int)stream.ReadUInt32() - 8;
+          type = stream.ReadString(4);
+          if (len == 0) continue;
+          atoms.Add(type);
+          offsets.Add(stream.Offset + len);
+          readHeaders = true;
+        }
+
+        //        path = this.atoms.join(".");
+        //        handler = atoms[path];
+        //        if (handler != null ? handler.fn : void 0) {
+        //          if (!(this.stream.available(this.len) || path === "mdat")) {
+        //            return;
+        //          }
+        //          handler.fn.call(this);
+        //          if (path in containers) {
+        //            this.readHeaders = false;
+        //          }
+        //        } else if (path in containers) {
+        //          this.readHeaders = false;
+        //        } else {
+        //          if (!this.stream.available(this.len)) {
+        //            return;
+        //          }
+        //          this.stream.advance(this.len);
+        //        }
+        //        while (this.stream.offset >= this.offsets[this.offsets.length - 1]) {
+        //          handler = atoms[this.atoms.join(".")];
+        //          if (handler != null ? handler.after : void 0) {
+        //            handler.after.call(this);
+        //          }
+        //          type = this.atoms.pop();
+        //          this.offsets.pop();
+        //          this.readHeaders = false;
+        //        }
+      }
+    }
 
     //    atom("ftyp", function() {
     //      var ref;

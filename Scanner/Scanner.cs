@@ -39,6 +39,8 @@ namespace Scanner
       var m4AStream = new M4AStream(m4AData);
       if (!M4ADemuxer.Probe(m4AStream)) throw new Exception("not a m4a-file!");
       var m4ADemuxer = new M4ADemuxer(m4AStream);
+      m4ADemuxer.ReadChunk();
+
     }
 
     private void Scanner_Load(object sender, EventArgs e)
