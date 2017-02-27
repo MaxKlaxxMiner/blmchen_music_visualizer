@@ -1,6 +1,6 @@
 ﻿namespace Scanner
 {
-  partial class Scanner
+  sealed partial class Scanner
   {
     /// <summary>
     /// Erforderliche Designervariable.
@@ -37,6 +37,7 @@
       this.ClientSize = new System.Drawing.Size(1089, 542);
       this.Name = "Scanner";
       this.Text = "Music Scanner";
+      this.Load += new System.EventHandler(this.Scanner_Load);
       this.ResumeLayout(false);
 
     }
