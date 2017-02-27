@@ -39,6 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="aac\AacDecoder.cs" />
+    <Compile Include="aac\AdtsDemuxer.cs" />
+    <Compile Include="aac\BitstreamReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
