@@ -3,10 +3,7 @@
 
 using System;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
 using System.Windows.Forms;
-using MultiWaveDecoder;
 
 #endregion
 
@@ -38,14 +35,7 @@ namespace Scanner
       if (!finfo.Exists) throw new FileNotFoundException(finfo.FullName);
       var mp4Data = File.ReadAllBytes(finfo.FullName);
 
-      var md5 = MD5.Create();
-      var hash = string.Concat(md5.ComputeHash(mp4Data).Select(x => x.ToString("X2")));
-      if (hash != "778DC42CF8DAF6C6008E332757030C50") throw new FileLoadException("MD5 error!");
-
-      var reader = new DirectStreamReader(mp4Data);
-      var demuxer = new AdtsDemuxer(reader);
-      var header = demuxer.ReadHeader();
-
+      
     }
 
     private void Scanner_Load(object sender, EventArgs e)
