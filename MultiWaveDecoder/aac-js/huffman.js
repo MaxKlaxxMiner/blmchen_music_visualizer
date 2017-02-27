@@ -19,7 +19,7 @@
  */
 
 // [bit length, codeword, values...]
-const HCB1 = [
+HCB1 = [
     [1, 0, 0, 0, 0, 0],
     [5, 16, 1, 0, 0, 0],
     [5, 17, -1, 0, 0, 0],
@@ -103,7 +103,7 @@ const HCB1 = [
     [11, 2047, 1, 1, 1, -1]
 ];
 
-const HCB2 = [
+HCB2 = [
     [3, 0, 0, 0, 0, 0],
     [4, 2, 1, 0, 0, 0],
     [5, 6, -1, 0, 0, 0],
@@ -187,7 +187,7 @@ const HCB2 = [
     [9, 511, 1, 1, 1, -1]
 ];
 
-const HCB3 = [
+HCB3 = [
     [1, 0, 0, 0, 0, 0],
     [4, 8, 1, 0, 0, 0],
     [4, 9, 0, 0, 0, 1],
@@ -271,7 +271,7 @@ const HCB3 = [
     [16, 65535, 2, 0, 2, 2]
 ];
 
-const HCB4 = [
+HCB4 = [
     [4, 0, 1, 1, 1, 1],
     [4, 1, 0, 1, 1, 1],
     [4, 2, 1, 1, 0, 1],
@@ -355,7 +355,7 @@ const HCB4 = [
     [12, 4095, 2, 0, 2, 2]
 ];
 
-const HCB5 = [
+HCB5 = [
     [1, 0, 0, 0],
     [4, 8, -1, 0],
     [4, 9, 1, 0],
@@ -439,7 +439,7 @@ const HCB5 = [
     [13, 8191, -4, -4]
 ];
 
-const HCB6 = [
+HCB6 = [
     [4, 0, 0, 0],
     [4, 1, 1, 0],
     [4, 2, 0, -1],
@@ -523,7 +523,7 @@ const HCB6 = [
     [11, 2047, 4, -4]
 ];
 
-const HCB7 = [
+HCB7 = [
     [1, 0, 0, 0],
     [3, 4, 1, 0],
     [3, 5, 0, 1],
@@ -590,7 +590,7 @@ const HCB7 = [
     [12, 4095, 7, 7]
 ];
 
-const HCB8 = [
+HCB8 = [
     [3, 0, 1, 1],
     [4, 2, 2, 1],
     [4, 3, 1, 0],
@@ -657,7 +657,7 @@ const HCB8 = [
     [10, 1023, 7, 7]
 ];
 
-const HCB9 = [
+HCB9 = [
     [1, 0, 0, 0],
     [3, 4, 1, 0],
     [3, 5, 0, 1],
@@ -829,7 +829,7 @@ const HCB9 = [
     [15, 32767, 12, 12]
 ];
 
-const HCB10 = [
+HCB10 = [
     [4, 0, 1, 1],
     [4, 1, 1, 2],
     [4, 2, 2, 1],
@@ -1001,7 +1001,7 @@ const HCB10 = [
     [12, 4095, 12, 12]
 ];
 
-const HCB11 = [
+HCB11 = [
     [4, 0, 0, 0],
     [4, 1, 1, 1],
     [5, 4, 16, 16],
@@ -1293,7 +1293,7 @@ const HCB11 = [
     [12, 4095, 15, 15]
 ];
 
-const HCB_SF = [
+HCB_SF = [
     [1, 0, 60],
     [3, 4, 59],
     [4, 10, 61],
@@ -1417,77 +1417,88 @@ const HCB_SF = [
     [19, 524287, 13]
 ];
 
-const CODEBOOKS = [HCB1, HCB2, HCB3, HCB4, HCB5, HCB6, HCB7, HCB8, HCB9, HCB10, HCB11];
-const UNSIGNED = [false, false, true, true, false, false, true, true, true, true, true],
-      QUAD_LEN = 4, 
-      PAIR_LEN = 2;
+CODEBOOKS = [HCB1, HCB2, HCB3, HCB4, HCB5, HCB6, HCB7, HCB8, HCB9, HCB10, HCB11];
+UNSIGNED = [false, false, true, true, false, false, true, true, true, true, true];
+QUAD_LEN = 4;
+PAIR_LEN = 2;
 
 var Huffman = {
-    findOffset: function(stream, table) {
-        var off = 0,
-            len = table[off][0],
-            cw = stream.read(len);
-            
-        while (cw !== table[off][1]) {
-            var j = table[++off][0] - len;
-            len = table[off][0];
-            cw <<= j;
-            cw |= stream.read(j);
-        }
-        
-        return off;
-    },
-    
-    signValues: function(stream, data, off, len) {
-        for (var i = off; i < off + len; i++) {
-            if (data[i] && stream.read(1))
-                data[i] = -data[i];
-        }
-    },
-    
-    getEscape: function(stream, s) {
-        var i = 4;
-        while (stream.read(1))
-            i++;
-            
-        var j = stream.read(i) | (1 << i);
-        return s < 0 ? -j : j;
-    },
-    
-    decodeScaleFactor: function(stream) {
-        var offset = this.findOffset(stream, HCB_SF);
-        return HCB_SF[offset][2];
-    },
-    
-    decodeSpectralData: function(stream, cb, data, off) {
-        var HCB = CODEBOOKS[cb - 1],
-            offset = this.findOffset(stream, HCB);
-            
-        data[off] = HCB[offset][2];
-        data[off + 1] = HCB[offset][3];
-        
-        if (cb < 5) {
-            data[off + 2] = HCB[offset][4];
-            data[off + 3] = HCB[offset][5];
-        }
-        
-        // sign and escape
-        if (cb < 11) {
-            if (UNSIGNED[cb - 1])
-                this.signValues(stream, data, off, cb < 5 ? QUAD_LEN : PAIR_LEN);
-                
-        } else if (cb === 11 || cb > 15) {
-            this.signValues(stream, data, off, cb < 5 ? QUAD_LEN : PAIR_LEN);
-            
-            if (Math.abs(data[off]) === 16) 
-                data[off] = this.getEscape(stream, data[off]);
-                
-            if (Math.abs(data[off + 1]) === 16)
-                data[off + 1] = this.getEscape(stream, data[off + 1]);
-        } else {
-            throw new Error("Huffman: unknown spectral codebook: " + cb);
-        }
+  findOffset: function (stream, table)
+  {
+    var off = 0,
+        len = table[off][0],
+        cw = stream.read(len);
+
+    while (cw !== table[off][1])
+    {
+      var j = table[++off][0] - len;
+      len = table[off][0];
+      cw <<= j;
+      cw |= stream.read(j);
     }
+
+    return off;
+  },
+
+  signValues: function (stream, data, off, len)
+  {
+    for (var i = off; i < off + len; i++)
+    {
+      if (data[i] && stream.read(1))
+        data[i] = -data[i];
+    }
+  },
+
+  getEscape: function (stream, s)
+  {
+    var i = 4;
+    while (stream.read(1))
+      i++;
+
+    var j = stream.read(i) | (1 << i);
+    return s < 0 ? -j : j;
+  },
+
+  decodeScaleFactor: function (stream)
+  {
+    var offset = this.findOffset(stream, HCB_SF);
+    return HCB_SF[offset][2];
+  },
+
+  decodeSpectralData: function (stream, cb, data, off)
+  {
+    var HCB = CODEBOOKS[cb - 1],
+        offset = this.findOffset(stream, HCB);
+
+    data[off] = HCB[offset][2];
+    data[off + 1] = HCB[offset][3];
+
+    if (cb < 5)
+    {
+      data[off + 2] = HCB[offset][4];
+      data[off + 3] = HCB[offset][5];
+    }
+
+    // sign and escape
+    if (cb < 11)
+    {
+      if (UNSIGNED[cb - 1])
+        this.signValues(stream, data, off, cb < 5 ? QUAD_LEN : PAIR_LEN);
+
+    } else if (cb === 11 || cb > 15)
+    {
+      this.signValues(stream, data, off, cb < 5 ? QUAD_LEN : PAIR_LEN);
+
+      if (Math.abs(data[off]) === 16)
+        data[off] = this.getEscape(stream, data[off]);
+
+      if (Math.abs(data[off + 1]) === 16)
+        data[off + 1] = this.getEscape(stream, data[off + 1]);
+    } else
+    {
+      throw new Error("Huffman: unknown spectral codebook: " + cb);
+    }
+  }
 };
 
 module.exports = Huffman;
