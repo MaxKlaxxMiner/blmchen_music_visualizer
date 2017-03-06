@@ -75,19 +75,6 @@ namespace MultiWaveDecoder
     //      return this.list.availableBytes - this.localOffset;
     //    };
 
-    //    Stream.prototype.advance = function(bytes) {
-    //      if (!this.available(bytes)) {
-    //        throw new UnderflowError();
-    //      }
-    //      this.localOffset += bytes;
-    //      this.offset += bytes;
-    //      while (this.list.first && this.localOffset >= this.list.first.length) {
-    //        this.localOffset -= this.list.first.length;
-    //        this.list.advance();
-    //      }
-    //      return this;
-    //    };
-
     //    Stream.prototype.rewind = function(bytes) {
     //      if (bytes > this.offset) {
     //        throw new UnderflowError();
@@ -497,7 +484,14 @@ namespace MultiWaveDecoder
 
     public bool Available(int bytes)
     {
-      return dataPos + bytes <= data.Length;
+      return bytes >= 0 && dataPos + bytes <= data.Length;
+    }
+
+    public void Advance(int bytes)
+    {
+      if (!Available(bytes)) throw new Exception("underflow");
+
+      dataPos += bytes;
     }
 
     public string PeekString(int offset, int length, Encoding encoding = null)

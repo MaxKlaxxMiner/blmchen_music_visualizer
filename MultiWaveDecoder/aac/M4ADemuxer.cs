@@ -11,8 +11,17 @@ namespace MultiWaveDecoder
     bool readHeaders;
     int len;
     string type;
-    readonly List<string> atoms = new List<string>();
+
+    sealed class Atom
+    {
+      public string type;
+      public Action<M4ADemuxer> fn = null;
+      public override string ToString() { return type; }
+    }
+
+    readonly List<Atom> atoms = new List<Atom>();
     readonly List<int> offsets = new List<int>();
+    readonly List<Atom> containers = new List<Atom>();
 
     public M4ADemuxer(M4AStream stream)
     {
@@ -53,10 +62,6 @@ namespace MultiWaveDecoder
     //      return this.tracks = [];
     //    };
 
-    //    atoms = {};
-
-    //    containers = {};
-
     //    atom = function(name, fn) {
     //      var c, container, k, len1, ref;
     //      c = [];
@@ -81,7 +86,6 @@ namespace MultiWaveDecoder
 
     public void ReadChunk()
     {
-      //      var handler, path, type;
       while (stream.Available(1))
       {
         if (!readHeaders)
@@ -90,38 +94,49 @@ namespace MultiWaveDecoder
           len = (int)stream.ReadUInt32() - 8;
           type = stream.ReadString(4);
           if (len == 0) continue;
-          atoms.Add(type);
+          atoms.Add(new Atom { type = type });
           offsets.Add(stream.Offset + len);
           readHeaders = true;
         }
 
-        //        path = this.atoms.join(".");
-        //        handler = atoms[path];
-        //        if (handler != null ? handler.fn : void 0) {
-        //          if (!(this.stream.available(this.len) || path === "mdat")) {
-        //            return;
-        //          }
-        //          handler.fn.call(this);
-        //          if (path in containers) {
-        //            this.readHeaders = false;
-        //          }
-        //        } else if (path in containers) {
-        //          this.readHeaders = false;
-        //        } else {
-        //          if (!this.stream.available(this.len)) {
-        //            return;
-        //          }
-        //          this.stream.advance(this.len);
-        //        }
-        //        while (this.stream.offset >= this.offsets[this.offsets.length - 1]) {
-        //          handler = atoms[this.atoms.join(".")];
-        //          if (handler != null ? handler.after : void 0) {
-        //            handler.after.call(this);
-        //          }
-        //          type = this.atoms.pop();
-        //          this.offsets.pop();
-        //          this.readHeaders = false;
-        //        }
+        string path = string.Join(".", atoms);
+        var handler = atoms.FirstOrDefault(x => x.type == path);
+        if (handler != null && handler.fn != null)
+        {
+          if (!(stream.Available(len) || path == "mdat"))
+          {
+            return;
+          }
+          handler.fn(this);
+          if (containers.Any(x => x.type == path))
+          {
+            readHeaders = false;
+          }
+        }
+        else if (containers.Any(x => x.type == path))
+        {
+          readHeaders = false;
+        }
+        else
+        {
+          if (!stream.Available(len))
+          {
+            return;
+          }
+          stream.Advance(len);
+        }
+
+                while (this.stream.Offset >= this.offsets[this.offsets.Count - 1]) 
+                {
+                  handler = atoms[this.atoms.join(".")];
+                  if (handler != null ? handler.after : void 0) 
+                  {
+                    handler.after.call(this);
+                  }
+                  type = this.atoms.pop();
+                  this.offsets.pop();
+                  this.readHeaders = false;
+                }
       }
     }
 
