@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="aac\Main.cs" />
+    <Compile Include="aac\util\wav\WaveFileWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
@@ -288,7 +289,6 @@
     <Content Include="jaad\spi\javasound\MP4AudioInputStream.java" />
     <Content Include="jaad\spi\javasound\package-info.java" />
     <Content Include="jaad\spi\package-info.java" />
-    <Content Include="jaad\util\wav\package-info.java" />
     <Content Include="jaad\util\wav\WaveFileWriter.java" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
