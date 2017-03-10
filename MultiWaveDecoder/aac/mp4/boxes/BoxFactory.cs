@@ -8,10 +8,10 @@ namespace MultiWaveDecoder
   {
     public static Box parseBox(Box parent, MP4InputStream inStream)
     {
-      throw new NotImplementedException();
-      //long offset = inStream.getOffset();
+      long offset = inStream.getOffset();
+      long size = inStream.readBytes(4);
 
-      //long size = inStream.readBytes(4);
+      throw new NotImplementedException();
       //long type = inStream.readBytes(4);
       //if(size==1) size = inStream.readBytes(8);
       //if(type==EXTENDED_TYPE) inStream.skipBytes(16);

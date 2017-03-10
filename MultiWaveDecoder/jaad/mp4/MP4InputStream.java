@@ -127,41 +127,6 @@ public class MP4InputStream
 	}
 
 	/**
-	 * Reads <code>len</code> bytes of data from the input into the array 
-	 * <code>b</code>. If len is zero, then no bytes are read.
-	 * 
-	 * This method blocks until all bytes could be read, the end of the stream 
-	 * is detected, or an I/O error occurs.
-	 * 
-	 * If the stream ends before <code>len</code> bytes could be read an 
-	 * EOFException is thrown.
-	 * 
-	 * @param b the buffer into which the data is read.
-	 * @param off the start offset in array <code>b</code> at which the data is written.
-	 * @param len the number of bytes to read.
-	 * @throws IOException If the end of the stream is detected, the input 
-	 * stream has been closed, or if some other I/O error occurs.
-	 */
-	public void read(byte[] b, int off, int len) throws IOException {
-		int read = 0;
-		int i = 0;
-
-		while(read<len && ! peeked.isEmpty()) {
-			b[off+read] = peeked.remove();
-			read++;
-		}
-
-		while(read<len) {
-			if(in!=null) i = in.read(b, off+read, len-read);
-			else if(fin!=null) i = fin.read(b, off+read, len-read);
-			if(i<0) throw new EOFException();
-			else read += i;
-		}
-
-		offset += read;
-	}
-
-	/**
 	 * Peeks up to eight bytes as a long value. This method blocks until all 
 	 * bytes could be read, the end of the stream is detected, or an I/O error 
 	 * occurs.
@@ -177,30 +142,6 @@ public class MP4InputStream
 		if(n<1||n>8) throw new IndexOutOfBoundsException("invalid number of bytes to read: "+n);
 		byte[] b = new byte[n];
 		peek(b, 0, n);
-
-		long result = 0;
-		for(int i = 0; i<n; i++) {
-			result = (result<<8)|(b[i]&0xFF);
-		}
-		return result;
-	}
-
-	/**
-	 * Reads up to eight bytes as a long value. This method blocks until all 
-	 * bytes could be read, the end of the stream is detected, or an I/O error 
-	 * occurs.
-	 * 
-	 * @param n the number of bytes to read >0 and <=8
-	 * @return the read bytes as a long value
-	 * @throws IOException If the end of the stream is detected, the input 
-	 * stream has been closed, or if some other I/O error occurs.
-	 * @throws IndexOutOfBoundsException if <code>n</code> is not in the range 
-	 * [1...8] inclusive.
-	 */
-	public long readBytes(int n) throws IOException {
-		if(n<1||n>8) throw new IndexOutOfBoundsException("invalid number of bytes to read: "+n);
-		byte[] b = new byte[n];
-		read(b, 0, n);
 
 		long result = 0;
 		for(int i = 0; i<n; i++) {
@@ -387,19 +328,6 @@ public class MP4InputStream
 		}
 
 		offset += l;
-	}
-
-	/**
-	 * Returns the current offset in the stream.
-	 * 
-	 * @return the current offset
-	 * @throws IOException if an I/O error occurs (only when using a RandomAccessFile)
-	 */
-	public long getOffset() throws IOException {
-		long l = -1;
-		if(in!=null) l = offset;
-		else if(fin!=null) l = fin.getFilePointer();
-		return l;
 	}
 
 	/**
