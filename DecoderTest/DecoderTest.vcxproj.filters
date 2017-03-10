@@ -27,6 +27,9 @@
     <ClCompile Include="sbr_syntax.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="decode.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="getopt.h">
@@ -96,6 +99,15 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="sbr_e_nf.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="decode.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="misc.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="wave_out.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
