@@ -333,42 +333,6 @@ public class BoxFactory implements BoxTypes {
 		PARAMETER.put(OMA_MUTABLE_DRM_INFORMATION_BOX, new string[]{"OMA DRM Mutable DRM Information Box"});
 	}
 
-	public static Box parseBox(Box parent, MP4InputStream in) throws IOException {
-		long offset = in.getOffset();
-
-		long size = in.readBytes(4);
-		long type = in.readBytes(4);
-		if(size==1) size = in.readBytes(8);
-		if(type==EXTENDED_TYPE) in.skipBytes(16);
-
-		//error protection
-		if(parent!=null) {
-			long parentLeft = (parent.getOffset()+parent.getSize())-offset;
-			if(size>parentLeft) throw new IOException("error while decoding box '"+typeToString(type)+"' at offset "+offset+": box too large for parent");
-		}
-
-		Logger.getLogger("MP4 Boxes").finest(typeToString(type));
-		BoxImpl box = forType(type, in.getOffset());
-		box.setParams(parent, size, type, offset);
-		box.decode(in);
-
-		//if box doesn't contain data it only contains children
-		Class<?> cl = box.getClass();
-		if(cl==BoxImpl.class||cl==FullBox.class) box.readChildren(in);
-
-		//check bytes left
-		long left = (box.getOffset()+box.getSize())-in.getOffset();
-		if(left>0
-				&&!(box instanceof MediaDataBox)
-				&&!(box instanceof UnknownBox)
-				&&!(box instanceof FreeSpaceBox)) LOGGER.log(Level.INFO, "bytes left after reading box {0}: left: {1}, offset: {2}", new Object[]{typeToString(type), left, in.getOffset()});
-		else if(left<0) LOGGER.log(Level.SEVERE, "box {0} overread: {1} bytes, offset: {2}", new Object[]{typeToString(type), -left, in.getOffset()});
-
-		//if mdat found and no random access, don't skip
-		if(box.getType()!=MEDIA_DATA_BOX||in.hasRandomAccess()) in.skipBytes(left);
-		return box;
-	}
-
 	//TODO: remove usages
 	public static Box parseBox(MP4InputStream in, Class<? extends BoxImpl> boxClass) throws IOException {
 		long offset = in.getOffset();

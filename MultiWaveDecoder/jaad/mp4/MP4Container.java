@@ -18,34 +18,6 @@ public class MP4Container {
 	private Box moov;
 	private Movie movie;
 
-	private void readContent() throws IOException {
-		//read all boxes
-		Box box = null;
-		long type;
-		boolean moovFound = false;
-		while(inStream.hasLeft()) {
-			box = BoxFactory.parseBox(null, in);
-			if(boxes.isEmpty()&&box.getType()!=BoxTypes.FILE_TYPE_BOX) throw new MP4Exception("no MP4 signature found");
-			boxes.add(box);
-
-			type = box.getType();
-			if(type==BoxTypes.FILE_TYPE_BOX) {
-				if(ftyp==null) ftyp = (FileTypeBox) box;
-			}
-			else if(type==BoxTypes.MOVIE_BOX) {
-				if(movie==null) moov = box;
-				moovFound = true;
-			}
-			else if(type==BoxTypes.PROGRESSIVE_DOWNLOAD_INFORMATION_BOX) {
-				if(pdin==null) pdin = (ProgressiveDownloadInformationBox) box;
-			}
-			else if(type==BoxTypes.MEDIA_DATA_BOX) {
-				if(moovFound) break;
-				else if(!inStream.hasRandomAccess()) throw new MP4Exception("movie box at end of file, need random access");
-			}
-		}
-	}
-
 	public Brand getMajorBrand() {
 		if(major==null) major = Brand.forID(ftyp.getMajorBrand());
 		return major;

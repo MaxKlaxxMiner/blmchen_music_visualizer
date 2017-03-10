@@ -6,7 +6,6 @@ public class MP4InputStream
 	public static string UTF8 = "UTF-8";
 	public static string UTF16 = "UTF-16";
 	private static int BYTE_ORDER_MASK = 0xFEFF;
-	private LinkedList<Byte> peeked = new LinkedList<Byte>();
 
 	/**
 	 * Peeks the next byte of data from the input. The value byte is returned as
@@ -428,26 +427,6 @@ public class MP4InputStream
 	 */
 	public boolean hasRandomAccess() {
 		return fin!=null;
-	}
-
-	/**
-	 * Indicates, if the input has some data left.
-	 * 
-	 * @return true if there is at least one byte left
-	 * @throws IOException if an I/O error occurs
-	 */
-	public boolean hasLeft() throws IOException {
-		boolean b;
-		if(!peeked.isEmpty()){
-			b = true;
-		}else if(fin!=null){
-			b = fin.getFilePointer()<(fin.length()-1);
-		} else {
-			int i = in.read();
-			b = (i!=-1);
-			if(b) peeked.add((byte) i);
-		}
-		return b;
 	}
 
 	/**

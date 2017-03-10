@@ -24,6 +24,7 @@ namespace MultiWaveDecoder
       using (var inFileStream = File.OpenRead(inFile))
       {
         MP4Container cont = new MP4Container(inFileStream);
+        throw new NotImplementedException();
         //  Movie movie = cont.getMovie();
         //  List<Track> tracks = movie.getTracks(AudioTrack.AudioCodec.AAC);
         //  if (tracks.isEmpty()) throw new Exception("movie does not contain any AAC track");

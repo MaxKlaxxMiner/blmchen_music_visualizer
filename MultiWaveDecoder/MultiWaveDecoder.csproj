@@ -41,7 +41,9 @@
   <ItemGroup>
     <Compile Include="aac\Main.cs" />
     <Compile Include="aac\mp4\boxes\Box.cs" />
+    <Compile Include="aac\mp4\boxes\BoxFactory.cs" />
     <Compile Include="aac\mp4\MP4Container.cs" />
+    <Compile Include="aac\mp4\MP4Exception.cs" />
     <Compile Include="aac\mp4\MP4InputStream.cs" />
     <Compile Include="aac\util\wav\WaveFileWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -271,7 +273,6 @@
     <Content Include="jaad\mp4\boxes\UnknownBox.java" />
     <Content Include="jaad\mp4\boxes\Utils.java" />
     <Content Include="jaad\mp4\MP4Container.java" />
-    <Content Include="jaad\mp4\MP4Exception.java" />
     <Content Include="jaad\mp4\MP4InputStream.java" />
     <Content Include="jaad\mp4\od\DecoderConfigDescriptor.java" />
     <Content Include="jaad\mp4\od\DecoderSpecificInfo.java" />

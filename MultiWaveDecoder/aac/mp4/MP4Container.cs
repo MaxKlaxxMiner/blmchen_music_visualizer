@@ -42,8 +42,40 @@ namespace MultiWaveDecoder
     {
       this.inStream = new MP4InputStream(inStream);
 
-      throw new NotImplementedException();
-      // readContent();
+      readContent();
+    }
+
+    void readContent()
+    {
+      // read all boxes
+      bool moovFound = false;
+      while (inStream.hasLeft())
+      {
+        var box = BoxFactory.parseBox(null, inStream);
+        throw new NotImplementedException();
+        //if (boxes.isEmpty() && box.getType() != BoxTypes.FILE_TYPE_BOX) throw new MP4Exception("no MP4 signature found");
+        //boxes.add(box);
+
+        //long type = box.getType();
+        //if (type == BoxTypes.FILE_TYPE_BOX)
+        //{
+        //  if (ftyp == null) ftyp = (FileTypeBox)box;
+        //}
+        //else if (type == BoxTypes.MOVIE_BOX)
+        //{
+        //  if (movie == null) moov = box;
+        //  moovFound = true;
+        //}
+        //else if (type == BoxTypes.PROGRESSIVE_DOWNLOAD_INFORMATION_BOX)
+        //{
+        //  if (pdin == null) pdin = (ProgressiveDownloadInformationBox)box;
+        //}
+        //else if (type == BoxTypes.MEDIA_DATA_BOX)
+        //{
+        //  if (moovFound) break;
+        //  else if (!inStream.hasRandomAccess()) throw new MP4Exception("movie box at end of file, need random access");
+        //}
+      }
     }
   }
 }
