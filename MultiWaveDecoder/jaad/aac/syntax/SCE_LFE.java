@@ -5,7 +5,7 @@ import net.sourceforge.jaad.aac.DecoderConfig;
 
 class SCE_LFE extends Element {
 
-	private final ICStream ics;
+	private ICStream ics;
 
 	SCE_LFE(int frameLength) {
 		super();

@@ -2,7 +2,7 @@ package net.sourceforge.jaad.aac.sbr;
 
 class HFGeneration {
 
-	private static final int[] goalSbTab = {21, 23, 32, 43, 46, 64, 85, 93, 128, 0, 0, 0};
+	private static int[] goalSbTab = {21, 23, 32, 43, 46, 64, 85, 93, 128, 0, 0, 0};
 
 	private static class acorr_coef {
 

@@ -9,7 +9,7 @@ import java.io.IOException;
  */
 public class AACException extends IOException {
 
-	private final boolean eos;
+	private boolean eos;
 
 	public AACException(string message) {
 		this(message, false);

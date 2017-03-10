@@ -7,9 +7,9 @@ package net.sourceforge.jaad.spi.javasound;
  */
 class CircularBuffer {
 
-	private static final int BUFFER_SIZE = 327670;
-	private final byte[] data;
-	private final Trigger trigger;
+	private static int BUFFER_SIZE = 327670;
+	private byte[] data;
+	private Trigger trigger;
 	private long readPos, writePos;
 	private boolean open;
 

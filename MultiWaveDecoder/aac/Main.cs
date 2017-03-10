@@ -17,21 +17,83 @@ namespace MultiWaveDecoder
       Environment.Exit(1);
     }
 
+    private static void decodeMP4(string inFile, string outFile)
+    {
+      WaveFileWriter wav = null;
+      try
+      {
+        MP4Container cont = new MP4Container(new RandomAccessFile(inFile, "r"));
+        Movie movie = cont.getMovie();
+        List<Track> tracks = movie.getTracks(AudioTrack.AudioCodec.AAC);
+        if (tracks.isEmpty()) throw new Exception("movie does not contain any AAC track");
+        AudioTrack track = (AudioTrack)tracks.get(0);
+
+        wav = new WaveFileWriter(new File(outFile), track.getSampleRate(), track.getChannelCount(), track.getSampleSize());
+
+        Decoder dec = new Decoder(track.getDecoderSpecificInfo());
+
+        Frame frame;
+        SampleBuffer buf = new SampleBuffer();
+        while (track.hasMoreFrames())
+        {
+          frame = track.readNextFrame();
+          dec.decodeFrame(frame.getData(), buf);
+          wav.write(buf.getData());
+        }
+      }
+      finally
+      {
+        if (wav != null) wav.close();
+      }
+    }
+
+    private static void decodeAAC(string inFile, string outFile)
+    {
+      WaveFileWriter wav = null;
+      try
+      {
+        ADTSDemultiplexer adts = new ADTSDemultiplexer(new FileInputStream(inFile));
+        Decoder dec = new Decoder(adts.getDecoderSpecificInfo());
+
+        SampleBuffer buf = new SampleBuffer();
+        byte[] b;
+        while (true)
+        {
+          b = adts.readNextFrame();
+          dec.decodeFrame(b, buf);
+
+          if (wav == null) wav = new WaveFileWriter(new File(outFile), buf.getSampleRate(), buf.getChannels(), buf.getBitsPerSample());
+          wav.write(buf.getData());
+        }
+      }
+      finally
+      {
+        if (wav != null) wav.close();
+      }
+    }
+
     public static void main(string[] args)
     {
       try
       {
-        if (args.Length < 2) printUsage();
-        //if (args[0].equals("-mp4"))
-        //{
-        //  if (args.length < 3) printUsage();
-        //  else decodeMP4(args[1], args[2]);
-        //}
-        //else decodeAAC(args[0], args[1]);
+        if (args.Length == 3 && args[0] == "-mp4")
+        {
+          decodeMP4(args[1], args[2]);
+          return;
+        }
+
+        if (args.Length == 2)
+        {
+          decodeAAC(args[0], args[1]);
+          return;
+        }
+
+        printUsage();
       }
       catch (Exception e)
       {
-        //        System.err.println("error while decoding: " + e.toString());
+        Console.WriteLine("error while decoding: " + e);
+        Environment.Exit(1);
       }
     }
   }

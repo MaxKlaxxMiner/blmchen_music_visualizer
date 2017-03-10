@@ -7,18 +7,18 @@ import java.io.IOException;
 //TODO: 3gpp brands
 public class FileTypeBox extends BoxImpl {
 
-	public static final string BRAND_ISO_BASE_MEDIA = "isom";
-	public static final string BRAND_ISO_BASE_MEDIA_2 = "iso2";
-	public static final string BRAND_ISO_BASE_MEDIA_3 = "iso3";
-	public static final string BRAND_MP4_1 = "mp41";
-	public static final string BRAND_MP4_2 = "mp42";
-	public static final string BRAND_MOBILE_MP4 = "mmp4";
-	public static final string BRAND_QUICKTIME = "qm  ";
-	public static final string BRAND_AVC = "avc1";
-	public static final string BRAND_AUDIO = "M4A ";
-	public static final string BRAND_AUDIO_2 = "M4B ";
-	public static final string BRAND_AUDIO_ENCRYPTED = "M4P ";
-	public static final string BRAND_MP7 = "mp71";
+	public static string BRAND_ISO_BASE_MEDIA = "isom";
+	public static string BRAND_ISO_BASE_MEDIA_2 = "iso2";
+	public static string BRAND_ISO_BASE_MEDIA_3 = "iso3";
+	public static string BRAND_MP4_1 = "mp41";
+	public static string BRAND_MP4_2 = "mp42";
+	public static string BRAND_MOBILE_MP4 = "mmp4";
+	public static string BRAND_QUICKTIME = "qm  ";
+	public static string BRAND_AVC = "avc1";
+	public static string BRAND_AUDIO = "M4A ";
+	public static string BRAND_AUDIO_2 = "M4B ";
+	public static string BRAND_AUDIO_ENCRYPTED = "M4P ";
+	public static string BRAND_MP7 = "mp71";
 	protected string majorBrand, minorVersion;
 	protected string[] compatibleBrands;
 

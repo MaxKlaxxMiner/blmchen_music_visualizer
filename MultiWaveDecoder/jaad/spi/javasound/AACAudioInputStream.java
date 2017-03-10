@@ -9,9 +9,9 @@ import net.sourceforge.jaad.adts.ADTSDemultiplexer;
 
 class AACAudioInputStream extends AsynchronousAudioInputStream {
 
-	private final ADTSDemultiplexer adts;
-	private final Decoder decoder;
-	private final SampleBuffer sampleBuffer;
+	private ADTSDemultiplexer adts;
+	private Decoder decoder;
+	private SampleBuffer sampleBuffer;
 	private AudioFormat audioFormat = null;
 	private byte[] saved;
 

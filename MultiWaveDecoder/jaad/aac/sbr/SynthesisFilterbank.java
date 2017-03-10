@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 class SynthesisFilterbank implements FilterbankTable {
 
-	private static final float[][] qmf32_pre_twiddle = {
+	private static float[][] qmf32_pre_twiddle = {
 		{0.999924701839145f, -0.012271538285720f},
 		{0.999322384588350f, -0.036807222941359f},
 		{0.998118112900149f, -0.061320736302209f},
@@ -41,7 +41,7 @@ class SynthesisFilterbank implements FilterbankTable {
 
 	private float[] v; //double ringbuffer
 	private int v_index; //ringbuffer index
-	private final int channels;
+	private int channels;
 
 	public SynthesisFilterbank(int channels) {
 		this.channels = channels;

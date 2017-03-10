@@ -10,10 +10,10 @@ import java.util.Arrays;
 
 public class ICSInfo implements Constants, ScaleFactorBands {
 
-	public static final int WINDOW_SHAPE_SINE = 0;
-	public static final int WINDOW_SHAPE_KAISER = 1;
-	public static final int PREVIOUS = 0;
-	public static final int CURRENT = 1;
+	public static int WINDOW_SHAPE_SINE = 0;
+	public static int WINDOW_SHAPE_KAISER = 1;
+	public static int PREVIOUS = 0;
+	public static int CURRENT = 1;
 
 	public static enum WindowSequence {
 
@@ -43,7 +43,7 @@ public class ICSInfo implements Constants, ScaleFactorBands {
 			return w;
 		}
 	}
-	private final int frameLength;
+	private int frameLength;
 	private WindowSequence windowSequence;
 	private int[] windowShape;
 	private int maxSFB;
@@ -70,7 +70,7 @@ public class ICSInfo implements Constants, ScaleFactorBands {
 
 	/* ========== decoding ========== */
 	public void decode(BitStream in, DecoderConfig conf, boolean commonWindow) throws AACException {
-		final SampleFrequency sf = conf.getSampleFrequency();
+		SampleFrequency sf = conf.getSampleFrequency();
 		if(sf.equals(SampleFrequency.SAMPLE_FREQUENCY_NONE)) throw new AACException("invalid sample frequency");
 
 		in.skipBit(); //reserved

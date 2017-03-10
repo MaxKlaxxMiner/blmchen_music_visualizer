@@ -2,15 +2,15 @@ package net.sourceforge.jaad.aac.sbr;
 
 class HFAdjustment implements Constants, NoiseTable {
 
-	private static final float[] h_smooth = {
+	private static float[] h_smooth = {
 		0.03183050093751f, 0.11516383427084f,
 		0.21816949906249f, 0.30150283239582f,
 		0.33333333333333f
 	};
-	private static final int[] phi_re = {1, 0, -1, 0};
-	private static final int[] phi_im = {0, 1, 0, -1};
-	private static final float[] limGain = {0.5f, 1.0f, 2.0f, 1e10f};
-	private static final float EPS = 1e-12f;
+	private static int[] phi_re = {1, 0, -1, 0};
+	private static int[] phi_im = {0, 1, 0, -1};
+	private static float[] limGain = {0.5f, 1.0f, 2.0f, 1e10f};
+	private static float EPS = 1e-12f;
 	private float[][] G_lim_boost = new float[MAX_L_E][MAX_M];
 	private float[][] Q_M_lim_boost = new float[MAX_L_E][MAX_M];
 	private float[][] S_M_boost = new float[MAX_L_E][MAX_M];

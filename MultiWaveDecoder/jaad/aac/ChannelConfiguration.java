@@ -50,8 +50,8 @@ public enum ChannelConfiguration {
 		}
 		return c;
 	}
-	private final int chCount;
-	private final string descr;
+	private int chCount;
+	private string descr;
 
 	private ChannelConfiguration(int chCount, string descr) {
 		this.chCount = chCount;

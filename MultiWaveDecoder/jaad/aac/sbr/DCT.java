@@ -2,10 +2,10 @@ package net.sourceforge.jaad.aac.sbr;
 
 class DCT {
 
-	private static final int n = 32;
+	private static int n = 32;
 
 	// w_array_real[i] = cos(2*M_PI*i/32)
-	private static final float[] w_array_real = {
+	private static float[] w_array_real = {
 		1.000000000000000f, 0.980785279337272f,
 		0.923879528329380f, 0.831469603195765f,
 		0.707106765732237f, 0.555570210304169f,
@@ -17,7 +17,7 @@ class DCT {
 	};
 
 	// w_array_imag[i] = sin(-2*M_PI*i/32)
-	private static final float[] w_array_imag = {
+	private static float[] w_array_imag = {
 		0.000000000000000f, -0.195090327375064f,
 		-0.382683442461104f, -0.555570246648862f,
 		-0.707106796640858f, -0.831469627480512f,
@@ -28,7 +28,7 @@ class DCT {
 		-0.382683361692986f, -0.195090241632088f
 	};
 
-	private static final float[] dct4_64_tab = {
+	private static float[] dct4_64_tab = {
 		0.999924719333649f, 0.998118102550507f,
 		0.993906974792480f, 0.987301409244537f,
 		0.978317379951477f, 0.966976463794708f,
@@ -127,7 +127,7 @@ class DCT {
 		0.897167563438416f, 0.949727773666382f
 	};
 
-	private static final int[] bit_rev_tab = {0, 16, 8, 24, 4, 20, 12, 28, 2, 18, 10, 26, 6, 22, 14, 30, 1, 17, 9, 25, 5, 21, 13, 29, 3, 19, 11, 27, 7, 23, 15, 31};
+	private static int[] bit_rev_tab = {0, 16, 8, 24, 4, 20, 12, 28, 2, 18, 10, 26, 6, 22, 14, 30, 1, 17, 9, 25, 5, 21, 13, 29, 3, 19, 11, 27, 7, 23, 15, 31};
 
 	// FFT decimation in frequency
 	// 4*16*2+16=128+16=144 multiplications

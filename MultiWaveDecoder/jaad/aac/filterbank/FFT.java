@@ -4,9 +4,9 @@ import net.sourceforge.jaad.aac.AACException;
 
 class FFT implements FFTTables {
 
-	private final int length;
-	private final float[][] roots;
-	private final float[][] rev;
+	private int length;
+	private float[][] roots;
+	private float[][] rev;
 	private float[] a, b, c, d, e1, e2;
 
 	FFT(int length) throws AACException {
@@ -40,8 +40,8 @@ class FFT implements FFTTables {
 	}
 
 	void process(float[][] in, boolean forward) {
-		final int imOff = (forward ? 2 : 1);
-		final int scale = (forward ? length: 1);
+		int imOff = (forward ? 2 : 1);
+		int scale = (forward ? length: 1);
 		//bit-reversal
 		int ii = 0;
 		for(int i = 0; i<length; i++) {

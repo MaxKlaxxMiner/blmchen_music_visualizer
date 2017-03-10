@@ -6,17 +6,17 @@ import net.sourceforge.jaad.aac.SampleFrequency;
 
 public class PCE extends Element {
 
-	private static final int MAX_FRONT_CHANNEL_ELEMENTS = 16;
-	private static final int MAX_SIDE_CHANNEL_ELEMENTS = 16;
-	private static final int MAX_BACK_CHANNEL_ELEMENTS = 16;
-	private static final int MAX_LFE_CHANNEL_ELEMENTS = 4;
-	private static final int MAX_ASSOC_DATA_ELEMENTS = 8;
-	private static final int MAX_VALID_CC_ELEMENTS = 16;
+	private static int MAX_FRONT_CHANNEL_ELEMENTS = 16;
+	private static int MAX_SIDE_CHANNEL_ELEMENTS = 16;
+	private static int MAX_BACK_CHANNEL_ELEMENTS = 16;
+	private static int MAX_LFE_CHANNEL_ELEMENTS = 4;
+	private static int MAX_ASSOC_DATA_ELEMENTS = 8;
+	private static int MAX_VALID_CC_ELEMENTS = 16;
 
 	public static class TaggedElement {
 
-		private final boolean isCPE;
-		private final int tag;
+		private boolean isCPE;
+		private int tag;
 
 		public TaggedElement(boolean isCPE, int tag) {
 			this.isCPE = isCPE;
@@ -34,8 +34,8 @@ public class PCE extends Element {
 
 	public static class CCE {
 
-		private final boolean isIndSW;
-		private final int tag;
+		private boolean isIndSW;
+		private int tag;
 
 		public CCE(boolean isIndSW, int tag) {
 			this.isIndSW = isIndSW;
@@ -58,10 +58,10 @@ public class PCE extends Element {
 	private boolean monoMixdown, stereoMixdown, matrixMixdownIDXPresent;
 	private int monoMixdownElementNumber, stereoMixdownElementNumber, matrixMixdownIDX;
 	private boolean pseudoSurround;
-	private final TaggedElement[] frontElements, sideElements, backElements;
-	private final int[] lfeElementTags;
-	private final int[] assocDataElementTags;
-	private final CCE[] ccElements;
+	private TaggedElement[] frontElements, sideElements, backElements;
+	private int[] lfeElementTags;
+	private int[] assocDataElementTags;
+	private CCE[] ccElements;
 	private byte[] commentFieldData;
 
 	public PCE() {
@@ -124,7 +124,7 @@ public class PCE extends Element {
 
 		in.byteAlign();
 
-		final int commentFieldBytes = in.readBits(8);
+		int commentFieldBytes = in.readBits(8);
 		commentFieldData = new byte[commentFieldBytes];
 		for(i = 0; i<commentFieldBytes; i++) {
 			commentFieldData[i] = (byte) in.readBits(8);

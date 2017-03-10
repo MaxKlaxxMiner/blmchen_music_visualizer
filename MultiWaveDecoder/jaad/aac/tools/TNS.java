@@ -13,8 +13,8 @@ import net.sourceforge.jaad.aac.syntax.ICStream;
  */
 public class TNS implements Constants, TNSTables {
 
-	private static final int TNS_MAX_ORDER = 20;
-	private static final int[] SHORT_BITS = {1, 4, 3}, LONG_BITS = {2, 6, 5};
+	private static int TNS_MAX_ORDER = 20;
+	private static int[] SHORT_BITS = {1, 4, 3}, LONG_BITS = {2, 6, 5};
 	//bitstream
 	private int[] nFilt;
 	private int[][] length, order;
@@ -30,8 +30,8 @@ public class TNS implements Constants, TNSTables {
 	}
 
 	public void decode(BitStream in, ICSInfo info) throws AACException {
-		final int windowCount = info.getWindowCount();
-		final int[] bits = info.isEightShortFrame() ? SHORT_BITS : LONG_BITS;
+		int windowCount = info.getWindowCount();
+		int[] bits = info.isEightShortFrame() ? SHORT_BITS : LONG_BITS;
 
 		int w, i, filt, coefLen, coefRes, coefCompress, tmp;
 		for(w = 0; w<windowCount; w++) {

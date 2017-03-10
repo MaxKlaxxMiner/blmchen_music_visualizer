@@ -3,8 +3,8 @@ package net.sourceforge.jaad.aac.gain;
 //inverse polyphase quadrature filter
 class IPQF implements GCConstants, PQFTables {
 
-	private final float[] buf;
-	private final float[][] tmp1, tmp2;
+	private float[] buf;
+	private float[][] tmp1, tmp2;
 
 	IPQF() {
 		buf = new float[BANDS];
@@ -27,7 +27,7 @@ class IPQF implements GCConstants, PQFTables {
 	}
 
 	private void performSynthesis(float[] in, float[] out, int outOff) {
-		final int kk = NPQFTAPS/(2*BANDS);
+		int kk = NPQFTAPS/(2*BANDS);
 		int i, n, k;
 		float acc;
 

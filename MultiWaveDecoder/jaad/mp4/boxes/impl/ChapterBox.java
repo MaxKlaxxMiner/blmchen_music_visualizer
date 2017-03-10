@@ -15,7 +15,7 @@ import net.sourceforge.jaad.mp4.boxes.FullBox;
  */
 public class ChapterBox extends FullBox {
 
-	private final Map<Long, string> chapters;
+	private Map<Long, string> chapters;
 
 	public ChapterBox() {
 		super("Chapter Box");
@@ -28,7 +28,7 @@ public class ChapterBox extends FullBox {
 
 		in.skipBytes(4); //??
 
-		final int count = in.read();
+		int count = in.read();
 
 		long timestamp;
 		int len;

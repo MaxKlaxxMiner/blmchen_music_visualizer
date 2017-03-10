@@ -8,7 +8,7 @@ import net.sourceforge.jaad.mp4.boxes.BoxImpl;
 
 public class NeroMetadataTagsBox extends BoxImpl {
 
-	private final Map<String, string> pairs;
+	private Map<String, string> pairs;
 
 	public NeroMetadataTagsBox() {
 		super("Nero Metadata Tags Box");

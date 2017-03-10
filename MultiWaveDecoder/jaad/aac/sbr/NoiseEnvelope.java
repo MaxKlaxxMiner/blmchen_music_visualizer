@@ -2,7 +2,7 @@ package net.sourceforge.jaad.aac.sbr;
 
 class NoiseEnvelope implements Constants {
 
-	private static final float[] E_deq_tab = {
+	private static float[] E_deq_tab = {
 		64.0f, 128.0f, 256.0f, 512.0f, 1024.0f, 2048.0f, 4096.0f, 8192.0f,
 		16384.0f, 32768.0f, 65536.0f, 131072.0f, 262144.0f, 524288.0f, 1.04858E+006f, 2.09715E+006f,
 		4.1943E+006f, 8.38861E+006f, 1.67772E+007f, 3.35544E+007f, 6.71089E+007f, 1.34218E+008f, 2.68435E+008f, 5.36871E+008f,
@@ -14,7 +14,7 @@ class NoiseEnvelope implements Constants {
 	};
 
 	/* table for Q_div2 values when no coupling */
-	private static final float[] Q_div2_tab = {
+	private static float[] Q_div2_tab = {
 		0.984615f, 0.969697f,
 		0.941176f, 0.888889f,
 		0.8f, 0.666667f,
@@ -32,7 +32,7 @@ class NoiseEnvelope implements Constants {
 		2.38419E-007f, 1.19209E-007f,
 		5.96046E-008f};
 
-	private static final float[][] Q_div2_tab_left = {
+	private static float[][] Q_div2_tab_left = {
 		{0.0302959f, 0.111015f, 0.332468f, 0.663212f, 0.882759f, 0.962406f, 0.984615f, 0.990329f, 0.991768f, 0.992128f, 0.992218f, 0.992241f, 0.992246f},
 		{0.0153809f, 0.0587695f, 0.199377f, 0.496124f, 0.790123f, 0.927536f, 0.969697f, 0.980843f, 0.98367f, 0.984379f, 0.984556f, 0.984601f, 0.984612f},
 		{0.00775006f, 0.0302744f, 0.110727f, 0.329897f, 0.653061f, 0.864865f, 0.941176f, 0.962406f, 0.967864f, 0.969238f, 0.969582f, 0.969668f, 0.96969f},
@@ -66,7 +66,7 @@ class NoiseEnvelope implements Constants {
 		{2.90967E-011f, 1.16302E-010f, 4.63849E-010f, 1.83399E-009f, 7.01231E-009f, 2.38419E-008f, 5.96046E-008f, 9.53674E-008f, 1.12197E-007f, 1.17375E-007f, 1.18745E-007f, 1.19093E-007f, 1.1918E-007f}
 	};
 
-	private static final float[][] Q_div2_tab_right = {
+	private static float[][] Q_div2_tab_right = {
 		{0.992246f, 0.992241f, 0.992218f, 0.992128f, 0.991768f, 0.990329f, 0.984615f, 0.962406f, 0.882759f, 0.663212f, 0.332468f, 0.111015f, 0.0302959f},
 		{0.984612f, 0.984601f, 0.984556f, 0.984379f, 0.98367f, 0.980843f, 0.969697f, 0.927536f, 0.790123f, 0.496124f, 0.199377f, 0.0587695f, 0.0153809f},
 		{0.96969f, 0.969668f, 0.969582f, 0.969238f, 0.967864f, 0.962406f, 0.941176f, 0.864865f, 0.653061f, 0.329897f, 0.110727f, 0.0302744f, 0.00775006f},
@@ -100,7 +100,7 @@ class NoiseEnvelope implements Constants {
 		{1.1918E-007f, 1.19093E-007f, 1.18745E-007f, 1.17375E-007f, 1.12197E-007f, 9.53674E-008f, 5.96046E-008f, 2.38419E-008f, 7.01231E-009f, 1.83399E-009f, 4.63849E-010f, 1.16302E-010f, 2.90967E-011f}
 	};
 	/* table for Q_div values when no coupling */
-	private static final float[] Q_div_tab = {
+	private static float[] Q_div_tab = {
 		0.0153846f, 0.030303f,
 		0.0588235f, 0.111111f,
 		0.2f, 0.333333f,
@@ -119,7 +119,7 @@ class NoiseEnvelope implements Constants {
 		1f
 	};
 
-	private static final float[][] Q_div_tab_left = {
+	private static float[][] Q_div_tab_left = {
 		{0.969704f, 0.888985f, 0.667532f, 0.336788f, 0.117241f, 0.037594f, 0.0153846f, 0.00967118f, 0.00823245f, 0.00787211f, 0.00778198f, 0.00775945f, 0.00775382f},
 		{0.984619f, 0.94123f, 0.800623f, 0.503876f, 0.209877f, 0.0724638f, 0.030303f, 0.0191571f, 0.0163305f, 0.0156212f, 0.0154438f, 0.0153994f, 0.0153883f},
 		{0.99225f, 0.969726f, 0.889273f, 0.670103f, 0.346939f, 0.135135f, 0.0588235f, 0.037594f, 0.0321361f, 0.0307619f, 0.0304178f, 0.0303317f, 0.0303102f},
@@ -153,7 +153,7 @@ class NoiseEnvelope implements Constants {
 		{1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f}
 	};
 
-	private static final float[][] Q_div_tab_right = {
+	private static float[][] Q_div_tab_right = {
 		{0.00775382f, 0.00775945f, 0.00778198f, 0.00787211f, 0.00823245f, 0.00967118f, 0.0153846f, 0.037594f, 0.117241f, 0.336788f, 0.667532f, 0.888985f, 0.969704f},
 		{0.0153883f, 0.0153994f, 0.0154438f, 0.0156212f, 0.0163305f, 0.0191571f, 0.030303f, 0.0724638f, 0.209877f, 0.503876f, 0.800623f, 0.94123f, 0.984619f},
 		{0.0303102f, 0.0303317f, 0.0304178f, 0.0307619f, 0.0321361f, 0.037594f, 0.0588235f, 0.135135f, 0.346939f, 0.670103f, 0.889273f, 0.969726f, 0.99225f},
@@ -373,7 +373,7 @@ class NoiseEnvelope implements Constants {
 		}
 	}
 
-	private static final float[] E_pan_tab = {
+	private static float[] E_pan_tab = {
 		0.000244081f, 0.000488043f,
 		0.00097561f, 0.00194932f,
 		0.00389105f, 0.00775194f,

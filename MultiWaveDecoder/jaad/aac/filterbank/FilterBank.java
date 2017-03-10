@@ -6,12 +6,12 @@ import net.sourceforge.jaad.aac.syntax.ICSInfo.WindowSequence;
 
 public class FilterBank implements Constants, SineWindows, KBDWindows {
 
-	private final float[][] LONG_WINDOWS;// = {SINE_LONG, KBD_LONG};
-	private final float[][] SHORT_WINDOWS;// = {SINE_SHORT, KBD_SHORT};
-	private final int length, shortLen, mid, trans;
-	private final MDCT mdctShort, mdctLong;
-	private final float[] buf;
-	private final float[][] overlaps;
+	private float[][] LONG_WINDOWS;// = {SINE_LONG, KBD_LONG};
+	private float[][] SHORT_WINDOWS;// = {SINE_SHORT, KBD_SHORT};
+	private int length, shortLen, mid, trans;
+	private MDCT mdctShort, mdctLong;
+	private float[] buf;
+	private float[][] overlaps;
 
 	public FilterBank(boolean smallFrames, int channels) throws AACException {
 		if(smallFrames) {

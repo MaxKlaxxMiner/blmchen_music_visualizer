@@ -28,14 +28,14 @@ public enum SampleFrequency {
 	 * @return a sample frequency with the given index
 	 */
 	public static SampleFrequency forInt(int i) {
-		final SampleFrequency freq;
+		SampleFrequency freq;
 		if(i>=0&&i<12) freq = values()[i];
 		else freq = SAMPLE_FREQUENCY_NONE;
 		return freq;
 	}
 
 	public static SampleFrequency forFrequency(int i) {
-		final SampleFrequency[] all = values();
+		SampleFrequency[] all = values();
 
 		SampleFrequency freq = null;
 		for(int j = 0; freq==null&&j<12; j++) {
@@ -45,8 +45,8 @@ public enum SampleFrequency {
 		if(freq==null) freq = SAMPLE_FREQUENCY_NONE;
 		return freq;
 	}
-	private final int index, frequency;
-	private final int[] prediction, maxTNS_SFB;
+	private int index, frequency;
+	private int[] prediction, maxTNS_SFB;
 
 	private SampleFrequency(int index, int freqency, int[] prediction, int[] maxTNS_SFB) {
 		this.index = index;

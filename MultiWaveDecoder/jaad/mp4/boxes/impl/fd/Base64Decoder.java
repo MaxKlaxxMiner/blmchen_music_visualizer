@@ -12,7 +12,7 @@ import java.io.PushbackInputStream;
  */
 class Base64Decoder {
 
-	/*private static final char[] CHAR_ARRAY = {
+	/*private static char[] CHAR_ARRAY = {
 	//       0   1   2   3   4   5   6   7
 	'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', // 0
 	'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', // 1
@@ -24,7 +24,7 @@ class Base64Decoder {
 	'4', '5', '6', '7', '8', '9', '+', '/' // 7
 	};*/
 	//CHAR_CONVERT_ARRAY[CHAR_ARRAY[i]] = i;
-	private static final byte[] CHAR_CONVERT_ARRAY = {
+	private static byte[] CHAR_CONVERT_ARRAY = {
 		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 		-1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63, 52, 53, 54, 55, 56, 57,
@@ -72,7 +72,7 @@ class Base64Decoder {
 		}
 		while(i=='\n'||i=='\r');
 
-		final byte[] buf = new byte[4];
+		byte[] buf = new byte[4];
 		buf[0] = (byte) i;
 
 		i = readFully(in, buf, 1, rem-1);

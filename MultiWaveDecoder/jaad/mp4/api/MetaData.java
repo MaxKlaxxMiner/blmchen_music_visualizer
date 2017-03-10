@@ -35,51 +35,51 @@ public class MetaData {
 
 	public static class Field<T> {
 
-		public static final Field<String> ARTIST = new Field<String>("Artist");
-		public static final Field<String> TITLE = new Field<String>("Title");
-		public static final Field<String> ALBUM_ARTIST = new Field<String>("Album Artist");
-		public static final Field<String> ALBUM = new Field<String>("Album");
-		public static final Field<Integer> TRACK_NUMBER = new Field<Integer>("Track Number");
-		public static final Field<Integer> TOTAL_TRACKS = new Field<Integer>("Total Tracks");
-		public static final Field<Integer> DISK_NUMBER = new Field<Integer>("Disk Number");
-		public static final Field<Integer> TOTAL_DISKS = new Field<Integer>("Total disks");
-		public static final Field<String> COMPOSER = new Field<String>("Composer");
-		public static final Field<String> COMMENTS = new Field<String>("Comments");
-		public static final Field<Integer> TEMPO = new Field<Integer>("Tempo");
-		public static final Field<Integer> LENGTH_IN_MILLISECONDS = new Field<Integer>("Length in milliseconds");
-		public static final Field<Date> RELEASE_DATE = new Field<Date>("Release Date");
-		public static final Field<String> GENRE = new Field<String>("Genre");
-		public static final Field<String> ENCODER_NAME = new Field<String>("Encoder Name");
-		public static final Field<String> ENCODER_TOOL = new Field<String>("Encoder Tool");
-		public static final Field<Date> ENCODING_DATE = new Field<Date>("Encoding Date");
-		public static final Field<String> COPYRIGHT = new Field<String>("Copyright");
-		public static final Field<String> PUBLISHER = new Field<String>("Publisher");
-		public static final Field<Boolean> COMPILATION = new Field<Boolean>("Part of compilation");
-		public static final Field<List<Artwork>> COVER_ARTWORKS = new Field<List<Artwork>>("Cover Artworks");
-		public static final Field<String> GROUPING = new Field<String>("Grouping");
-		public static final Field<String> LOCATION = new Field<String>("Location");
-		public static final Field<String> LYRICS = new Field<String>("Lyrics");
-		public static final Field<Integer> RATING = new Field<Integer>("Rating");
-		public static final Field<Integer> PODCAST = new Field<Integer>("Podcast");
-		public static final Field<String> PODCAST_URL = new Field<String>("Podcast URL");
-		public static final Field<String> CATEGORY = new Field<String>("Category");
-		public static final Field<String> KEYWORDS = new Field<String>("Keywords");
-		public static final Field<Integer> EPISODE_GLOBAL_UNIQUE_ID = new Field<Integer>("Episode Global Unique ID");
-		public static final Field<String> DESCRIPTION = new Field<String>("Description");
-		public static final Field<String> TV_SHOW = new Field<String>("TV Show");
-		public static final Field<String> TV_NETWORK = new Field<String>("TV Network");
-		public static final Field<String> TV_EPISODE = new Field<String>("TV Episode");
-		public static final Field<Integer> TV_EPISODE_NUMBER = new Field<Integer>("TV Episode Number");
-		public static final Field<Integer> TV_SEASON = new Field<Integer>("TV Season");
-		public static final Field<String> INTERNET_RADIO_STATION = new Field<String>("Internet Radio Station");
-		public static final Field<String> PURCHASE_DATE = new Field<String>("Purchase Date");
-		public static final Field<String> GAPLESS_PLAYBACK = new Field<String>("Gapless Playback");
-		public static final Field<Boolean> HD_VIDEO = new Field<Boolean>("HD Video");
-		public static final Field<Locale> LANGUAGE = new Field<Locale>("Language");
+		public static Field<String> ARTIST = new Field<String>("Artist");
+		public static Field<String> TITLE = new Field<String>("Title");
+		public static Field<String> ALBUM_ARTIST = new Field<String>("Album Artist");
+		public static Field<String> ALBUM = new Field<String>("Album");
+		public static Field<Integer> TRACK_NUMBER = new Field<Integer>("Track Number");
+		public static Field<Integer> TOTAL_TRACKS = new Field<Integer>("Total Tracks");
+		public static Field<Integer> DISK_NUMBER = new Field<Integer>("Disk Number");
+		public static Field<Integer> TOTAL_DISKS = new Field<Integer>("Total disks");
+		public static Field<String> COMPOSER = new Field<String>("Composer");
+		public static Field<String> COMMENTS = new Field<String>("Comments");
+		public static Field<Integer> TEMPO = new Field<Integer>("Tempo");
+		public static Field<Integer> LENGTH_IN_MILLISECONDS = new Field<Integer>("Length in milliseconds");
+		public static Field<Date> RELEASE_DATE = new Field<Date>("Release Date");
+		public static Field<String> GENRE = new Field<String>("Genre");
+		public static Field<String> ENCODER_NAME = new Field<String>("Encoder Name");
+		public static Field<String> ENCODER_TOOL = new Field<String>("Encoder Tool");
+		public static Field<Date> ENCODING_DATE = new Field<Date>("Encoding Date");
+		public static Field<String> COPYRIGHT = new Field<String>("Copyright");
+		public static Field<String> PUBLISHER = new Field<String>("Publisher");
+		public static Field<Boolean> COMPILATION = new Field<Boolean>("Part of compilation");
+		public static Field<List<Artwork>> COVER_ARTWORKS = new Field<List<Artwork>>("Cover Artworks");
+		public static Field<String> GROUPING = new Field<String>("Grouping");
+		public static Field<String> LOCATION = new Field<String>("Location");
+		public static Field<String> LYRICS = new Field<String>("Lyrics");
+		public static Field<Integer> RATING = new Field<Integer>("Rating");
+		public static Field<Integer> PODCAST = new Field<Integer>("Podcast");
+		public static Field<String> PODCAST_URL = new Field<String>("Podcast URL");
+		public static Field<String> CATEGORY = new Field<String>("Category");
+		public static Field<String> KEYWORDS = new Field<String>("Keywords");
+		public static Field<Integer> EPISODE_GLOBAL_UNIQUE_ID = new Field<Integer>("Episode Global Unique ID");
+		public static Field<String> DESCRIPTION = new Field<String>("Description");
+		public static Field<String> TV_SHOW = new Field<String>("TV Show");
+		public static Field<String> TV_NETWORK = new Field<String>("TV Network");
+		public static Field<String> TV_EPISODE = new Field<String>("TV Episode");
+		public static Field<Integer> TV_EPISODE_NUMBER = new Field<Integer>("TV Episode Number");
+		public static Field<Integer> TV_SEASON = new Field<Integer>("TV Season");
+		public static Field<String> INTERNET_RADIO_STATION = new Field<String>("Internet Radio Station");
+		public static Field<String> PURCHASE_DATE = new Field<String>("Purchase Date");
+		public static Field<String> GAPLESS_PLAYBACK = new Field<String>("Gapless Playback");
+		public static Field<Boolean> HD_VIDEO = new Field<Boolean>("HD Video");
+		public static Field<Locale> LANGUAGE = new Field<Locale>("Language");
 		//sorting
-		public static final Field<String> ARTIST_SORT_TEXT = new Field<String>("Artist Sort Text");
-		public static final Field<String> TITLE_SORT_TEXT = new Field<String>("Title Sort Text");
-		public static final Field<String> ALBUM_SORT_TEXT = new Field<String>("Album Sort Text");
+		public static Field<String> ARTIST_SORT_TEXT = new Field<String>("Artist Sort Text");
+		public static Field<String> TITLE_SORT_TEXT = new Field<String>("Title Sort Text");
+		public static Field<String> ALBUM_SORT_TEXT = new Field<String>("Album Sort Text");
 		private string name;
 
 		private Field(string name) {
@@ -90,7 +90,7 @@ public class MetaData {
 			return name;
 		}
 	}
-	private static final string[] STANDARD_GENRES = {
+	private static string[] STANDARD_GENRES = {
 		"undefined",
 		//IDv1 standard
 		"blues",
@@ -221,7 +221,7 @@ public class MetaData {
 		"euro house",
 		"dance hall"
 	};
-	private static final string[] NERO_TAGS = {
+	private static string[] NERO_TAGS = {
 		"artist", "title", "album", "track", "totaltracks", "year", "genre",
 		"disc", "totaldiscs", "url", "copyright", "comment", "lyrics",
 		"credits", "rating", "label", "composer", "isrc", "mood", "tempo"
@@ -273,7 +273,7 @@ public class MetaData {
 		if(udta.hasChild(BoxTypes.THREE_GPP_LOCATION_INFORMATION_BOX)) put(Field.LOCATION, ((ThreeGPPLocationBox) udta.getChild(BoxTypes.THREE_GPP_LOCATION_INFORMATION_BOX)).getPlaceName());
 		if(udta.hasChild(BoxTypes.THREE_GPP_PERFORMER_BOX)) put(Field.ARTIST, ((ThreeGPPMetadataBox) udta.getChild(BoxTypes.THREE_GPP_PERFORMER_BOX)).getData());
 		if(udta.hasChild(BoxTypes.THREE_GPP_RECORDING_YEAR_BOX)) {
-			final string value = ((ThreeGPPMetadataBox) udta.getChild(BoxTypes.THREE_GPP_RECORDING_YEAR_BOX)).getData();
+			string value = ((ThreeGPPMetadataBox) udta.getChild(BoxTypes.THREE_GPP_RECORDING_YEAR_BOX)).getData();
 			try {
 				put(Field.RELEASE_DATE, new Date(Integer.parseInt(value)));
 			}
@@ -286,7 +286,7 @@ public class MetaData {
 
 	//parses children of 'ilst': iTunes
 	private void parseITunesMetaData(Box ilst) {
-		final List<Box> boxes = ilst.getChildren();
+		List<Box> boxes = ilst.getChildren();
 		long l;
 		ITunesMetadataBox data;
 		for(Box box : boxes) {
@@ -311,7 +311,7 @@ public class MetaData {
 				String s = null;
 				if(data.getDataType()==ITunesMetadataBox.DataType.UTF8) s = data.getText();
 				else {
-					final int i = data.getInteger();
+					int i = data.getInteger();
 					if(i>0&&i<STANDARD_GENRES.length) s = STANDARD_GENRES[data.getInteger()];
 				}
 				if(s!=null) put(Field.GENRE, s);
@@ -321,10 +321,10 @@ public class MetaData {
 			else if(l==BoxTypes.COPYRIGHT_BOX) put(Field.COPYRIGHT, data.getText());
 			else if(l==BoxTypes.COMPILATION_PART_BOX) put(Field.COMPILATION, data.getBoolean());
 			else if(l==BoxTypes.COVER_BOX) {
-				final Artwork aw = new Artwork(Artwork.Type.forDataType(data.getDataType()), data.getData());
+				Artwork aw = new Artwork(Artwork.Type.forDataType(data.getDataType()), data.getData());
 				if(contents.containsKey(Field.COVER_ARTWORKS)) get(Field.COVER_ARTWORKS).add(aw);
 				else {
-					final List<Artwork> list = new ArrayList<Artwork>();
+					List<Artwork> list = new ArrayList<Artwork>();
 					list.add(aw);
 					put(Field.COVER_ARTWORKS, list);
 				}
@@ -355,7 +355,7 @@ public class MetaData {
 	//parses children of ID3
 	private void parseID3(ID3TagBox box) {
 		try {
-			final DataInputStream in = new DataInputStream(new ByteArrayInputStream(box.getID3Data()));
+			DataInputStream in = new DataInputStream(new ByteArrayInputStream(box.getID3Data()));
 			ID3Tag tag = new ID3Tag(in);
 			int[] num;
 			for(ID3Frame frame : tag.getFrames()) {
@@ -423,7 +423,7 @@ public class MetaData {
 
 	//parses children of 'tags': Nero
 	private void parseNeroTags(NeroMetadataTagsBox tags) {
-		final Map<String, string> pairs = tags.getPairs();
+		Map<String, string> pairs = tags.getPairs();
 		String val;
 		for(string key : pairs.keySet()) {
 			val = pairs.get(key);

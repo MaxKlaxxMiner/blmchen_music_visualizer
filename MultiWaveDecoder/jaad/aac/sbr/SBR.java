@@ -8,8 +8,8 @@ import net.sourceforge.jaad.aac.syntax.BitStream;
 
 public class SBR implements Constants, net.sourceforge.jaad.aac.syntax.Constants, HuffmanTables {
 
-	private final boolean downSampledSBR;
-	final SampleFrequency sample_rate;
+	private boolean downSampledSBR;
+	SampleFrequency sample_rate;
 	int maxAACLine;
 
 	int rate;

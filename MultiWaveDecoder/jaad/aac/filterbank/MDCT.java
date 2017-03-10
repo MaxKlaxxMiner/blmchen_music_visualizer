@@ -4,11 +4,11 @@ import net.sourceforge.jaad.aac.AACException;
 
 class MDCT implements MDCTTables {
 
-	private final int N, N2, N4, N8;
-	private final float[][] sincos;
-	private final FFT fft;
-	private final float[][] buf;
-	private final float[] tmp;
+	private int N, N2, N4, N8;
+	private float[][] sincos;
+	private FFT fft;
+	private float[][] buf;
+	private float[] tmp;
 
 	MDCT(int length) throws AACException {
 		N = length;

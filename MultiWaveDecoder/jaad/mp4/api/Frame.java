@@ -2,9 +2,9 @@ package net.sourceforge.jaad.mp4.api;
 
 public class Frame implements Comparable<Frame> {
 
-	private final Type type;
-	private final long offset, size;
-	private final double time;
+	private Type type;
+	private long offset, size;
+	private double time;
 	private byte[] data;
 
 	Frame(Type type, long offset, long size, double time) {
@@ -31,7 +31,7 @@ public class Frame implements Comparable<Frame> {
 	}
 
 	public int compareTo(Frame f) {
-		final double d = time-f.time;
+		double d = time-f.time;
 		//0 should not happen, since frames don't have the same timestamps
 		return (d<0) ? -1 : ((d>0) ? 1 : 0);
 	}

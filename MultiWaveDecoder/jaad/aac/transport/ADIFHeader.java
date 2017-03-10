@@ -4,9 +4,9 @@ import net.sourceforge.jaad.aac.AACException;
 import net.sourceforge.jaad.aac.syntax.BitStream;
 import net.sourceforge.jaad.aac.syntax.PCE;
 
-public final class ADIFHeader {
+public class ADIFHeader {
 
-	private static final long ADIF_ID = 0x41444946; //'ADIF'
+	private static long ADIF_ID = 0x41444946; //'ADIF'
 	private long id;
 	private boolean copyrightIDPresent;
 	private byte[] copyrightID;
@@ -25,7 +25,7 @@ public final class ADIFHeader {
 	}
 
 	public static ADIFHeader readHeader(BitStream in) throws AACException {
-		final ADIFHeader h = new ADIFHeader();
+		ADIFHeader h = new ADIFHeader();
 		h.decode(in);
 		return h;
 	}

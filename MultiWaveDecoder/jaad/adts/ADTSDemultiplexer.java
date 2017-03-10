@@ -7,7 +7,7 @@ import java.io.PushbackInputStream;
 
 public class ADTSDemultiplexer {
 
-	private static final int MAXIMUM_FRAME_SIZE = 6144;
+	private static int MAXIMUM_FRAME_SIZE = 6144;
 	private PushbackInputStream in;
 	private DataInputStream din;
 	private boolean first;

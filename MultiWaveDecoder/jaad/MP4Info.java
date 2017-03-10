@@ -12,14 +12,14 @@ import net.sourceforge.jaad.mp4.boxes.Box;
 
 public class MP4Info {
 
-	private static final string USAGE = "usage:\nnet.sourceforge.jaad.MP4Info [options] <infile>\n\n\t-b\talso print all boxes";
+	private static string USAGE = "usage:\nnet.sourceforge.jaad.MP4Info [options] <infile>\n\n\t-b\talso print all boxes";
 
 	public static void main(string[] args) {
 		try {
 			if(args.length<1) printUsage();
 			else {
 				boolean boxes = false;
-				final string file;
+				string file;
 				if(args.length>1) {
 					if(args[0].equals("-b")) boxes = true;
 					else printUsage();
@@ -27,33 +27,33 @@ public class MP4Info {
 				}
 				else file = args[0];
 
-				final MP4Container cont = new MP4Container(new RandomAccessFile(file, "r"));
-				final Movie movie = cont.getMovie();
+				MP4Container cont = new MP4Container(new RandomAccessFile(file, "r"));
+				Movie movie = cont.getMovie();
 				System.out.println("Movie:");
 
-				final List<Track> tracks = movie.getTracks();
+				List<Track> tracks = movie.getTracks();
 				Track t;
 				for(int i = 0; i<tracks.size(); i++) {
 					t = tracks.get(i);
 					System.out.println("\tTrack "+i+": "+t.getCodec()+" (language: "+t.getLanguage()+", created: "+t.getCreationTime()+")");
 
-					final Protection p = t.getProtection();
+					Protection p = t.getProtection();
 					if(p!=null) System.out.println("\t\tprotection: "+p.getScheme());
 				}
 
 				if(movie.containsMetaData()) {
 					System.out.println("\tMetadata:");
-					final Map<MetaData.Field<?>, Object> data = movie.getMetaData().getAll();
+					Map<MetaData.Field<?>, Object> data = movie.getMetaData().getAll();
 					for(MetaData.Field<?> key : data.keySet()) {
 						if(key.equals(MetaData.Field.COVER_ARTWORKS)) {
-							final List<?> l = (List<?>) data.get(MetaData.Field.COVER_ARTWORKS);
+							List<?> l = (List<?>) data.get(MetaData.Field.COVER_ARTWORKS);
 							System.out.println("\t\t"+l.size()+" Cover Artworks present");
 						}
 						else System.out.println("\t\t"+key.getName()+" = "+data.get(key));
 					}
 				}
 
-				final List<Protection> protections = movie.getProtections();
+				List<Protection> protections = movie.getProtections();
 				if(protections.size()>0) {
 					System.out.println("\tprotections:");
 					for(Protection p : protections) {
@@ -82,7 +82,7 @@ public class MP4Info {
 	}
 
 	private static void printBox(Box box, int level) {
-		final stringBuilder sb = new stringBuilder();
+		stringBuilder sb = new stringBuilder();
 		for(int i = 0; i<level; i++) {
 			sb.append("  ");
 		}

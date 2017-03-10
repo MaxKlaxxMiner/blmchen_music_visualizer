@@ -17,9 +17,9 @@ import javax.sound.sampled.spi.AudioFileReader;
 
 public class AACAudioFileReader extends AudioFileReader {
 
-	public static final AudioFileFormat.Type AAC = new AudioFileFormat.Type("AAC", "aac");
-	public static final AudioFileFormat.Type MP4 = new AudioFileFormat.Type("MP4", "mp4");
-	private static final AudioFormat.Encoding AAC_ENCODING = new AudioFormat.Encoding("AAC");
+	public static AudioFileFormat.Type AAC = new AudioFileFormat.Type("AAC", "aac");
+	public static AudioFileFormat.Type MP4 = new AudioFileFormat.Type("MP4", "mp4");
+	private static AudioFormat.Encoding AAC_ENCODING = new AudioFormat.Encoding("AAC");
 
 	@Override
 	public AudioFileFormat getAudioFileFormat(InputStream in) throws UnsupportedAudioFileException, IOException {
@@ -35,7 +35,7 @@ public class AACAudioFileReader extends AudioFileReader {
 
 	@Override
 	public AudioFileFormat getAudioFileFormat(URL url) throws UnsupportedAudioFileException, IOException {
-		final InputStream in = url.openStream();
+		InputStream in = url.openStream();
 		try {
 			return getAudioFileFormat(in);
 		}
@@ -50,7 +50,7 @@ public class AACAudioFileReader extends AudioFileReader {
 		try {
 			in = new BufferedInputStream(new FileInputStream(file));
 			in.mark(1000);
-			final AudioFileFormat aff = getAudioFileFormat(in, (int) file.length());
+			AudioFileFormat aff = getAudioFileFormat(in, (int) file.length());
 			in.reset();
 			return aff;
 		}
@@ -60,7 +60,7 @@ public class AACAudioFileReader extends AudioFileReader {
 	}
 
 	private AudioFileFormat getAudioFileFormat(InputStream in, int mediaLength) throws UnsupportedAudioFileException, IOException {
-		final byte[] head = new byte[12];
+		byte[] head = new byte[12];
 		in.read(head);
 		boolean canHandle = false;
 		if(new string(head, 4, 4).equals("ftyp"))
@@ -95,7 +95,7 @@ public class AACAudioFileReader extends AudioFileReader {
 			canHandle = false;	//Ogg stream ?
 		}
 		else {
-			final BitStream bit = new BitStream(head);
+			BitStream bit = new BitStream(head);
 			try {
 				ADTSDemultiplexer adts = new ADTSDemultiplexer(in);
 				canHandle = true;
@@ -105,7 +105,7 @@ public class AACAudioFileReader extends AudioFileReader {
 			}
 		}
 		if(canHandle) {
-			final AudioFormat format = new AudioFormat(AAC_ENCODING, AudioSystem.NOT_SPECIFIED, AudioSystem.NOT_SPECIFIED, mediaLength, AudioSystem.NOT_SPECIFIED, AudioSystem.NOT_SPECIFIED, true);
+			AudioFormat format = new AudioFormat(AAC_ENCODING, AudioSystem.NOT_SPECIFIED, AudioSystem.NOT_SPECIFIED, mediaLength, AudioSystem.NOT_SPECIFIED, AudioSystem.NOT_SPECIFIED, true);
 			return new AudioFileFormat(AAC, format, AudioSystem.NOT_SPECIFIED);
 		}
 		else throw new UnsupportedAudioFileException();
@@ -117,7 +117,7 @@ public class AACAudioFileReader extends AudioFileReader {
 		try {
 			if(!in.markSupported()) in = new BufferedInputStream(in);
 			in.mark(1000);
-			final AudioFileFormat aff = getAudioFileFormat(in, AudioSystem.NOT_SPECIFIED);
+			AudioFileFormat aff = getAudioFileFormat(in, AudioSystem.NOT_SPECIFIED);
 			in.reset();
 			return new MP4AudioInputStream(in, aff.getFormat(), aff.getFrameLength());
 		}
@@ -133,7 +133,7 @@ public class AACAudioFileReader extends AudioFileReader {
 
 	@Override
 	public AudioInputStream getAudioInputStream(URL url) throws UnsupportedAudioFileException, IOException {
-		final InputStream in = url.openStream();
+		InputStream in = url.openStream();
 		try {
 			return getAudioInputStream(in);
 		}
@@ -149,7 +149,7 @@ public class AACAudioFileReader extends AudioFileReader {
 
 	@Override
 	public AudioInputStream getAudioInputStream(File file) throws UnsupportedAudioFileException, IOException {
-		final InputStream in = new FileInputStream(file);
+		InputStream in = new FileInputStream(file);
 		try {
 			return getAudioInputStream(in);
 		}

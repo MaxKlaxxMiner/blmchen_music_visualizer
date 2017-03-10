@@ -7,9 +7,9 @@ class FIL extends Element implements Constants {
 
 	public static class DynamicRangeInfo {
 
-		private static final int MAX_NBR_BANDS = 7;
-		private final boolean[] excludeMask;
-		private final boolean[] additionalExcludedChannels;
+		private static int MAX_NBR_BANDS = 7;
+		private boolean[] excludeMask;
+		private boolean[] additionalExcludedChannels;
 		private boolean pceTagPresent;
 		private int pceInstanceTag;
 		private int tagReservedBits;
@@ -27,13 +27,13 @@ class FIL extends Element implements Constants {
 			additionalExcludedChannels = new boolean[MAX_NBR_BANDS];
 		}
 	}
-	private static final int TYPE_FILL = 0;
-	private static final int TYPE_FILL_DATA = 1;
-	private static final int TYPE_EXT_DATA_ELEMENT = 2;
-	private static final int TYPE_DYNAMIC_RANGE = 11;
-	private static final int TYPE_SBR_DATA = 13;
-	private static final int TYPE_SBR_DATA_CRC = 14;
-	private final boolean downSampledSBR;
+	private static int TYPE_FILL = 0;
+	private static int TYPE_FILL_DATA = 1;
+	private static int TYPE_EXT_DATA_ELEMENT = 2;
+	private static int TYPE_DYNAMIC_RANGE = 11;
+	private static int TYPE_SBR_DATA = 13;
+	private static int TYPE_SBR_DATA_CRC = 14;
+	private boolean downSampledSBR;
 	private DynamicRangeInfo dri;
 
 	FIL(boolean downSampledSBR) {
@@ -46,21 +46,21 @@ class FIL extends Element implements Constants {
 		if(count==15) count += in.readBits(8)-1;
 		count *= 8; //convert to bits
 
-		final int cpy = count;
-		final int pos = in.getPosition();
+		int cpy = count;
+		int pos = in.getPosition();
 
 		while(count>0) {
 			count = decodeExtensionPayload(in, count, prev, sf, sbrEnabled, smallFrames);
 		}
 
-		final int pos2 = in.getPosition()-pos;
-		final int bitsLeft = cpy-pos2;
+		int pos2 = in.getPosition()-pos;
+		int bitsLeft = cpy-pos2;
 		if(bitsLeft>0) in.skipBits(pos2);
 		else if(bitsLeft<0) throw new AACException("FIL element overread: "+bitsLeft);
 	}
 
 	private int decodeExtensionPayload(BitStream in, int count, Element prev, SampleFrequency sf, boolean sbrEnabled, boolean smallFrames) throws AACException {
-		final int type = in.readBits(4);
+		int type = in.readBits(4);
 		int ret = count-4;
 		switch(type) {
 			case TYPE_DYNAMIC_RANGE:

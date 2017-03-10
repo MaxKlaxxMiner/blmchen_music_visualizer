@@ -29,14 +29,14 @@ public class EAC3DecoderInfo extends DecoderInfo {
 
 	public class IndependentSubstream {
 
-		private final int index;
-		private final DependentSubstream[] dependentSubstreams;
+		private int index;
+		private DependentSubstream[] dependentSubstreams;
 
 		private IndependentSubstream(int index) {
 			this.index = index;
 
-			final int loc = box.getDependentSubstreamLocation()[index];
-			final List<DependentSubstream> list = new ArrayList<DependentSubstream>();
+			int loc = box.getDependentSubstreamLocation()[index];
+			List<DependentSubstream> list = new ArrayList<DependentSubstream>();
 			for(int i = 0; i<9; i++) {
 				if(((loc>>(8-i))&1)==1) list.add(DependentSubstream.values()[i]);
 			}

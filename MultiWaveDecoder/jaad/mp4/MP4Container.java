@@ -54,12 +54,12 @@ public class MP4Container {
 		}
 		log.setLevel(Level.WARNING);
 
-		final ConsoleHandler h = new ConsoleHandler();
+		ConsoleHandler h = new ConsoleHandler();
 		h.setLevel(Level.ALL);
 		log.addHandler(h);
 	}
-	private final MP4InputStream in;
-	private final List<Box> boxes;
+	private MP4InputStream in;
+	private List<Box> boxes;
 	private Brand major, minor;
 	private Brand[] compatible;
 	private FileTypeBox ftyp;
@@ -121,7 +121,7 @@ public class MP4Container {
 
 	public Brand[] getCompatibleBrands() {
 		if(compatible==null) {
-			final string[] s = ftyp.getCompatibleBrands();
+			string[] s = ftyp.getCompatibleBrands();
 			compatible = new Brand[s.length];
 			for(int i = 0; i<s.length; i++) {
 				compatible[i] = Brand.forID(s[i]);

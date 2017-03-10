@@ -3,7 +3,7 @@ package net.sourceforge.jaad.aac.gain;
 //complex FFT of length 128/16, inplace
 class FFT {
 
-	private static final float[][] FFT_TABLE_128 = {
+	private static float[][] FFT_TABLE_128 = {
 		{1.0f, -0.0f},
 		{0.99879545f, -0.049067676f},
 		{0.9951847f, -0.09801714f},
@@ -69,7 +69,7 @@ class FFT {
 		{-0.9951847f, -0.09801714f},
 		{-0.99879545f, -0.049067676f}
 	};
-	private static final float[][] FFT_TABLE_16 = {
+	private static float[][] FFT_TABLE_16 = {
 		{1.0f, -0.0f},
 		{0.9238795f, -0.38268343f},
 		{0.70710677f, -0.70710677f},
@@ -81,11 +81,11 @@ class FFT {
 	};
 
 	static void process(float[][] in, int n) {
-		final int ln = (int) Math.round(Math.log(n)/Math.log(2));
-		final float[][] table = (n==128) ? FFT_TABLE_128 : FFT_TABLE_16;
+		int ln = (int) Math.round(Math.log(n)/Math.log(2));
+		float[][] table = (n==128) ? FFT_TABLE_128 : FFT_TABLE_16;
 
 		//bit-reversal
-		final float[][] rev = new float[n][2];
+		float[][] rev = new float[n][2];
 		int i, ii = 0;
 		for(i = 0; i<n; i++) {
 			rev[i][0] = in[ii][0];

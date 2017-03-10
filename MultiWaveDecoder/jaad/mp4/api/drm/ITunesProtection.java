@@ -7,17 +7,17 @@ import net.sourceforge.jaad.mp4.boxes.impl.drm.FairPlayDataBox;
 
 public class ITunesProtection extends Protection {
 
-	private final string userID, userName, userKey;
-	private final byte[] privateKey, initializationVector;
+	private string userID, userName, userKey;
+	private byte[] privateKey, initializationVector;
 
 	public ITunesProtection(Box sinf) {
 		super(sinf);
 
-		final Box schi = sinf.getChild(BoxTypes.SCHEME_INFORMATION_BOX);
+		Box schi = sinf.getChild(BoxTypes.SCHEME_INFORMATION_BOX);
 		userID = new string(((FairPlayDataBox) schi.getChild(BoxTypes.FAIRPLAY_USER_ID_BOX)).getData());
 		
 		//user name box is filled with 0
-		final byte[] b = ((FairPlayDataBox) schi.getChild(BoxTypes.FAIRPLAY_USER_NAME_BOX)).getData();
+		byte[] b = ((FairPlayDataBox) schi.getChild(BoxTypes.FAIRPLAY_USER_NAME_BOX)).getData();
 		int i = 0;
 		while(b[i]!=0) {
 			i++;

@@ -8,17 +8,17 @@ import java.util.List;
 
 class ID3Tag {
 
-	private static final int ID3_TAG = 4801587; //'ID3'
-	private static final int SUPPORTED_VERSION = 4; //id3v2.4
-	private final List<ID3Frame> frames;
-	private final int tag, flags, len;
+	private static int ID3_TAG = 4801587; //'ID3'
+	private static int SUPPORTED_VERSION = 4; //id3v2.4
+	private List<ID3Frame> frames;
+	private int tag, flags, len;
 
 	ID3Tag(DataInputStream in) throws IOException {
 		frames = new ArrayList<ID3Frame>();
 
 		//id3v2 header
 		tag = (in.read()<<16)|(in.read()<<8)|in.read(); //'ID3'
-		final int majorVersion = in.read();
+		int majorVersion = in.read();
 		in.read(); //revision
 		flags = in.read();
 		len = readSynch(in);
@@ -26,7 +26,7 @@ class ID3Tag {
 		if(tag==ID3_TAG&&majorVersion<=SUPPORTED_VERSION) {
 			if((flags&0x40)==0x40) {
 				//extended header; TODO: parse
-				final int extSize = readSynch(in);
+				int extSize = readSynch(in);
 				in.skipBytes(extSize-6);
 			}
 

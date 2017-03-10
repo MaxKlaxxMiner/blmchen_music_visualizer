@@ -14,17 +14,17 @@ import net.sourceforge.jaad.mp4.api.Track;
 
 class MP4AudioInputStream extends AsynchronousAudioInputStream {
 
-	private final AudioTrack track;
-	private final Decoder decoder;
-	private final SampleBuffer sampleBuffer;
+	private AudioTrack track;
+	private Decoder decoder;
+	private SampleBuffer sampleBuffer;
 	private AudioFormat audioFormat;
 	private byte[] saved;
 
 	MP4AudioInputStream(InputStream in, AudioFormat format, long length) throws IOException {
 		super(in, format, length);
-		final MP4Container cont = new MP4Container(in);
-		final Movie movie = cont.getMovie();
-		final List<Track> tracks = movie.getTracks(AudioTrack.AudioCodec.AAC);
+		MP4Container cont = new MP4Container(in);
+		Movie movie = cont.getMovie();
+		List<Track> tracks = movie.getTracks(AudioTrack.AudioCodec.AAC);
 		if(tracks.isEmpty()) throw new IOException("movie does not contain any AAC track");
 		track = (AudioTrack) tracks.get(0);
 
@@ -60,7 +60,7 @@ class MP4AudioInputStream extends AsynchronousAudioInputStream {
 			return;
 		}
 		try {
-			final Frame frame = track.readNextFrame();
+			Frame frame = track.readNextFrame();
 			if(frame==null) {
 				buffer.close();
 				return;

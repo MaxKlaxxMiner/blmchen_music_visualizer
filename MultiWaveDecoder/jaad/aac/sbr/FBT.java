@@ -21,9 +21,9 @@ class FBT implements Constants {
 			return startMin+OFFSET[6][bs_start_freq];
 		}
 	}
-	private static final int[] stopMinTable = {13, 15, 20, 21, 23,
+	private static int[] stopMinTable = {13, 15, 20, 21, 23,
 		32, 32, 35, 48, 64, 70, 96};
-	private static final int[][] STOP_OFFSET_TABLE = {
+	private static int[][] STOP_OFFSET_TABLE = {
 		{0, 2, 4, 6, 8, 11, 14, 18, 22, 26, 31, 37, 44, 51},
 		{0, 2, 4, 6, 8, 11, 14, 18, 22, 26, 31, 36, 42, 49},
 		{0, 2, 4, 6, 8, 11, 14, 17, 21, 25, 29, 34, 39, 44},
@@ -322,7 +322,7 @@ class FBT implements Constants {
 	 * This reduces the number calls to this functions needed (now only on
 	 * header reset)
 	 */
-	private static final float[] limiterBandsCompare = {1.327152f,
+	private static float[] limiterBandsCompare = {1.327152f,
 		1.185093f, 1.119872f};
 
 	public static void limiter_frequency_table(SBR sbr) {

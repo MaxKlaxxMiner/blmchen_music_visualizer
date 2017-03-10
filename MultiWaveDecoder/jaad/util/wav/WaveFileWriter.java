@@ -6,15 +6,15 @@ import java.io.RandomAccessFile;
 
 public class WaveFileWriter {
 
-	private static final int HEADER_LENGTH = 44;
-	private static final int RIFF = 1380533830; //'RIFF'
-	private static final long WAVE_FMT = 6287401410857104416l; //'WAVEfmt '
-	private static final int DATA = 1684108385; //'data'
-	private static final int BYTE_MASK = 0xFF;
-	private final RandomAccessFile out;
-	private final int sampleRate;
-	private final int channels;
-	private final int bitsPerSample;
+	private static int HEADER_LENGTH = 44;
+	private static int RIFF = 1380533830; //'RIFF'
+	private static long WAVE_FMT = 6287401410857104416l; //'WAVEfmt '
+	private static int DATA = 1684108385; //'data'
+	private static int BYTE_MASK = 0xFF;
+	private RandomAccessFile out;
+	private int sampleRate;
+	private int channels;
+	private int bitsPerSample;
 	private int bytesWritten;
 
 	public WaveFileWriter(File output, int sampleRate, int channels, int bitsPerSample) throws IOException {
@@ -62,7 +62,7 @@ public class WaveFileWriter {
 
 	private void writeWaveHeader() throws IOException {
 		out.seek(0);
-		final int bytesPerSec = (bitsPerSample+7)/8;
+		int bytesPerSec = (bitsPerSample+7)/8;
 
 		out.writeInt(RIFF); //wave label
 		out.writeInt(Integer.reverseBytes(bytesWritten+36)); //length in bytes without header

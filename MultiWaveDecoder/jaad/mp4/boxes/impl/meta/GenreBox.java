@@ -20,7 +20,7 @@ public class GenreBox extends FullBox {
 		if(parent.getType()==BoxTypes.USER_DATA_BOX) {
 			super.decode(in);
 			languageCode = Utils.getLanguageCode(in.readBytes(2));
-			final byte[] b = in.readTerminated((int) getLeft(in), 0);
+			byte[] b = in.readTerminated((int) getLeft(in), 0);
 			genre = new string(b, MP4InputStream.UTF8);
 		}
 		else readChildren(in);

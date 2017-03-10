@@ -45,13 +45,13 @@ public class SampleGroupDescriptionBox extends FullBox {
 		groupingType = in.readBytes(4);
 		defaultLength = (version==1)?in.readBytes(4):0;
 
-		final int entryCount = (int) in.readBytes(4);
+		int entryCount = (int) in.readBytes(4);
 
 		//TODO!
-		/*final HandlerBox hdlr = (HandlerBox) parent.getParent().getParent().getChild(BoxTypes.HANDLER_BOX);
-		final int handlerType = (int) hdlr.getHandlerType();
+		/*HandlerBox hdlr = (HandlerBox) parent.getParent().getParent().getChild(BoxTypes.HANDLER_BOX);
+		int handlerType = (int) hdlr.getHandlerType();
 		
-		final Class<? extends BoxImpl> boxClass;
+		Class<? extends BoxImpl> boxClass;
 		switch(handlerType) {
 		case HandlerBox.TYPE_VIDEO:
 		boxClass = VisualSampleGroupEntry.class;

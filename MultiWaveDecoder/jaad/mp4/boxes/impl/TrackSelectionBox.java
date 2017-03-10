@@ -44,7 +44,7 @@ import net.sourceforge.jaad.mp4.boxes.FullBox;
 public class TrackSelectionBox extends FullBox {
 
 	private long switchGroup;
-	private final List<Long> attributes;
+	private List<Long> attributes;
 
 	public TrackSelectionBox() {
 		super("Track Selection Box");

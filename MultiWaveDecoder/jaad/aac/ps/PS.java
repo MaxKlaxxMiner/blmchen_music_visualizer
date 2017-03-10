@@ -1125,7 +1125,7 @@ public class PS implements PSConstants, PSTables, HuffmanTables {
 				/* 0 < L <= 32: integer */
 				L = (float) (this.border_position[env+1]-this.border_position[env]);
 
-				/* obtain final H_xy by means of linear interpolation */
+				/* obtain H_xy by means of linear interpolation */
 				deltaH11[0] = (h11[0]-this.h11_prev[gr][0])/L;
 				deltaH12[0] = (h12[0]-this.h12_prev[gr][0])/L;
 				deltaH21[0] = (h21[0]-this.h21_prev[gr][0])/L;
@@ -1143,7 +1143,7 @@ public class PS implements PSConstants, PSTables, HuffmanTables {
 
 				/* only calculate imaginary part when needed */
 				if((this.enable_ipdopd)&&(bk<nr_ipdopd_par)) {
-					/* obtain final H_xy by means of linear interpolation */
+					/* obtain H_xy by means of linear interpolation */
 					deltaH11[1] = (h11[1]-this.h11_prev[gr][1])/L;
 					deltaH12[1] = (h12[1]-this.h12_prev[gr][1])/L;
 					deltaH21[1] = (h21[1]-this.h21_prev[gr][1])/L;
@@ -1219,7 +1219,7 @@ public class PS implements PSConstants, PSTables, HuffmanTables {
 							tempRight[1] += (H12[1]*inLeft[0])+(H22[1]*inRight[0]);
 						}
 
-						/* store final samples */
+						/* store samples */
 						if(gr<this.num_hybrid_groups) {
 							X_hybrid_left[n][sb][0] = tempLeft[0];
 							X_hybrid_left[n][sb][1] = tempLeft[1];

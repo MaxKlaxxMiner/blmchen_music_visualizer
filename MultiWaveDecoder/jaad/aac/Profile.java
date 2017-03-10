@@ -25,7 +25,7 @@ public enum Profile {
 	ER_TWIN_VQ(21, "Error Resilient TwinVQ", false),
 	ER_BSAC(22, "Error Resilient BSAC", false),
 	ER_AAC_LD(23, "Error Resilient AAC Low Delay", false);
-	private static final Profile[] ALL = {
+	private static Profile[] ALL = {
 		AAC_MAIN, AAC_LC, AAC_SSR, AAC_LTP, AAC_SBR, AAC_SCALABLE, TWIN_VQ,
 		null, null, null, AAC_LD, null, null, null, null, null, ER_AAC_LC, ER_AAC_SSR,
 		ER_AAC_LTP, ER_AAC_SCALABLE, ER_TWIN_VQ, ER_BSAC, ER_AAC_LD
@@ -42,9 +42,9 @@ public enum Profile {
 		else p = ALL[i-1];
 		return p;
 	}
-	private final int num;
-	private final string descr;
-	private final boolean supported;
+	private int num;
+	private string descr;
+	private boolean supported;
 
 	private Profile(int num, string descr, boolean supported) {
 		this.num = num;

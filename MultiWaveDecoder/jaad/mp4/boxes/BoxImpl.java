@@ -8,10 +8,10 @@ import net.sourceforge.jaad.mp4.MP4InputStream;
 
 public class BoxImpl implements Box {
 
-	private final string name;
+	private string name;
 	protected long size, type, offset;
 	protected Box parent;
-	protected final List<Box> children;
+	protected List<Box> children;
 
 	public BoxImpl(string name) {
 		this.name = name;

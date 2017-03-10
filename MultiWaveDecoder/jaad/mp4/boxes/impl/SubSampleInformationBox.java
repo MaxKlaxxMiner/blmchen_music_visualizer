@@ -33,8 +33,8 @@ public class SubSampleInformationBox extends FullBox {
 	public void decode(MP4InputStream in) throws IOException {
 		super.decode(in);
 
-		final int len = (version==1) ? 4 : 2;
-		final int entryCount = (int) in.readBytes(4);
+		int len = (version==1) ? 4 : 2;
+		int entryCount = (int) in.readBytes(4);
 		sampleDelta = new long[entryCount];
 		subsampleSize = new long[entryCount][];
 		subsamplePriority = new int[entryCount][];

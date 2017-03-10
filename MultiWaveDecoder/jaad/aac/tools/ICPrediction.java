@@ -14,17 +14,17 @@ import java.util.logging.Level;
  */
 public class ICPrediction {
 
-	private static final float SF_SCALE = 1.0f/-1024.0f;
-	private static final float INV_SF_SCALE = 1.0f/SF_SCALE;
-	private static final int MAX_PREDICTORS = 672;
-	private static final float A = 0.953125f; //61.0 / 64
-	private static final float ALPHA = 0.90625f;  //29.0 / 32
+	private static float SF_SCALE = 1.0f/-1024.0f;
+	private static float INV_SF_SCALE = 1.0f/SF_SCALE;
+	private static int MAX_PREDICTORS = 672;
+	private static float A = 0.953125f; //61.0 / 64
+	private static float ALPHA = 0.90625f;  //29.0 / 32
 	private boolean predictorReset;
 	private int predictorResetGroup;
 	private boolean[] predictionUsed;
 	private PredictorState[] states;
 
-	private static final class PredictorState {
+	private static class PredictorState {
 
 		float cor0 = 0.0f;
 		float cor1 = 0.0f;
@@ -40,12 +40,12 @@ public class ICPrediction {
 	}
 
 	public void decode(BitStream in, int maxSFB, SampleFrequency sf) throws AACException {
-		final int predictorCount = sf.getPredictorCount();
+		int predictorCount = sf.getPredictorCount();
 
 		if(predictorReset = in.readBool()) predictorResetGroup = in.readBits(5);
 
-		final int maxPredSFB = sf.getMaximalPredictionSFB();
-		final int length = Math.min(maxSFB, maxPredSFB);
+		int maxPredSFB = sf.getMaximalPredictionSFB();
+		int length = Math.min(maxSFB, maxPredSFB);
 		predictionUsed = new boolean[length];
 		for(int sfb = 0; sfb<length; sfb++) {
 			predictionUsed[sfb] = in.readBool();
@@ -62,12 +62,12 @@ public class ICPrediction {
 	}
 
 	public void process(ICStream ics, float[] data, SampleFrequency sf) {
-		final ICSInfo info = ics.getInfo();
+		ICSInfo info = ics.getInfo();
 
 		if(info.isEightShortFrame()) resetAllPredictors();
 		else {
-			final int len = Math.min(sf.getMaximalPredictionSFB(), info.getMaxSFB());
-			final int[] swbOffsets = info.getSWBOffsets();
+			int len = Math.min(sf.getMaximalPredictionSFB(), info.getMaxSFB());
+			int[] swbOffsets = info.getSWBOffsets();
 			int k;
 			for(int sfb = 0; sfb<len; sfb++) {
 				for(k = swbOffsets[sfb]; k<swbOffsets[sfb+1]; k++) {
@@ -104,19 +104,19 @@ public class ICPrediction {
 
 	private void predict(float[] data, int off, boolean output) {
 		if(states[off]==null) states[off] = new PredictorState();
-		final PredictorState state = states[off];
-		final float r0 = state.r0, r1 = state.r1;
-		final float cor0 = state.cor0, cor1 = state.cor1;
-		final float var0 = state.var0, var1 = state.var1;
+		PredictorState state = states[off];
+		float r0 = state.r0, r1 = state.r1;
+		float cor0 = state.cor0, cor1 = state.cor1;
+		float var0 = state.var0, var1 = state.var1;
 
-		final float k1 = var0>1 ? cor0*even(A/var0) : 0;
-		final float k2 = var1>1 ? cor1*even(A/var1) : 0;
+		float k1 = var0>1 ? cor0*even(A/var0) : 0;
+		float k2 = var1>1 ? cor1*even(A/var1) : 0;
 
-		final float pv = round(k1*r0+k2*r1);
+		float pv = round(k1*r0+k2*r1);
 		if(output) data[off] += pv*SF_SCALE;
 
-		final float e0 = (data[off]*INV_SF_SCALE);
-		final float e1 = e0-k1*r0;
+		float e0 = (data[off]*INV_SF_SCALE);
+		float e1 = e0-k1*r0;
 
 		state.cor1 = trunc(ALPHA*cor1+r1*e1);
 		state.var1 = trunc(ALPHA*var1+0.5f*(r1*r1+e1*e1));

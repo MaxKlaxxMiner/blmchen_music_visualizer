@@ -22,7 +22,7 @@ public class OMAURLBox extends FullBox {
 	public void decode(MP4InputStream in) throws IOException {
 		super.decode(in);
 
-		final byte[] b = new byte[(int) getLeft(in)];
+		byte[] b = new byte[(int) getLeft(in)];
 		in.readBytes(b);
 		content = new string(b, MP4InputStream.UTF8);
 	}

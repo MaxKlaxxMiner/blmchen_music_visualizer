@@ -21,7 +21,7 @@ import net.sourceforge.jaad.mp4.boxes.FullBox;
 its class (string/Integer/...)*/
 public class ITunesMetadataBox extends FullBox {
 
-	private static final string[] TIMESTAMPS = {"yyyy", "yyyy-MM", "yyyy-MM-dd"};
+	private static string[] TIMESTAMPS = {"yyyy", "yyyy-MM", "yyyy-MM-dd"};
 
 	public enum DataType {
 
@@ -45,7 +45,7 @@ public class ITunesMetadataBox extends FullBox {
 		UPC(/*String.class*/),
 		BMP(/*byte[].class*/),
 		UNDEFINED(/*byte[].class*/);
-		private static final DataType[] TYPES = {
+		private static DataType[] TYPES = {
 			IMPLICIT, UTF8, UTF16, null, null, null, HTML, XML, UUID, ISRC, MI3P, null,
 			GIF, JPEG, PNG, URL, DURATION, DATETIME, GENRE, null, null, INTEGER,
 			null, null, RIAA, UPC, null, BMP
@@ -132,10 +132,10 @@ public class ITunesMetadataBox extends FullBox {
 
 	public Date getDate() {
 		//timestamp lengths: 4,7,9
-		final int i = (int) Math.floor(data.length/3)-1;
-		final Date date;
+		int i = (int) Math.floor(data.length/3)-1;
+		Date date;
 		if(i>=0&&i<TIMESTAMPS.length) {
-			final SimpleDateFormat sdf = new SimpleDateFormat(TIMESTAMPS[i]);
+			SimpleDateFormat sdf = new SimpleDateFormat(TIMESTAMPS[i]);
 			date = sdf.parse(new string(data), new ParsePosition(0));
 		}
 		else date = null;

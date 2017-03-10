@@ -26,19 +26,19 @@ public abstract class Protection {
 	static Protection parse(Box sinf) {
 		Protection p = null;
 		if(sinf.hasChild(BoxTypes.SCHEME_TYPE_BOX)) {
-			final SchemeTypeBox schm = (SchemeTypeBox) sinf.getChild(BoxTypes.SCHEME_TYPE_BOX);
-			final long l = schm.getSchemeType();
+			SchemeTypeBox schm = (SchemeTypeBox) sinf.getChild(BoxTypes.SCHEME_TYPE_BOX);
+			long l = schm.getSchemeType();
 			if(l==Scheme.ITUNES_FAIR_PLAY.type) p = new ITunesProtection(sinf);
 		}
 
 		if(p==null) p = new UnknownProtection(sinf);
 		return p;
 	}
-	private final Codec originalFormat;
+	private Codec originalFormat;
 
 	protected Protection(Box sinf) {
 		//original format
-		final long type = ((OriginalFormatBox) sinf.getChild(BoxTypes.ORIGINAL_FORMAT_BOX)).getOriginalFormat();
+		long type = ((OriginalFormatBox) sinf.getChild(BoxTypes.ORIGINAL_FORMAT_BOX)).getOriginalFormat();
 		Codec c;
 		//TODO: currently it tests for audio and video codec, can do this any other way?
 		if(!(c = AudioTrack.AudioCodec.forType(type)).equals(AudioTrack.AudioCodec.UNKNOWN_AUDIO_CODEC)) originalFormat = c;
