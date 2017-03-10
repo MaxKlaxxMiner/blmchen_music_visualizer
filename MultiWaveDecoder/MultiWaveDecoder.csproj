@@ -118,7 +118,6 @@
     <Content Include="jaad\aac\transport\ADIFHeader.java" />
     <Content Include="jaad\adts\ADTSDemultiplexer.java" />
     <Content Include="jaad\adts\ADTSFrame.java" />
-    <Content Include="jaad\Main.java" />
     <Content Include="jaad\MP4Info.java" />
     <Content Include="jaad\mp4\api\Artwork.java" />
     <Content Include="jaad\mp4\api\AudioTrack.java" />

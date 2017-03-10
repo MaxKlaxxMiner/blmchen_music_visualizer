@@ -19,62 +19,64 @@ namespace MultiWaveDecoder
 
     private static void decodeMP4(string inFile, string outFile)
     {
-      WaveFileWriter wav = null;
-      try
-      {
-        MP4Container cont = new MP4Container(new RandomAccessFile(inFile, "r"));
-        Movie movie = cont.getMovie();
-        List<Track> tracks = movie.getTracks(AudioTrack.AudioCodec.AAC);
-        if (tracks.isEmpty()) throw new Exception("movie does not contain any AAC track");
-        AudioTrack track = (AudioTrack)tracks.get(0);
+      throw new NotImplementedException();
+      //WaveFileWriter wav = null;
+      //try
+      //{
+      //  MP4Container cont = new MP4Container(new RandomAccessFile(inFile, "r"));
+      //  Movie movie = cont.getMovie();
+      //  List<Track> tracks = movie.getTracks(AudioTrack.AudioCodec.AAC);
+      //  if (tracks.isEmpty()) throw new Exception("movie does not contain any AAC track");
+      //  AudioTrack track = (AudioTrack)tracks.get(0);
 
-        wav = new WaveFileWriter(new File(outFile), track.getSampleRate(), track.getChannelCount(), track.getSampleSize());
+      //  wav = new WaveFileWriter(new File(outFile), track.getSampleRate(), track.getChannelCount(), track.getSampleSize());
 
-        Decoder dec = new Decoder(track.getDecoderSpecificInfo());
+      //  Decoder dec = new Decoder(track.getDecoderSpecificInfo());
 
-        Frame frame;
-        SampleBuffer buf = new SampleBuffer();
-        while (track.hasMoreFrames())
-        {
-          frame = track.readNextFrame();
-          dec.decodeFrame(frame.getData(), buf);
-          wav.write(buf.getData());
-        }
-      }
-      finally
-      {
-        if (wav != null) wav.close();
-      }
+      //  Frame frame;
+      //  SampleBuffer buf = new SampleBuffer();
+      //  while (track.hasMoreFrames())
+      //  {
+      //    frame = track.readNextFrame();
+      //    dec.decodeFrame(frame.getData(), buf);
+      //    wav.write(buf.getData());
+      //  }
+      //}
+      //finally
+      //{
+      //  if (wav != null) wav.close();
+      //}
     }
 
     private static void decodeAAC(string inFile, string outFile)
     {
-      WaveFileWriter wav = null;
-      try
-      {
-        ADTSDemultiplexer adts = new ADTSDemultiplexer(new FileInputStream(inFile));
-        Decoder dec = new Decoder(adts.getDecoderSpecificInfo());
+      throw new NotImplementedException();
+      //WaveFileWriter wav = null;
+      //try
+      //{
+      //  ADTSDemultiplexer adts = new ADTSDemultiplexer(new FileInputStream(inFile));
+      //  Decoder dec = new Decoder(adts.getDecoderSpecificInfo());
 
-        SampleBuffer buf = new SampleBuffer();
-        byte[] b;
-        while (true)
-        {
-          b = adts.readNextFrame();
-          dec.decodeFrame(b, buf);
+      //  SampleBuffer buf = new SampleBuffer();
+      //  byte[] b;
+      //  while (true)
+      //  {
+      //    b = adts.readNextFrame();
+      //    dec.decodeFrame(b, buf);
 
-          if (wav == null) wav = new WaveFileWriter(new File(outFile), buf.getSampleRate(), buf.getChannels(), buf.getBitsPerSample());
-          wav.write(buf.getData());
-        }
-      }
-      finally
-      {
-        if (wav != null) wav.close();
-      }
+      //    if (wav == null) wav = new WaveFileWriter(new File(outFile), buf.getSampleRate(), buf.getChannels(), buf.getBitsPerSample());
+      //    wav.write(buf.getData());
+      //  }
+      //}
+      //finally
+      //{
+      //  if (wav != null) wav.close();
+      //}
     }
 
     public static void main(string[] args)
     {
-      try
+      //try
       {
         if (args.Length == 3 && args[0] == "-mp4")
         {
@@ -90,11 +92,11 @@ namespace MultiWaveDecoder
 
         printUsage();
       }
-      catch (Exception e)
-      {
-        Console.WriteLine("error while decoding: " + e);
-        Environment.Exit(1);
-      }
+      //catch (Exception e)
+      //{
+      //  Console.WriteLine("error while decoding: " + e);
+      //  Environment.Exit(1);
+      //}
     }
   }
 }
