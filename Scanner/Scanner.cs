@@ -4,6 +4,7 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
+using MultiWaveDecoder;
 
 #endregion
 
@@ -32,9 +33,9 @@ namespace Scanner
 
       var finfo = new FileInfo(TestFileM4A);
       if (!finfo.Exists) throw new FileNotFoundException(finfo.FullName);
-      var m4AData = File.ReadAllBytes(finfo.FullName);
+      //var m4AData = File.ReadAllBytes(finfo.FullName);
 
-
+      Main.main(new[] { finfo.FullName });
     }
 
     private void Scanner_Load(object sender, EventArgs e)
