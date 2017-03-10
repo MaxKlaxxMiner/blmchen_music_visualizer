@@ -5,7 +5,7 @@ import net.sourceforge.jaad.mp4.MP4InputStream;
 
 public class ThreeGPPKeywordsBox extends ThreeGPPMetadataBox {
 
-	private String[] keywords;
+	private string[] keywords;
 
 	public ThreeGPPKeywordsBox() {
 		super("3GPP Keywords Box");
@@ -16,7 +16,7 @@ public class ThreeGPPKeywordsBox extends ThreeGPPMetadataBox {
 		decodeCommon(in);
 
 		final int count = in.read();
-		keywords = new String[count];
+		keywords = new string[count];
 
 		int len;
 		for(int i = 0; i<count; i++) {
@@ -25,7 +25,7 @@ public class ThreeGPPKeywordsBox extends ThreeGPPMetadataBox {
 		}
 	}
 
-	public String[] getKeywords() {
+	public string[] getKeywords() {
 		return keywords;
 	}
 }

@@ -34,7 +34,7 @@ public class BoxFactory implements BoxTypes {
 	}
 	private static final Map<Long, Class<? extends BoxImpl>> BOX_CLASSES = new HashMap<Long, Class<? extends BoxImpl>>();
 	private static final Map<Long, Class<? extends BoxImpl>[]> BOX_MULTIPLE_CLASSES = new HashMap<Long, Class<? extends BoxImpl>[]>();
-	private static final Map<Long, String[]> PARAMETER = new HashMap<Long, String[]>();
+	private static final Map<Long, string[]> PARAMETER = new HashMap<Long, string[]>();
 
 	static {
 		//classes
@@ -240,97 +240,97 @@ public class BoxFactory implements BoxTypes {
 		BOX_CLASSES.put(FAIRPLAY_IV_BOX, FairPlayDataBox.class);
 		BOX_CLASSES.put(FAIRPLAY_PRIVATE_KEY_BOX, FairPlayDataBox.class);
 		//parameter
-		PARAMETER.put(ADDITIONAL_METADATA_CONTAINER_BOX, new String[]{"Additional Metadata Container Box"});
-		PARAMETER.put(DATA_INFORMATION_BOX, new String[]{"Data Information Box"});
-		PARAMETER.put(EDIT_BOX, new String[]{"Edit Box"});
-		PARAMETER.put(MEDIA_BOX, new String[]{"Media Box"});
-		PARAMETER.put(MEDIA_INFORMATION_BOX, new String[]{"Media Information Box"});
-		PARAMETER.put(MOVIE_BOX, new String[]{"Movie Box"});
-		PARAMETER.put(MOVIE_EXTENDS_BOX, new String[]{"Movie Extends Box"});
-		PARAMETER.put(MOVIE_FRAGMENT_BOX, new String[]{"Movie Fragment Box"});
-		PARAMETER.put(MOVIE_FRAGMENT_RANDOM_ACCESS_BOX, new String[]{"Movie Fragment Random Access Box"});
-		PARAMETER.put(NULL_MEDIA_HEADER_BOX, new String[]{"Null Media Header Box"});
-		PARAMETER.put(PARTITION_ENTRY, new String[]{"Partition Entry"});
-		PARAMETER.put(PROTECTION_SCHEME_INFORMATION_BOX, new String[]{"Protection Scheme Information Box"});
-		PARAMETER.put(SAMPLE_TABLE_BOX, new String[]{"Sample Table Box"});
-		PARAMETER.put(SCHEME_INFORMATION_BOX, new String[]{"Scheme Information Box"});
-		PARAMETER.put(TRACK_BOX, new String[]{"Track Box"});
-		PARAMETER.put(TRACK_FRAGMENT_BOX, new String[]{"Track Fragment Box"});
-		PARAMETER.put(USER_DATA_BOX, new String[]{"User Data Box"});
-		PARAMETER.put(ITUNES_META_LIST_BOX, new String[]{"iTunes Meta List Box"});
-		PARAMETER.put(CUSTOM_ITUNES_METADATA_BOX, new String[]{"Custom iTunes Metadata Box"});
-		PARAMETER.put(ALBUM_ARTIST_NAME_BOX, new String[]{"Album Artist Name Box"});
-		PARAMETER.put(ALBUM_ARTIST_SORT_BOX, new String[]{"Album Artist Sort Box"});
-		PARAMETER.put(ALBUM_NAME_BOX, new String[]{"Album Name Box"});
-		PARAMETER.put(ALBUM_SORT_BOX, new String[]{"Album Sort Box"});
-		PARAMETER.put(ARTIST_NAME_BOX, new String[]{"Artist Name Box"});
-		PARAMETER.put(ARTIST_SORT_BOX, new String[]{"Artist Sort Box"});
-		PARAMETER.put(CATEGORY_BOX, new String[]{"Category Box"});
-		PARAMETER.put(COMMENTS_BOX, new String[]{"Comments Box"});
-		PARAMETER.put(COMPILATION_PART_BOX, new String[]{"Compilation Part Box"});
-		PARAMETER.put(COMPOSER_NAME_BOX, new String[]{"Composer Name Box"});
-		PARAMETER.put(COMPOSER_SORT_BOX, new String[]{"Composer Sort Box"});
-		PARAMETER.put(COVER_BOX, new String[]{"Cover Box"});
-		PARAMETER.put(CUSTOM_GENRE_BOX, new String[]{"Custom Genre Box"});
-		PARAMETER.put(DESCRIPTION_BOX, new String[]{"Description Cover Box"});
-		PARAMETER.put(DISK_NUMBER_BOX, new String[]{"Disk Number Box"});
-		PARAMETER.put(EPISODE_GLOBAL_UNIQUE_ID_BOX, new String[]{"Episode Global Unique ID Box"});
-		PARAMETER.put(GAPLESS_PLAYBACK_BOX, new String[]{"Gapless Playback Box"});
-		PARAMETER.put(GROUPING_BOX, new String[]{"Grouping Box"});
-		PARAMETER.put(HD_VIDEO_BOX, new String[]{"HD Video Box"});
-		PARAMETER.put(ITUNES_PURCHASE_ACCOUNT_BOX, new String[]{"iTunes Purchase Account Box"});
-		PARAMETER.put(ITUNES_ACCOUNT_TYPE_BOX, new String[]{"iTunes Account Type Box"});
-		PARAMETER.put(ITUNES_CATALOGUE_ID_BOX, new String[]{"iTunes Catalogue ID Box"});
-		PARAMETER.put(ITUNES_COUNTRY_CODE_BOX, new String[]{"iTunes Country Code Box"});
-		PARAMETER.put(KEYWORD_BOX, new String[]{"Keyword Box"});
-		PARAMETER.put(LONG_DESCRIPTION_BOX, new String[]{"Long Description Box"});
-		PARAMETER.put(LYRICS_BOX, new String[]{"Lyrics Box"});
-		PARAMETER.put(META_TYPE_BOX, new String[]{"Meta Type Box"});
-		PARAMETER.put(PODCAST_BOX, new String[]{"Podcast Box"});
-		PARAMETER.put(PODCAST_URL_BOX, new String[]{"Podcast URL Box"});
-		PARAMETER.put(PURCHASE_DATE_BOX, new String[]{"Purchase Date Box"});
-		PARAMETER.put(RELEASE_DATE_BOX, new String[]{"Release Date Box"});
-		PARAMETER.put(TEMPO_BOX, new String[]{"Tempo Box"});
-		PARAMETER.put(TRACK_NAME_BOX, new String[]{"Track Name Box"});
-		PARAMETER.put(TRACK_NUMBER_BOX, new String[]{"Track Number Box"});
-		PARAMETER.put(TRACK_SORT_BOX, new String[]{"Track Sort Box"});
-		PARAMETER.put(TV_EPISODE_BOX, new String[]{"TV Episode Box"});
-		PARAMETER.put(TV_EPISODE_NUMBER_BOX, new String[]{"TV Episode Number Box"});
-		PARAMETER.put(TV_NETWORK_NAME_BOX, new String[]{"TV Network Name Box"});
-		PARAMETER.put(TV_SEASON_BOX, new String[]{"TV Season Box"});
-		PARAMETER.put(TV_SHOW_BOX, new String[]{"TV Show Box"});
-		PARAMETER.put(TV_SHOW_SORT_BOX, new String[]{"TV Show Sort Box"});
-		PARAMETER.put(THREE_GPP_AUTHOR_BOX, new String[]{"3GPP Author Box"});
-		PARAMETER.put(THREE_GPP_CLASSIFICATION_BOX, new String[]{"3GPP Classification Box"});
-		PARAMETER.put(THREE_GPP_DESCRIPTION_BOX, new String[]{"3GPP Description Box"});
-		PARAMETER.put(THREE_GPP_PERFORMER_BOX, new String[]{"3GPP Performer Box"});
-		PARAMETER.put(THREE_GPP_TITLE_BOX, new String[]{"3GPP Title Box"});
-		PARAMETER.put(GOOGLE_HOST_HEADER_BOX, new String[]{"Google Host Header Box"});
-		PARAMETER.put(GOOGLE_PING_MESSAGE_BOX, new String[]{"Google Ping Message Box"});
-		PARAMETER.put(GOOGLE_PING_URL_BOX, new String[]{"Google Ping URL Box"});
-		PARAMETER.put(GOOGLE_SOURCE_DATA_BOX, new String[]{"Google Source Data Box"});
-		PARAMETER.put(GOOGLE_START_TIME_BOX, new String[]{"Google Start Time Box"});
-		PARAMETER.put(GOOGLE_TRACK_DURATION_BOX, new String[]{"Google Track Duration Box"});
-		PARAMETER.put(MP4V_SAMPLE_ENTRY, new String[]{"MPEG-4 Video Sample Entry"});
-		PARAMETER.put(H263_SAMPLE_ENTRY, new String[]{"H263 Video Sample Entry"});
-		PARAMETER.put(ENCRYPTED_VIDEO_SAMPLE_ENTRY, new String[]{"Encrypted Video Sample Entry"});
-		PARAMETER.put(AVC_SAMPLE_ENTRY, new String[]{"AVC Video Sample Entry"});
-		PARAMETER.put(MP4A_SAMPLE_ENTRY, new String[]{"MPEG- 4Audio Sample Entry"});
-		PARAMETER.put(AC3_SAMPLE_ENTRY, new String[]{"AC-3 Audio Sample Entry"});
-		PARAMETER.put(EAC3_SAMPLE_ENTRY, new String[]{"Extended AC-3 Audio Sample Entry"});
-		PARAMETER.put(DRMS_SAMPLE_ENTRY, new String[]{"DRMS Audio Sample Entry"});
-		PARAMETER.put(AMR_SAMPLE_ENTRY, new String[]{"AMR Audio Sample Entry"});
-		PARAMETER.put(AMR_WB_SAMPLE_ENTRY, new String[]{"AMR-Wideband Audio Sample Entry"});
-		PARAMETER.put(EVRC_SAMPLE_ENTRY, new String[]{"EVC Audio Sample Entry"});
-		PARAMETER.put(QCELP_SAMPLE_ENTRY, new String[]{"QCELP Audio Sample Entry"});
-		PARAMETER.put(SMV_SAMPLE_ENTRY, new String[]{"SMV Audio Sample Entry"});
-		PARAMETER.put(ENCRYPTED_AUDIO_SAMPLE_ENTRY, new String[]{"Encrypted Audio Sample Entry"});
-		PARAMETER.put(OMA_COVER_URI_BOX, new String[]{"OMA DRM Cover URI Box"});
-		PARAMETER.put(OMA_DRM_CONTAINER_BOX, new String[]{"OMA DRM Container Box"});
-		PARAMETER.put(OMA_ICON_URI_BOX, new String[]{"OMA DRM Icon URI Box"});
-		PARAMETER.put(OMA_INFO_URL_BOX, new String[]{"OMA DRM Info URL Box"});
-		PARAMETER.put(OMA_LYRICS_URI_BOX, new String[]{"OMA DRM Lyrics URI Box"});
-		PARAMETER.put(OMA_MUTABLE_DRM_INFORMATION_BOX, new String[]{"OMA DRM Mutable DRM Information Box"});
+		PARAMETER.put(ADDITIONAL_METADATA_CONTAINER_BOX, new string[]{"Additional Metadata Container Box"});
+		PARAMETER.put(DATA_INFORMATION_BOX, new string[]{"Data Information Box"});
+		PARAMETER.put(EDIT_BOX, new string[]{"Edit Box"});
+		PARAMETER.put(MEDIA_BOX, new string[]{"Media Box"});
+		PARAMETER.put(MEDIA_INFORMATION_BOX, new string[]{"Media Information Box"});
+		PARAMETER.put(MOVIE_BOX, new string[]{"Movie Box"});
+		PARAMETER.put(MOVIE_EXTENDS_BOX, new string[]{"Movie Extends Box"});
+		PARAMETER.put(MOVIE_FRAGMENT_BOX, new string[]{"Movie Fragment Box"});
+		PARAMETER.put(MOVIE_FRAGMENT_RANDOM_ACCESS_BOX, new string[]{"Movie Fragment Random Access Box"});
+		PARAMETER.put(NULL_MEDIA_HEADER_BOX, new string[]{"Null Media Header Box"});
+		PARAMETER.put(PARTITION_ENTRY, new string[]{"Partition Entry"});
+		PARAMETER.put(PROTECTION_SCHEME_INFORMATION_BOX, new string[]{"Protection Scheme Information Box"});
+		PARAMETER.put(SAMPLE_TABLE_BOX, new string[]{"Sample Table Box"});
+		PARAMETER.put(SCHEME_INFORMATION_BOX, new string[]{"Scheme Information Box"});
+		PARAMETER.put(TRACK_BOX, new string[]{"Track Box"});
+		PARAMETER.put(TRACK_FRAGMENT_BOX, new string[]{"Track Fragment Box"});
+		PARAMETER.put(USER_DATA_BOX, new string[]{"User Data Box"});
+		PARAMETER.put(ITUNES_META_LIST_BOX, new string[]{"iTunes Meta List Box"});
+		PARAMETER.put(CUSTOM_ITUNES_METADATA_BOX, new string[]{"Custom iTunes Metadata Box"});
+		PARAMETER.put(ALBUM_ARTIST_NAME_BOX, new string[]{"Album Artist Name Box"});
+		PARAMETER.put(ALBUM_ARTIST_SORT_BOX, new string[]{"Album Artist Sort Box"});
+		PARAMETER.put(ALBUM_NAME_BOX, new string[]{"Album Name Box"});
+		PARAMETER.put(ALBUM_SORT_BOX, new string[]{"Album Sort Box"});
+		PARAMETER.put(ARTIST_NAME_BOX, new string[]{"Artist Name Box"});
+		PARAMETER.put(ARTIST_SORT_BOX, new string[]{"Artist Sort Box"});
+		PARAMETER.put(CATEGORY_BOX, new string[]{"Category Box"});
+		PARAMETER.put(COMMENTS_BOX, new string[]{"Comments Box"});
+		PARAMETER.put(COMPILATION_PART_BOX, new string[]{"Compilation Part Box"});
+		PARAMETER.put(COMPOSER_NAME_BOX, new string[]{"Composer Name Box"});
+		PARAMETER.put(COMPOSER_SORT_BOX, new string[]{"Composer Sort Box"});
+		PARAMETER.put(COVER_BOX, new string[]{"Cover Box"});
+		PARAMETER.put(CUSTOM_GENRE_BOX, new string[]{"Custom Genre Box"});
+		PARAMETER.put(DESCRIPTION_BOX, new string[]{"Description Cover Box"});
+		PARAMETER.put(DISK_NUMBER_BOX, new string[]{"Disk Number Box"});
+		PARAMETER.put(EPISODE_GLOBAL_UNIQUE_ID_BOX, new string[]{"Episode Global Unique ID Box"});
+		PARAMETER.put(GAPLESS_PLAYBACK_BOX, new string[]{"Gapless Playback Box"});
+		PARAMETER.put(GROUPING_BOX, new string[]{"Grouping Box"});
+		PARAMETER.put(HD_VIDEO_BOX, new string[]{"HD Video Box"});
+		PARAMETER.put(ITUNES_PURCHASE_ACCOUNT_BOX, new string[]{"iTunes Purchase Account Box"});
+		PARAMETER.put(ITUNES_ACCOUNT_TYPE_BOX, new string[]{"iTunes Account Type Box"});
+		PARAMETER.put(ITUNES_CATALOGUE_ID_BOX, new string[]{"iTunes Catalogue ID Box"});
+		PARAMETER.put(ITUNES_COUNTRY_CODE_BOX, new string[]{"iTunes Country Code Box"});
+		PARAMETER.put(KEYWORD_BOX, new string[]{"Keyword Box"});
+		PARAMETER.put(LONG_DESCRIPTION_BOX, new string[]{"Long Description Box"});
+		PARAMETER.put(LYRICS_BOX, new string[]{"Lyrics Box"});
+		PARAMETER.put(META_TYPE_BOX, new string[]{"Meta Type Box"});
+		PARAMETER.put(PODCAST_BOX, new string[]{"Podcast Box"});
+		PARAMETER.put(PODCAST_URL_BOX, new string[]{"Podcast URL Box"});
+		PARAMETER.put(PURCHASE_DATE_BOX, new string[]{"Purchase Date Box"});
+		PARAMETER.put(RELEASE_DATE_BOX, new string[]{"Release Date Box"});
+		PARAMETER.put(TEMPO_BOX, new string[]{"Tempo Box"});
+		PARAMETER.put(TRACK_NAME_BOX, new string[]{"Track Name Box"});
+		PARAMETER.put(TRACK_NUMBER_BOX, new string[]{"Track Number Box"});
+		PARAMETER.put(TRACK_SORT_BOX, new string[]{"Track Sort Box"});
+		PARAMETER.put(TV_EPISODE_BOX, new string[]{"TV Episode Box"});
+		PARAMETER.put(TV_EPISODE_NUMBER_BOX, new string[]{"TV Episode Number Box"});
+		PARAMETER.put(TV_NETWORK_NAME_BOX, new string[]{"TV Network Name Box"});
+		PARAMETER.put(TV_SEASON_BOX, new string[]{"TV Season Box"});
+		PARAMETER.put(TV_SHOW_BOX, new string[]{"TV Show Box"});
+		PARAMETER.put(TV_SHOW_SORT_BOX, new string[]{"TV Show Sort Box"});
+		PARAMETER.put(THREE_GPP_AUTHOR_BOX, new string[]{"3GPP Author Box"});
+		PARAMETER.put(THREE_GPP_CLASSIFICATION_BOX, new string[]{"3GPP Classification Box"});
+		PARAMETER.put(THREE_GPP_DESCRIPTION_BOX, new string[]{"3GPP Description Box"});
+		PARAMETER.put(THREE_GPP_PERFORMER_BOX, new string[]{"3GPP Performer Box"});
+		PARAMETER.put(THREE_GPP_TITLE_BOX, new string[]{"3GPP Title Box"});
+		PARAMETER.put(GOOGLE_HOST_HEADER_BOX, new string[]{"Google Host Header Box"});
+		PARAMETER.put(GOOGLE_PING_MESSAGE_BOX, new string[]{"Google Ping Message Box"});
+		PARAMETER.put(GOOGLE_PING_URL_BOX, new string[]{"Google Ping URL Box"});
+		PARAMETER.put(GOOGLE_SOURCE_DATA_BOX, new string[]{"Google Source Data Box"});
+		PARAMETER.put(GOOGLE_START_TIME_BOX, new string[]{"Google Start Time Box"});
+		PARAMETER.put(GOOGLE_TRACK_DURATION_BOX, new string[]{"Google Track Duration Box"});
+		PARAMETER.put(MP4V_SAMPLE_ENTRY, new string[]{"MPEG-4 Video Sample Entry"});
+		PARAMETER.put(H263_SAMPLE_ENTRY, new string[]{"H263 Video Sample Entry"});
+		PARAMETER.put(ENCRYPTED_VIDEO_SAMPLE_ENTRY, new string[]{"Encrypted Video Sample Entry"});
+		PARAMETER.put(AVC_SAMPLE_ENTRY, new string[]{"AVC Video Sample Entry"});
+		PARAMETER.put(MP4A_SAMPLE_ENTRY, new string[]{"MPEG- 4Audio Sample Entry"});
+		PARAMETER.put(AC3_SAMPLE_ENTRY, new string[]{"AC-3 Audio Sample Entry"});
+		PARAMETER.put(EAC3_SAMPLE_ENTRY, new string[]{"Extended AC-3 Audio Sample Entry"});
+		PARAMETER.put(DRMS_SAMPLE_ENTRY, new string[]{"DRMS Audio Sample Entry"});
+		PARAMETER.put(AMR_SAMPLE_ENTRY, new string[]{"AMR Audio Sample Entry"});
+		PARAMETER.put(AMR_WB_SAMPLE_ENTRY, new string[]{"AMR-Wideband Audio Sample Entry"});
+		PARAMETER.put(EVRC_SAMPLE_ENTRY, new string[]{"EVC Audio Sample Entry"});
+		PARAMETER.put(QCELP_SAMPLE_ENTRY, new string[]{"QCELP Audio Sample Entry"});
+		PARAMETER.put(SMV_SAMPLE_ENTRY, new string[]{"SMV Audio Sample Entry"});
+		PARAMETER.put(ENCRYPTED_AUDIO_SAMPLE_ENTRY, new string[]{"Encrypted Audio Sample Entry"});
+		PARAMETER.put(OMA_COVER_URI_BOX, new string[]{"OMA DRM Cover URI Box"});
+		PARAMETER.put(OMA_DRM_CONTAINER_BOX, new string[]{"OMA DRM Container Box"});
+		PARAMETER.put(OMA_ICON_URI_BOX, new string[]{"OMA DRM Icon URI Box"});
+		PARAMETER.put(OMA_INFO_URL_BOX, new string[]{"OMA DRM Info URL Box"});
+		PARAMETER.put(OMA_LYRICS_URI_BOX, new string[]{"OMA DRM Lyrics URI Box"});
+		PARAMETER.put(OMA_MUTABLE_DRM_INFORMATION_BOX, new string[]{"OMA DRM Mutable DRM Information Box"});
 	}
 
 	public static Box parseBox(Box parent, MP4InputStream in) throws IOException {
@@ -403,9 +403,9 @@ public class BoxFactory implements BoxTypes {
 		if(BOX_CLASSES.containsKey(l)) {
 			Class<? extends BoxImpl> cl = BOX_CLASSES.get(l);
 			if(PARAMETER.containsKey(l)) {
-				final String[] s = PARAMETER.get(l);
+				final string[] s = PARAMETER.get(l);
 				try {
-					Constructor<? extends BoxImpl> con = cl.getConstructor(String.class);
+					Constructor<? extends BoxImpl> con = cl.getConstructor(string.class);
 					box = con.newInstance(s[0]);
 				}
 				catch(Exception e) {
@@ -430,12 +430,12 @@ public class BoxFactory implements BoxTypes {
 		return box;
 	}
 
-	public static String typeToString(long l) {
+	public static string typeToString(long l) {
 		byte[] b = new byte[4];
 		b[0] = (byte) ((l>>24)&0xFF);
 		b[1] = (byte) ((l>>16)&0xFF);
 		b[2] = (byte) ((l>>8)&0xFF);
 		b[3] = (byte) (l&0xFF);
-		return new String(b);
+		return new string(b);
 	}
 }

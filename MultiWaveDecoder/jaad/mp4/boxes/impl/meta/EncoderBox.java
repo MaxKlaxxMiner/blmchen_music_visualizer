@@ -7,7 +7,7 @@ import net.sourceforge.jaad.mp4.boxes.FullBox;
 
 public class EncoderBox extends FullBox {
 
-	private String data;
+	private string data;
 
 	public EncoderBox() {
 		super("Encoder Box");
@@ -22,7 +22,7 @@ public class EncoderBox extends FullBox {
 		}
 	}
 
-	public String getData() {
+	public string getData() {
 		return data;
 	}
 }

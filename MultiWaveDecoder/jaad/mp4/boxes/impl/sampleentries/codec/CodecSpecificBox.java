@@ -15,7 +15,7 @@ public abstract class CodecSpecificBox extends BoxImpl {
 	private long vendor;
 	private int decoderVersion;
 
-	public CodecSpecificBox(String name) {
+	public CodecSpecificBox(string name) {
 		super(name);
 	}
 

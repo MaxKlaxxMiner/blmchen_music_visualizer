@@ -43,10 +43,10 @@ public enum Profile {
 		return p;
 	}
 	private final int num;
-	private final String descr;
+	private final string descr;
 	private final boolean supported;
 
-	private Profile(int num, String descr, boolean supported) {
+	private Profile(int num, string descr, boolean supported) {
 		this.num = num;
 		this.descr = descr;
 		this.supported = supported;
@@ -65,7 +65,7 @@ public enum Profile {
 	 * Returns a short description of this profile.
 	 * @return the profile's description
 	 */
-	public String getDescription() {
+	public string getDescription() {
 		return descr;
 	}
 
@@ -75,7 +75,7 @@ public enum Profile {
 	 * @return the profile's description
 	 */
 	@Override
-	public String toString() {
+	public string toString() {
 		return descr;
 	}
 

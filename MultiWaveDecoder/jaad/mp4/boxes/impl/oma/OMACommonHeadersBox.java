@@ -12,7 +12,7 @@ public class OMACommonHeadersBox extends FullBox {
 	private int encryptionMethod, paddingScheme;
 	private long plaintextLength;
 	private byte[] contentID, rightsIssuerURL;
-	private Map<String, String> textualHeaders;
+	private Map<String, string> textualHeaders;
 
 	public OMACommonHeadersBox() {
 		super("OMA DRM Common Header Box");
@@ -34,11 +34,11 @@ public class OMACommonHeadersBox extends FullBox {
 		rightsIssuerURL = new byte[rightsIssuerURLLength];
 		in.readBytes(rightsIssuerURL);
 
-		textualHeaders = new HashMap<String, String>();
+		textualHeaders = new HashMap<String, string>();
 		String key, value;
 		while(textualHeadersLength>0) {
-			key = new String(in.readTerminated((int) getLeft(in), ':'));
-			value = new String(in.readTerminated((int) getLeft(in), 0));
+			key = new string(in.readTerminated((int) getLeft(in), ':'));
+			value = new string(in.readTerminated((int) getLeft(in), 0));
 			textualHeaders.put(key, value);
 
 			textualHeadersLength -= key.length()+value.length()+2;
@@ -105,7 +105,7 @@ public class OMACommonHeadersBox extends FullBox {
 		return rightsIssuerURL;
 	}
 
-	public Map<String, String> getTextualHeaders() {
+	public Map<String, string> getTextualHeaders() {
 		return textualHeaders;
 	}
 }

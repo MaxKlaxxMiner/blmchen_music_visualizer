@@ -24,9 +24,9 @@ import java.io.IOException;
 
 abstract class MetadataSampleEntry extends SampleEntry {
 
-	private String contentEncoding;
+	private string contentEncoding;
 
-	MetadataSampleEntry(String name) {
+	MetadataSampleEntry(string name) {
 		super(name);
 	}
 
@@ -44,7 +44,7 @@ abstract class MetadataSampleEntry extends SampleEntry {
 	 * An example for this field is 'application/zip'.
 	 * @return the encoding's MIME-type
 	 */
-	public String getContentEncoding() {
+	public string getContentEncoding() {
 		return contentEncoding;
 	}
 }

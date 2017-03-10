@@ -7,20 +7,20 @@ import java.io.IOException;
 //TODO: 3gpp brands
 public class FileTypeBox extends BoxImpl {
 
-	public static final String BRAND_ISO_BASE_MEDIA = "isom";
-	public static final String BRAND_ISO_BASE_MEDIA_2 = "iso2";
-	public static final String BRAND_ISO_BASE_MEDIA_3 = "iso3";
-	public static final String BRAND_MP4_1 = "mp41";
-	public static final String BRAND_MP4_2 = "mp42";
-	public static final String BRAND_MOBILE_MP4 = "mmp4";
-	public static final String BRAND_QUICKTIME = "qm  ";
-	public static final String BRAND_AVC = "avc1";
-	public static final String BRAND_AUDIO = "M4A ";
-	public static final String BRAND_AUDIO_2 = "M4B ";
-	public static final String BRAND_AUDIO_ENCRYPTED = "M4P ";
-	public static final String BRAND_MP7 = "mp71";
-	protected String majorBrand, minorVersion;
-	protected String[] compatibleBrands;
+	public static final string BRAND_ISO_BASE_MEDIA = "isom";
+	public static final string BRAND_ISO_BASE_MEDIA_2 = "iso2";
+	public static final string BRAND_ISO_BASE_MEDIA_3 = "iso3";
+	public static final string BRAND_MP4_1 = "mp41";
+	public static final string BRAND_MP4_2 = "mp42";
+	public static final string BRAND_MOBILE_MP4 = "mmp4";
+	public static final string BRAND_QUICKTIME = "qm  ";
+	public static final string BRAND_AVC = "avc1";
+	public static final string BRAND_AUDIO = "M4A ";
+	public static final string BRAND_AUDIO_2 = "M4B ";
+	public static final string BRAND_AUDIO_ENCRYPTED = "M4P ";
+	public static final string BRAND_MP7 = "mp71";
+	protected string majorBrand, minorVersion;
+	protected string[] compatibleBrands;
 
 	public FileTypeBox() {
 		super("File Type Box");
@@ -30,21 +30,21 @@ public class FileTypeBox extends BoxImpl {
 	public void decode(MP4InputStream in) throws IOException {
 		majorBrand = in.readString(4);
 		minorVersion = in.readString(4);
-		compatibleBrands = new String[(int) getLeft(in)/4];
+		compatibleBrands = new string[(int) getLeft(in)/4];
 		for(int i = 0; i<compatibleBrands.length; i++) {
 			compatibleBrands[i] = in.readString(4);
 		}
 	}
 
-	public String getMajorBrand() {
+	public string getMajorBrand() {
 		return majorBrand;
 	}
 
-	public String getMinorVersion() {
+	public string getMinorVersion() {
 		return minorVersion;
 	}
 
-	public String[] getCompatibleBrands() {
+	public string[] getCompatibleBrands() {
 		return compatibleBrands;
 	}
 }

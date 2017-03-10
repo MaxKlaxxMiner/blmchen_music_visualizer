@@ -6,7 +6,7 @@ import net.sourceforge.jaad.mp4.boxes.FullBox;
 
 public class RequirementBox extends FullBox {
 
-	private String requirement;
+	private string requirement;
 
 	public RequirementBox() {
 		super("Requirement Box");
@@ -19,7 +19,7 @@ public class RequirementBox extends FullBox {
 		requirement = in.readString((int) getLeft(in));
 	}
 
-	public String getRequirement() {
+	public string getRequirement() {
 		return requirement;
 	}
 }

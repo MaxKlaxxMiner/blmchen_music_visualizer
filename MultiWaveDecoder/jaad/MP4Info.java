@@ -12,14 +12,14 @@ import net.sourceforge.jaad.mp4.boxes.Box;
 
 public class MP4Info {
 
-	private static final String USAGE = "usage:\nnet.sourceforge.jaad.MP4Info [options] <infile>\n\n\t-b\talso print all boxes";
+	private static final string USAGE = "usage:\nnet.sourceforge.jaad.MP4Info [options] <infile>\n\n\t-b\talso print all boxes";
 
-	public static void main(String[] args) {
+	public static void main(string[] args) {
 		try {
 			if(args.length<1) printUsage();
 			else {
 				boolean boxes = false;
-				final String file;
+				final string file;
 				if(args.length>1) {
 					if(args[0].equals("-b")) boxes = true;
 					else printUsage();
@@ -82,7 +82,7 @@ public class MP4Info {
 	}
 
 	private static void printBox(Box box, int level) {
-		final StringBuilder sb = new StringBuilder();
+		final stringBuilder sb = new stringBuilder();
 		for(int i = 0; i<level; i++) {
 			sb.append("  ");
 		}

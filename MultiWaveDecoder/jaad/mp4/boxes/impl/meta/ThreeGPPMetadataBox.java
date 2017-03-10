@@ -7,9 +7,9 @@ import net.sourceforge.jaad.mp4.boxes.Utils;
 
 public class ThreeGPPMetadataBox extends FullBox {
 
-	private String languageCode, data;
+	private string languageCode, data;
 
-	public ThreeGPPMetadataBox(String name) {
+	public ThreeGPPMetadataBox(string name) {
 		super(name);
 	}
 
@@ -30,11 +30,11 @@ public class ThreeGPPMetadataBox extends FullBox {
 	 * The language code for the following text. See ISO 639-2/T for the set of
 	 * three character codes.
 	 */
-	public String getLanguageCode() {
+	public string getLanguageCode() {
 		return languageCode;
 	}
 
-	public String getData() {
+	public string getData() {
 		return data;
 	}
 }

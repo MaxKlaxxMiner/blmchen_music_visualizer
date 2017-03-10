@@ -12,7 +12,7 @@ import net.sourceforge.jaad.mp4.boxes.FullBox;
  */
 public class ITunesMetadataNameBox extends FullBox {
 
-	private String metaName;
+	private string metaName;
 
 	public ITunesMetadataNameBox() {
 		super("iTunes Metadata Name Box");
@@ -25,7 +25,7 @@ public class ITunesMetadataNameBox extends FullBox {
 		metaName = in.readString((int) getLeft(in));
 	}
 
-	public String getMetaName() {
+	public string getMetaName() {
 		return metaName;
 	}
 }

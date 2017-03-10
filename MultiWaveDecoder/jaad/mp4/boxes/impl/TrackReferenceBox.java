@@ -22,7 +22,7 @@ import net.sourceforge.jaad.mp4.boxes.BoxImpl;
  */
 public class TrackReferenceBox extends BoxImpl {
 
-	private String referenceType;
+	private string referenceType;
 	private List<Long> trackIDs;
 
 	public TrackReferenceBox() {
@@ -49,7 +49,7 @@ public class TrackReferenceBox extends BoxImpl {
 	 * should only be used if the referenced hint track is used.</li>
 	 * @return the reference type
 	 */
-	public String getReferenceType() {
+	public string getReferenceType() {
 		return referenceType;
 	}
 

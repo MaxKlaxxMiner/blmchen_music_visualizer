@@ -15,7 +15,7 @@ import net.sourceforge.jaad.mp4.boxes.FullBox;
  */
 public class OMAContentIDBox extends FullBox {
 
-	private String contentID;
+	private string contentID;
 
 	public OMAContentIDBox() {
 		super("OMA DRM Content ID Box");
@@ -34,7 +34,7 @@ public class OMAContentIDBox extends FullBox {
 	 * 
 	 * @return the content-ID
 	 */
-	public String getContentID() {
+	public string getContentID() {
 		return contentID;
 	}
 }

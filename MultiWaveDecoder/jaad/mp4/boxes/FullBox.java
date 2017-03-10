@@ -7,7 +7,7 @@ public class FullBox extends BoxImpl {
 
 	protected int version, flags;
 
-	public FullBox(String name) {
+	public FullBox(string name) {
 		super(name);
 	}
 

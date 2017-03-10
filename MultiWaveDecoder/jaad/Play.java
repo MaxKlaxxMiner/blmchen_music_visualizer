@@ -19,9 +19,9 @@ import javax.sound.sampled.SourceDataLine;
  */
 public class Play {
 
-	private static final String USAGE = "usage:\nnet.sourceforge.jaad.Play [-mp4] <infile>\n\n\t-mp4\tinput file is in MP4 container format";
+	private static final string USAGE = "usage:\nnet.sourceforge.jaad.Play [-mp4] <infile>\n\n\t-mp4\tinput file is in MP4 container format";
 
-	public static void main(String[] args) {
+	public static void main(string[] args) {
 		try {
 			if(args.length<1) printUsage();
 			if(args[0].equals("-mp4")) {
@@ -41,7 +41,7 @@ public class Play {
 		System.exit(1);
 	}
 
-	private static void decodeMP4(String in) throws Exception {
+	private static void decodeMP4(string in) throws Exception {
 		SourceDataLine line = null;
 		byte[] b;
 		try {
@@ -86,7 +86,7 @@ public class Play {
 		}
 	}
 
-	private static void decodeAAC(String in) throws Exception {
+	private static void decodeAAC(string in) throws Exception {
 		SourceDataLine line = null;
 		byte[] b;
 		try {

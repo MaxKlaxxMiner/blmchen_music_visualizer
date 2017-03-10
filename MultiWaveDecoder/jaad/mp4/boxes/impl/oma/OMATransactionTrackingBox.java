@@ -13,7 +13,7 @@ import net.sourceforge.jaad.mp4.boxes.FullBox;
  */
 public class OMATransactionTrackingBox extends FullBox {
 
-	private String transactionID;
+	private string transactionID;
 
 	public OMATransactionTrackingBox() {
 		super("OMA DRM Transaction Tracking Box");
@@ -30,7 +30,7 @@ public class OMATransactionTrackingBox extends FullBox {
 	 * 
 	 * @return the transaction-ID
 	 */
-	public String getTransactionID() {
+	public string getTransactionID() {
 		return transactionID;
 	}
 }

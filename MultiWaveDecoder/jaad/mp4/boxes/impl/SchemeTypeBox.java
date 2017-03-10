@@ -13,7 +13,7 @@ public class SchemeTypeBox extends FullBox {
 
 	public static final long ITUNES_SCHEME = 1769239918; //itun
 	private long schemeType, schemeVersion;
-	private String schemeURI;
+	private string schemeURI;
 
 	public SchemeTypeBox() {
 		super("Scheme Type Box");
@@ -55,7 +55,7 @@ public class SchemeTypeBox extends FullBox {
 	 *
 	 * @return the scheme URI or null, if no URI is present
 	 */
-	public String getSchemeURI() {
+	public string getSchemeURI() {
 		return schemeURI;
 	}
 }

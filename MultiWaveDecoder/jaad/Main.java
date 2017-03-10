@@ -21,28 +21,14 @@ import java.util.List;
  */
 public class Main {
 
-	private static final String USAGE = "usage:\nnet.sourceforge.jaad.Main [-mp4] <infile> <outfile>\n\n\t-mp4\tinput file is in MP4 container format";
-
-	public static void main(String[] args) {
-		try {
-			if(args.length<2) printUsage();
-			if(args[0].equals("-mp4")) {
-				if(args.length<3) printUsage();
-				else decodeMP4(args[1], args[2]);
-			}
-			else decodeAAC(args[0], args[1]);
-		}
-		catch(Exception e) {
-			System.err.println("error while decoding: "+e.toString());
-		}
-	}
+	private static final string USAGE = "usage:\nnet.sourceforge.jaad.Main [-mp4] <infile> <outfile>\n\n\t-mp4\tinput file is in MP4 container format";
 
 	private static void printUsage() {
 		System.out.println(USAGE);
 		System.exit(1);
 	}
 
-	private static void decodeMP4(String in, String out) throws Exception {
+	private static void decodeMP4(string in, string out) throws Exception {
 		WaveFileWriter wav = null;
 		try {
 			final MP4Container cont = new MP4Container(new RandomAccessFile(in, "r"));
@@ -68,7 +54,7 @@ public class Main {
 		}
 	}
 
-	private static void decodeAAC(String in, String out) throws IOException {
+	private static void decodeAAC(string in, string out) throws IOException {
 		WaveFileWriter wav = null;
 		try {
 			final ADTSDemultiplexer adts = new ADTSDemultiplexer(new FileInputStream(in));

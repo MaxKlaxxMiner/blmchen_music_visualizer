@@ -11,11 +11,11 @@ public class AACException extends IOException {
 
 	private final boolean eos;
 
-	public AACException(String message) {
+	public AACException(string message) {
 		this(message, false);
 	}
 
-	public AACException(String message, boolean eos) {
+	public AACException(string message, boolean eos) {
 		super(message);
 		this.eos = eos;
 	}

@@ -18,10 +18,10 @@ import net.sourceforge.jaad.mp4.boxes.FullBox;
  * @author in-somnia
  */
 /*TODO: use generics here? -> each DataType should return <T> corresponding to
-its class (String/Integer/...)*/
+its class (string/Integer/...)*/
 public class ITunesMetadataBox extends FullBox {
 
-	private static final String[] TIMESTAMPS = {"yyyy", "yyyy-MM", "yyyy-MM-dd"};
+	private static final string[] TIMESTAMPS = {"yyyy", "yyyy-MM", "yyyy-MM-dd"};
 
 	public enum DataType {
 
@@ -99,9 +99,9 @@ public class ITunesMetadataBox extends FullBox {
 	 * Returns the content as a text string.
 	 * @return the metadata as text
 	 */
-	public String getText() {
+	public string getText() {
 		//first four bytes are padding (zero)
-		return new String(data, 0, data.length, Charset.forName("UTF-8"));
+		return new string(data, 0, data.length, Charset.forName("UTF-8"));
 	}
 
 	/**
@@ -136,7 +136,7 @@ public class ITunesMetadataBox extends FullBox {
 		final Date date;
 		if(i>=0&&i<TIMESTAMPS.length) {
 			final SimpleDateFormat sdf = new SimpleDateFormat(TIMESTAMPS[i]);
-			date = sdf.parse(new String(data), new ParsePosition(0));
+			date = sdf.parse(new string(data), new ParsePosition(0));
 		}
 		else date = null;
 		return date;

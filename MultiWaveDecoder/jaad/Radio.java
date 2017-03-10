@@ -19,9 +19,9 @@ import net.sourceforge.jaad.adts.ADTSDemultiplexer;
  */
 public class Radio {
 
-	private static final String USAGE = "usage:\nnet.sourceforge.jaad.Radio <url>";
+	private static final string USAGE = "usage:\nnet.sourceforge.jaad.Radio <url>";
 
-	public static void main(String[] args) {
+	public static void main(string[] args) {
 		try {
 			if(args.length<1) printUsage();
 			else decode(args[0]);
@@ -37,7 +37,7 @@ public class Radio {
 		System.exit(1);
 	}
 
-	private static void decode(String arg) throws Exception {
+	private static void decode(string arg) throws Exception {
 		final SampleBuffer buf = new SampleBuffer();
 
 		SourceDataLine line = null;

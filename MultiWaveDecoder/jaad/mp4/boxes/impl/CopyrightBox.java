@@ -14,7 +14,7 @@ import net.sourceforge.jaad.mp4.boxes.Utils;
  */
 public class CopyrightBox extends FullBox {
 
-	private String languageCode, notice;
+	private string languageCode, notice;
 
 	public CopyrightBox() {
 		super("Copyright Box");
@@ -36,14 +36,14 @@ public class CopyrightBox extends FullBox {
 	 * The language code for the following text. See ISO 639-2/T for the set of
 	 * three character codes.
 	 */
-	public String getLanguageCode() {
+	public string getLanguageCode() {
 		return languageCode;
 	}
 
 	/**
 	 * The copyright notice.
 	 */
-	public String getNotice() {
+	public string getNotice() {
 		return notice;
 	}
 }

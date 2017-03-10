@@ -90,7 +90,7 @@ public class VideoTrack extends Track {
 		return (sampleEntry!=null) ? sampleEntry.getFrameCount() : 0;
 	}
 
-	public String getCompressorName() {
+	public string getCompressorName() {
 		return (sampleEntry!=null) ? sampleEntry.getCompressorName() : "";
 	}
 

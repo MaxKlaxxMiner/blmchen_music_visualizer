@@ -39,11 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="aac\Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="aac\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="jaad\aac\AACException.java" />
     <Content Include="jaad\aac\ChannelConfiguration.java" />

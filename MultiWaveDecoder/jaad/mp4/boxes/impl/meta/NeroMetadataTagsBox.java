@@ -8,11 +8,11 @@ import net.sourceforge.jaad.mp4.boxes.BoxImpl;
 
 public class NeroMetadataTagsBox extends BoxImpl {
 
-	private final Map<String, String> pairs;
+	private final Map<String, string> pairs;
 
 	public NeroMetadataTagsBox() {
 		super("Nero Metadata Tags Box");
-		pairs = new HashMap<String, String>();
+		pairs = new HashMap<String, string>();
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class NeroMetadataTagsBox extends BoxImpl {
 		}
 	}
 
-	public Map<String, String> getPairs() {
+	public Map<String, string> getPairs() {
 		return pairs;
 	}
 }

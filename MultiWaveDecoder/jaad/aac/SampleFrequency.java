@@ -109,7 +109,7 @@ public enum SampleFrequency {
 	 * @return the sample frequency's description
 	 */
 	@Override
-	public String toString() {
+	public string toString() {
 		return Integer.toString(frequency);
 	}
 }

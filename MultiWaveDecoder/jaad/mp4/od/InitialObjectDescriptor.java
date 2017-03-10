@@ -14,7 +14,7 @@ public class InitialObjectDescriptor extends Descriptor {
 
 	private int objectDescriptorID;
 	private boolean urlPresent, includeInlineProfiles;
-	private String url;
+	private string url;
 	private int odProfile, sceneProfile, audioProfile, visualProfile, graphicsProfile;
 
 	@Override
@@ -71,13 +71,13 @@ public class InitialObjectDescriptor extends Descriptor {
 	}
 
 	/**
-	 * A URL String that shall point to another InitialObjectDescriptor. If no
+	 * A URL string that shall point to another InitialObjectDescriptor. If no
 	 * URL is present (if <code>isURLPresent()</code> returns false) this method
 	 * returns null.
 	 *
-	 * @return a URL String or null if none is present
+	 * @return a URL string or null if none is present
 	 */
-	public String getURL() {
+	public string getURL() {
 		return url;
 	}
 

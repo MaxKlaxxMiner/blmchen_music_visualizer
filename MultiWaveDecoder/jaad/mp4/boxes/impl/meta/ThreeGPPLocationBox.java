@@ -25,7 +25,7 @@ public class ThreeGPPLocationBox extends ThreeGPPMetadataBox {
 
 	private int role;
 	private double longitude, latitude, altitude;
-	private String placeName, astronomicalBody, additionalNotes;
+	private string placeName, astronomicalBody, additionalNotes;
 
 	public ThreeGPPLocationBox() {
 		super("3GPP Location Information Box");
@@ -50,7 +50,7 @@ public class ThreeGPPLocationBox extends ThreeGPPMetadataBox {
 	 * 
 	 * @return the place's name
 	 */
-	public String getPlaceName() {
+	public string getPlaceName() {
 		return placeName;
 	}
 
@@ -105,7 +105,7 @@ public class ThreeGPPLocationBox extends ThreeGPPMetadataBox {
 	 * 
 	 * @return the astronomical body
 	 */
-	public String getAstronomicalBody() {
+	public string getAstronomicalBody() {
 		return astronomicalBody;
 	}
 
@@ -114,7 +114,7 @@ public class ThreeGPPLocationBox extends ThreeGPPMetadataBox {
 	 * 
 	 * @return the additional notes
 	 */
-	public String getAdditionalNotes() {
+	public string getAdditionalNotes() {
 		return additionalNotes;
 	}
 }

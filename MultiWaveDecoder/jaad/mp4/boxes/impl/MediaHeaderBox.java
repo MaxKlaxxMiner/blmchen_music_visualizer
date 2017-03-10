@@ -12,7 +12,7 @@ import net.sourceforge.jaad.mp4.boxes.Utils;
 public class MediaHeaderBox extends FullBox {
 
 	private long creationTime, modificationTime, timeScale, duration;
-	private String language;
+	private string language;
 
 	public MediaHeaderBox() {
 		super("Media Header Box");
@@ -76,7 +76,7 @@ public class MediaHeaderBox extends FullBox {
 	 * Language code for this media as defined in ISO 639-2/T.
 	 * @return the language code
 	 */
-	public String getLanguage() {
+	public string getLanguage() {
 		return language;
 	}
 }

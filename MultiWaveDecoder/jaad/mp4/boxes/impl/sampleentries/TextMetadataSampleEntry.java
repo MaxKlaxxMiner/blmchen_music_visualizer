@@ -24,7 +24,7 @@ import java.io.IOException;
 
 public class TextMetadataSampleEntry extends MetadataSampleEntry {
 
-	private String mimeType;
+	private string mimeType;
 
 	public TextMetadataSampleEntry() {
 		super("Text Metadata Sample Entry");
@@ -43,7 +43,7 @@ public class TextMetadataSampleEntry extends MetadataSampleEntry {
 	 * 
 	 * @return the content's MIME type
 	 */
-	public String getMimeType() {
+	public string getMimeType() {
 		return mimeType;
 	}
 }

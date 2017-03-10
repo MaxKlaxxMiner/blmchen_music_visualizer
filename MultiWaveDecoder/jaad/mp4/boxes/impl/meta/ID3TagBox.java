@@ -8,7 +8,7 @@ import net.sourceforge.jaad.mp4.boxes.Utils;
 //TODO: use nio ByteBuffer instead of array
 public class ID3TagBox extends FullBox {
 
-	private String language;
+	private string language;
 	private byte[] id3Data;
 
 	public ID3TagBox() {
@@ -33,7 +33,7 @@ public class ID3TagBox extends FullBox {
 	 * The language code for the following text. See ISO 639-2/T for the set of
 	 * three character codes.
 	 */
-	public String getLanguage() {
+	public string getLanguage() {
 		return language;
 	}
 }

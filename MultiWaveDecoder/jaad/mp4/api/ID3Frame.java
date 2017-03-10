@@ -93,9 +93,9 @@ class ID3Frame {
 	static final int UNSYNCHRONISED_LYRIC = 1431522388; //USLT
 	static final int USER_DEFINED_TEXT_INFORMATION_FRAME = 1415075928; //TXXX
 	static final int USER_DEFINED_URL_LINK_FRAME = 1465407576; //WXXX
-	private static final String[] TEXT_ENCODINGS = {"ISO-8859-1", "UTF-16"/*BOM*/, "UTF-16", "UTF-8"};
-	private static final String[] VALID_TIMESTAMPS = {"yyyy, yyyy-MM", "yyyy-MM-dd", "yyyy-MM-ddTHH", "yyyy-MM-ddTHH:mm", "yyyy-MM-ddTHH:mm:ss"};
-	private static final String UNKNOWN_LANGUAGE = "xxx";
+	private static final string[] TEXT_ENCODINGS = {"ISO-8859-1", "UTF-16"/*BOM*/, "UTF-16", "UTF-8"};
+	private static final string[] VALID_TIMESTAMPS = {"yyyy, yyyy-MM", "yyyy-MM-dd", "yyyy-MM-ddTHH", "yyyy-MM-ddTHH:mm", "yyyy-MM-ddTHH:mm:ss"};
+	private static final string UNKNOWN_LANGUAGE = "xxx";
 	private long size;
 	private int id, flags, groupID, encryptionMethod;
 	private byte[] data;
@@ -147,11 +147,11 @@ class ID3Frame {
 		return data;
 	}
 
-	public String getText() {
-		return new String(data, Charset.forName(TEXT_ENCODINGS[0]));
+	public string getText() {
+		return new string(data, Charset.forName(TEXT_ENCODINGS[0]));
 	}
 
-	public String getEncodedText() {
+	public string getEncodedText() {
 		//first byte indicates encoding
 		final int enc = data[0];
 
@@ -160,16 +160,16 @@ class ID3Frame {
 		for(int i = 1; i<data.length&&t<0; i++) {
 			if(data[i]==0&&(enc==0||enc==3||data[i+1]==0)) t = i;
 		}
-		return new String(data, 1, t-1, Charset.forName(TEXT_ENCODINGS[enc]));
+		return new string(data, 1, t-1, Charset.forName(TEXT_ENCODINGS[enc]));
 	}
 
 	public int getNumber() {
-		return Integer.parseInt(new String(data));
+		return Integer.parseInt(new string(data));
 	}
 
 	public int[] getNumbers() {
 		//multiple numbers separated by '/'
-		final String x = new String(data, Charset.forName(TEXT_ENCODINGS[0]));
+		final string x = new string(data, Charset.forName(TEXT_ENCODINGS[0]));
 		final int i = x.indexOf('/');
 		final int[] y;
 		if(i>0) y = new int[]{Integer.parseInt(x.substring(0, i)), Integer.parseInt(x.substring(i+1))};
@@ -183,14 +183,14 @@ class ID3Frame {
 		final Date date;
 		if(i>=0&&i<VALID_TIMESTAMPS.length) {
 			final SimpleDateFormat sdf = new SimpleDateFormat(VALID_TIMESTAMPS[i]);
-			date = sdf.parse(new String(data), new ParsePosition(0));
+			date = sdf.parse(new string(data), new ParsePosition(0));
 		}
 		else date = null;
 		return date;
 	}
 
 	public Locale getLocale() {
-		final String s = new String(data).toLowerCase();
+		final string s = new string(data).toLowerCase();
 		final Locale l;
 		if(s.equals(UNKNOWN_LANGUAGE)) l = null;
 		else l = new Locale(s);

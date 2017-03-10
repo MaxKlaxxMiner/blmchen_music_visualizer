@@ -7,14 +7,14 @@ import net.sourceforge.jaad.mp4.boxes.impl.drm.FairPlayDataBox;
 
 public class ITunesProtection extends Protection {
 
-	private final String userID, userName, userKey;
+	private final string userID, userName, userKey;
 	private final byte[] privateKey, initializationVector;
 
 	public ITunesProtection(Box sinf) {
 		super(sinf);
 
 		final Box schi = sinf.getChild(BoxTypes.SCHEME_INFORMATION_BOX);
-		userID = new String(((FairPlayDataBox) schi.getChild(BoxTypes.FAIRPLAY_USER_ID_BOX)).getData());
+		userID = new string(((FairPlayDataBox) schi.getChild(BoxTypes.FAIRPLAY_USER_ID_BOX)).getData());
 		
 		//user name box is filled with 0
 		final byte[] b = ((FairPlayDataBox) schi.getChild(BoxTypes.FAIRPLAY_USER_NAME_BOX)).getData();
@@ -22,9 +22,9 @@ public class ITunesProtection extends Protection {
 		while(b[i]!=0) {
 			i++;
 		}
-		userName = new String(b, 0, i-1);
+		userName = new string(b, 0, i-1);
 		
-		userKey = new String(((FairPlayDataBox) schi.getChild(BoxTypes.FAIRPLAY_USER_KEY_BOX)).getData());
+		userKey = new string(((FairPlayDataBox) schi.getChild(BoxTypes.FAIRPLAY_USER_KEY_BOX)).getData());
 		privateKey = ((FairPlayDataBox) schi.getChild(BoxTypes.FAIRPLAY_PRIVATE_KEY_BOX)).getData();
 		initializationVector = ((FairPlayDataBox) schi.getChild(BoxTypes.FAIRPLAY_IV_BOX)).getData();
 	}
@@ -34,15 +34,15 @@ public class ITunesProtection extends Protection {
 		return Scheme.ITUNES_FAIR_PLAY;
 	}
 
-	public String getUserID() {
+	public string getUserID() {
 		return userID;
 	}
 
-	public String getUserName() {
+	public string getUserName() {
 		return userName;
 	}
 
-	public String getUserKey() {
+	public string getUserKey() {
 		return userKey;
 	}
 

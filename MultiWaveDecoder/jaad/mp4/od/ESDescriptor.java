@@ -9,7 +9,7 @@ import net.sourceforge.jaad.mp4.MP4InputStream;
  *
  * The first part consists of the ES_ID which is a unique reference to the
  * elementary stream within its name scope, a mechanism to group elementary
- * streams within this Descriptor and an optional URL String.
+ * streams within this Descriptor and an optional URL string.
  *
  * The second part is a set of optional extension descriptors that support the
  * inclusion of future extensions as well as the transport of private data in a
@@ -25,7 +25,7 @@ public class ESDescriptor extends Descriptor {
 
 	private int esID, streamPriority, dependingOnES_ID;
 	private boolean streamDependency, urlPresent, ocrPresent;
-	private String url;
+	private string url;
 
 	void decode(MP4InputStream in) throws IOException {
 		esID = (int) in.readBytes(2);
@@ -91,15 +91,15 @@ public class ESDescriptor extends Descriptor {
 	}
 
 	/**
-	 * A URL String that shall point to the location of an SL-packetized stream
+	 * A URL string that shall point to the location of an SL-packetized stream
 	 * by name. The parameters of the SL-packetized stream that is retrieved
 	 * from the URL are fully specified in this ESDescriptor. 
 	 * If no URL is present (if <code>isURLPresent()</code> returns false) this
 	 * method returns null.
 	 *
-	 * @return a URL String or null if none is present
+	 * @return a URL string or null if none is present
 	 */
-	public String getURL() {
+	public string getURL() {
 		return url;
 	}
 

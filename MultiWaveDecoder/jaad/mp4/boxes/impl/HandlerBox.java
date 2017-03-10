@@ -36,7 +36,7 @@ public class HandlerBox extends FullBox {
 	public static final int TYPE_IPSM = 1768977261; //ipsm
 	public static final int TYPE_MJSM = 1835692909; //mjsm
 	private long handlerType;
-	private String handlerName;
+	private string handlerName;
 
 	public HandlerBox() {
 		super("Handler Box");
@@ -84,7 +84,7 @@ public class HandlerBox extends FullBox {
 	 * 
 	 * @return the handler type's name
 	 */
-	public String getHandlerName() {
+	public string getHandlerName() {
 		return handlerName;
 	}
 }

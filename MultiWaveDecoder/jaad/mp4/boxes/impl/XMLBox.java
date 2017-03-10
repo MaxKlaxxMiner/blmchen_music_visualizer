@@ -15,7 +15,7 @@ import net.sourceforge.jaad.mp4.boxes.FullBox;
  */
 public class XMLBox extends FullBox {
 
-	private String content;
+	private string content;
 
 	public XMLBox() {
 		super("XML Box");
@@ -31,7 +31,7 @@ public class XMLBox extends FullBox {
 	/**
 	 * The XML content.
 	 */
-	public String getContent() {
+	public string getContent() {
 		return content;
 	}
 }

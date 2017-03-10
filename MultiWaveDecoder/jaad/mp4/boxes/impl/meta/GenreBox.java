@@ -8,7 +8,7 @@ import net.sourceforge.jaad.mp4.boxes.Utils;
 
 public class GenreBox extends FullBox {
 
-	private String languageCode, genre;
+	private string languageCode, genre;
 
 	public GenreBox() {
 		super("Genre Box");
@@ -21,16 +21,16 @@ public class GenreBox extends FullBox {
 			super.decode(in);
 			languageCode = Utils.getLanguageCode(in.readBytes(2));
 			final byte[] b = in.readTerminated((int) getLeft(in), 0);
-			genre = new String(b, MP4InputStream.UTF8);
+			genre = new string(b, MP4InputStream.UTF8);
 		}
 		else readChildren(in);
 	}
 
-	public String getLanguageCode() {
+	public string getLanguageCode() {
 		return languageCode;
 	}
 
-	public String getGenre() {
+	public string getGenre() {
 		return genre;
 	}
 }

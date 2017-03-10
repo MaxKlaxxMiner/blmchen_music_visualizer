@@ -8,11 +8,11 @@ import net.sourceforge.jaad.mp4.boxes.FullBox;
 
 public class GroupIDToNameBox extends FullBox {
 
-	private final Map<Long, String> map;
+	private final Map<Long, string> map;
 
 	public GroupIDToNameBox() {
 		super("Group ID To Name Box");
-		map = new HashMap<Long, String>();
+		map = new HashMap<Long, string>();
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class GroupIDToNameBox extends FullBox {
 	 *
 	 * @return the ID to name map
 	 */
-	public Map<Long, String> getMap() {
+	public Map<Long, string> getMap() {
 		return map;
 	}
 }

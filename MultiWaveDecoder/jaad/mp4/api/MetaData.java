@@ -80,17 +80,17 @@ public class MetaData {
 		public static final Field<String> ARTIST_SORT_TEXT = new Field<String>("Artist Sort Text");
 		public static final Field<String> TITLE_SORT_TEXT = new Field<String>("Title Sort Text");
 		public static final Field<String> ALBUM_SORT_TEXT = new Field<String>("Album Sort Text");
-		private String name;
+		private string name;
 
-		private Field(String name) {
+		private Field(string name) {
 			this.name = name;
 		}
 
-		public String getName() {
+		public string getName() {
 			return name;
 		}
 	}
-	private static final String[] STANDARD_GENRES = {
+	private static final string[] STANDARD_GENRES = {
 		"undefined",
 		//IDv1 standard
 		"blues",
@@ -221,7 +221,7 @@ public class MetaData {
 		"euro house",
 		"dance hall"
 	};
-	private static final String[] NERO_TAGS = {
+	private static final string[] NERO_TAGS = {
 		"artist", "title", "album", "track", "totaltracks", "year", "genre",
 		"disc", "totaldiscs", "url", "copyright", "comment", "lyrics",
 		"credits", "rating", "label", "composer", "isrc", "mood", "tempo"
@@ -273,7 +273,7 @@ public class MetaData {
 		if(udta.hasChild(BoxTypes.THREE_GPP_LOCATION_INFORMATION_BOX)) put(Field.LOCATION, ((ThreeGPPLocationBox) udta.getChild(BoxTypes.THREE_GPP_LOCATION_INFORMATION_BOX)).getPlaceName());
 		if(udta.hasChild(BoxTypes.THREE_GPP_PERFORMER_BOX)) put(Field.ARTIST, ((ThreeGPPMetadataBox) udta.getChild(BoxTypes.THREE_GPP_PERFORMER_BOX)).getData());
 		if(udta.hasChild(BoxTypes.THREE_GPP_RECORDING_YEAR_BOX)) {
-			final String value = ((ThreeGPPMetadataBox) udta.getChild(BoxTypes.THREE_GPP_RECORDING_YEAR_BOX)).getData();
+			final string value = ((ThreeGPPMetadataBox) udta.getChild(BoxTypes.THREE_GPP_RECORDING_YEAR_BOX)).getData();
 			try {
 				put(Field.RELEASE_DATE, new Date(Integer.parseInt(value)));
 			}
@@ -423,9 +423,9 @@ public class MetaData {
 
 	//parses children of 'tags': Nero
 	private void parseNeroTags(NeroMetadataTagsBox tags) {
-		final Map<String, String> pairs = tags.getPairs();
+		final Map<String, string> pairs = tags.getPairs();
 		String val;
-		for(String key : pairs.keySet()) {
+		for(string key : pairs.keySet()) {
 			val = pairs.get(key);
 			try {
 				if(key.equals(NERO_TAGS[0])) put(Field.ARTIST, val);

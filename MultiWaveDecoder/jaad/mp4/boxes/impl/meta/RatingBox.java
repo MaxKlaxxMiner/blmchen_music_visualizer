@@ -8,7 +8,7 @@ import net.sourceforge.jaad.mp4.boxes.Utils;
 
 public class RatingBox extends FullBox {
 
-	private String languageCode, rating;
+	private string languageCode, rating;
 
 	public RatingBox() {
 		super("Rating Box");
@@ -25,16 +25,16 @@ public class RatingBox extends FullBox {
 			final long criteria = in.readBytes(4);
 			languageCode = Utils.getLanguageCode(in.readBytes(2));
 			final byte[] b = in.readTerminated((int) getLeft(in), 0);
-			rating = new String(b, MP4InputStream.UTF8);
+			rating = new string(b, MP4InputStream.UTF8);
 		}
 		else readChildren(in);
 	}
 
-	public String getLanguageCode() {
+	public string getLanguageCode() {
 		return languageCode;
 	}
 
-	public String getRating() {
+	public string getRating() {
 		return rating;
 	}
 }

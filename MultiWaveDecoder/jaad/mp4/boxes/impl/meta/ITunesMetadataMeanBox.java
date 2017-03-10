@@ -6,7 +6,7 @@ import net.sourceforge.jaad.mp4.boxes.FullBox;
 
 public class ITunesMetadataMeanBox extends FullBox {
 
-	private String domain;
+	private string domain;
 
 	public ITunesMetadataMeanBox() {
 		super("iTunes Metadata Mean Box");
@@ -19,7 +19,7 @@ public class ITunesMetadataMeanBox extends FullBox {
 		domain = in.readString((int) getLeft(in));
 	}
 
-	public String getDomain() {
+	public string getDomain() {
 		return domain;
 	}
 }

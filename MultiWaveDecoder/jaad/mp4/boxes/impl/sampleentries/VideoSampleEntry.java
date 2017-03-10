@@ -27,9 +27,9 @@ public class VideoSampleEntry extends SampleEntry {
 	private int width, height;
 	private double horizontalResolution, verticalResolution;
 	private int frameCount, depth;
-	private String compressorName;
+	private string compressorName;
 
-	public VideoSampleEntry(String name) {
+	public VideoSampleEntry(string name) {
 		super(name);
 	}
 
@@ -104,7 +104,7 @@ public class VideoSampleEntry extends SampleEntry {
 	/**
 	 * The compressor name, for informative purposes.
 	 */
-	public String getCompressorName() {
+	public string getCompressorName() {
 		return compressorName;
 	}
 

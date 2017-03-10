@@ -8,7 +8,7 @@ import java.io.IOException;
  *
  * The first part uniquely labels the <code>ObjectDescriptor</code> within its
  * name scope by means of an ID. Media objects in the scene description use this
- * ID to refer to their object descriptor. An optional URL String indicates that
+ * ID to refer to their object descriptor. An optional URL string indicates that
  * the actual object descriptor resides at a remote location.
  *
  * The second part is a set of optional descriptors that support the inclusion
@@ -25,7 +25,7 @@ public class ObjectDescriptor extends Descriptor {
 
 	private int objectDescriptorID;
 	private boolean urlPresent;
-	private String url;
+	private string url;
 
 	void decode(MP4InputStream in) throws IOException {
 		//10 bits objectDescriptorID, 1 bit url flag, 5 bits reserved
@@ -60,13 +60,13 @@ public class ObjectDescriptor extends Descriptor {
 	}
 
 	/**
-	 * A URL String that shall point to another InitialObjectDescriptor. If no
+	 * A URL string that shall point to another InitialObjectDescriptor. If no
 	 * URL is present (if <code>isURLPresent()</code> returns false) this method
 	 * returns null.
 	 *
-	 * @return a URL String or null if none is present
+	 * @return a URL string or null if none is present
 	 */
-	public String getURL() {
+	public string getURL() {
 		return url;
 	}
 }

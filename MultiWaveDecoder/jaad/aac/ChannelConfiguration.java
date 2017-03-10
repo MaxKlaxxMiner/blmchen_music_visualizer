@@ -51,9 +51,9 @@ public enum ChannelConfiguration {
 		return c;
 	}
 	private final int chCount;
-	private final String descr;
+	private final string descr;
 
-	private ChannelConfiguration(int chCount, String descr) {
+	private ChannelConfiguration(int chCount, string descr) {
 		this.chCount = chCount;
 		this.descr = descr;
 	}
@@ -69,7 +69,7 @@ public enum ChannelConfiguration {
 	 * Returns a short description of this configuration.
 	 * @return the channel configuration's description
 	 */
-	public String getDescription() {
+	public string getDescription() {
 		return descr;
 	}
 
@@ -79,7 +79,7 @@ public enum ChannelConfiguration {
 	 * @return the channel configuration's description
 	 */
 	@Override
-	public String toString() {
+	public string toString() {
 		return descr;
 	}
 }

@@ -27,7 +27,7 @@ public abstract class SampleEntry extends BoxImpl {
 
 	private long dataReferenceIndex;
 
-	protected SampleEntry(String name) {
+	protected SampleEntry(string name) {
 		super(name);
 	}
 

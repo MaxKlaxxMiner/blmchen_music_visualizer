@@ -12,8 +12,8 @@ public class MP4InputStream {
 
 	public static final int MASK8 = 0xFF;
 	public static final int MASK16 = 0xFFFF;
-	public static final String UTF8 = "UTF-8";
-	public static final String UTF16 = "UTF-16";
+	public static final string UTF8 = "UTF-8";
+	public static final string UTF16 = "UTF-16";
 	private static final int BYTE_ORDER_MASK = 0xFEFF;
 	private final InputStream in;
 	private final RandomAccessFile fin;
@@ -276,18 +276,18 @@ public class MP4InputStream {
 	}
 
 	/**
-	 * Reads <code>n</code> bytes from the input as a String. The bytes are 
+	 * Reads <code>n</code> bytes from the input as a string. The bytes are 
 	 * directly converted into characters. If not enough bytes could be read, an
 	 * EOFException is thrown.
 	 * This method blocks until all bytes could be read, the end of the stream 
 	 * is detected, or an I/O error occurs.
 	 * 
-	 * @param n the length of the String.
-	 * @return the String, that was read
+	 * @param n the length of the string.
+	 * @return the string, that was read
 	 * @throws IOException If the end of the stream is detected, the input 
 	 * stream has been closed, or if some other I/O error occurs.
 	 */
-	public String readString(final int n) throws IOException {
+	public string readString(final int n) throws IOException {
 		int i = -1;
 		int pos = 0;
 		char[] c = new char[n];
@@ -296,11 +296,11 @@ public class MP4InputStream {
 			c[pos] = (char) i;
 			pos++;
 		}
-		return new String(c, 0, pos);
+		return new string(c, 0, pos);
 	}
 
 	/**
-	 * Reads a null-terminated UTF-encoded String from the input. The maximum 
+	 * Reads a null-terminated UTF-encoded string from the input. The maximum 
 	 * number of bytes that can be read before the null must appear must be 
 	 * specified.
 	 * Although the method is preferred for unicode, the encoding can be any 
@@ -311,17 +311,17 @@ public class MP4InputStream {
 	 * 
 	 * @param max the maximum number of bytes to read, before the null-terminator
 	 * must appear.
-	 * @param encoding the charset used to encode the String
-	 * @return the decoded String
+	 * @param encoding the charset used to encode the string
+	 * @return the decoded string
 	 * @throws IOException If the end of the stream is detected, the input 
 	 * stream has been closed, or if some other I/O error occurs.
 	 */
-	public String readUTFString(int max, String encoding) throws IOException {
-		return new String(readTerminated(max, 0), Charset.forName(encoding));
+	public string readUTFString(int max, string encoding) throws IOException {
+		return new string(readTerminated(max, 0), Charset.forName(encoding));
 	}
 
 	/**
-	 * Reads a null-terminated UTF-encoded String from the input. The maximum 
+	 * Reads a null-terminated UTF-encoded string from the input. The maximum 
 	 * number of bytes that can be read before the null must appear must be 
 	 * specified.
 	 * The encoding is detected automatically, it may be UTF-8 or UTF-16 
@@ -332,15 +332,15 @@ public class MP4InputStream {
 	 * 
 	 * @param max the maximum number of bytes to read, before the null-terminator
 	 * must appear.
-	 * @return the decoded String
+	 * @return the decoded string
 	 * @throws IOException If the end of the stream is detected, the input 
 	 * stream has been closed, or if some other I/O error occurs.
 	 */
-	public String readUTFString(int max) throws IOException {
+	public string readUTFString(int max) throws IOException {
 		//read byte order mask
 		final byte[] bom = new byte[2];
 		read(bom, 0, 2);
-		if(bom[0]==0||bom[1]==0) return new String();
+		if(bom[0]==0||bom[1]==0) return new string();
 		final int i = (bom[0]<<8)|bom[1];
 
 		//read null-terminated
@@ -350,7 +350,7 @@ public class MP4InputStream {
 		System.arraycopy(bom, 0, b2, 0, bom.length);
 		System.arraycopy(b, 0, b2, bom.length, b.length);
 
-		return new String(b2, Charset.forName((i==BYTE_ORDER_MASK) ? UTF16 : UTF8));
+		return new string(b2, Charset.forName((i==BYTE_ORDER_MASK) ? UTF16 : UTF8));
 	}
 
 	/**

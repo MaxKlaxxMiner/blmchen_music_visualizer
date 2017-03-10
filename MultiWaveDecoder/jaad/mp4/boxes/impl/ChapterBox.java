@@ -15,11 +15,11 @@ import net.sourceforge.jaad.mp4.boxes.FullBox;
  */
 public class ChapterBox extends FullBox {
 
-	private final Map<Long, String> chapters;
+	private final Map<Long, string> chapters;
 
 	public ChapterBox() {
 		super("Chapter Box");
-		chapters = new HashMap<Long, String>();
+		chapters = new HashMap<Long, string>();
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class ChapterBox extends FullBox {
 	 *
 	 * @return the chapters
 	 */
-	public Map<Long, String> getChapters() {
+	public Map<Long, string> getChapters() {
 		return chapters;
 	}
 }

@@ -6,7 +6,7 @@ import net.sourceforge.jaad.mp4.boxes.BoxImpl;
 
 public abstract class SampleGroupDescriptionEntry extends BoxImpl {
 
-	protected SampleGroupDescriptionEntry(String name) {
+	protected SampleGroupDescriptionEntry(string name) {
 		super(name);
 	}
 

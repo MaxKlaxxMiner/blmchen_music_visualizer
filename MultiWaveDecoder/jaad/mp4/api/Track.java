@@ -74,7 +74,7 @@ public abstract class Track {
 					location = new URL(url.getLocation());
 				}
 				catch(MalformedURLException e) {
-					Logger.getLogger("MP4 API").log(Level.WARNING, "Parsing URL-Box failed: {0}, url: {1}", new String[]{e.toString(), url.getLocation()});
+					Logger.getLogger("MP4 API").log(Level.WARNING, "Parsing URL-Box failed: {0}, url: {1}", new string[]{e.toString(), url.getLocation()});
 					location = null;
 				}
 			}

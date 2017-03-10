@@ -14,7 +14,7 @@ import net.sourceforge.jaad.mp4.boxes.FullBox;
  */
 public class OMADiscreteMediaHeadersBox extends FullBox {
 
-	private String contentType;
+	private string contentType;
 
 	public OMADiscreteMediaHeadersBox() {
 		super("OMA DRM Discrete Media Headers Box");
@@ -37,7 +37,7 @@ public class OMADiscreteMediaHeadersBox extends FullBox {
 	 * 
 	 * @return the content type
 	 */
-	public String getContentType() {
+	public string getContentType() {
 		return contentType;
 	}
 }

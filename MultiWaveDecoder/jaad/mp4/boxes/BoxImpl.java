@@ -8,12 +8,12 @@ import net.sourceforge.jaad.mp4.MP4InputStream;
 
 public class BoxImpl implements Box {
 
-	private final String name;
+	private final string name;
 	protected long size, type, offset;
 	protected Box parent;
 	protected final List<Box> children;
 
-	public BoxImpl(String name) {
+	public BoxImpl(string name) {
 		this.name = name;
 
 		children = new ArrayList<Box>(4);
@@ -56,12 +56,12 @@ public class BoxImpl implements Box {
 		return parent;
 	}
 
-	public String getName() {
+	public string getName() {
 		return name;
 	}
 
 	@Override
-	public String toString() {
+	public string toString() {
 		return name+" ["+BoxFactory.typeToString(type)+"]";
 	}
 

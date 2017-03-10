@@ -7,7 +7,7 @@ import net.sourceforge.jaad.mp4.boxes.FullBox;
 public class DataEntryUrlBox extends FullBox {
 
 	private boolean inFile;
-	private String location;
+	private string location;
 
 	public DataEntryUrlBox() {
 		super("Data Entry Url Box");
@@ -25,7 +25,7 @@ public class DataEntryUrlBox extends FullBox {
 		return inFile;
 	}
 
-	public String getLocation() {
+	public string getLocation() {
 		return location;
 	}
 }

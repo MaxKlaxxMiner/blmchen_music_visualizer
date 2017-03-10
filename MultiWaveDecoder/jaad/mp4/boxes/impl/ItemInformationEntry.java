@@ -7,7 +7,7 @@ import net.sourceforge.jaad.mp4.boxes.FullBox;
 public class ItemInformationEntry extends FullBox {
 
 	private int itemID, itemProtectionIndex;
-	private String itemName, contentType, contentEncoding;
+	private string itemName, contentType, contentEncoding;
 	private long extensionType;
 	private Extension extension;
 
@@ -60,28 +60,28 @@ public class ItemInformationEntry extends FullBox {
 	}
 
 	/**
-	 * The item name is a String containing a symbolic name of the item (source
+	 * The item name is a string containing a symbolic name of the item (source
 	 * file for file delivery transmissions).
 	 *
 	 * @return the item name
 	 */
-	public String getItemName() {
+	public string getItemName() {
 		return itemName;
 	}
 
 	/**
-	 * The content type is a String with the MIME type of the item. If the item 
+	 * The content type is a string with the MIME type of the item. If the item 
 	 * is content encoded (see below), then the content type refers to the item 
 	 * after content decoding.
 	 * 
 	 * @return the content type
 	 */
-	public String getContentType() {
+	public string getContentType() {
 		return contentType;
 	}
 
 	/**
-	 * The content encoding is an optional String used to indicate that the
+	 * The content encoding is an optional string used to indicate that the
 	 * binary file is encoded and needs to be decoded before interpreted. The
 	 * values are as defined for Content-Encoding for HTTP/1.1. Some possible
 	 * values are "gzip", "compress" and "deflate". An empty string indicates no
@@ -90,7 +90,7 @@ public class ItemInformationEntry extends FullBox {
 	 *
 	 * @return the content encoding
 	 */
-	public String getContentEncoding() {
+	public string getContentEncoding() {
 		return contentEncoding;
 	}
 
@@ -133,7 +133,7 @@ public class ItemInformationEntry extends FullBox {
 
 	public static class FDExtension extends Extension {
 
-		private String contentLocation, contentMD5;
+		private string contentLocation, contentMD5;
 		private long contentLength, transferLength;
 		private long[] groupID;
 
@@ -153,12 +153,12 @@ public class ItemInformationEntry extends FullBox {
 		}
 
 		/**
-		 * The content location is a String in containing the URI of the file as
+		 * The content location is a string in containing the URI of the file as
 		 * defined in HTTP/1.1 (RFC 2616).
 		 *
 		 * @return the content location
 		 */
-		public String getContentLocation() {
+		public string getContentLocation() {
 			return contentLocation;
 		}
 
@@ -168,7 +168,7 @@ public class ItemInformationEntry extends FullBox {
 		 *
 		 * @return the content MD5
 		 */
-		public String getContentMD5() {
+		public string getContentMD5() {
 			return contentMD5;
 		}
 

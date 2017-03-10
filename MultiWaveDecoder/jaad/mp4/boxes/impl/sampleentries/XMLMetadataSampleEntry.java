@@ -24,7 +24,7 @@ import java.io.IOException;
 
 public class XMLMetadataSampleEntry extends MetadataSampleEntry {
 
-	private String namespace, schemaLocation;
+	private string namespace, schemaLocation;
 
 	public XMLMetadataSampleEntry() {
 		super("XML Metadata Sample Entry");
@@ -45,7 +45,7 @@ public class XMLMetadataSampleEntry extends MetadataSampleEntry {
 	 * BiM.
 	 * @return the namespace
 	 */
-	public String getNamespace() {
+	public string getNamespace() {
 		return namespace;
 	}
 
@@ -55,7 +55,7 @@ public class XMLMetadataSampleEntry extends MetadataSampleEntry {
 	 * encoding mechanisms such as BiM.
 	 * @return the schema's URL
 	 */
-	public String getSchemaLocation() {
+	public string getSchemaLocation() {
 		return schemaLocation;
 	}
 }

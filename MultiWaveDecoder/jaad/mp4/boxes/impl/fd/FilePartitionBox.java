@@ -8,7 +8,7 @@ public class FilePartitionBox extends FullBox {
 
 	private int itemID, packetPayloadSize, fecEncodingID, fecInstanceID,
 			maxSourceBlockLength, encodingSymbolLength, maxNumberOfEncodingSymbols;
-	private String schemeSpecificInfo;
+	private string schemeSpecificInfo;
 	private int[] blockCounts;
 	private long[] blockSizes;
 
@@ -28,7 +28,7 @@ public class FilePartitionBox extends FullBox {
 		maxSourceBlockLength = (int) in.readBytes(2);
 		encodingSymbolLength = (int) in.readBytes(2);
 		maxNumberOfEncodingSymbols = (int) in.readBytes(2);
-		schemeSpecificInfo = new String(Base64Decoder.decode(in.readTerminated((int) getLeft(in), 0)));
+		schemeSpecificInfo = new string(Base64Decoder.decode(in.readTerminated((int) getLeft(in), 0)));
 
 		final int entryCount = (int) in.readBytes(2);
 		blockCounts = new int[entryCount];
@@ -125,13 +125,13 @@ public class FilePartitionBox extends FullBox {
 	}
 
 	/**
-	 * The scheme specific info is a String of the scheme-specific object 
+	 * The scheme specific info is a string of the scheme-specific object 
 	 * transfer information (FEC-OTI-Scheme-Specific-Info). The definition of 
 	 * the information depends on the EC encoding ID.
 	 * 
 	 * @return the scheme specific info
 	 */
-	public String getSchemeSpecificInfo() {
+	public string getSchemeSpecificInfo() {
 		return schemeSpecificInfo;
 	}
 
