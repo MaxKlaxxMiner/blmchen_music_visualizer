@@ -1,33 +1,5 @@
-package net.sourceforge.jaad;
-
-import net.sourceforge.jaad.aac.Decoder;
-import net.sourceforge.jaad.aac.SampleBuffer;
-import net.sourceforge.jaad.adts.ADTSDemultiplexer;
-import net.sourceforge.jaad.mp4.MP4Container;
-import net.sourceforge.jaad.mp4.api.AudioTrack;
-import net.sourceforge.jaad.mp4.api.Frame;
-import net.sourceforge.jaad.mp4.api.Movie;
-import net.sourceforge.jaad.mp4.api.Track;
-import net.sourceforge.jaad.util.wav.WaveFileWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.util.List;
-
-/**
- * Command line example, that can decode an AAC file to a WAVE file.
- * @author in-somnia
- */
-public class Main {
-
-	private static final string USAGE = "usage:\nnet.sourceforge.jaad.Main [-mp4] <infile> <outfile>\n\n\t-mp4\tinput file is in MP4 container format";
-
-	private static void printUsage() {
-		System.out.println(USAGE);
-		System.exit(1);
-	}
-
+public class Main
+{
 	private static void decodeMP4(string in, string out) throws Exception {
 		WaveFileWriter wav = null;
 		try {

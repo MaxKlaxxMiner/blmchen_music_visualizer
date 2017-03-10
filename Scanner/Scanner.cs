@@ -35,7 +35,7 @@ namespace Scanner
       if (!finfo.Exists) throw new FileNotFoundException(finfo.FullName);
       //var m4AData = File.ReadAllBytes(finfo.FullName);
 
-      Main.main(new[] { finfo.FullName });
+      Main.main(new[] { "-mp4", finfo.FullName, "test.wav" });
     }
 
     private void Scanner_Load(object sender, EventArgs e)

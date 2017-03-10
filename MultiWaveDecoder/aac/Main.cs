@@ -3,13 +3,25 @@
 
 namespace MultiWaveDecoder
 {
+  /// <summary>
+  /// Command line example, that can decode an AAC file to a WAVE file.
+  /// @author in-somnia
+  /// </summary>
   public class Main
   {
+    const string USAGE = "usage:\ndecoder.exe [-mp4] <infile> <outfile>\n\n\t-mp4\tinput file is in MP4 container format";
+
+    static void printUsage()
+    {
+      Console.WriteLine(USAGE);
+      Environment.Exit(1);
+    }
+
     public static void main(string[] args)
     {
       try
       {
-        //if (args.Length < 2) printUsage();
+        if (args.Length < 2) printUsage();
         //if (args[0].equals("-mp4"))
         //{
         //  if (args.length < 3) printUsage();
@@ -19,7 +31,7 @@ namespace MultiWaveDecoder
       }
       catch (Exception e)
       {
-//        System.err.println("error while decoding: " + e.toString());
+        //        System.err.println("error while decoding: " + e.toString());
       }
     }
   }
