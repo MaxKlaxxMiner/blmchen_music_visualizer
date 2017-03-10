@@ -1,50 +1,3 @@
-package net.sourceforge.jaad.mp4;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.RandomAccessFile;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Handler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import net.sourceforge.jaad.mp4.api.Brand;
-import net.sourceforge.jaad.mp4.api.Movie;
-import net.sourceforge.jaad.mp4.boxes.Box;
-import net.sourceforge.jaad.mp4.boxes.BoxFactory;
-import net.sourceforge.jaad.mp4.boxes.BoxTypes;
-import net.sourceforge.jaad.mp4.boxes.impl.FileTypeBox;
-import net.sourceforge.jaad.mp4.boxes.impl.ProgressiveDownloadInformationBox;
-
-/**
- * The MP4Container is the central class for the MP4 demultiplexer. It reads the
- * container and gives access to the containing data.
- *
- * The data source can be either an <code>InputStream</code> or a
- * <code>RandomAccessFile</code>. Since the specification does not decree a
- * specific order of the content, the data needed for parsing (the sample
- * tables) may be at the end of the stream. In this case, random access is
- * needed and reading from an <code>InputSteam</code> will cause an exception.
- * Thus, whenever possible, a <code>RandomAccessFile</code> should be used for 
- * local files. Parsing from an <code>InputStream</code> is useful when reading 
- * from a network stream.
- *
- * Each <code>MP4Container</code> can return the used file brand (file format
- * version). Optionally, the following data may be present:
- * <ul>
- * <li>progressive download informations: pairs of download rate and playback
- * delay, see {@link #getDownloadInformationPairs() getDownloadInformationPairs()}</li>
- * <li>a <code>Movie</code></li>
- * </ul>
- *
- * Additionally it gives access to the underlying MP4 boxes, that can be 
- * retrieved by <code>getBoxes()</code>. However, it is not recommended to 
- * access the boxes directly.
- * 
- * @author in-somnia
- */
 public class MP4Container {
 
 	static {
@@ -58,8 +11,6 @@ public class MP4Container {
 		h.setLevel(Level.ALL);
 		log.addHandler(h);
 	}
-	private MP4InputStream in;
-	private List<Box> boxes;
 	private Brand major, minor;
 	private Brand[] compatible;
 	private FileTypeBox ftyp;
@@ -67,26 +18,12 @@ public class MP4Container {
 	private Box moov;
 	private Movie movie;
 
-	public MP4Container(InputStream in) throws IOException {
-		this.in = new MP4InputStream(in);
-		boxes = new ArrayList<Box>();
-
-		readContent();
-	}
-
-	public MP4Container(RandomAccessFile in) throws IOException {
-		this.in = new MP4InputStream(in);
-		boxes = new ArrayList<Box>();
-
-		readContent();
-	}
-
 	private void readContent() throws IOException {
 		//read all boxes
 		Box box = null;
 		long type;
 		boolean moovFound = false;
-		while(in.hasLeft()) {
+		while(inStream.hasLeft()) {
 			box = BoxFactory.parseBox(null, in);
 			if(boxes.isEmpty()&&box.getType()!=BoxTypes.FILE_TYPE_BOX) throw new MP4Exception("no MP4 signature found");
 			boxes.add(box);
@@ -104,7 +41,7 @@ public class MP4Container {
 			}
 			else if(type==BoxTypes.MEDIA_DATA_BOX) {
 				if(moovFound) break;
-				else if(!in.hasRandomAccess()) throw new MP4Exception("movie box at end of file, need random access");
+				else if(!inStream.hasRandomAccess()) throw new MP4Exception("movie box at end of file, need random access");
 			}
 		}
 	}

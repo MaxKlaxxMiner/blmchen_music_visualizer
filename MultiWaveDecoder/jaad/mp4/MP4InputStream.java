@@ -1,49 +1,12 @@
-package net.sourceforge.jaad.mp4;
-
-import java.io.EOFException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.RandomAccessFile;
-import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.LinkedList;
-
-public class MP4InputStream {
+public class MP4InputStream 
+{
 
 	public static int MASK8 = 0xFF;
 	public static int MASK16 = 0xFFFF;
 	public static string UTF8 = "UTF-8";
 	public static string UTF16 = "UTF-16";
 	private static int BYTE_ORDER_MASK = 0xFEFF;
-	private InputStream in;
-	private RandomAccessFile fin;
 	private LinkedList<Byte> peeked = new LinkedList<Byte>();
-	private long offset; //only used with InputStream
-
-	/**
-	 * Constructs an <code>MP4InputStream</code> that reads from an 
-	 * <code>InputStream</code>. It will have no random access, thus seeking 
-	 * will not be possible.
-	 * 
-	 * @param in an <code>InputStream</code> to read from
-	 */
-	MP4InputStream(InputStream in) {
-		this.in = in;
-		fin = null;
-		offset = 0;
-	}
-
-	/**
-	 * Constructs an <code>MP4InputStream</code> that reads from a 
-	 * <code>RandomAccessFile</code>. It will have random access and seeking 
-	 * will be possible.
-	 * 
-	 * @param in a <code>RandomAccessFile</code> to read from
-	 */
-	MP4InputStream(RandomAccessFile fin) {
-		this.fin = fin;
-		in = null;
-	}
 
 	/**
 	 * Peeks the next byte of data from the input. The value byte is returned as

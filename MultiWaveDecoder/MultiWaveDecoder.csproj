@@ -40,6 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="aac\Main.cs" />
+    <Compile Include="aac\mp4\boxes\Box.cs" />
+    <Compile Include="aac\mp4\MP4Container.cs" />
+    <Compile Include="aac\mp4\MP4InputStream.cs" />
     <Compile Include="aac\util\wav\WaveFileWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

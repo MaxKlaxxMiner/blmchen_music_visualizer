@@ -21,24 +21,27 @@ namespace MultiWaveDecoder
 
     private static void decodeMP4(string inFile, string outFile)
     {
-      //  MP4Container cont = new MP4Container(new RandomAccessFile(inFile, "r"));
-      //  Movie movie = cont.getMovie();
-      //  List<Track> tracks = movie.getTracks(AudioTrack.AudioCodec.AAC);
-      //  if (tracks.isEmpty()) throw new Exception("movie does not contain any AAC track");
-      //  AudioTrack track = (AudioTrack)tracks.get(0);
-
-      //using (var wav = new WaveFileWriter(File.Create(outFile), track.getSampleRate(), track.getChannelCount(), track.getSampleSize()))
+      using (var inFileStream = File.OpenRead(inFile))
       {
-        //  Decoder dec = new Decoder(track.getDecoderSpecificInfo());
+        MP4Container cont = new MP4Container(inFileStream);
+        //  Movie movie = cont.getMovie();
+        //  List<Track> tracks = movie.getTracks(AudioTrack.AudioCodec.AAC);
+        //  if (tracks.isEmpty()) throw new Exception("movie does not contain any AAC track");
+        //  AudioTrack track = (AudioTrack)tracks.get(0);
 
-        //  Frame frame;
-        //  SampleBuffer buf = new SampleBuffer();
-        //  while (track.hasMoreFrames())
-        //  {
-        //    frame = track.readNextFrame();
-        //    dec.decodeFrame(frame.getData(), buf);
-        //    wav.write(buf.getData());
-        //  }
+        //using (var wav = new WaveFileWriter(File.Create(outFile), track.getSampleRate(), track.getChannelCount(), track.getSampleSize()))
+        {
+          //  Decoder dec = new Decoder(track.getDecoderSpecificInfo());
+
+          //  Frame frame;
+          //  SampleBuffer buf = new SampleBuffer();
+          //  while (track.hasMoreFrames())
+          //  {
+          //    frame = track.readNextFrame();
+          //    dec.decodeFrame(frame.getData(), buf);
+          //    wav.write(buf.getData());
+          //  }
+        }
       }
     }
 
