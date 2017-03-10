@@ -37,6 +37,7 @@ Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
 #endif
 
 #include <stdio.h>
+#include <stdlib.h>
 
 /* Comment out all this code if we are using the GNU C Library, and are not
 actually compiling the library itself.  This code is part of the GNU C
@@ -177,12 +178,70 @@ extern int  strncmp(const char *s1, const char *s2, unsigned int n);
 static int my_strlen(const char *s);
 static char *my_index(const char *str, int chr);
 #else
-extern char *getenv();
+//extern char *getenv();
 #endif
 
-static int
-my_strlen(str)
-const char *str;
+int strcmp(const char *p1, const char *p2)
+{
+  register const unsigned char *s1 = (const unsigned char *)p1;
+  register const unsigned char *s2 = (const unsigned char *)p2;
+  register unsigned char c1, c2;
+
+  do
+  {
+    c1 = (unsigned char)*s1++;
+    c2 = (unsigned char)*s2++;
+    if (c1 == '\0') return c1 - c2;
+  }
+  while (c1 == c2);
+
+  return c1 - c2;
+}
+
+int strncmp(const char *s1, const char *s2, size_t n)
+{
+  register unsigned char c1 = '\0';
+  register unsigned char c2 = '\0';
+
+  if (n >= 4)
+  {
+    size_t n4 = n >> 2;
+    do
+    {
+      c1 = (unsigned char)*s1++;
+      c2 = (unsigned char)*s2++;
+      if (c1 == '\0' || c1 != c2)
+        return c1 - c2;
+      c1 = (unsigned char)*s1++;
+      c2 = (unsigned char)*s2++;
+      if (c1 == '\0' || c1 != c2)
+        return c1 - c2;
+      c1 = (unsigned char)*s1++;
+      c2 = (unsigned char)*s2++;
+      if (c1 == '\0' || c1 != c2)
+        return c1 - c2;
+      c1 = (unsigned char)*s1++;
+      c2 = (unsigned char)*s2++;
+      if (c1 == '\0' || c1 != c2)
+        return c1 - c2;
+    }
+    while (--n4 > 0);
+    n &= 3;
+  }
+
+  while (n > 0)
+  {
+    c1 = (unsigned char)*s1++;
+    c2 = (unsigned char)*s2++;
+    if (c1 == '\0' || c1 != c2)
+      return c1 - c2;
+    n--;
+  }
+
+  return c1 - c2;
+}
+
+static int my_strlen(const char *str)
 {
   int n = 0;
   while (*str++)
@@ -190,10 +249,7 @@ const char *str;
   return n;
 }
 
-static char *
-my_index(str, chr)
-const char *str;
-int chr;
+static char *my_index(const char *str, int chr)
 {
   while (*str)
   {
@@ -239,9 +295,7 @@ reverse non options: -x -y a b c
 static void exchange(char **argv);
 #endif
 
-static void
-exchange(argv)
-char **argv;
+static void exchange(char **argv)
 {
   char *temp, **first, **last;
 
@@ -328,14 +382,7 @@ recent call.
 If LONG_ONLY is nonzero, '-' as well as '--' can introduce
 long-named options.  */
 
-int
-_getopt_internal(argc, argv, optstring, longopts, longind, long_only)
-int argc;
-char *const *argv;
-const char *optstring;
-const struct option *longopts;
-int *longind;
-int long_only;
+int _getopt_internal(int argc, char *const *argv, const char *optstring, const struct option *longopts, int *longind, int long_only)
 {
   int option_index;
 
@@ -662,11 +709,7 @@ int long_only;
   }
 }
 
-int
-getopt(argc, argv, optstring)
-int argc;
-char *const *argv;
-const char *optstring;
+int getopt(int argc, char *const *argv, const char *optstring)
 {
   return _getopt_internal(argc, argv, optstring,
     (const struct option *) 0,
@@ -674,13 +717,7 @@ const char *optstring;
     0);
 }
 
-int
-getopt_long(argc, argv, options, long_options, opt_index)
-int argc;
-char *const *argv;
-const char *options;
-const struct option *long_options;
-int *opt_index;
+int getopt_long(int argc, char *const *argv, const char *options, const struct option *long_options, int *opt_index)
 {
   return _getopt_internal(argc, argv, options, long_options, opt_index, 0);
 }
