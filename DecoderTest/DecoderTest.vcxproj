@@ -80,6 +80,7 @@
     <ClCompile Include="decoder.cpp" />
     <ClCompile Include="getopt.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mp4_utils.cpp" />
     <ClCompile Include="sbr_syntax.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +92,7 @@
     <ClInclude Include="decode.h" />
     <ClInclude Include="drc.h" />
     <ClInclude Include="error.h" />
+    <ClInclude Include="faad.h" />
     <ClInclude Include="filtbank.h" />
     <ClInclude Include="getopt.h" />
     <ClInclude Include="misc.h" />

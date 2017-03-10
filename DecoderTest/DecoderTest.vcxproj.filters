@@ -30,6 +30,9 @@
     <ClCompile Include="decode.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="mp4_utils.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="getopt.h">
@@ -108,6 +111,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="wave_out.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="faad.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
