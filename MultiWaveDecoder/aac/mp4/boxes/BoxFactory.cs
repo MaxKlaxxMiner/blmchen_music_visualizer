@@ -1,7 +1,6 @@
 ﻿// ReSharper disable InconsistentNaming
 
 using System;
-using System.IO;
 
 namespace MultiWaveDecoder
 {
@@ -26,6 +25,10 @@ namespace MultiWaveDecoder
         switch (type)
         {
           case BoxType.FILE_TYPE_BOX: return new FileTypeBox();
+          case BoxType.SKIP_BOX:
+          case BoxType.WIDE_BOX:
+          case BoxType.FREE_SPACE_BOX: return new FreeSpaceBox();
+          case BoxType.MEDIA_DATA_BOX: return new MediaDataBox();
           default:
           {
             Logger.LogBoxes("BoxFactory - unknown box type: " + type + " '" + typeToString(type) + "', position: " + offset.ToString("N0"));
@@ -51,9 +54,8 @@ namespace MultiWaveDecoder
       // --- error protection ---
       if (parent != null)
       {
-        throw new NotImplementedException();
-        //long parentLeft = (parent.getOffset() + parent.getSize()) - offset;
-        //if (size > parentLeft) throw new IOException("error while decoding box '" + type + "' ('" + typeToString(type) + "') at offset " + offset.ToString("N0") + ": box too large for parent");
+        long parentLeft = (parent.getOffset() + parent.getSize()) - offset;
+        if (size > parentLeft) throw new Exception("error while decoding box '" + type + "' ('" + typeToString(type) + "') at offset " + offset.ToString("N0") + ": box too large for parent");
       }
 
       Logger.LogBoxes(typeToString(type));
@@ -61,22 +63,21 @@ namespace MultiWaveDecoder
       box.setParams(parent, size, type, offset);
       box.decode(inStream);
 
-      ////if box doesn't contain data it only contains children
-      //Class<?> cl = box.getClass();
-      //if(cl==BoxImpl.class||cl==FullBox.class) box.readChildren(inStream);
+      // --- if box doesn't contain data it only contains children ---
+      if (box.GetType() == typeof(BoxImpl) || box.GetType() == typeof(FullBox)) box.readChildren(inStream);
 
-      throw new NotImplementedException();
-      ////check bytes left
-      //long left = (box.getOffset()+box.getSize())-inStream.getOffset();
-      //if(left>0
-      //    &&!(box instanceof MediaDataBox)
-      //    &&!(box instanceof UnknownBox)
-      //    &&!(box instanceof FreeSpaceBox)) LOGGER.log(Level.INFO, "bytes left after reading box {0}: left: {1}, offset: {2}", new Object[]{typeToString(type), left, inStream.getOffset()});
-      //else if(left<0) LOGGER.log(Level.SEVERE, "box {0} overread: {1} bytes, offset: {2}", new Object[]{typeToString(type), -left, inStream.getOffset()});
+      // --- check bytes left ---
+      long left = (box.getOffset() + box.getSize()) - inStream.getOffset();
+      if (left > 0
+          && !(box is MediaDataBox)
+          && !(box is UnknownBox)
+          && !(box is FreeSpaceBox)) Logger.LogInfo(string.Format("bytes left after reading box {0}: left: {1}, offset: {2}", typeToString(type), left, inStream.getOffset()));
+      else if (left < 0) Logger.LogServe(string.Format("box {0} overread: {1} bytes, offset: {2}", typeToString(type), -left, inStream.getOffset()));
 
-      ////if mdat found and no random access, don't skip
-      //if(box.getType()!=MEDIA_DATA_BOX||inStream.hasRandomAccess()) inStream.skipBytes(left);
-      //return box;
+      // --- if mdat found, don't skip ---
+      if (box.getType() != BoxType.MEDIA_DATA_BOX) inStream.skipBytes(left);
+
+      return box;
     }
 
   }

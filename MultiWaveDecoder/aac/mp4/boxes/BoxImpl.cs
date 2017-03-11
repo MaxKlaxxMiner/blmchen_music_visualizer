@@ -92,7 +92,7 @@ namespace MultiWaveDecoder
       return children.Where(box => box.getType() == type).ToArray();
     }
 
-    protected void readChildren(MP4InputStream inStream)
+    public void readChildren(MP4InputStream inStream)
     {
       while (inStream.getOffset() < (offset + size))
       {
@@ -101,7 +101,7 @@ namespace MultiWaveDecoder
       }
     }
 
-    protected void readChildren(MP4InputStream inStream, int len)
+    public void readChildren(MP4InputStream inStream, int len)
     {
       for (int i = 0; i < len; i++)
       {

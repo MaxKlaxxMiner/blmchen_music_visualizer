@@ -55,6 +55,16 @@ namespace MultiWaveDecoder
     }
 
     /// <summary>
+    /// Reads the next byte of data from the input. The value byte is returned as an int in the range 0 to 255.
+    /// If no byte is available because the end of the stream has been reached, an EOFException is thrown. This method blocks until input data is available, the end of the stream is detected, or an I/O error occurs.
+    /// </summary>
+    /// <returns>the next byte of data</returns>
+    public int read()
+    {
+      return (int)readBytes(1);
+    }
+
+    /// <summary>
     /// Reads <code>len</code> bytes of data from the input into the array <code>b</code>. If len is zero, then no bytes are read.
     /// 
     /// This method blocks until all bytes could be read, the end of the stream is detected, or an I/O error occurs.
@@ -96,7 +106,7 @@ namespace MultiWaveDecoder
       read(b, 0, n);
 
       long result = 0;
-      for (int i = 0; i < n; i++)
+      for (int i = 0; i < b.Length; i++)
       {
         result = (result << 8) | (b[i] & 0xFF);
       }

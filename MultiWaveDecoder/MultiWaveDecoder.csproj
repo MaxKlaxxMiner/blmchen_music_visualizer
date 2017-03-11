@@ -40,11 +40,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="aac\Main.cs" />
+    <Compile Include="aac\mp4\boxes\FullBox.cs" />
     <Compile Include="aac\mp4\boxes\IBox.cs" />
     <Compile Include="aac\mp4\boxes\BoxFactory.cs" />
     <Compile Include="aac\mp4\boxes\BoxImpl.cs" />
     <Compile Include="aac\mp4\boxes\BoxType.cs" />
     <Compile Include="aac\mp4\boxes\impl\FileTypeBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\FreeSpaceBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\MediaDataBox.cs" />
     <Compile Include="aac\mp4\boxes\UnknownBox.cs" />
     <Compile Include="aac\mp4\MP4Container.cs" />
     <Compile Include="aac\mp4\MP4Exception.cs" />
@@ -154,7 +157,6 @@
     <Content Include="jaad\mp4\api\Utils.java" />
     <Content Include="jaad\mp4\api\VideoTrack.java" />
     <Content Include="jaad\mp4\boxes\BoxFactory.java" />
-    <Content Include="jaad\mp4\boxes\FullBox.java" />
     <Content Include="jaad\mp4\boxes\impl\AppleLosslessBox.java" />
     <Content Include="jaad\mp4\boxes\impl\BinaryXMLBox.java" />
     <Content Include="jaad\mp4\boxes\impl\BitRateBox.java" />
@@ -179,7 +181,6 @@
     <Content Include="jaad\mp4\boxes\impl\fd\FilePartitionBox.java" />
     <Content Include="jaad\mp4\boxes\impl\fd\GroupIDToNameBox.java" />
     <Content Include="jaad\mp4\boxes\impl\fd\package-info.java" />
-    <Content Include="jaad\mp4\boxes\impl\FreeSpaceBox.java" />
     <Content Include="jaad\mp4\boxes\impl\HandlerBox.java" />
     <Content Include="jaad\mp4\boxes\impl\HintMediaHeaderBox.java" />
     <Content Include="jaad\mp4\boxes\impl\IPMPControlBox.java" />
@@ -188,7 +189,6 @@
     <Content Include="jaad\mp4\boxes\impl\ItemInformationEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\ItemLocationBox.java" />
     <Content Include="jaad\mp4\boxes\impl\ItemProtectionBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\MediaDataBox.java" />
     <Content Include="jaad\mp4\boxes\impl\MediaHeaderBox.java" />
     <Content Include="jaad\mp4\boxes\impl\MetaBox.java" />
     <Content Include="jaad\mp4\boxes\impl\MetaBoxRelationBox.java" />

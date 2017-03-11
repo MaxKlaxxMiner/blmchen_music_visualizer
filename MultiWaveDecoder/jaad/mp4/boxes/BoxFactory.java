@@ -30,7 +30,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(FD_SESSION_GROUP_BOX, FDSessionGroupBox.class);
 		BOX_CLASSES.put(FEC_RESERVOIR_BOX, FECReservoirBox.class);
 		BOX_CLASSES.put(FILE_PARTITION_BOX, FilePartitionBox.class);
-		BOX_CLASSES.put(FREE_SPACE_BOX, FreeSpaceBox.class);
 		BOX_CLASSES.put(GROUP_ID_TO_NAME_BOX, GroupIDToNameBox.class);
 		BOX_CLASSES.put(HANDLER_BOX, HandlerBox.class);
 		BOX_CLASSES.put(HINT_MEDIA_HEADER_BOX, HintMediaHeaderBox.class);
@@ -41,7 +40,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(ITEM_LOCATION_BOX, ItemLocationBox.class);
 		BOX_CLASSES.put(ITEM_PROTECTION_BOX, ItemProtectionBox.class);
 		BOX_CLASSES.put(MEDIA_BOX, BoxImpl.class);
-		BOX_CLASSES.put(MEDIA_DATA_BOX, MediaDataBox.class);
 		BOX_CLASSES.put(MEDIA_HEADER_BOX, MediaHeaderBox.class);
 		BOX_CLASSES.put(MEDIA_INFORMATION_BOX, BoxImpl.class);
 		BOX_CLASSES.put(META_BOX, MetaBox.class);
@@ -74,7 +72,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(SCHEME_TYPE_BOX, SchemeTypeBox.class);
 		BOX_CLASSES.put(SCHEME_INFORMATION_BOX, BoxImpl.class);
 		BOX_CLASSES.put(SHADOW_SYNC_SAMPLE_BOX, ShadowSyncSampleBox.class);
-		BOX_CLASSES.put(SKIP_BOX, FreeSpaceBox.class);
 		BOX_CLASSES.put(SOUND_MEDIA_HEADER_BOX, SoundMediaHeaderBox.class);
 		BOX_CLASSES.put(SUB_SAMPLE_INFORMATION_BOX, SubSampleInformationBox.class);
 		BOX_CLASSES.put(SYNC_SAMPLE_BOX, SyncSampleBox.class);
@@ -89,7 +86,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(TRACK_SELECTION_BOX, TrackSelectionBox.class);
 		BOX_CLASSES.put(USER_DATA_BOX, BoxImpl.class);
 		BOX_CLASSES.put(VIDEO_MEDIA_HEADER_BOX, VideoMediaHeaderBox.class);
-		BOX_CLASSES.put(WIDE_BOX, FreeSpaceBox.class);
 		BOX_CLASSES.put(XML_BOX, XMLBox.class);
 		BOX_CLASSES.put(OBJECT_DESCRIPTOR_BOX, ObjectDescriptorBox.class);
 		BOX_CLASSES.put(SAMPLE_DEPENDENCY_BOX, SampleDependencyBox.class);

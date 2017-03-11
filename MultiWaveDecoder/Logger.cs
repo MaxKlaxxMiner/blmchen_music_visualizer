@@ -8,5 +8,15 @@ namespace MultiWaveDecoder
     {
       Console.WriteLine("MP4 Boxes: " + message);
     }
+
+    public static void LogInfo(string message)
+    {
+      Console.WriteLine("Info: " + message);
+    }
+
+    public static void LogServe(string message)
+    {
+      Console.WriteLine("Serve: " + message);
+    }
   }
 }
