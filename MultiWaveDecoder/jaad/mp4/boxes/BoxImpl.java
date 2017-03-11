@@ -1,36 +1,8 @@
 
 public class BoxImpl implements Box {
 
-	private string name;
-	protected long size, type, offset;
-	protected Box parent;
-	protected List<Box> children;
-
-	public BoxImpl(string name) {
-		this.name = name;
-
-		children = new ArrayList<Box>(4);
-	}
-
-	public void setParams(Box parent, long size, long type, long offset) {
-		this.size = size;
-		this.type = type;
-		this.parent = parent;
-		this.offset = offset;
-	}
-
 	protected long getLeft(MP4InputStream in) throws IOException {
 		return (offset+size)-in.getOffset();
-	}
-
-	/**
-	 * Decodes the given input stream by reading this box and all of its
-	 * children (if any).
-	 * 
-	 * @param in an input stream
-	 * @throws IOException if an error occurs while reading
-	 */
-	public void decode(MP4InputStream in) throws IOException {
 	}
 
 	public long getType() {
@@ -53,12 +25,7 @@ public class BoxImpl implements Box {
 		return name;
 	}
 
-	@Override
-	public string toString() {
-		return name+" ["+BoxFactory.typeToString(type)+"]";
-	}
-
-	//container methods
+  //container methods
 	public boolean hasChildren() {
 		return children.size()>0;
 	}

@@ -15,6 +15,7 @@ namespace MultiWaveDecoder
       b[1] = (char)((l >> 16) & 0xFF);
       b[2] = (char)((l >> 8) & 0xFF);
       b[3] = (char)(l & 0xFF);
+      for (int i = 0; i < b.Length; i++) if (b[i] < ' ') b[i] = ' ';
       return new string(b);
     }
 
@@ -27,27 +28,15 @@ namespace MultiWaveDecoder
           default:
           {
             Logger.LogBoxes("BoxFactory - unknown box type: " + type + " '" + typeToString(type) + "', position: " + offset.ToString("N0"));
-            return null;
+            return new UnknownBox();
           }
         }
       }
       catch (Exception e)
       {
         Logger.LogBoxes("BoxFactory - could not call constructor for " + type + " '" + typeToString(type) + "': " + e);
-        return null;
+        return new UnknownBox();
       }
-
-      //  Class<? extends BoxImpl> cl = BOX_CLASSES.get(l);
-      //  if(PARAMETER.containsKey(l)) {
-      //    string[] s = PARAMETER.get(l);
-      //    try {
-      //      Constructor<? extends BoxImpl> con = cl.getConstructor(string.class);
-      //      box = con.newInstance(s[0]);
-      //    }
-      //    catch(Exception e) {
-      //      box = new UnknownBox();
-      //    }
-      //  }
     }
 
     public static Box parseBox(Box parent, MP4InputStream inStream)
@@ -67,9 +56,9 @@ namespace MultiWaveDecoder
       }
 
       Logger.LogBoxes(typeToString(type));
-      BoxImpl box = forType(type, inStream.getOffset());
-      //box.setParams(parent, size, type, offset);
-      //box.decode(inStream);
+      var box = forType(type, inStream.getOffset());
+      box.setParams(parent, size, type, offset);
+      box.decode(inStream);
 
       ////if box doesn't contain data it only contains children
       //Class<?> cl = box.getClass();
