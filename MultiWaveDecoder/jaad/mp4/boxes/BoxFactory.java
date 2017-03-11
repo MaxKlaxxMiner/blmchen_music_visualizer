@@ -19,9 +19,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(COMPOSITION_TIME_TO_SAMPLE_BOX, CompositionTimeToSampleBox.class);
 		BOX_CLASSES.put(COPYRIGHT_BOX, CopyrightBox.class);
 		BOX_CLASSES.put(DATA_ENTRY_URN_BOX, DataEntryUrnBox.class);
-		BOX_CLASSES.put(DATA_ENTRY_URL_BOX, DataEntryUrlBox.class);
-		BOX_CLASSES.put(DATA_INFORMATION_BOX, BoxImpl.class);
-		BOX_CLASSES.put(DATA_REFERENCE_BOX, DataReferenceBox.class);
 		BOX_CLASSES.put(DECODING_TIME_TO_SAMPLE_BOX, DecodingTimeToSampleBox.class);
 		BOX_CLASSES.put(DEGRADATION_PRIORITY_BOX, DegradationPriorityBox.class);
 		BOX_CLASSES.put(EDIT_BOX, BoxImpl.class);
@@ -56,11 +53,9 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(PROGRESSIVE_DOWNLOAD_INFORMATION_BOX, ProgressiveDownloadInformationBox.class);
 		BOX_CLASSES.put(PROTECTION_SCHEME_INFORMATION_BOX, BoxImpl.class);
 		BOX_CLASSES.put(SAMPLE_DEPENDENCY_TYPE_BOX, SampleDependencyTypeBox.class);
-		BOX_CLASSES.put(SAMPLE_DESCRIPTION_BOX, SampleDescriptionBox.class);
 		BOX_CLASSES.put(SAMPLE_GROUP_DESCRIPTION_BOX, SampleGroupDescriptionBox.class);
 		BOX_CLASSES.put(SAMPLE_SCALE_BOX, SampleScaleBox.class);
 		BOX_CLASSES.put(SAMPLE_SIZE_BOX, SampleSizeBox.class);
-		BOX_CLASSES.put(SAMPLE_TABLE_BOX, BoxImpl.class);
 		BOX_CLASSES.put(SAMPLE_TO_CHUNK_BOX, SampleToChunkBox.class);
 		BOX_CLASSES.put(SAMPLE_TO_GROUP_BOX, SampleToGroupBox.class);
 		BOX_CLASSES.put(SCHEME_TYPE_BOX, SchemeTypeBox.class);
@@ -151,7 +146,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(H263_SAMPLE_ENTRY, VideoSampleEntry.class);
 		BOX_CLASSES.put(ENCRYPTED_VIDEO_SAMPLE_ENTRY, VideoSampleEntry.class);
 		BOX_CLASSES.put(AVC_SAMPLE_ENTRY, VideoSampleEntry.class);
-		BOX_CLASSES.put(MP4A_SAMPLE_ENTRY, AudioSampleEntry.class);
 		BOX_CLASSES.put(AC3_SAMPLE_ENTRY, AudioSampleEntry.class);
 		BOX_CLASSES.put(EAC3_SAMPLE_ENTRY, AudioSampleEntry.class);
 		BOX_CLASSES.put(DRMS_SAMPLE_ENTRY, AudioSampleEntry.class);
@@ -196,7 +190,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(FAIRPLAY_PRIVATE_KEY_BOX, FairPlayDataBox.class);
 		//parameter
 		PARAMETER.put(ADDITIONAL_METADATA_CONTAINER_BOX, new string[]{"Additional Metadata Container Box"});
-		PARAMETER.put(DATA_INFORMATION_BOX, new string[]{"Data Information Box"});
 		PARAMETER.put(EDIT_BOX, new string[]{"Edit Box"});
 		PARAMETER.put(MOVIE_EXTENDS_BOX, new string[]{"Movie Extends Box"});
 		PARAMETER.put(MOVIE_FRAGMENT_BOX, new string[]{"Movie Fragment Box"});
@@ -204,7 +197,6 @@ public class BoxFactory implements BoxTypes
 		PARAMETER.put(NULL_MEDIA_HEADER_BOX, new string[]{"Null Media Header Box"});
 		PARAMETER.put(PARTITION_ENTRY, new string[]{"Partition Entry"});
 		PARAMETER.put(PROTECTION_SCHEME_INFORMATION_BOX, new string[]{"Protection Scheme Information Box"});
-		PARAMETER.put(SAMPLE_TABLE_BOX, new string[]{"Sample Table Box"});
 		PARAMETER.put(SCHEME_INFORMATION_BOX, new string[]{"Scheme Information Box"});
 		PARAMETER.put(TRACK_FRAGMENT_BOX, new string[]{"Track Fragment Box"});
 		PARAMETER.put(USER_DATA_BOX, new string[]{"User Data Box"});
@@ -266,7 +258,6 @@ public class BoxFactory implements BoxTypes
 		PARAMETER.put(H263_SAMPLE_ENTRY, new string[]{"H263 Video Sample Entry"});
 		PARAMETER.put(ENCRYPTED_VIDEO_SAMPLE_ENTRY, new string[]{"Encrypted Video Sample Entry"});
 		PARAMETER.put(AVC_SAMPLE_ENTRY, new string[]{"AVC Video Sample Entry"});
-		PARAMETER.put(MP4A_SAMPLE_ENTRY, new string[]{"MPEG- 4Audio Sample Entry"});
 		PARAMETER.put(AC3_SAMPLE_ENTRY, new string[]{"AC-3 Audio Sample Entry"});
 		PARAMETER.put(EAC3_SAMPLE_ENTRY, new string[]{"Extended AC-3 Audio Sample Entry"});
 		PARAMETER.put(DRMS_SAMPLE_ENTRY, new string[]{"DRMS Audio Sample Entry"});

@@ -1,12 +1,5 @@
 public class MP4InputStream 
 {
-
-	public static int MASK8 = 0xFF;
-	public static int MASK16 = 0xFFFF;
-	public static string UTF8 = "UTF-8";
-	public static string UTF16 = "UTF-16";
-	private static int BYTE_ORDER_MASK = 0xFEFF;
-
 	/**
 	 * Peeks the next byte of data from the input. The value byte is returned as
 	 * an int in the range 0 to 255. If no byte is available because the end of 
@@ -145,39 +138,6 @@ public class MP4InputStream
 	 */
 	public void readBytes(byte[] b) throws IOException {
 		read(b, 0, b.length);
-	}
-
-	/**
-	 * Reads a null-terminated UTF-encoded string from the input. The maximum 
-	 * number of bytes that can be read before the null must appear must be 
-	 * specified.
-	 * The encoding is detected automatically, it may be UTF-8 or UTF-16 
-	 * (determined by a byte order mask at the beginning).
-	 * 
-	 * This method blocks until all bytes could be read, the end of the stream 
-	 * is detected, or an I/O error occurs.
-	 * 
-	 * @param max the maximum number of bytes to read, before the null-terminator
-	 * must appear.
-	 * @return the decoded string
-	 * @throws IOException If the end of the stream is detected, the input 
-	 * stream has been closed, or if some other I/O error occurs.
-	 */
-	public string readUTFString(int max) throws IOException {
-		//read byte order mask
-		byte[] bom = new byte[2];
-		read(bom, 0, 2);
-		if(bom[0]==0||bom[1]==0) return new string();
-		int i = (bom[0]<<8)|bom[1];
-
-		//read null-terminated
-		byte[] b = readTerminated(max-2, 0);
-		//copy bom
-		byte[] b2 = new byte[b.length+bom.length];
-		System.arraycopy(bom, 0, b2, 0, bom.length);
-		System.arraycopy(b, 0, b2, bom.length, b.length);
-
-		return new string(b2, Charset.forName((i==BYTE_ORDER_MASK) ? UTF16 : UTF8));
 	}
 
 	/**

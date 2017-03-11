@@ -47,6 +47,11 @@
     <Compile Include="aac\mp4\boxes\BoxFactory.cs" />
     <Compile Include="aac\mp4\boxes\BoxImpl.cs" />
     <Compile Include="aac\mp4\boxes\BoxType.cs" />
+    <Compile Include="aac\mp4\boxes\impl\SampleDescriptionBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\DataEntryUrlBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\DataReferenceBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\sampleentries\AudioSampleEntry.cs" />
+    <Compile Include="aac\mp4\boxes\impl\sampleentries\SampleEntry.cs" />
     <Compile Include="aac\mp4\boxes\impl\SoundMediaHeaderBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\HandlerBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\MediaHeaderBox.cs" />
@@ -174,9 +179,7 @@
     <Content Include="jaad\mp4\boxes\impl\ColorParameterBox.java" />
     <Content Include="jaad\mp4\boxes\impl\CompositionTimeToSampleBox.java" />
     <Content Include="jaad\mp4\boxes\impl\CopyrightBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\DataEntryUrlBox.java" />
     <Content Include="jaad\mp4\boxes\impl\DataEntryUrnBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\DataReferenceBox.java" />
     <Content Include="jaad\mp4\boxes\impl\DecodingTimeToSampleBox.java" />
     <Content Include="jaad\mp4\boxes\impl\DegradationPriorityBox.java" />
     <Content Include="jaad\mp4\boxes\impl\drm\FairPlayDataBox.java" />
@@ -233,8 +236,6 @@
     <Content Include="jaad\mp4\boxes\impl\PrimaryItemBox.java" />
     <Content Include="jaad\mp4\boxes\impl\SampleDependencyBox.java" />
     <Content Include="jaad\mp4\boxes\impl\SampleDependencyTypeBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\SampleDescriptionBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\sampleentries\AudioSampleEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\codec\AC3SpecificBox.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\codec\AMRSpecificBox.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\codec\AVCSpecificBox.java" />
@@ -248,7 +249,6 @@
     <Content Include="jaad\mp4\boxes\impl\sampleentries\MetadataSampleEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\MPEGSampleEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\RTPHintSampleEntry.java" />
-    <Content Include="jaad\mp4\boxes\impl\sampleentries\SampleEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\TextMetadataSampleEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\VideoSampleEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\XMLMetadataSampleEntry.java" />

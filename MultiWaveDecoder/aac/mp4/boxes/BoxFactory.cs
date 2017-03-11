@@ -38,6 +38,12 @@ namespace MultiWaveDecoder
           case BoxType.HANDLER_BOX: return new HandlerBox();
           case BoxType.MEDIA_INFORMATION_BOX: return new BoxImpl("Media Information Box");
           case BoxType.SOUND_MEDIA_HEADER_BOX: return new SoundMediaHeaderBox();
+          case BoxType.DATA_INFORMATION_BOX: return new BoxImpl("Data Information Box");
+          case BoxType.DATA_REFERENCE_BOX: return new DataReferenceBox();
+          case BoxType.DATA_ENTRY_URL_BOX: return new DataEntryUrlBox();
+          case BoxType.SAMPLE_TABLE_BOX: return new BoxImpl("Sample Table Box");
+          case BoxType.SAMPLE_DESCRIPTION_BOX: return new SampleDescriptionBox();
+          case BoxType.MP4A_SAMPLE_ENTRY: return new AudioSampleEntry("MPEG-4 Audio Sample Entry");
           default:
           {
             Console.ForegroundColor = ConsoleColor.Yellow;

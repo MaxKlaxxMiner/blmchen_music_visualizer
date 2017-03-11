@@ -12,6 +12,12 @@ namespace MultiWaveDecoder
 {
   public sealed class MP4InputStream
   {
+    public const int MASK8 = 0xFF;
+    public const int MASK16 = 0xFFFF;
+    public const string UTF8 = "UTF-8";
+    public const string UTF16 = "UTF-16";
+    const int BYTE_ORDER_MASK = 0xFEFF;
+
     readonly Stream inStream;
     long offset;
     readonly Queue<byte> peeked = new Queue<byte>();
@@ -211,6 +217,35 @@ namespace MultiWaveDecoder
     public string readEncodedString(int max, Encoding encoding)
     {
       return encoding.GetString(readTerminated(max, 0));
+    }
+
+    /// <summary>
+    /// Reads a null-terminated UTF-encoded string from the input. The maximum number of bytes that can be read before the null must appear must be specified.
+    /// The encoding is detected automatically, it may be UTF-8 or UTF-16 (determined by a byte order mask at the beginning).
+    /// 
+    /// This method blocks until all bytes could be read, the end of the stream is detected, or an I/O error occurs.
+    /// </summary>
+    /// <param name="max">the maximum number of bytes to read, before the null-terminator must appear.</param>
+    /// <returns>the decoded string</returns>
+    public string readUTFString(int max)
+    {
+      throw new NotImplementedException("todo: test");
+
+      // --- read byte order mask ---
+      var bom = new byte[2];
+      read(bom, 0, 2);
+      if (bom[0] == 0 || bom[1] == 0) return "";
+      int i = (bom[0] << 8) | bom[1];
+
+      // --- read null-terminated ---
+      var b = readTerminated(max - 2, 0);
+
+      // --- copy bom ---
+      var b2 = new byte[b.Length + bom.Length];
+      Array.Copy(bom, 0, b2, 0, bom.Length);
+      Array.Copy(b, 0, b2, bom.Length, b.Length);
+
+      return i == BYTE_ORDER_MASK ? Encoding.BigEndianUnicode.GetString(b2) : Encoding.UTF8.GetString(b2);
     }
   }
 }
