@@ -7,6 +7,17 @@ namespace MultiWaveDecoder
 {
   public static class BoxFactory
   {
+    public static string typeToString(BoxTypes type)
+    {
+      uint l = (uint)type;
+      var b = new char[4];
+      b[0] = (char)((l >> 24) & 0xFF);
+      b[1] = (char)((l >> 16) & 0xFF);
+      b[2] = (char)((l >> 8) & 0xFF);
+      b[3] = (char)(l & 0xFF);
+      return new string(b);
+    }
+
     public static Box parseBox(Box parent, MP4InputStream inStream)
     {
       long offset = inStream.getOffset();
@@ -20,11 +31,10 @@ namespace MultiWaveDecoder
       {
         throw new NotImplementedException();
         //long parentLeft = (parent.getOffset() + parent.getSize()) - offset;
-        //if (size > parentLeft) throw new IOException("error while decoding box '" + type + "' at offset " + offset.ToString("N0") + ": box too large for parent");
+        //if (size > parentLeft) throw new IOException("error while decoding box '" + type + "' ('" + typeToString(type) + "') at offset " + offset.ToString("N0") + ": box too large for parent");
       }
 
-      throw new NotImplementedException();
-      //Logger.getLogger("MP4 Boxes").finest(typeToString(type));
+      Logger.LogBoxes(typeToString(type));
       //BoxImpl box = forType(type, inStream.getOffset());
       //box.setParams(parent, size, type, offset);
       //box.decode(inStream);
@@ -33,6 +43,7 @@ namespace MultiWaveDecoder
       //Class<?> cl = box.getClass();
       //if(cl==BoxImpl.class||cl==FullBox.class) box.readChildren(inStream);
 
+      throw new NotImplementedException();
       ////check bytes left
       //long left = (box.getOffset()+box.getSize())-inStream.getOffset();
       //if(left>0

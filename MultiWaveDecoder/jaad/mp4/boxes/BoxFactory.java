@@ -1,37 +1,6 @@
-package net.sourceforge.jaad.mp4.boxes;
 
-import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Handler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import net.sourceforge.jaad.mp4.MP4InputStream;
-import net.sourceforge.jaad.mp4.boxes.impl.*;
-import net.sourceforge.jaad.mp4.boxes.impl.fd.*;
-import net.sourceforge.jaad.mp4.boxes.impl.meta.*;
-import net.sourceforge.jaad.mp4.boxes.impl.oma.*;
-import net.sourceforge.jaad.mp4.boxes.impl.sampleentries.*;
-import net.sourceforge.jaad.mp4.boxes.impl.sampleentries.codec.*;
-import net.sourceforge.jaad.mp4.boxes.impl.ESDBox;
-import net.sourceforge.jaad.mp4.boxes.impl.drm.FairPlayDataBox;
-
-public class BoxFactory implements BoxTypes {
-
-	private static Logger LOGGER = Logger.getLogger("MP4 Boxes");
-
-	static {
-		for(Handler h : LOGGER.getHandlers()) {
-			LOGGER.removeHandler(h);
-		}
-		LOGGER.setLevel(Level.WARNING);
-
-		ConsoleHandler h = new ConsoleHandler();
-		h.setLevel(Level.ALL);
-		LOGGER.addHandler(h);
-	}
+public class BoxFactory implements BoxTypes 
+{
 	private static Map<Long, Class<? extends BoxImpl>> BOX_CLASSES = new HashMap<Long, Class<? extends BoxImpl>>();
 	private static Map<Long, Class<? extends BoxImpl>[]> BOX_MULTIPLE_CLASSES = new HashMap<Long, Class<? extends BoxImpl>[]>();
 	private static Map<Long, string[]> PARAMETER = new HashMap<Long, string[]>();
@@ -392,14 +361,5 @@ public class BoxFactory implements BoxTypes {
 			box = new UnknownBox();
 		}
 		return box;
-	}
-
-	public static string typeToString(long l) {
-		byte[] b = new byte[4];
-		b[0] = (byte) ((l>>24)&0xFF);
-		b[1] = (byte) ((l>>16)&0xFF);
-		b[2] = (byte) ((l>>8)&0xFF);
-		b[3] = (byte) (l&0xFF);
-		return new string(b);
 	}
 }
