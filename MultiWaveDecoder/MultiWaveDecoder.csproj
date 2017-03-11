@@ -41,12 +41,13 @@
   <ItemGroup>
     <Compile Include="aac\Main.cs" />
     <Compile Include="aac\mp4\api\Movie.cs" />
-    <Compile Include="aac\mp4\boxes\BoxesUtils.cs" />
+    <Compile Include="aac\mp4\boxes\BoxUtils.cs" />
     <Compile Include="aac\mp4\boxes\FullBox.cs" />
     <Compile Include="aac\mp4\boxes\IBox.cs" />
     <Compile Include="aac\mp4\boxes\BoxFactory.cs" />
     <Compile Include="aac\mp4\boxes\BoxImpl.cs" />
     <Compile Include="aac\mp4\boxes\BoxType.cs" />
+    <Compile Include="aac\mp4\boxes\impl\Class1.cs" />
     <Compile Include="aac\mp4\boxes\impl\MovieHeaderBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\FileTypeBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\FreeSpaceBox.cs" />
@@ -267,7 +268,6 @@
     <Content Include="jaad\mp4\boxes\impl\TrackFragmentHeaderBox.java" />
     <Content Include="jaad\mp4\boxes\impl\TrackFragmentRandomAccessBox.java" />
     <Content Include="jaad\mp4\boxes\impl\TrackFragmentRunBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\TrackHeaderBox.java" />
     <Content Include="jaad\mp4\boxes\impl\TrackReferenceBox.java" />
     <Content Include="jaad\mp4\boxes\impl\TrackSelectionBox.java" />
     <Content Include="jaad\mp4\boxes\impl\VideoMediaHeaderBox.java" />

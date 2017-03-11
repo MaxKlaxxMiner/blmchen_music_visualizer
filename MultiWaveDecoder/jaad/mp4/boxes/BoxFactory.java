@@ -73,13 +73,11 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(SOUND_MEDIA_HEADER_BOX, SoundMediaHeaderBox.class);
 		BOX_CLASSES.put(SUB_SAMPLE_INFORMATION_BOX, SubSampleInformationBox.class);
 		BOX_CLASSES.put(SYNC_SAMPLE_BOX, SyncSampleBox.class);
-		BOX_CLASSES.put(TRACK_BOX, BoxImpl.class);
 		BOX_CLASSES.put(TRACK_EXTENDS_BOX, TrackExtendsBox.class);
 		BOX_CLASSES.put(TRACK_FRAGMENT_BOX, BoxImpl.class);
 		BOX_CLASSES.put(TRACK_FRAGMENT_HEADER_BOX, TrackFragmentHeaderBox.class);
 		BOX_CLASSES.put(TRACK_FRAGMENT_RANDOM_ACCESS_BOX, TrackFragmentRandomAccessBox.class);
 		BOX_CLASSES.put(TRACK_FRAGMENT_RUN_BOX, TrackFragmentRunBox.class);
-		BOX_CLASSES.put(TRACK_HEADER_BOX, TrackHeaderBox.class);
 		BOX_CLASSES.put(TRACK_REFERENCE_BOX, TrackReferenceBox.class);
 		BOX_CLASSES.put(TRACK_SELECTION_BOX, TrackSelectionBox.class);
 		BOX_CLASSES.put(USER_DATA_BOX, BoxImpl.class);
@@ -215,7 +213,6 @@ public class BoxFactory implements BoxTypes
 		PARAMETER.put(PROTECTION_SCHEME_INFORMATION_BOX, new string[]{"Protection Scheme Information Box"});
 		PARAMETER.put(SAMPLE_TABLE_BOX, new string[]{"Sample Table Box"});
 		PARAMETER.put(SCHEME_INFORMATION_BOX, new string[]{"Scheme Information Box"});
-		PARAMETER.put(TRACK_BOX, new string[]{"Track Box"});
 		PARAMETER.put(TRACK_FRAGMENT_BOX, new string[]{"Track Fragment Box"});
 		PARAMETER.put(USER_DATA_BOX, new string[]{"User Data Box"});
 		PARAMETER.put(ITUNES_META_LIST_BOX, new string[]{"iTunes Meta List Box"});

@@ -1,7 +1,7 @@
 ﻿// ReSharper disable InconsistentNaming
 namespace MultiWaveDecoder
 {
-  public static class BoxesUtils
+  public static class BoxUtils
   {
     const long UNDETERMINED = 4294967295;
 

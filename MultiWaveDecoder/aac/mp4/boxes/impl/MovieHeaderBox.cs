@@ -22,7 +22,7 @@ namespace MultiWaveDecoder
       creationTime = inStream.readBytes(len);
       modificationTime = inStream.readBytes(len);
       timeScale = inStream.readBytes(4);
-      duration = BoxesUtils.detectUndetermined(inStream.readBytes(len));
+      duration = BoxUtils.detectUndetermined(inStream.readBytes(len));
 
       rate = inStream.readFixedPoint(16, 16);
       volume = inStream.readFixedPoint(8, 8);
