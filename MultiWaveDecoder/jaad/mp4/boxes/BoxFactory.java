@@ -44,14 +44,12 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(MEDIA_INFORMATION_BOX, BoxImpl.class);
 		BOX_CLASSES.put(META_BOX, MetaBox.class);
 		BOX_CLASSES.put(META_BOX_RELATION_BOX, MetaBoxRelationBox.class);
-		BOX_CLASSES.put(MOVIE_BOX, BoxImpl.class);
 		BOX_CLASSES.put(MOVIE_EXTENDS_BOX, BoxImpl.class);
 		BOX_CLASSES.put(MOVIE_EXTENDS_HEADER_BOX, MovieExtendsHeaderBox.class);
 		BOX_CLASSES.put(MOVIE_FRAGMENT_BOX, BoxImpl.class);
 		BOX_CLASSES.put(MOVIE_FRAGMENT_HEADER_BOX, MovieFragmentHeaderBox.class);
 		BOX_CLASSES.put(MOVIE_FRAGMENT_RANDOM_ACCESS_BOX, BoxImpl.class);
 		BOX_CLASSES.put(MOVIE_FRAGMENT_RANDOM_ACCESS_OFFSET_BOX, MovieFragmentRandomAccessOffsetBox.class);
-		BOX_CLASSES.put(MOVIE_HEADER_BOX, MovieHeaderBox.class);
 		BOX_CLASSES.put(NERO_METADATA_TAGS_BOX, NeroMetadataTagsBox.class);
 		BOX_CLASSES.put(NULL_MEDIA_HEADER_BOX, FullBox.class);
 		BOX_CLASSES.put(ORIGINAL_FORMAT_BOX, OriginalFormatBox.class);
@@ -209,7 +207,6 @@ public class BoxFactory implements BoxTypes
 		PARAMETER.put(EDIT_BOX, new string[]{"Edit Box"});
 		PARAMETER.put(MEDIA_BOX, new string[]{"Media Box"});
 		PARAMETER.put(MEDIA_INFORMATION_BOX, new string[]{"Media Information Box"});
-		PARAMETER.put(MOVIE_BOX, new string[]{"Movie Box"});
 		PARAMETER.put(MOVIE_EXTENDS_BOX, new string[]{"Movie Extends Box"});
 		PARAMETER.put(MOVIE_FRAGMENT_BOX, new string[]{"Movie Fragment Box"});
 		PARAMETER.put(MOVIE_FRAGMENT_RANDOM_ACCESS_BOX, new string[]{"Movie Fragment Random Access Box"});

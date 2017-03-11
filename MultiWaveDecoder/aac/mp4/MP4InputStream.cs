@@ -157,5 +157,21 @@ namespace MultiWaveDecoder
     {
       return new string(readByteArray(n).Select(c => (char)c).ToArray());
     }
+
+    /// <summary>
+    /// Reads a fixed point number from the input. The number is read as a <code>m.n</code> value, that results from deviding an integer by 2<sup>n</sup>.
+    /// </summary>
+    /// <param name="m">the number of bits before the point</param>
+    /// <param name="n">the number of bits after the point</param>
+    /// <returns>a floating point number with the same value</returns>
+    public double readFixedPoint(int m, int n)
+    {
+      int bits = m + n;
+      if ((bits % 8) != 0) throw new ArgumentException("number of bits is not a multiple of 8: " + (m + n));
+      long l = readBytes(bits / 8);
+      double x = Math.Pow(2, n);
+      double d = l / x;
+      return d;
+    }
   }
 }

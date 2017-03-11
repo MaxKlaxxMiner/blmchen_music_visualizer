@@ -230,28 +230,6 @@ public class MP4InputStream
 	}
 
 	/**
-	 * Reads a fixed point number from the input. The number is read as a 
-	 * <code>m.n</code> value, that results from deviding an integer by 
-	 * 2<sup>n</sup>.
-	 * 
-	 * @param m the number of bits before the point
-	 * @param n the number of bits after the point
-	 * @return a floating point number with the same value
-	 * @throws IOException If the end of the stream is detected, the input 
-	 * stream has been closed, or if some other I/O error occurs.
-	 * @throws IllegalArgumentException if the total number of bits (m+n) is not
-	 * a multiple of eight
-	 */
-	public double readFixedPoint(int m, int n) throws IOException {
-		int bits = m+n;
-		if((bits%8)!=0) throw new IllegalArgumentException("number of bits is not a multiple of 8: "+(m+n));
-		long l = readBytes(bits/8);
-		double x = Math.pow(2, n);
-		double d = ((double) l)/x;
-		return d;
-	}
-
-	/**
 	 * Seeks to a specific offset in the stream. This is only possible when 
 	 * using a RandomAccessFile. If an InputStream is used, this method throws 
 	 * an IOException.

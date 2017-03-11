@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace MultiWaveDecoder
 {
-  public abstract class BoxImpl : IBox
+  public class BoxImpl : IBox
   {
     readonly string name;
 
@@ -16,7 +16,7 @@ namespace MultiWaveDecoder
     BoxType type;
     long offset;
 
-    protected BoxImpl(string name)
+    public BoxImpl(string name)
     {
       this.name = name;
     }
@@ -25,7 +25,10 @@ namespace MultiWaveDecoder
     /// Decodes the given input stream by reading this box and all of its children (if any).
     /// </summary>
     /// <param name="inStream">an input stream</param>
-    public abstract void decode(MP4InputStream inStream);
+    public virtual void decode(MP4InputStream inStream)
+    {
+
+    }
 
     public void setParams(IBox parent, long size, BoxType type, long offset)
     {

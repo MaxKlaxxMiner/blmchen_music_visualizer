@@ -29,9 +29,14 @@ namespace MultiWaveDecoder
           case BoxType.WIDE_BOX:
           case BoxType.FREE_SPACE_BOX: return new FreeSpaceBox();
           case BoxType.MEDIA_DATA_BOX: return new MediaDataBox();
+          case BoxType.MOVIE_BOX: return new BoxImpl("Movie Box");
+          case BoxType.MOVIE_HEADER_BOX: return new MovieHeaderBox();
           default:
           {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Logger.LogBoxes("BoxFactory - unknown box type: " + type + " '" + typeToString(type) + "', position: " + offset.ToString("N0"));
+            Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Gray;
             return new UnknownBox();
           }
         }

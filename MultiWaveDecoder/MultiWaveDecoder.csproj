@@ -41,11 +41,13 @@
   <ItemGroup>
     <Compile Include="aac\Main.cs" />
     <Compile Include="aac\mp4\api\Movie.cs" />
+    <Compile Include="aac\mp4\boxes\BoxesUtils.cs" />
     <Compile Include="aac\mp4\boxes\FullBox.cs" />
     <Compile Include="aac\mp4\boxes\IBox.cs" />
     <Compile Include="aac\mp4\boxes\BoxFactory.cs" />
     <Compile Include="aac\mp4\boxes\BoxImpl.cs" />
     <Compile Include="aac\mp4\boxes\BoxType.cs" />
+    <Compile Include="aac\mp4\boxes\impl\MovieHeaderBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\FileTypeBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\FreeSpaceBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\MediaDataBox.cs" />
@@ -191,7 +193,6 @@
     <Content Include="jaad\mp4\boxes\impl\ItemInformationEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\ItemLocationBox.java" />
     <Content Include="jaad\mp4\boxes\impl\ItemProtectionBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\MediaHeaderBox.java" />
     <Content Include="jaad\mp4\boxes\impl\MetaBox.java" />
     <Content Include="jaad\mp4\boxes\impl\MetaBoxRelationBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\EncoderBox.java" />
@@ -212,7 +213,6 @@
     <Content Include="jaad\mp4\boxes\impl\MovieExtendsHeaderBox.java" />
     <Content Include="jaad\mp4\boxes\impl\MovieFragmentHeaderBox.java" />
     <Content Include="jaad\mp4\boxes\impl\MovieFragmentRandomAccessOffsetBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\MovieHeaderBox.java" />
     <Content Include="jaad\mp4\boxes\impl\ObjectDescriptorBox.java" />
     <Content Include="jaad\mp4\boxes\impl\oma\OMAAccessUnitFormatBox.java" />
     <Content Include="jaad\mp4\boxes\impl\oma\OMACommonHeadersBox.java" />
@@ -272,7 +272,6 @@
     <Content Include="jaad\mp4\boxes\impl\TrackSelectionBox.java" />
     <Content Include="jaad\mp4\boxes\impl\VideoMediaHeaderBox.java" />
     <Content Include="jaad\mp4\boxes\impl\XMLBox.java" />
-    <Content Include="jaad\mp4\boxes\Utils.java" />
     <Content Include="jaad\mp4\MP4Container.java" />
     <Content Include="jaad\mp4\MP4InputStream.java" />
     <Content Include="jaad\mp4\od\DecoderConfigDescriptor.java" />
