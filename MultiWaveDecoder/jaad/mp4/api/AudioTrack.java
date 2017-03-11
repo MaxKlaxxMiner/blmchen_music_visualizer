@@ -25,14 +25,14 @@ public class AudioTrack extends Track {
 
 		static Codec forType(long type) {
 			Codec ac;
-			if(type==BoxTypes.MP4A_SAMPLE_ENTRY) ac = AAC;
-			else if(type==BoxTypes.AC3_SAMPLE_ENTRY) ac = AC3;
-			else if(type==BoxTypes.AMR_SAMPLE_ENTRY) ac = AMR;
-			else if(type==BoxTypes.AMR_WB_SAMPLE_ENTRY) ac = AMR_WIDE_BAND;
-			else if(type==BoxTypes.EVRC_SAMPLE_ENTRY) ac = EVRC;
-			else if(type==BoxTypes.EAC3_SAMPLE_ENTRY) ac = EXTENDED_AC3;
-			else if(type==BoxTypes.QCELP_SAMPLE_ENTRY) ac = QCELP;
-			else if(type==BoxTypes.SMV_SAMPLE_ENTRY) ac = SMV;
+			if(type==BoxType.MP4A_SAMPLE_ENTRY) ac = AAC;
+			else if(type==BoxType.AC3_SAMPLE_ENTRY) ac = AC3;
+			else if(type==BoxType.AMR_SAMPLE_ENTRY) ac = AMR;
+			else if(type==BoxType.AMR_WB_SAMPLE_ENTRY) ac = AMR_WIDE_BAND;
+			else if(type==BoxType.EVRC_SAMPLE_ENTRY) ac = EVRC;
+			else if(type==BoxType.EAC3_SAMPLE_ENTRY) ac = EXTENDED_AC3;
+			else if(type==BoxType.QCELP_SAMPLE_ENTRY) ac = QCELP;
+			else if(type==BoxType.SMV_SAMPLE_ENTRY) ac = SMV;
 			else ac = UNKNOWN_AUDIO_CODEC;
 			return ac;
 		}
@@ -44,23 +44,23 @@ public class AudioTrack extends Track {
 	public AudioTrack(Box trak, MP4InputStream in) {
 		super(trak, in);
 
-		Box mdia = trak.getChild(BoxTypes.MEDIA_BOX);
-		Box minf = mdia.getChild(BoxTypes.MEDIA_INFORMATION_BOX);
-		smhd = (SoundMediaHeaderBox) minf.getChild(BoxTypes.SOUND_MEDIA_HEADER_BOX);
+		Box mdia = trak.getChild(BoxType.MEDIA_BOX);
+		Box minf = mdia.getChild(BoxType.MEDIA_INFORMATION_BOX);
+		smhd = (SoundMediaHeaderBox) minf.getChild(BoxType.SOUND_MEDIA_HEADER_BOX);
 
-		Box stbl = minf.getChild(BoxTypes.SAMPLE_TABLE_BOX);
+		Box stbl = minf.getChild(BoxType.SAMPLE_TABLE_BOX);
 
 		//sample descriptions: 'mp4a' and 'enca' have an ESDBox, all others have a CodecSpecificBox
-		SampleDescriptionBox stsd = (SampleDescriptionBox) stbl.getChild(BoxTypes.SAMPLE_DESCRIPTION_BOX);
+		SampleDescriptionBox stsd = (SampleDescriptionBox) stbl.getChild(BoxType.SAMPLE_DESCRIPTION_BOX);
 		if(stsd.getChildren().get(0) instanceof AudioSampleEntry) {
 			sampleEntry = (AudioSampleEntry) stsd.getChildren().get(0);
 			long type = sampleEntry.getType();
-			if(sampleEntry.hasChild(BoxTypes.ESD_BOX)) findDecoderSpecificInfo((ESDBox) sampleEntry.getChild(BoxTypes.ESD_BOX));
+			if(sampleEntry.hasChild(BoxType.ESD_BOX)) findDecoderSpecificInfo((ESDBox) sampleEntry.getChild(BoxType.ESD_BOX));
 			else decoderInfo = DecoderInfo.parse((CodecSpecificBox) sampleEntry.getChildren().get(0));
 
-			if(type==BoxTypes.ENCRYPTED_AUDIO_SAMPLE_ENTRY||type==BoxTypes.DRMS_SAMPLE_ENTRY) {
-				findDecoderSpecificInfo((ESDBox) sampleEntry.getChild(BoxTypes.ESD_BOX));
-				protection = Protection.parse(sampleEntry.getChild(BoxTypes.PROTECTION_SCHEME_INFORMATION_BOX));
+			if(type==BoxType.ENCRYPTED_AUDIO_SAMPLE_ENTRY||type==BoxType.DRMS_SAMPLE_ENTRY) {
+				findDecoderSpecificInfo((ESDBox) sampleEntry.getChild(BoxType.ESD_BOX));
+				protection = Protection.parse(sampleEntry.getChild(BoxType.PROTECTION_SCHEME_INFORMATION_BOX));
 				codec = protection.getOriginalFormat();
 			}
 			else codec = AudioCodec.forType(sampleEntry.getType());

@@ -1,16 +1,3 @@
-package net.sourceforge.jaad.mp4.api;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import net.sourceforge.jaad.mp4.MP4InputStream;
-import net.sourceforge.jaad.mp4.boxes.Box;
-import net.sourceforge.jaad.mp4.boxes.BoxTypes;
-import net.sourceforge.jaad.mp4.boxes.impl.HandlerBox;
-import net.sourceforge.jaad.mp4.boxes.impl.MovieHeaderBox;
-
 public class Movie {
 
 	private MP4InputStream in;
@@ -23,8 +10,8 @@ public class Movie {
 		this.in = in;
 
 		//create tracks
-		mvhd = (MovieHeaderBox) moov.getChild(BoxTypes.MOVIE_HEADER_BOX);
-		List<Box> trackBoxes = moov.getChildren(BoxTypes.TRACK_BOX);
+		mvhd = (MovieHeaderBox) moov.getChild(BoxType.MOVIE_HEADER_BOX);
+		List<Box> trackBoxes = moov.getChildren(BoxType.TRACK_BOX);
 		tracks = new ArrayList<Track>(trackBoxes.size());
 		Track track;
 		for(int i = 0; i<trackBoxes.size(); i++) {
@@ -34,17 +21,17 @@ public class Movie {
 
 		//read metadata: moov.meta/moov.udta.meta
 		metaData = new MetaData();
-		if(moov.hasChild(BoxTypes.META_BOX)) metaData.parse(null, moov.getChild(BoxTypes.META_BOX));
-		else if(moov.hasChild(BoxTypes.USER_DATA_BOX)) {
-			Box udta = moov.getChild(BoxTypes.USER_DATA_BOX);
-			if(udta.hasChild(BoxTypes.META_BOX)) metaData.parse(udta, udta.getChild(BoxTypes.META_BOX));
+		if(moov.hasChild(BoxType.META_BOX)) metaData.parse(null, moov.getChild(BoxType.META_BOX));
+		else if(moov.hasChild(BoxType.USER_DATA_BOX)) {
+			Box udta = moov.getChild(BoxType.USER_DATA_BOX);
+			if(udta.hasChild(BoxType.META_BOX)) metaData.parse(udta, udta.getChild(BoxType.META_BOX));
 		}
 
 		//detect DRM
 		protections = new ArrayList<Protection>();
-		if(moov.hasChild(BoxTypes.ITEM_PROTECTION_BOX)) {
-			Box ipro = moov.getChild(BoxTypes.ITEM_PROTECTION_BOX);
-			for(Box sinf : ipro.getChildren(BoxTypes.PROTECTION_SCHEME_INFORMATION_BOX)) {
+		if(moov.hasChild(BoxType.ITEM_PROTECTION_BOX)) {
+			Box ipro = moov.getChild(BoxType.ITEM_PROTECTION_BOX);
+			for(Box sinf : ipro.getChildren(BoxType.PROTECTION_SCHEME_INFORMATION_BOX)) {
 				protections.add(Protection.parse(sinf));
 			}
 		}
@@ -52,7 +39,7 @@ public class Movie {
 
 	//TODO: support hint and meta
 	private Track createTrack(Box trak) {
-		HandlerBox hdlr = (HandlerBox) trak.getChild(BoxTypes.MEDIA_BOX).getChild(BoxTypes.HANDLER_BOX);
+		HandlerBox hdlr = (HandlerBox) trak.getChild(BoxType.MEDIA_BOX).getChild(BoxType.HANDLER_BOX);
 		Track track;
 		switch((int) hdlr.getHandlerType()) {
 			case HandlerBox.TYPE_VIDEO:

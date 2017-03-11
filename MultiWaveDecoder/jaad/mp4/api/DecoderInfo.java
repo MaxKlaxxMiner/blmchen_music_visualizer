@@ -25,14 +25,14 @@ public abstract class DecoderInfo {
 		long l = css.getType();
 
 		DecoderInfo info;
-		if(l==BoxTypes.H263_SPECIFIC_BOX) info = new H263DecoderInfo(css);
-		else if(l==BoxTypes.AMR_SPECIFIC_BOX) info = new AMRDecoderInfo(css);
-		else if(l==BoxTypes.EVRC_SPECIFIC_BOX) info = new EVRCDecoderInfo(css);
-		else if(l==BoxTypes.QCELP_SPECIFIC_BOX) info = new QCELPDecoderInfo(css);
-		else if(l==BoxTypes.SMV_SPECIFIC_BOX) info = new SMVDecoderInfo(css);
-		else if(l==BoxTypes.AVC_SPECIFIC_BOX) info = new AVCDecoderInfo(css);
-		else if(l==BoxTypes.AC3_SPECIFIC_BOX) info = new AC3DecoderInfo(css);
-		else if(l==BoxTypes.EAC3_SPECIFIC_BOX) info = new EAC3DecoderInfo(css);
+		if(l==BoxType.H263_SPECIFIC_BOX) info = new H263DecoderInfo(css);
+		else if(l==BoxType.AMR_SPECIFIC_BOX) info = new AMRDecoderInfo(css);
+		else if(l==BoxType.EVRC_SPECIFIC_BOX) info = new EVRCDecoderInfo(css);
+		else if(l==BoxType.QCELP_SPECIFIC_BOX) info = new QCELPDecoderInfo(css);
+		else if(l==BoxType.SMV_SPECIFIC_BOX) info = new SMVDecoderInfo(css);
+		else if(l==BoxType.AVC_SPECIFIC_BOX) info = new AVCDecoderInfo(css);
+		else if(l==BoxType.AC3_SPECIFIC_BOX) info = new AC3DecoderInfo(css);
+		else if(l==BoxType.EAC3_SPECIFIC_BOX) info = new EAC3DecoderInfo(css);
 		else info = new UnknownDecoderInfo();
 		return info;
 	}

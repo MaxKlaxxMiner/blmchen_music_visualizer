@@ -17,7 +17,7 @@ public class RatingBox extends FullBox {
 	@Override
 	public void decode(MP4InputStream in) throws IOException {
 		//3gpp or iTunes
-		if(parent.getType()==BoxTypes.USER_DATA_BOX) {
+		if(parent.getType()==BoxType.USER_DATA_BOX) {
 			super.decode(in);
 
 			//TODO: what to do with both?

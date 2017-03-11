@@ -25,7 +25,7 @@ public class DegradationPriorityBox extends FullBox {
 		super.decode(in);
 
 		//get number of samples from SampleSizeBox
-		int sampleCount = ((SampleSizeBox) parent.getChild(BoxTypes.SAMPLE_SIZE_BOX)).getSampleCount();
+		int sampleCount = ((SampleSizeBox) parent.getChild(BoxType.SAMPLE_SIZE_BOX)).getSampleCount();
 
 		priorities = new int[sampleCount];
 		for(int i = 0; i<sampleCount; i++) {

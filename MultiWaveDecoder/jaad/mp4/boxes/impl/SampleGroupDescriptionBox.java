@@ -48,7 +48,7 @@ public class SampleGroupDescriptionBox extends FullBox {
 		int entryCount = (int) in.readBytes(4);
 
 		//TODO!
-		/*HandlerBox hdlr = (HandlerBox) parent.getParent().getParent().getChild(BoxTypes.HANDLER_BOX);
+		/*HandlerBox hdlr = (HandlerBox) parent.getParent().getParent().getChild(BoxType.HANDLER_BOX);
 		int handlerType = (int) hdlr.getHandlerType();
 		
 		Class<? extends BoxImpl> boxClass;

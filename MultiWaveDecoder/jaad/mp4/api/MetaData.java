@@ -243,37 +243,37 @@ public class MetaData {
 	 */
 	void parse(Box udta, Box meta) {
 		//standard boxes
-		if(meta.hasChild(BoxTypes.COPYRIGHT_BOX)) {
-			CopyrightBox cprt = (CopyrightBox) meta.getChild(BoxTypes.COPYRIGHT_BOX);
+		if(meta.hasChild(BoxType.COPYRIGHT_BOX)) {
+			CopyrightBox cprt = (CopyrightBox) meta.getChild(BoxType.COPYRIGHT_BOX);
 			put(Field.LANGUAGE, new Locale(cprt.getLanguageCode()));
 			put(Field.COPYRIGHT, cprt.getNotice());
 		}
 		//3gpp user data
 		if(udta!=null) parse3GPPData(udta);
 		//id3, TODO: can be present in different languages
-		if(meta.hasChild(BoxTypes.ID3_TAG_BOX)) parseID3((ID3TagBox) meta.getChild(BoxTypes.ID3_TAG_BOX));
+		if(meta.hasChild(BoxType.ID3_TAG_BOX)) parseID3((ID3TagBox) meta.getChild(BoxType.ID3_TAG_BOX));
 		//itunes
-		if(meta.hasChild(BoxTypes.ITUNES_META_LIST_BOX)) parseITunesMetaData(meta.getChild(BoxTypes.ITUNES_META_LIST_BOX));
+		if(meta.hasChild(BoxType.ITUNES_META_LIST_BOX)) parseITunesMetaData(meta.getChild(BoxType.ITUNES_META_LIST_BOX));
 		//nero tags
-		if(meta.hasChild(BoxTypes.NERO_METADATA_TAGS_BOX)) parseNeroTags((NeroMetadataTagsBox) meta.getChild(BoxTypes.NERO_METADATA_TAGS_BOX));
+		if(meta.hasChild(BoxType.NERO_METADATA_TAGS_BOX)) parseNeroTags((NeroMetadataTagsBox) meta.getChild(BoxType.NERO_METADATA_TAGS_BOX));
 	}
 
 	//parses specific children of 'udta': 3GPP
 	//TODO: handle language codes
 	private void parse3GPPData(Box udta) {
-		if(udta.hasChild(BoxTypes.THREE_GPP_ALBUM_BOX)) {
-			ThreeGPPAlbumBox albm = (ThreeGPPAlbumBox) udta.getChild(BoxTypes.THREE_GPP_ALBUM_BOX);
+		if(udta.hasChild(BoxType.THREE_GPP_ALBUM_BOX)) {
+			ThreeGPPAlbumBox albm = (ThreeGPPAlbumBox) udta.getChild(BoxType.THREE_GPP_ALBUM_BOX);
 			put(Field.ALBUM, albm.getData());
 			put(Field.TRACK_NUMBER, albm.getTrackNumber());
 		}
-		//if(udta.hasChild(BoxTypes.THREE_GPP_AUTHOR_BOX));
-		//if(udta.hasChild(BoxTypes.THREE_GPP_CLASSIFICATION_BOX));
-		if(udta.hasChild(BoxTypes.THREE_GPP_DESCRIPTION_BOX)) put(Field.DESCRIPTION, ((ThreeGPPMetadataBox) udta.getChild(BoxTypes.THREE_GPP_DESCRIPTION_BOX)).getData());
-		if(udta.hasChild(BoxTypes.THREE_GPP_KEYWORDS_BOX)) put(Field.KEYWORDS, ((ThreeGPPMetadataBox) udta.getChild(BoxTypes.THREE_GPP_KEYWORDS_BOX)).getData());
-		if(udta.hasChild(BoxTypes.THREE_GPP_LOCATION_INFORMATION_BOX)) put(Field.LOCATION, ((ThreeGPPLocationBox) udta.getChild(BoxTypes.THREE_GPP_LOCATION_INFORMATION_BOX)).getPlaceName());
-		if(udta.hasChild(BoxTypes.THREE_GPP_PERFORMER_BOX)) put(Field.ARTIST, ((ThreeGPPMetadataBox) udta.getChild(BoxTypes.THREE_GPP_PERFORMER_BOX)).getData());
-		if(udta.hasChild(BoxTypes.THREE_GPP_RECORDING_YEAR_BOX)) {
-			string value = ((ThreeGPPMetadataBox) udta.getChild(BoxTypes.THREE_GPP_RECORDING_YEAR_BOX)).getData();
+		//if(udta.hasChild(BoxType.THREE_GPP_AUTHOR_BOX));
+		//if(udta.hasChild(BoxType.THREE_GPP_CLASSIFICATION_BOX));
+		if(udta.hasChild(BoxType.THREE_GPP_DESCRIPTION_BOX)) put(Field.DESCRIPTION, ((ThreeGPPMetadataBox) udta.getChild(BoxType.THREE_GPP_DESCRIPTION_BOX)).getData());
+		if(udta.hasChild(BoxType.THREE_GPP_KEYWORDS_BOX)) put(Field.KEYWORDS, ((ThreeGPPMetadataBox) udta.getChild(BoxType.THREE_GPP_KEYWORDS_BOX)).getData());
+		if(udta.hasChild(BoxType.THREE_GPP_LOCATION_INFORMATION_BOX)) put(Field.LOCATION, ((ThreeGPPLocationBox) udta.getChild(BoxType.THREE_GPP_LOCATION_INFORMATION_BOX)).getPlaceName());
+		if(udta.hasChild(BoxType.THREE_GPP_PERFORMER_BOX)) put(Field.ARTIST, ((ThreeGPPMetadataBox) udta.getChild(BoxType.THREE_GPP_PERFORMER_BOX)).getData());
+		if(udta.hasChild(BoxType.THREE_GPP_RECORDING_YEAR_BOX)) {
+			string value = ((ThreeGPPMetadataBox) udta.getChild(BoxType.THREE_GPP_RECORDING_YEAR_BOX)).getData();
 			try {
 				put(Field.RELEASE_DATE, new Date(Integer.parseInt(value)));
 			}
@@ -281,7 +281,7 @@ public class MetaData {
 				Logger.getLogger("MP4 API").log(Level.INFO, "unable to parse 3GPP metadata: recording year value: {0}", value);
 			}
 		}
-		if(udta.hasChild(BoxTypes.THREE_GPP_TITLE_BOX)) put(Field.TITLE, ((ThreeGPPMetadataBox) udta.getChild(BoxTypes.THREE_GPP_TITLE_BOX)).getData());
+		if(udta.hasChild(BoxType.THREE_GPP_TITLE_BOX)) put(Field.TITLE, ((ThreeGPPMetadataBox) udta.getChild(BoxType.THREE_GPP_TITLE_BOX)).getData());
 	}
 
 	//parses children of 'ilst': iTunes
@@ -291,23 +291,23 @@ public class MetaData {
 		ITunesMetadataBox data;
 		for(Box box : boxes) {
 			l = box.getType();
-			data = (ITunesMetadataBox) box.getChild(BoxTypes.ITUNES_METADATA_BOX);
+			data = (ITunesMetadataBox) box.getChild(BoxType.ITUNES_METADATA_BOX);
 
-			if(l==BoxTypes.ARTIST_NAME_BOX) put(Field.ARTIST, data.getText());
-			else if(l==BoxTypes.TRACK_NAME_BOX) put(Field.TITLE, data.getText());
-			else if(l==BoxTypes.ALBUM_ARTIST_NAME_BOX) put(Field.ALBUM_ARTIST, data.getText());
-			else if(l==BoxTypes.ALBUM_NAME_BOX) put(Field.ALBUM, data.getText());
-			else if(l==BoxTypes.TRACK_NUMBER_BOX) {
+			if(l==BoxType.ARTIST_NAME_BOX) put(Field.ARTIST, data.getText());
+			else if(l==BoxType.TRACK_NAME_BOX) put(Field.TITLE, data.getText());
+			else if(l==BoxType.ALBUM_ARTIST_NAME_BOX) put(Field.ALBUM_ARTIST, data.getText());
+			else if(l==BoxType.ALBUM_NAME_BOX) put(Field.ALBUM, data.getText());
+			else if(l==BoxType.TRACK_NUMBER_BOX) {
 				byte[] b = data.getData();
 				put(Field.TRACK_NUMBER, new Integer(b[3]));
 				put(Field.TOTAL_TRACKS, new Integer(b[5]));
 			}
-			else if(l==BoxTypes.DISK_NUMBER_BOX) put(Field.DISK_NUMBER, data.getInteger());
-			else if(l==BoxTypes.COMPOSER_NAME_BOX) put(Field.COMPOSER, data.getText());
-			else if(l==BoxTypes.COMMENTS_BOX) put(Field.COMMENTS, data.getText());
-			else if(l==BoxTypes.TEMPO_BOX) put(Field.TEMPO, data.getInteger());
-			else if(l==BoxTypes.RELEASE_DATE_BOX) put(Field.RELEASE_DATE, data.getDate());
-			else if(l==BoxTypes.GENRE_BOX||l==BoxTypes.CUSTOM_GENRE_BOX) {
+			else if(l==BoxType.DISK_NUMBER_BOX) put(Field.DISK_NUMBER, data.getInteger());
+			else if(l==BoxType.COMPOSER_NAME_BOX) put(Field.COMPOSER, data.getText());
+			else if(l==BoxType.COMMENTS_BOX) put(Field.COMMENTS, data.getText());
+			else if(l==BoxType.TEMPO_BOX) put(Field.TEMPO, data.getInteger());
+			else if(l==BoxType.RELEASE_DATE_BOX) put(Field.RELEASE_DATE, data.getDate());
+			else if(l==BoxType.GENRE_BOX||l==BoxType.CUSTOM_GENRE_BOX) {
 				String s = null;
 				if(data.getDataType()==ITunesMetadataBox.DataType.UTF8) s = data.getText();
 				else {
@@ -316,11 +316,11 @@ public class MetaData {
 				}
 				if(s!=null) put(Field.GENRE, s);
 			}
-			else if(l==BoxTypes.ENCODER_NAME_BOX) put(Field.ENCODER_NAME, data.getText());
-			else if(l==BoxTypes.ENCODER_TOOL_BOX) put(Field.ENCODER_TOOL, data.getText());
-			else if(l==BoxTypes.COPYRIGHT_BOX) put(Field.COPYRIGHT, data.getText());
-			else if(l==BoxTypes.COMPILATION_PART_BOX) put(Field.COMPILATION, data.getBoolean());
-			else if(l==BoxTypes.COVER_BOX) {
+			else if(l==BoxType.ENCODER_NAME_BOX) put(Field.ENCODER_NAME, data.getText());
+			else if(l==BoxType.ENCODER_TOOL_BOX) put(Field.ENCODER_TOOL, data.getText());
+			else if(l==BoxType.COPYRIGHT_BOX) put(Field.COPYRIGHT, data.getText());
+			else if(l==BoxType.COMPILATION_PART_BOX) put(Field.COMPILATION, data.getBoolean());
+			else if(l==BoxType.COVER_BOX) {
 				Artwork aw = new Artwork(Artwork.Type.forDataType(data.getDataType()), data.getData());
 				if(contents.containsKey(Field.COVER_ARTWORKS)) get(Field.COVER_ARTWORKS).add(aw);
 				else {
@@ -329,26 +329,26 @@ public class MetaData {
 					put(Field.COVER_ARTWORKS, list);
 				}
 			}
-			else if(l==BoxTypes.GROUPING_BOX) put(Field.GROUPING, data.getText());
-			else if(l==BoxTypes.LYRICS_BOX) put(Field.LYRICS, data.getText());
-			else if(l==BoxTypes.RATING_BOX) put(Field.RATING, data.getInteger());
-			else if(l==BoxTypes.PODCAST_BOX) put(Field.PODCAST, data.getInteger());
-			else if(l==BoxTypes.PODCAST_URL_BOX) put(Field.PODCAST_URL, data.getText());
-			else if(l==BoxTypes.CATEGORY_BOX) put(Field.CATEGORY, data.getText());
-			else if(l==BoxTypes.KEYWORD_BOX) put(Field.KEYWORDS, data.getText());
-			else if(l==BoxTypes.DESCRIPTION_BOX) put(Field.DESCRIPTION, data.getText());
-			else if(l==BoxTypes.LONG_DESCRIPTION_BOX) put(Field.DESCRIPTION, data.getText());
-			else if(l==BoxTypes.TV_SHOW_BOX) put(Field.TV_SHOW, data.getText());
-			else if(l==BoxTypes.TV_NETWORK_NAME_BOX) put(Field.TV_NETWORK, data.getText());
-			else if(l==BoxTypes.TV_EPISODE_BOX) put(Field.TV_EPISODE, data.getText());
-			else if(l==BoxTypes.TV_EPISODE_NUMBER_BOX) put(Field.TV_EPISODE_NUMBER, data.getInteger());
-			else if(l==BoxTypes.TV_SEASON_BOX) put(Field.TV_SEASON, data.getInteger());
-			else if(l==BoxTypes.PURCHASE_DATE_BOX) put(Field.PURCHASE_DATE, data.getText());
-			else if(l==BoxTypes.GAPLESS_PLAYBACK_BOX) put(Field.GAPLESS_PLAYBACK, data.getText());
-			else if(l==BoxTypes.HD_VIDEO_BOX) put(Field.HD_VIDEO, data.getBoolean());
-			else if(l==BoxTypes.ARTIST_SORT_BOX) put(Field.ARTIST_SORT_TEXT, data.getText());
-			else if(l==BoxTypes.TRACK_SORT_BOX) put(Field.TITLE_SORT_TEXT, data.getText());
-			else if(l==BoxTypes.ALBUM_SORT_BOX) put(Field.ALBUM_SORT_TEXT, data.getText());
+			else if(l==BoxType.GROUPING_BOX) put(Field.GROUPING, data.getText());
+			else if(l==BoxType.LYRICS_BOX) put(Field.LYRICS, data.getText());
+			else if(l==BoxType.RATING_BOX) put(Field.RATING, data.getInteger());
+			else if(l==BoxType.PODCAST_BOX) put(Field.PODCAST, data.getInteger());
+			else if(l==BoxType.PODCAST_URL_BOX) put(Field.PODCAST_URL, data.getText());
+			else if(l==BoxType.CATEGORY_BOX) put(Field.CATEGORY, data.getText());
+			else if(l==BoxType.KEYWORD_BOX) put(Field.KEYWORDS, data.getText());
+			else if(l==BoxType.DESCRIPTION_BOX) put(Field.DESCRIPTION, data.getText());
+			else if(l==BoxType.LONG_DESCRIPTION_BOX) put(Field.DESCRIPTION, data.getText());
+			else if(l==BoxType.TV_SHOW_BOX) put(Field.TV_SHOW, data.getText());
+			else if(l==BoxType.TV_NETWORK_NAME_BOX) put(Field.TV_NETWORK, data.getText());
+			else if(l==BoxType.TV_EPISODE_BOX) put(Field.TV_EPISODE, data.getText());
+			else if(l==BoxType.TV_EPISODE_NUMBER_BOX) put(Field.TV_EPISODE_NUMBER, data.getInteger());
+			else if(l==BoxType.TV_SEASON_BOX) put(Field.TV_SEASON, data.getInteger());
+			else if(l==BoxType.PURCHASE_DATE_BOX) put(Field.PURCHASE_DATE, data.getText());
+			else if(l==BoxType.GAPLESS_PLAYBACK_BOX) put(Field.GAPLESS_PLAYBACK, data.getText());
+			else if(l==BoxType.HD_VIDEO_BOX) put(Field.HD_VIDEO, data.getBoolean());
+			else if(l==BoxType.ARTIST_SORT_BOX) put(Field.ARTIST_SORT_TEXT, data.getText());
+			else if(l==BoxType.TRACK_SORT_BOX) put(Field.TITLE_SORT_TEXT, data.getText());
+			else if(l==BoxType.ALBUM_SORT_BOX) put(Field.ALBUM_SORT_TEXT, data.getText());
 		}
 	}
 

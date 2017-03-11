@@ -20,7 +20,7 @@ public class MetaBox extends FullBox {
 		// the version and flags fields in the meta box, instead going
 		// directly to the hdlr box
 		long possibleType = in.peekBytes(8) & 0xFFFFFFFFL;
-		if(possibleType != BoxTypes.HANDLER_BOX){
+		if(possibleType != BoxType.HANDLER_BOX){
 			super.decode(in);
 		}
 		readChildren(in);

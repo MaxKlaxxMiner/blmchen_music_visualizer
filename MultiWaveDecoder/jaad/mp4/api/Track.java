@@ -57,17 +57,17 @@ public abstract class Track {
 	Track(Box trak, MP4InputStream in) {
 		this.in = in;
 
-		tkhd = (TrackHeaderBox) trak.getChild(BoxTypes.TRACK_HEADER_BOX);
+		tkhd = (TrackHeaderBox) trak.getChild(BoxType.TRACK_HEADER_BOX);
 
-		Box mdia = trak.getChild(BoxTypes.MEDIA_BOX);
-		mdhd = (MediaHeaderBox) mdia.getChild(BoxTypes.MEDIA_HEADER_BOX);
-		Box minf = mdia.getChild(BoxTypes.MEDIA_INFORMATION_BOX);
+		Box mdia = trak.getChild(BoxType.MEDIA_BOX);
+		mdhd = (MediaHeaderBox) mdia.getChild(BoxType.MEDIA_HEADER_BOX);
+		Box minf = mdia.getChild(BoxType.MEDIA_INFORMATION_BOX);
 
-		Box dinf = minf.getChild(BoxTypes.DATA_INFORMATION_BOX);
-		DataReferenceBox dref = (DataReferenceBox) dinf.getChild(BoxTypes.DATA_REFERENCE_BOX);
+		Box dinf = minf.getChild(BoxType.DATA_INFORMATION_BOX);
+		DataReferenceBox dref = (DataReferenceBox) dinf.getChild(BoxType.DATA_REFERENCE_BOX);
 		//TODO: support URNs
-		if(dref.hasChild(BoxTypes.DATA_ENTRY_URL_BOX)) {
-			DataEntryUrlBox url = (DataEntryUrlBox) dref.getChild(BoxTypes.DATA_ENTRY_URL_BOX);
+		if(dref.hasChild(BoxType.DATA_ENTRY_URL_BOX)) {
+			DataEntryUrlBox url = (DataEntryUrlBox) dref.getChild(BoxType.DATA_ENTRY_URL_BOX);
 			inFile = url.isInFile();
 			if(!inFile) {
 				try {
@@ -79,8 +79,8 @@ public abstract class Track {
 				}
 			}
 		}
-		/*else if(dref.containsChild(BoxTypes.DATA_ENTRY_URN_BOX)) {
-		DataEntryUrnBox urn = (DataEntryUrnBox) dref.getChild(BoxTypes.DATA_ENTRY_URN_BOX);
+		/*else if(dref.containsChild(BoxType.DATA_ENTRY_URN_BOX)) {
+		DataEntryUrnBox urn = (DataEntryUrnBox) dref.getChild(BoxType.DATA_ENTRY_URN_BOX);
 		inFile = urn.isInFile();
 		location = urn.getLocation();
 		}*/
@@ -90,7 +90,7 @@ public abstract class Track {
 		}
 
 		//sample table
-		Box stbl = minf.getChild(BoxTypes.SAMPLE_TABLE_BOX);
+		Box stbl = minf.getChild(BoxType.SAMPLE_TABLE_BOX);
 		if(stbl.hasChildren()) {
 			frames = new ArrayList<Frame>();
 			parseSampleTable(stbl);
@@ -104,21 +104,21 @@ public abstract class Track {
 		Type type = getType();
 
 		//sample sizes
-		long[] sampleSizes = ((SampleSizeBox) stbl.getChild(BoxTypes.SAMPLE_SIZE_BOX)).getSampleSizes();
+		long[] sampleSizes = ((SampleSizeBox) stbl.getChild(BoxType.SAMPLE_SIZE_BOX)).getSampleSizes();
 
 		//chunk offsets
 		ChunkOffsetBox stco;
-		if(stbl.hasChild(BoxTypes.CHUNK_OFFSET_BOX)) stco = (ChunkOffsetBox) stbl.getChild(BoxTypes.CHUNK_OFFSET_BOX);
-		else stco = (ChunkOffsetBox) stbl.getChild(BoxTypes.CHUNK_LARGE_OFFSET_BOX);
+		if(stbl.hasChild(BoxType.CHUNK_OFFSET_BOX)) stco = (ChunkOffsetBox) stbl.getChild(BoxType.CHUNK_OFFSET_BOX);
+		else stco = (ChunkOffsetBox) stbl.getChild(BoxType.CHUNK_LARGE_OFFSET_BOX);
 		long[] chunkOffsets = stco.getChunks();
 
 		//samples to chunks
-		SampleToChunkBox stsc = ((SampleToChunkBox) stbl.getChild(BoxTypes.SAMPLE_TO_CHUNK_BOX));
+		SampleToChunkBox stsc = ((SampleToChunkBox) stbl.getChild(BoxType.SAMPLE_TO_CHUNK_BOX));
 		long[] firstChunks = stsc.getFirstChunks();
 		long[] samplesPerChunk = stsc.getSamplesPerChunk();
 
 		//sample durations/timestamps
-		DecodingTimeToSampleBox stts = (DecodingTimeToSampleBox) stbl.getChild(BoxTypes.DECODING_TIME_TO_SAMPLE_BOX);
+		DecodingTimeToSampleBox stts = (DecodingTimeToSampleBox) stbl.getChild(BoxType.DECODING_TIME_TO_SAMPLE_BOX);
 		long[] sampleCounts = stts.getSampleCounts();
 		long[] sampleDeltas = stts.getSampleDeltas();
 		long[] timeOffsets = new long[sampleSizes.length];

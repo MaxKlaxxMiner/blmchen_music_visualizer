@@ -17,7 +17,7 @@ public class ChunkOffsetBox extends FullBox {
 	public void decode(MP4InputStream in) throws IOException {
 		super.decode(in);
 
-		int len = (type==BoxTypes.CHUNK_LARGE_OFFSET_BOX) ? 8 : 4;
+		int len = (type==BoxType.CHUNK_LARGE_OFFSET_BOX) ? 8 : 4;
 		int entryCount = (int) in.readBytes(4);
 		chunks = new long[entryCount];
 

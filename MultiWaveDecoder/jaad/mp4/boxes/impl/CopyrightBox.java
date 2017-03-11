@@ -22,14 +22,14 @@ public class CopyrightBox extends FullBox {
 
 	@Override
 	public void decode(MP4InputStream in) throws IOException {
-		if(parent.getType()==BoxTypes.USER_DATA_BOX) {
+		if(parent.getType()==BoxType.USER_DATA_BOX) {
 			super.decode(in);
 			//1 bit padding, 5*3 bits language code (ISO-639-2/T)
 			languageCode = Utils.getLanguageCode(in.readBytes(2));
 
 			notice = in.readUTFString((int) getLeft(in));
 		}
-		else if(parent.getType()==BoxTypes.ITUNES_META_LIST_BOX) readChildren(in);
+		else if(parent.getType()==BoxType.ITUNES_META_LIST_BOX) readChildren(in);
 	}
 
 	/**

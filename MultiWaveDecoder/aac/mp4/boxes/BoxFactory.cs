@@ -74,8 +74,8 @@ namespace MultiWaveDecoder
           && !(box is FreeSpaceBox)) Logger.LogInfo(string.Format("bytes left after reading box {0}: left: {1}, offset: {2}", typeToString(type), left, inStream.getOffset()));
       else if (left < 0) Logger.LogServe(string.Format("box {0} overread: {1} bytes, offset: {2}", typeToString(type), -left, inStream.getOffset()));
 
-      // --- if mdat found, don't skip ---
-      if (box.getType() != BoxType.MEDIA_DATA_BOX) inStream.skipBytes(left);
+      // --- skip left Data ---
+      inStream.skipBytes(left);
 
       return box;
     }

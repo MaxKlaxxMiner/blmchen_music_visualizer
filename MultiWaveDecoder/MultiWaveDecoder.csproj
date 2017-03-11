@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="aac\Main.cs" />
+    <Compile Include="aac\mp4\api\Movie.cs" />
     <Compile Include="aac\mp4\boxes\FullBox.cs" />
     <Compile Include="aac\mp4\boxes\IBox.cs" />
     <Compile Include="aac\mp4\boxes\BoxFactory.cs" />
@@ -48,6 +49,7 @@
     <Compile Include="aac\mp4\boxes\impl\FileTypeBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\FreeSpaceBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\MediaDataBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\ProgressiveDownloadInformationBox.cs" />
     <Compile Include="aac\mp4\boxes\UnknownBox.cs" />
     <Compile Include="aac\mp4\MP4Container.cs" />
     <Compile Include="aac\mp4\MP4Exception.cs" />
@@ -226,7 +228,6 @@
     <Content Include="jaad\mp4\boxes\impl\PaddingBitBox.java" />
     <Content Include="jaad\mp4\boxes\impl\PixelAspectRatioBox.java" />
     <Content Include="jaad\mp4\boxes\impl\PrimaryItemBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\ProgressiveDownloadInformationBox.java" />
     <Content Include="jaad\mp4\boxes\impl\SampleDependencyBox.java" />
     <Content Include="jaad\mp4\boxes\impl\SampleDependencyTypeBox.java" />
     <Content Include="jaad\mp4\boxes\impl\SampleDescriptionBox.java" />

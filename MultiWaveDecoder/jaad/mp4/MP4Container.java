@@ -1,23 +1,5 @@
 public class MP4Container {
 
-	static {
-		Logger log = Logger.getLogger("MP4 API");
-		for(Handler h : log.getHandlers()) {
-			log.removeHandler(h);
-		}
-		log.setLevel(Level.WARNING);
-
-		ConsoleHandler h = new ConsoleHandler();
-		h.setLevel(Level.ALL);
-		log.addHandler(h);
-	}
-	private Brand major, minor;
-	private Brand[] compatible;
-	private FileTypeBox ftyp;
-	private ProgressiveDownloadInformationBox pdin;
-	private Box moov;
-	private Movie movie;
-
 	public Brand getMajorBrand() {
 		if(major==null) major = Brand.forID(ftyp.getMajorBrand());
 		return major;
