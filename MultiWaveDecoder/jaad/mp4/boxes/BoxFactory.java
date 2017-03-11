@@ -31,7 +31,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(FEC_RESERVOIR_BOX, FECReservoirBox.class);
 		BOX_CLASSES.put(FILE_PARTITION_BOX, FilePartitionBox.class);
 		BOX_CLASSES.put(GROUP_ID_TO_NAME_BOX, GroupIDToNameBox.class);
-		BOX_CLASSES.put(HANDLER_BOX, HandlerBox.class);
 		BOX_CLASSES.put(IPMP_CONTROL_BOX, IPMPControlBox.class);
 		BOX_CLASSES.put(IPMP_INFO_BOX, IPMPInfoBox.class);
 		BOX_CLASSES.put(ITEM_INFORMATION_BOX, ItemInformationBox.class);
@@ -39,7 +38,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(ITEM_LOCATION_BOX, ItemLocationBox.class);
 		BOX_CLASSES.put(ITEM_PROTECTION_BOX, ItemProtectionBox.class);
 		BOX_CLASSES.put(HINT_MEDIA_HEADER_BOX, HintMediaHeaderBox.class);
-		BOX_CLASSES.put(MEDIA_INFORMATION_BOX, BoxImpl.class);
 		BOX_CLASSES.put(META_BOX, MetaBox.class);
 		BOX_CLASSES.put(META_BOX_RELATION_BOX, MetaBoxRelationBox.class);
 		BOX_CLASSES.put(MOVIE_EXTENDS_BOX, BoxImpl.class);
@@ -68,7 +66,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(SCHEME_TYPE_BOX, SchemeTypeBox.class);
 		BOX_CLASSES.put(SCHEME_INFORMATION_BOX, BoxImpl.class);
 		BOX_CLASSES.put(SHADOW_SYNC_SAMPLE_BOX, ShadowSyncSampleBox.class);
-		BOX_CLASSES.put(SOUND_MEDIA_HEADER_BOX, SoundMediaHeaderBox.class);
 		BOX_CLASSES.put(SUB_SAMPLE_INFORMATION_BOX, SubSampleInformationBox.class);
 		BOX_CLASSES.put(SYNC_SAMPLE_BOX, SyncSampleBox.class);
 		BOX_CLASSES.put(TRACK_EXTENDS_BOX, TrackExtendsBox.class);
@@ -201,7 +198,6 @@ public class BoxFactory implements BoxTypes
 		PARAMETER.put(ADDITIONAL_METADATA_CONTAINER_BOX, new string[]{"Additional Metadata Container Box"});
 		PARAMETER.put(DATA_INFORMATION_BOX, new string[]{"Data Information Box"});
 		PARAMETER.put(EDIT_BOX, new string[]{"Edit Box"});
-		PARAMETER.put(MEDIA_INFORMATION_BOX, new string[]{"Media Information Box"});
 		PARAMETER.put(MOVIE_EXTENDS_BOX, new string[]{"Movie Extends Box"});
 		PARAMETER.put(MOVIE_FRAGMENT_BOX, new string[]{"Movie Fragment Box"});
 		PARAMETER.put(MOVIE_FRAGMENT_RANDOM_ACCESS_BOX, new string[]{"Movie Fragment Random Access Box"});

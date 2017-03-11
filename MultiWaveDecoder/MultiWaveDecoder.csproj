@@ -47,6 +47,8 @@
     <Compile Include="aac\mp4\boxes\BoxFactory.cs" />
     <Compile Include="aac\mp4\boxes\BoxImpl.cs" />
     <Compile Include="aac\mp4\boxes\BoxType.cs" />
+    <Compile Include="aac\mp4\boxes\impl\SoundMediaHeaderBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\HandlerBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\MediaHeaderBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\TrackHeaderBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\MovieHeaderBox.cs" />
@@ -187,7 +189,6 @@
     <Content Include="jaad\mp4\boxes\impl\fd\FilePartitionBox.java" />
     <Content Include="jaad\mp4\boxes\impl\fd\GroupIDToNameBox.java" />
     <Content Include="jaad\mp4\boxes\impl\fd\package-info.java" />
-    <Content Include="jaad\mp4\boxes\impl\HandlerBox.java" />
     <Content Include="jaad\mp4\boxes\impl\HintMediaHeaderBox.java" />
     <Content Include="jaad\mp4\boxes\impl\IPMPControlBox.java" />
     <Content Include="jaad\mp4\boxes\impl\IPMPInfoBox.java" />
@@ -262,7 +263,6 @@
     <Content Include="jaad\mp4\boxes\impl\SampleToGroupBox.java" />
     <Content Include="jaad\mp4\boxes\impl\SchemeTypeBox.java" />
     <Content Include="jaad\mp4\boxes\impl\ShadowSyncSampleBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\SoundMediaHeaderBox.java" />
     <Content Include="jaad\mp4\boxes\impl\SubSampleInformationBox.java" />
     <Content Include="jaad\mp4\boxes\impl\SyncSampleBox.java" />
     <Content Include="jaad\mp4\boxes\impl\TrackExtendsBox.java" />

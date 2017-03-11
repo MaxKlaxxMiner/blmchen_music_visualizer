@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 // ReSharper disable MemberCanBePrivate.Global
 
@@ -172,6 +173,44 @@ namespace MultiWaveDecoder
       double x = Math.Pow(2, n);
       double d = l / x;
       return d;
+    }
+
+    /// <summary>
+    /// Reads a byte array from the input that is terminated by a specific byte (the 'terminator'). The maximum number of bytes that can be read before 
+    /// the terminator must appear must be specified.
+    /// 
+    /// The terminator will not be included in the returned array.
+    /// 
+    /// This method blocks until all bytes could be read, the end of the stream is detected, or an I/O error occurs.
+    /// </summary>
+    /// <param name="max">the maximum number of bytes to read, before the terminator </param>
+    /// <param name="terminator">the byte that indicates the end of the array</param>
+    /// <returns>the buffer into which the data is read.</returns>
+    public byte[] readTerminated(int max, int terminator) // JFIX (unused: terminator)
+    {
+      var b = new byte[max];
+      read(b, 0, max);
+
+      for (int i = 0; i < max; i++)
+      {
+        if (b[i] == terminator) return b.Take(i).ToArray();
+      }
+
+      return b;
+    }
+
+    /// <summary>
+    /// Reads a null-terminated UTF-encoded string from the input. The maximum number of bytes that can be read before the null must appear must be specified.
+    /// Although the method is preferred for unicode, the encoding can be any charset name, that is supported by the system.
+    /// 
+    /// This method blocks until all bytes could be read, the end of the stream is detected, or an I/O error occurs.
+    /// </summary>
+    /// <param name="max">the maximum number of bytes to read, before the null-terminator must appear.</param>
+    /// <param name="encoding">the charset used to encode the string</param>
+    /// <returns>decoded string</returns>
+    public string readEncodedString(int max, Encoding encoding)
+    {
+      return encoding.GetString(readTerminated(max, 0));
     }
   }
 }

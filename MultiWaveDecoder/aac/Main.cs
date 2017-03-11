@@ -8,6 +8,8 @@ namespace MultiWaveDecoder
   /// <summary>
   /// Command line example, that can decode an AAC file to a WAVE file.
   /// @author in-somnia
+  /// 
+  /// Info: Source-Fixes in JAAD-lib named "JFIX"
   /// </summary>
   public class Main
   {

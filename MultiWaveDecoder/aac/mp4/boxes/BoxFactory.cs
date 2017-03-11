@@ -35,6 +35,9 @@ namespace MultiWaveDecoder
           case BoxType.TRACK_HEADER_BOX: return new TrackHeaderBox();
           case BoxType.MEDIA_BOX: return new BoxImpl("Media Box");
           case BoxType.MEDIA_HEADER_BOX: return new MediaHeaderBox();
+          case BoxType.HANDLER_BOX: return new HandlerBox();
+          case BoxType.MEDIA_INFORMATION_BOX: return new BoxImpl("Media Information Box");
+          case BoxType.SOUND_MEDIA_HEADER_BOX: return new SoundMediaHeaderBox();
           default:
           {
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -77,14 +80,17 @@ namespace MultiWaveDecoder
 
       // --- check bytes left ---
       long left = (box.getOffset() + box.getSize()) - inStream.getOffset();
-      if (left > 0
-          && !(box is MediaDataBox)
-          && !(box is UnknownBox)
-          && !(box is FreeSpaceBox)) Logger.LogInfo(string.Format("bytes left after reading box {0}: left: {1}, offset: {2}", typeToString(type), left, inStream.getOffset()));
-      else if (left < 0) Logger.LogServe(string.Format("box {0} overread: {1} bytes, offset: {2}", typeToString(type), -left, inStream.getOffset()));
+      if (left > 0)
+      {
+        if (!(box is MediaDataBox) && !(box is UnknownBox) && !(box is FreeSpaceBox))
+        {
+          Logger.LogInfo(string.Format("bytes left after reading box {0}: left: {1}, offset: {2}", typeToString(type), left, inStream.getOffset()));
+        }
 
-      // --- skip left Data ---
-      inStream.skipBytes(left);
+        // --- skip left Data ---
+        inStream.skipBytes(left);
+      }
+      else if (left < 0) Logger.LogServe(string.Format("box {0} overread: {1} bytes, offset: {2}", typeToString(type), -left, inStream.getOffset()));
 
       return box;
     }

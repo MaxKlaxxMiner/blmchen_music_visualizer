@@ -151,27 +151,6 @@ public class MP4InputStream
 	 * Reads a null-terminated UTF-encoded string from the input. The maximum 
 	 * number of bytes that can be read before the null must appear must be 
 	 * specified.
-	 * Although the method is preferred for unicode, the encoding can be any 
-	 * charset name, that is supported by the system.
-	 * 
-	 * This method blocks until all bytes could be read, the end of the stream 
-	 * is detected, or an I/O error occurs.
-	 * 
-	 * @param max the maximum number of bytes to read, before the null-terminator
-	 * must appear.
-	 * @param encoding the charset used to encode the string
-	 * @return the decoded string
-	 * @throws IOException If the end of the stream is detected, the input 
-	 * stream has been closed, or if some other I/O error occurs.
-	 */
-	public string readUTFString(int max, string encoding) throws IOException {
-		return new string(readTerminated(max, 0), Charset.forName(encoding));
-	}
-
-	/**
-	 * Reads a null-terminated UTF-encoded string from the input. The maximum 
-	 * number of bytes that can be read before the null must appear must be 
-	 * specified.
 	 * The encoding is detected automatically, it may be UTF-8 or UTF-16 
 	 * (determined by a byte order mask at the beginning).
 	 * 
@@ -199,34 +178,6 @@ public class MP4InputStream
 		System.arraycopy(b, 0, b2, bom.length, b.length);
 
 		return new string(b2, Charset.forName((i==BYTE_ORDER_MASK) ? UTF16 : UTF8));
-	}
-
-	/**
-	 * Reads a byte array from the input that is terminated by a specific byte 
-	 * (the 'terminator'). The maximum number of bytes that can be read before 
-	 * the terminator must appear must be specified.
-	 * 
-	 * The terminator will not be included in the returned array.
-	 * 
-	 * This method blocks until all bytes could be read, the end of the stream 
-	 * is detected, or an I/O error occurs.
-	 * 
-	 * @param max the maximum number of bytes to read, before the terminator 
-	 * must appear.
-	 * @param terminator the byte that indicates the end of the array
-	 * @return the buffer into which the data is read.
-	 * @throws IOException If the end of the stream is detected, the input 
-	 * stream has been closed, or if some other I/O error occurs.
-	 */
-	public byte[] readTerminated(int max, int terminator) throws IOException {
-		byte[] b = new byte[max];
-		int pos = 0;
-		int i = 0;
-		while(pos<max&&i!=-1) {
-			i = read();
-			if(i!=-1) b[pos++] = (byte) i;
-		}
-		return Arrays.copyOf(b, pos);
 	}
 
 	/**
