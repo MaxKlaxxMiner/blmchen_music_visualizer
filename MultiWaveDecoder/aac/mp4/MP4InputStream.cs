@@ -100,5 +100,32 @@ namespace MultiWaveDecoder
       }
       return result;
     }
+
+    /// <summary>
+    /// Skips <code>n</code> bytes in the input. This method blocks until all bytes could be skipped, the end of the stream is detected, or an I/O error occurs.
+    /// </summary>
+    /// <param name="n">the number of bytes to skip</param>
+    public void skipBytes(long n)
+    {
+      long l = 0;
+      while (l < n && peeked.Count > 0)
+      {
+        peeked.Dequeue();
+        l++;
+      }
+
+      if (l < n)
+      {
+        var buf = new byte[Math.Min(65536, n - l)];
+        while (l < n)
+        {
+          int next = inStream.Read(buf, 0, (int)Math.Min(buf.Length, n - l));
+          if (next == 0) throw new EndOfStreamException();
+          l += next;
+        }
+      }
+
+      offset += l;
+    }
   }
 }

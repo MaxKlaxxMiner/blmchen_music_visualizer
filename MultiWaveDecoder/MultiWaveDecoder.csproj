@@ -42,6 +42,7 @@
     <Compile Include="aac\Main.cs" />
     <Compile Include="aac\mp4\boxes\Box.cs" />
     <Compile Include="aac\mp4\boxes\BoxFactory.cs" />
+    <Compile Include="aac\mp4\boxes\BoxTypes.cs" />
     <Compile Include="aac\mp4\MP4Container.cs" />
     <Compile Include="aac\mp4\MP4Exception.cs" />
     <Compile Include="aac\mp4\MP4InputStream.cs" />
@@ -151,7 +152,6 @@
     <Content Include="jaad\mp4\boxes\Box.java" />
     <Content Include="jaad\mp4\boxes\BoxFactory.java" />
     <Content Include="jaad\mp4\boxes\BoxImpl.java" />
-    <Content Include="jaad\mp4\boxes\BoxTypes.java" />
     <Content Include="jaad\mp4\boxes\FullBox.java" />
     <Content Include="jaad\mp4\boxes\impl\AppleLosslessBox.java" />
     <Content Include="jaad\mp4\boxes\impl\BinaryXMLBox.java" />

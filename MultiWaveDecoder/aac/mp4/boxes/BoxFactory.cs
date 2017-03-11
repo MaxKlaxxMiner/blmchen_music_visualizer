@@ -1,6 +1,7 @@
 ﻿// ReSharper disable InconsistentNaming
 
 using System;
+using System.IO;
 
 namespace MultiWaveDecoder
 {
@@ -10,18 +11,19 @@ namespace MultiWaveDecoder
     {
       long offset = inStream.getOffset();
       long size = inStream.readBytes(4);
+      var type = (BoxTypes)(uint)inStream.readBytes(4);
+      if (size == 1) size = inStream.readBytes(8);
+      if (type == BoxTypes.EXTENDED_TYPE) inStream.skipBytes(16);
+
+      // --- error protection ---
+      if (parent != null)
+      {
+        throw new NotImplementedException();
+        //long parentLeft = (parent.getOffset() + parent.getSize()) - offset;
+        //if (size > parentLeft) throw new IOException("error while decoding box '" + type + "' at offset " + offset.ToString("N0") + ": box too large for parent");
+      }
 
       throw new NotImplementedException();
-      //long type = inStream.readBytes(4);
-      //if(size==1) size = inStream.readBytes(8);
-      //if(type==EXTENDED_TYPE) inStream.skipBytes(16);
-
-      ////error protection
-      //if(parent!=null) {
-      //  long parentLeft = (parent.getOffset()+parent.getSize())-offset;
-      //  if(size>parentLeft) throw new IOException("error while decoding box '"+typeToString(type)+"' at offset "+offset+": box too large for parent");
-      //}
-
       //Logger.getLogger("MP4 Boxes").finest(typeToString(type));
       //BoxImpl box = forType(type, inStream.getOffset());
       //box.setParams(parent, size, type, offset);

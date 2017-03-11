@@ -307,30 +307,6 @@ public class MP4InputStream
 	}
 
 	/**
-	 * Skips <code>n</code> bytes in the input. This method blocks until all 
-	 * bytes could be skipped, the end of the stream is detected, or an I/O 
-	 * error occurs.
-	 * 
-	 * @param n the number of bytes to skip
-	 * @throws IOException If the end of the stream is detected, the input 
-	 * stream has been closed, or if some other I/O error occurs.
-	 */
-	public void skipBytes(long n) throws IOException {
-		long l = 0;
-		while(l<n && !peeked.isEmpty()){
-			peeked.remove();
-			l++;
-		}
-
-		while(l<n) {
-			if(in!=null) l += in.skip((n-l));
-			else if(fin!=null) l += fin.skipBytes((int) (n-l));
-		}
-
-		offset += l;
-	}
-
-	/**
 	 * Seeks to a specific offset in the stream. This is only possible when 
 	 * using a RandomAccessFile. If an InputStream is used, this method throws 
 	 * an IOException.
