@@ -7,7 +7,7 @@ namespace MultiWaveDecoder
 {
   public static class BoxFactory
   {
-    public static string typeToString(BoxTypes type)
+    public static string typeToString(BoxType type)
     {
       uint l = (uint)type;
       var b = new char[4];
@@ -18,13 +18,45 @@ namespace MultiWaveDecoder
       return new string(b);
     }
 
+    static BoxImpl forType(BoxType type, long offset)
+    {
+      try
+      {
+        switch (type)
+        {
+          default:
+          {
+            Logger.LogBoxes("BoxFactory - unknown box type: " + type + " '" + typeToString(type) + "', position: " + offset.ToString("N0"));
+            return null;
+          }
+        }
+      }
+      catch (Exception e)
+      {
+        Logger.LogBoxes("BoxFactory - could not call constructor for " + type + " '" + typeToString(type) + "': " + e);
+        return null;
+      }
+
+      //  Class<? extends BoxImpl> cl = BOX_CLASSES.get(l);
+      //  if(PARAMETER.containsKey(l)) {
+      //    string[] s = PARAMETER.get(l);
+      //    try {
+      //      Constructor<? extends BoxImpl> con = cl.getConstructor(string.class);
+      //      box = con.newInstance(s[0]);
+      //    }
+      //    catch(Exception e) {
+      //      box = new UnknownBox();
+      //    }
+      //  }
+    }
+
     public static Box parseBox(Box parent, MP4InputStream inStream)
     {
       long offset = inStream.getOffset();
       long size = inStream.readBytes(4);
-      var type = (BoxTypes)(uint)inStream.readBytes(4);
+      var type = (BoxType)(uint)inStream.readBytes(4);
       if (size == 1) size = inStream.readBytes(8);
-      if (type == BoxTypes.EXTENDED_TYPE) inStream.skipBytes(16);
+      if (type == BoxType.EXTENDED_TYPE) inStream.skipBytes(16);
 
       // --- error protection ---
       if (parent != null)
@@ -35,7 +67,7 @@ namespace MultiWaveDecoder
       }
 
       Logger.LogBoxes(typeToString(type));
-      //BoxImpl box = forType(type, inStream.getOffset());
+      BoxImpl box = forType(type, inStream.getOffset());
       //box.setParams(parent, size, type, offset);
       //box.decode(inStream);
 

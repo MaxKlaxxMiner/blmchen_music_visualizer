@@ -2,7 +2,7 @@
 
 namespace MultiWaveDecoder
 {
-  public enum BoxTypes
+  public enum BoxType
   {
     /// <summary>
     /// uuid

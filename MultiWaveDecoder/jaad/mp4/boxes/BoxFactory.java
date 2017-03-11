@@ -328,38 +328,4 @@ public class BoxFactory implements BoxTypes
 		}
 		return box;
 	}
-
-	private static BoxImpl forType(long type, long offset) {
-		BoxImpl box = null;
-
-		Long l = Long.valueOf(type);
-		if(BOX_CLASSES.containsKey(l)) {
-			Class<? extends BoxImpl> cl = BOX_CLASSES.get(l);
-			if(PARAMETER.containsKey(l)) {
-				string[] s = PARAMETER.get(l);
-				try {
-					Constructor<? extends BoxImpl> con = cl.getConstructor(string.class);
-					box = con.newInstance(s[0]);
-				}
-				catch(Exception e) {
-					LOGGER.log(Level.SEVERE, "BoxFactory: could not call constructor for "+typeToString(type), e);
-					box = new UnknownBox();
-				}
-			}
-			else {
-				try {
-					box = cl.newInstance();
-				}
-				catch(Exception e) {
-					LOGGER.log(Level.SEVERE, "BoxFactory: could not instantiate box "+typeToString(type), e);
-				}
-			}
-		}
-
-		if(box==null) {
-			LOGGER.log(Level.INFO, "BoxFactory: unknown box type: {0}; position: {1}", new Object[]{typeToString(type), offset});
-			box = new UnknownBox();
-		}
-		return box;
-	}
 }
