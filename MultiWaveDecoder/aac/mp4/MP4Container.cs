@@ -36,7 +36,7 @@ namespace MultiWaveDecoder
   public sealed class MP4Container
   {
     readonly MP4InputStream inStream;
-    readonly List<Box> boxes = new List<Box>();
+    readonly List<IBox> boxes = new List<IBox>();
 
     public MP4Container(Stream inStream)
     {

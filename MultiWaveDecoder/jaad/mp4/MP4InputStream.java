@@ -179,30 +179,6 @@ public class MP4InputStream
 	}
 
 	/**
-	 * Reads <code>n</code> bytes from the input as a string. The bytes are 
-	 * directly converted into characters. If not enough bytes could be read, an
-	 * EOFException is thrown.
-	 * This method blocks until all bytes could be read, the end of the stream 
-	 * is detected, or an I/O error occurs.
-	 * 
-	 * @param n the length of the string.
-	 * @return the string, that was read
-	 * @throws IOException If the end of the stream is detected, the input 
-	 * stream has been closed, or if some other I/O error occurs.
-	 */
-	public string readString(int n) throws IOException {
-		int i = -1;
-		int pos = 0;
-		char[] c = new char[n];
-		while(pos<n) {
-			i = read();
-			c[pos] = (char) i;
-			pos++;
-		}
-		return new string(c, 0, pos);
-	}
-
-	/**
 	 * Reads a null-terminated UTF-encoded string from the input. The maximum 
 	 * number of bytes that can be read before the null must appear must be 
 	 * specified.

@@ -3,6 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+
 // ReSharper disable MemberCanBePrivate.Global
 
 namespace MultiWaveDecoder
@@ -101,6 +103,13 @@ namespace MultiWaveDecoder
       return result;
     }
 
+    public byte[] readByteArray(int n)
+    {
+      var result = new byte[n];
+      read(result, 0, n);
+      return result;
+    }
+
     /// <summary>
     /// Skips <code>n</code> bytes in the input. This method blocks until all bytes could be skipped, the end of the stream is detected, or an I/O error occurs.
     /// </summary>
@@ -126,6 +135,17 @@ namespace MultiWaveDecoder
       }
 
       offset += l;
+    }
+
+    /// <summary>
+    /// Reads <code>n</code> bytes from the input as a string. The bytes are directly converted into characters. If not enough bytes could be read, an EOFException is thrown.
+    /// This method blocks until all bytes could be read, the end of the stream is detected, or an I/O error occurs.
+    /// </summary>
+    /// <param name="n">the length of the string.</param>
+    /// <returns>the string, that was read</returns>
+    public string readString(int n)
+    {
+      return new string(readByteArray(n).Select(c => (char)c).ToArray());
     }
   }
 }

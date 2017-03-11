@@ -25,6 +25,7 @@ namespace MultiWaveDecoder
       {
         switch (type)
         {
+          case BoxType.FILE_TYPE_BOX: return new FileTypeBox();
           default:
           {
             Logger.LogBoxes("BoxFactory - unknown box type: " + type + " '" + typeToString(type) + "', position: " + offset.ToString("N0"));
@@ -39,7 +40,7 @@ namespace MultiWaveDecoder
       }
     }
 
-    public static Box parseBox(Box parent, MP4InputStream inStream)
+    public static IBox parseBox(IBox parent, MP4InputStream inStream)
     {
       long offset = inStream.getOffset();
       long size = inStream.readBytes(4);

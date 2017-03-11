@@ -30,7 +30,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(FD_SESSION_GROUP_BOX, FDSessionGroupBox.class);
 		BOX_CLASSES.put(FEC_RESERVOIR_BOX, FECReservoirBox.class);
 		BOX_CLASSES.put(FILE_PARTITION_BOX, FilePartitionBox.class);
-		BOX_CLASSES.put(FILE_TYPE_BOX, FileTypeBox.class);
 		BOX_CLASSES.put(FREE_SPACE_BOX, FreeSpaceBox.class);
 		BOX_CLASSES.put(GROUP_ID_TO_NAME_BOX, GroupIDToNameBox.class);
 		BOX_CLASSES.put(HANDLER_BOX, HandlerBox.class);
