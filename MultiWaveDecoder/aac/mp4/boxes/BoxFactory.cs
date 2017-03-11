@@ -33,6 +33,8 @@ namespace MultiWaveDecoder
           case BoxType.MOVIE_HEADER_BOX: return new MovieHeaderBox();
           case BoxType.TRACK_BOX: return new BoxImpl("Track Box");
           case BoxType.TRACK_HEADER_BOX: return new TrackHeaderBox();
+          case BoxType.MEDIA_BOX: return new BoxImpl("Media Box");
+          case BoxType.MEDIA_HEADER_BOX: return new MediaHeaderBox();
           default:
           {
             Console.ForegroundColor = ConsoleColor.Yellow;

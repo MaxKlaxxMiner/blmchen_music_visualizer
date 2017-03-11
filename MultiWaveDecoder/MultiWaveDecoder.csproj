@@ -47,7 +47,8 @@
     <Compile Include="aac\mp4\boxes\BoxFactory.cs" />
     <Compile Include="aac\mp4\boxes\BoxImpl.cs" />
     <Compile Include="aac\mp4\boxes\BoxType.cs" />
-    <Compile Include="aac\mp4\boxes\impl\Class1.cs" />
+    <Compile Include="aac\mp4\boxes\impl\MediaHeaderBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\TrackHeaderBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\MovieHeaderBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\FileTypeBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\FreeSpaceBox.cs" />

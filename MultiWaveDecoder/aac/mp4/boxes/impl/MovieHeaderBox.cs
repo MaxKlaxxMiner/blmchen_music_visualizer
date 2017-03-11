@@ -5,7 +5,7 @@ namespace MultiWaveDecoder
   /// <summary>
   /// The movie header box defines overall information which is media-independent, and relevant to the entire presentation considered as a whole.
   /// </summary>
-  public class MovieHeaderBox : FullBox
+  public sealed class MovieHeaderBox : FullBox
   {
     long creationTime, modificationTime, timeScale, duration;
     double rate, volume;

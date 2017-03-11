@@ -32,15 +32,13 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(FILE_PARTITION_BOX, FilePartitionBox.class);
 		BOX_CLASSES.put(GROUP_ID_TO_NAME_BOX, GroupIDToNameBox.class);
 		BOX_CLASSES.put(HANDLER_BOX, HandlerBox.class);
-		BOX_CLASSES.put(HINT_MEDIA_HEADER_BOX, HintMediaHeaderBox.class);
 		BOX_CLASSES.put(IPMP_CONTROL_BOX, IPMPControlBox.class);
 		BOX_CLASSES.put(IPMP_INFO_BOX, IPMPInfoBox.class);
 		BOX_CLASSES.put(ITEM_INFORMATION_BOX, ItemInformationBox.class);
 		BOX_CLASSES.put(ITEM_INFORMATION_ENTRY, ItemInformationEntry.class);
 		BOX_CLASSES.put(ITEM_LOCATION_BOX, ItemLocationBox.class);
 		BOX_CLASSES.put(ITEM_PROTECTION_BOX, ItemProtectionBox.class);
-		BOX_CLASSES.put(MEDIA_BOX, BoxImpl.class);
-		BOX_CLASSES.put(MEDIA_HEADER_BOX, MediaHeaderBox.class);
+		BOX_CLASSES.put(HINT_MEDIA_HEADER_BOX, HintMediaHeaderBox.class);
 		BOX_CLASSES.put(MEDIA_INFORMATION_BOX, BoxImpl.class);
 		BOX_CLASSES.put(META_BOX, MetaBox.class);
 		BOX_CLASSES.put(META_BOX_RELATION_BOX, MetaBoxRelationBox.class);
@@ -203,7 +201,6 @@ public class BoxFactory implements BoxTypes
 		PARAMETER.put(ADDITIONAL_METADATA_CONTAINER_BOX, new string[]{"Additional Metadata Container Box"});
 		PARAMETER.put(DATA_INFORMATION_BOX, new string[]{"Data Information Box"});
 		PARAMETER.put(EDIT_BOX, new string[]{"Edit Box"});
-		PARAMETER.put(MEDIA_BOX, new string[]{"Media Box"});
 		PARAMETER.put(MEDIA_INFORMATION_BOX, new string[]{"Media Information Box"});
 		PARAMETER.put(MOVIE_EXTENDS_BOX, new string[]{"Movie Extends Box"});
 		PARAMETER.put(MOVIE_FRAGMENT_BOX, new string[]{"Movie Fragment Box"});
