@@ -55,7 +55,10 @@ namespace MultiWaveDecoder
           case BoxType.META_BOX: return new MetaBox();
           case BoxType.ITUNES_META_LIST_BOX: return new BoxImpl("iTunes Meta List Box");
           case BoxType.CUSTOM_ITUNES_METADATA_BOX: return new BoxImpl("Custom iTunes Metadata Box");
-          case BoxType.ITUNES_METADATA_MEAN_BOX: return new ITunesMetadataBox();
+          case BoxType.ITUNES_METADATA_MEAN_BOX: return new ITunesMetadataMeanBox();
+          case BoxType.FAIRPLAY_USER_NAME_BOX: return new FairPlayDataBox();
+          case BoxType.ITUNES_METADATA_BOX: return new ITunesMetadataBox();
+//		BOX_CLASSES.put(FAIRPLAY_USER_NAME_BOX, FairPlayDataBox.class);
           default:
           {
             Console.ForegroundColor = ConsoleColor.Yellow;

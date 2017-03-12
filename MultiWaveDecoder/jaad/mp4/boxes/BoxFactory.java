@@ -174,7 +174,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(OMA_RIGHTS_OBJECT_BOX, OMARightsObjectBox.class);
 		BOX_CLASSES.put(OMA_TRANSACTION_TRACKING_BOX, OMATransactionTrackingBox.class);
 		BOX_CLASSES.put(FAIRPLAY_USER_ID_BOX, FairPlayDataBox.class);
-		BOX_CLASSES.put(FAIRPLAY_USER_NAME_BOX, FairPlayDataBox.class);
 		BOX_CLASSES.put(FAIRPLAY_USER_KEY_BOX, FairPlayDataBox.class);
 		BOX_CLASSES.put(FAIRPLAY_IV_BOX, FairPlayDataBox.class);
 		BOX_CLASSES.put(FAIRPLAY_PRIVATE_KEY_BOX, FairPlayDataBox.class);
