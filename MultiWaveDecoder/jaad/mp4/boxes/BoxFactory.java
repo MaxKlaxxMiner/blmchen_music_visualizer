@@ -33,7 +33,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(ITEM_LOCATION_BOX, ItemLocationBox.class);
 		BOX_CLASSES.put(ITEM_PROTECTION_BOX, ItemProtectionBox.class);
 		BOX_CLASSES.put(HINT_MEDIA_HEADER_BOX, HintMediaHeaderBox.class);
-		BOX_CLASSES.put(META_BOX, MetaBox.class);
 		BOX_CLASSES.put(META_BOX_RELATION_BOX, MetaBoxRelationBox.class);
 		BOX_CLASSES.put(MOVIE_EXTENDS_BOX, BoxImpl.class);
 		BOX_CLASSES.put(MOVIE_EXTENDS_HEADER_BOX, MovieExtendsHeaderBox.class);
@@ -66,7 +65,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(TRACK_FRAGMENT_RUN_BOX, TrackFragmentRunBox.class);
 		BOX_CLASSES.put(TRACK_REFERENCE_BOX, TrackReferenceBox.class);
 		BOX_CLASSES.put(TRACK_SELECTION_BOX, TrackSelectionBox.class);
-		BOX_CLASSES.put(USER_DATA_BOX, BoxImpl.class);
 		BOX_CLASSES.put(VIDEO_MEDIA_HEADER_BOX, VideoMediaHeaderBox.class);
 		BOX_CLASSES.put(XML_BOX, XMLBox.class);
 		BOX_CLASSES.put(OBJECT_DESCRIPTOR_BOX, ObjectDescriptorBox.class);
@@ -194,7 +192,6 @@ public class BoxFactory implements BoxTypes
 		PARAMETER.put(PROTECTION_SCHEME_INFORMATION_BOX, new string[]{"Protection Scheme Information Box"});
 		PARAMETER.put(SCHEME_INFORMATION_BOX, new string[]{"Scheme Information Box"});
 		PARAMETER.put(TRACK_FRAGMENT_BOX, new string[]{"Track Fragment Box"});
-		PARAMETER.put(USER_DATA_BOX, new string[]{"User Data Box"});
 		PARAMETER.put(ITUNES_META_LIST_BOX, new string[]{"iTunes Meta List Box"});
 		PARAMETER.put(CUSTOM_ITUNES_METADATA_BOX, new string[]{"Custom iTunes Metadata Box"});
 		PARAMETER.put(ALBUM_ARTIST_NAME_BOX, new string[]{"Album Artist Name Box"});

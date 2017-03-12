@@ -248,6 +248,69 @@ namespace MultiWaveDecoder
       return i == BYTE_ORDER_MASK ? Encoding.BigEndianUnicode.GetString(b2) : Encoding.UTF8.GetString(b2);
     }
 
+    /// <summary>
+    /// Peeks <code>len</code> bytes of data from the input into the array <code>b</code>. If len is zero, then no bytes are read.
+    /// 
+    /// This method blocks until all bytes could be read, the end of the stream is detected, or an I/O error occurs.
+    /// 
+    /// If the stream ends before <code>len</code> bytes could be read an EOFException is thrown.
+    /// </summary>
+    /// <param name="b">the buffer into which the data is read.</param>
+    /// <param name="off">the start offset in array <code>b</code> at which the data is written.</param>
+    /// <param name="len">the number of bytes to read.</param>
+    public void peek(byte[] b, int off, int len)
+    {
+      int read = 0;
+
+      var allPeekedBytes = peeked.ToArray();
+      while (read < len && read < allPeekedBytes.Length)
+      {
+        b[off + read] = allPeekedBytes[read];
+        read++;
+      }
+
+      while (read < len)
+      {
+        int i = inStream.Read(b, off + read, len - read);
+        if (i == 0) throw new EndOfStreamException();
+        for (int j = 0; j < i; j++)
+        {
+          peeked.Enqueue(b[off + j]);
+        }
+        read += i;
+      }
+    }
+
+    /// <summary>
+    /// Peeks up to eight bytes as a long value. This method blocks until all bytes could be read, the end of the stream is detected, or an I/O error occurs.
+    /// </summary>
+    /// <param name="n">the number of bytes to read &gt;0 and &lt;=8</param>
+    /// <returns>the read bytes as a long value</returns>
+    public long peekBytes(int n)
+    {
+      if (n < 1 || n > 8) throw new ArgumentOutOfRangeException("invalid number of bytes to read: " + n);
+      var b = new byte[n];
+      peek(b, 0, n);
+
+      long result = 0;
+      for (int i = 0; i < n; i++)
+      {
+        result = (result << 8) | (b[i] & 0xFF);
+      }
+      return result;
+    }
+
+    /// <summary>
+    /// Peeks data from the input stream and stores them into the buffer array b.
+    /// This method blocks until all bytes could be read, the end of the stream  is detected, or an I/O error occurs.
+    /// If the length of b is zero, then no bytes are read.
+    /// </summary>
+    /// <param name="b">b the buffer into which the data is read.</param>
+    public void peekBytes(byte[] b)
+    {
+      peek(b, 0, b.Length);
+    }
+
     public override string ToString()
     {
       return (new { offset }).ToString();

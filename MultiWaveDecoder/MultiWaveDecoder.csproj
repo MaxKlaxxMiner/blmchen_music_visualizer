@@ -49,6 +49,7 @@
     <Compile Include="aac\mp4\boxes\BoxImpl.cs" />
     <Compile Include="aac\mp4\boxes\BoxType.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\ChunkOffsetBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\basic\MetaBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\SampleSizeBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\DecodingTimeToSampleBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\SampleToChunkBox.cs" />
@@ -211,7 +212,6 @@
     <Content Include="jaad\mp4\boxes\impl\ItemInformationEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\ItemLocationBox.java" />
     <Content Include="jaad\mp4\boxes\impl\ItemProtectionBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\MetaBox.java" />
     <Content Include="jaad\mp4\boxes\impl\MetaBoxRelationBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\EncoderBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\GenreBox.java" />

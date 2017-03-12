@@ -51,6 +51,8 @@ namespace MultiWaveDecoder
           case BoxType.SAMPLE_TO_CHUNK_BOX: return new SampleToChunkBox();
           case BoxType.SAMPLE_SIZE_BOX: return new SampleSizeBox();
           case BoxType.CHUNK_OFFSET_BOX: return new ChunkOffsetBox();
+          case BoxType.USER_DATA_BOX: return new BoxImpl("User Data Box");
+          case BoxType.META_BOX: return new MetaBox();
           default:
           {
             Console.ForegroundColor = ConsoleColor.Yellow;
