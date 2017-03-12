@@ -70,11 +70,8 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(OBJECT_DESCRIPTOR_BOX, ObjectDescriptorBox.class);
 		BOX_CLASSES.put(SAMPLE_DEPENDENCY_BOX, SampleDependencyBox.class);
 		BOX_CLASSES.put(ID3_TAG_BOX, ID3TagBox.class);
-		BOX_CLASSES.put(ITUNES_META_LIST_BOX, BoxImpl.class);
-		BOX_CLASSES.put(CUSTOM_ITUNES_METADATA_BOX, BoxImpl.class);
 		BOX_CLASSES.put(ITUNES_METADATA_BOX, ITunesMetadataBox.class);
 		BOX_CLASSES.put(ITUNES_METADATA_NAME_BOX, ITunesMetadataNameBox.class);
-		BOX_CLASSES.put(ITUNES_METADATA_MEAN_BOX, ITunesMetadataMeanBox.class);
 		BOX_CLASSES.put(ALBUM_ARTIST_NAME_BOX, BoxImpl.class);
 		BOX_CLASSES.put(ALBUM_ARTIST_SORT_BOX, BoxImpl.class);
 		BOX_CLASSES.put(ALBUM_NAME_BOX, BoxImpl.class);
@@ -192,8 +189,6 @@ public class BoxFactory implements BoxTypes
 		PARAMETER.put(PROTECTION_SCHEME_INFORMATION_BOX, new string[]{"Protection Scheme Information Box"});
 		PARAMETER.put(SCHEME_INFORMATION_BOX, new string[]{"Scheme Information Box"});
 		PARAMETER.put(TRACK_FRAGMENT_BOX, new string[]{"Track Fragment Box"});
-		PARAMETER.put(ITUNES_META_LIST_BOX, new string[]{"iTunes Meta List Box"});
-		PARAMETER.put(CUSTOM_ITUNES_METADATA_BOX, new string[]{"Custom iTunes Metadata Box"});
 		PARAMETER.put(ALBUM_ARTIST_NAME_BOX, new string[]{"Album Artist Name Box"});
 		PARAMETER.put(ALBUM_ARTIST_SORT_BOX, new string[]{"Album Artist Sort Box"});
 		PARAMETER.put(ALBUM_NAME_BOX, new string[]{"Album Name Box"});

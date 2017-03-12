@@ -53,6 +53,7 @@
     <Compile Include="aac\mp4\boxes\impl\basic\SampleSizeBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\DecodingTimeToSampleBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\SampleToChunkBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\meta\ITunesMetadataBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\unkown\UnknownPinfBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\unkown\UnknownSbtdBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\SampleDescriptionBox.cs" />
@@ -216,7 +217,6 @@
     <Content Include="jaad\mp4\boxes\impl\meta\EncoderBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\GenreBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\ID3TagBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\meta\ITunesMetadataBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\ITunesMetadataMeanBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\ITunesMetadataNameBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\NeroMetadataTagsBox.java" />

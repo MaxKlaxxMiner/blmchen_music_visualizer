@@ -53,6 +53,9 @@ namespace MultiWaveDecoder
           case BoxType.CHUNK_OFFSET_BOX: return new ChunkOffsetBox();
           case BoxType.USER_DATA_BOX: return new BoxImpl("User Data Box");
           case BoxType.META_BOX: return new MetaBox();
+          case BoxType.ITUNES_META_LIST_BOX: return new BoxImpl("iTunes Meta List Box");
+          case BoxType.CUSTOM_ITUNES_METADATA_BOX: return new BoxImpl("Custom iTunes Metadata Box");
+          case BoxType.ITUNES_METADATA_MEAN_BOX: return new ITunesMetadataBox();
           default:
           {
             Console.ForegroundColor = ConsoleColor.Yellow;
