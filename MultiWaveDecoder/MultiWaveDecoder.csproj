@@ -49,14 +49,20 @@
     <Compile Include="aac\mp4\boxes\BoxImpl.cs" />
     <Compile Include="aac\mp4\boxes\BoxType.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\ChunkOffsetBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\basic\CopyrightBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\MetaBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\SampleSizeBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\DecodingTimeToSampleBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\SampleToChunkBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\drm\FairPlayDataBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\meta\RatingBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\GenreBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\ITunesMetadataMeanBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\ITunesMetadataBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\unkown\UnknownGeIdBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\unkown\UnknownPlIdBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\unkown\UnknownCmIdBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\unkown\UnknownAtIdBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\unkown\UnknownPinfBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\unkown\UnknownOwnrBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\unkown\UnknownSbtdBox.cs" />
@@ -198,7 +204,6 @@
     <Content Include="jaad\mp4\boxes\impl\CleanApertureBox.java" />
     <Content Include="jaad\mp4\boxes\impl\ColorParameterBox.java" />
     <Content Include="jaad\mp4\boxes\impl\CompositionTimeToSampleBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\CopyrightBox.java" />
     <Content Include="jaad\mp4\boxes\impl\DataEntryUrnBox.java" />
     <Content Include="jaad\mp4\boxes\impl\DegradationPriorityBox.java" />
     <Content Include="jaad\mp4\boxes\impl\EditListBox.java" />
@@ -221,7 +226,6 @@
     <Content Include="jaad\mp4\boxes\impl\meta\ID3TagBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\ITunesMetadataNameBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\NeroMetadataTagsBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\meta\RatingBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\RequirementBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\ThreeGPPAlbumBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\ThreeGPPClassificationBox.java" />

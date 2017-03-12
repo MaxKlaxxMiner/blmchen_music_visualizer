@@ -16,7 +16,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(CLEAN_APERTURE_BOX, CleanApertureBox.class);
 		BOX_CLASSES.put(COMPACT_SAMPLE_SIZE_BOX, SampleSizeBox.class);
 		BOX_CLASSES.put(COMPOSITION_TIME_TO_SAMPLE_BOX, CompositionTimeToSampleBox.class);
-		BOX_CLASSES.put(COPYRIGHT_BOX, CopyrightBox.class);
 		BOX_CLASSES.put(DATA_ENTRY_URN_BOX, DataEntryUrnBox.class);
 		BOX_CLASSES.put(DEGRADATION_PRIORITY_BOX, DegradationPriorityBox.class);
 		BOX_CLASSES.put(EDIT_BOX, BoxImpl.class);
@@ -87,8 +86,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(GROUPING_BOX, BoxImpl.class);
 		BOX_CLASSES.put(HD_VIDEO_BOX, BoxImpl.class);
 		BOX_CLASSES.put(ITUNES_ACCOUNT_TYPE_BOX, BoxImpl.class);
-		BOX_CLASSES.put(ITUNES_CATALOGUE_ID_BOX, BoxImpl.class);
-		BOX_CLASSES.put(ITUNES_COUNTRY_CODE_BOX, BoxImpl.class);
 		BOX_CLASSES.put(KEYWORD_BOX, BoxImpl.class);
 		BOX_CLASSES.put(LONG_DESCRIPTION_BOX, BoxImpl.class);
 		BOX_CLASSES.put(LYRICS_BOX, BoxImpl.class);
@@ -96,7 +93,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(PODCAST_BOX, BoxImpl.class);
 		BOX_CLASSES.put(PODCAST_URL_BOX, BoxImpl.class);
 		BOX_CLASSES.put(PURCHASE_DATE_BOX, BoxImpl.class);
-		BOX_CLASSES.put(RATING_BOX, RatingBox.class);
 		BOX_CLASSES.put(REQUIREMENT_BOX, RequirementBox.class);
 		BOX_CLASSES.put(TEMPO_BOX, BoxImpl.class);
 		BOX_CLASSES.put(TRACK_SORT_BOX, BoxImpl.class);
@@ -189,8 +185,6 @@ public class BoxFactory implements BoxTypes
 		PARAMETER.put(GROUPING_BOX, new string[]{"Grouping Box"});
 		PARAMETER.put(HD_VIDEO_BOX, new string[]{"HD Video Box"});
 		PARAMETER.put(ITUNES_ACCOUNT_TYPE_BOX, new string[]{"iTunes Account Type Box"});
-		PARAMETER.put(ITUNES_CATALOGUE_ID_BOX, new string[]{"iTunes Catalogue ID Box"});
-		PARAMETER.put(ITUNES_COUNTRY_CODE_BOX, new string[]{"iTunes Country Code Box"});
 		PARAMETER.put(KEYWORD_BOX, new string[]{"Keyword Box"});
 		PARAMETER.put(LONG_DESCRIPTION_BOX, new string[]{"Long Description Box"});
 		PARAMETER.put(LYRICS_BOX, new string[]{"Lyrics Box"});

@@ -863,5 +863,21 @@ namespace MultiWaveDecoder
     /// ownr
     /// </summary>
     UNKNOWN_OWNR_BOX = 1870098034,
+    /// <summary>
+    /// atID
+    /// </summary>
+    UNKNOWN_ATID_BOX = 1635010884,
+    /// <summary>
+    /// cmID
+    /// </summary>
+    UNKNOWN_CMID_BOX = 1668106564,
+    /// <summary>
+    /// plID
+    /// </summary>
+    UNKNOWN_PLID_BOX = 1886144836,
+    /// <summary>
+    /// geID
+    /// </summary>
+    UNKNOWN_GEID_BOX = 1734691140,
   }
 }

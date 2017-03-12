@@ -71,6 +71,14 @@ namespace MultiWaveDecoder
           case BoxType.RELEASE_DATE_BOX: return new BoxImpl("Release Date Box");
           case BoxType.ITUNES_PURCHASE_ACCOUNT_BOX: return new BoxImpl("iTunes Purchase Account Box");
           case BoxType.UNKNOWN_OWNR_BOX: return new UnknownOwnrBox();
+          case BoxType.COPYRIGHT_BOX: return new CopyrightBox();
+          case BoxType.ITUNES_CATALOGUE_ID_BOX: return new BoxImpl("iTunes Catalogue ID Box");
+          case BoxType.RATING_BOX: return new RatingBox();
+          case BoxType.UNKNOWN_ATID_BOX: return new UnknownAtIdBox();
+          case BoxType.UNKNOWN_CMID_BOX: return new UnknownCmIdBox();
+          case BoxType.UNKNOWN_PLID_BOX: return new UnknownPlIdBox();
+          case BoxType.UNKNOWN_GEID_BOX: return new UnknownGeIdBox();
+          case BoxType.ITUNES_COUNTRY_CODE_BOX: return new BoxImpl("iTunes Country Code Box");
           default:
           {
             Console.ForegroundColor = ConsoleColor.Yellow;
