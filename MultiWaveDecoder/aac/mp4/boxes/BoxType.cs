@@ -879,5 +879,9 @@ namespace MultiWaveDecoder
     /// geID
     /// </summary>
     UNKNOWN_GEID_BOX = 1734691140,
+    /// <summary>
+    /// "xid "
+    /// </summary>
+    UNKNOWN_XID_BOX = 2020172832,
   }
 }

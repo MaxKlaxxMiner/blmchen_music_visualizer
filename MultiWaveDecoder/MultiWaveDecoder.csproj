@@ -59,6 +59,7 @@
     <Compile Include="aac\mp4\boxes\impl\meta\GenreBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\ITunesMetadataMeanBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\ITunesMetadataBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\unkown\UnknownXidBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\unkown\UnknownGeIdBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\unkown\UnknownPlIdBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\unkown\UnknownCmIdBox.cs" />

@@ -77,7 +77,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(CATEGORY_BOX, BoxImpl.class);
 		BOX_CLASSES.put(COMMENTS_BOX, BoxImpl.class);
 		BOX_CLASSES.put(COMPOSER_SORT_BOX, BoxImpl.class);
-		BOX_CLASSES.put(COVER_BOX, BoxImpl.class);
 		BOX_CLASSES.put(CUSTOM_GENRE_BOX, BoxImpl.class);
 		BOX_CLASSES.put(DESCRIPTION_BOX, BoxImpl.class);
 		BOX_CLASSES.put(ENCODER_NAME_BOX, EncoderBox.class);
@@ -89,10 +88,8 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(KEYWORD_BOX, BoxImpl.class);
 		BOX_CLASSES.put(LONG_DESCRIPTION_BOX, BoxImpl.class);
 		BOX_CLASSES.put(LYRICS_BOX, BoxImpl.class);
-		BOX_CLASSES.put(META_TYPE_BOX, BoxImpl.class);
 		BOX_CLASSES.put(PODCAST_BOX, BoxImpl.class);
 		BOX_CLASSES.put(PODCAST_URL_BOX, BoxImpl.class);
-		BOX_CLASSES.put(PURCHASE_DATE_BOX, BoxImpl.class);
 		BOX_CLASSES.put(REQUIREMENT_BOX, RequirementBox.class);
 		BOX_CLASSES.put(TEMPO_BOX, BoxImpl.class);
 		BOX_CLASSES.put(TRACK_SORT_BOX, BoxImpl.class);
@@ -178,7 +175,6 @@ public class BoxFactory implements BoxTypes
 		PARAMETER.put(CATEGORY_BOX, new string[]{"Category Box"});
 		PARAMETER.put(COMMENTS_BOX, new string[]{"Comments Box"});
 		PARAMETER.put(COMPOSER_SORT_BOX, new string[]{"Composer Sort Box"});
-		PARAMETER.put(COVER_BOX, new string[]{"Cover Box"});
 		PARAMETER.put(CUSTOM_GENRE_BOX, new string[]{"Custom Genre Box"});
 		PARAMETER.put(DESCRIPTION_BOX, new string[]{"Description Cover Box"});
 		PARAMETER.put(EPISODE_GLOBAL_UNIQUE_ID_BOX, new string[]{"Episode Global Unique ID Box"});
@@ -188,10 +184,8 @@ public class BoxFactory implements BoxTypes
 		PARAMETER.put(KEYWORD_BOX, new string[]{"Keyword Box"});
 		PARAMETER.put(LONG_DESCRIPTION_BOX, new string[]{"Long Description Box"});
 		PARAMETER.put(LYRICS_BOX, new string[]{"Lyrics Box"});
-		PARAMETER.put(META_TYPE_BOX, new string[]{"Meta Type Box"});
 		PARAMETER.put(PODCAST_BOX, new string[]{"Podcast Box"});
 		PARAMETER.put(PODCAST_URL_BOX, new string[]{"Podcast URL Box"});
-		PARAMETER.put(PURCHASE_DATE_BOX, new string[]{"Purchase Date Box"});
 		PARAMETER.put(TEMPO_BOX, new string[]{"Tempo Box"});
 		PARAMETER.put(TRACK_SORT_BOX, new string[]{"Track Sort Box"});
 		PARAMETER.put(TV_EPISODE_BOX, new string[]{"TV Episode Box"});

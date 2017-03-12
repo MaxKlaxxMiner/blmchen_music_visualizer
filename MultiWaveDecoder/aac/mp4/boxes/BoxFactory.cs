@@ -79,6 +79,10 @@ namespace MultiWaveDecoder
           case BoxType.UNKNOWN_PLID_BOX: return new UnknownPlIdBox();
           case BoxType.UNKNOWN_GEID_BOX: return new UnknownGeIdBox();
           case BoxType.ITUNES_COUNTRY_CODE_BOX: return new BoxImpl("iTunes Country Code Box");
+          case BoxType.META_TYPE_BOX: return new BoxImpl("Meta Type Box");
+          case BoxType.PURCHASE_DATE_BOX: return new BoxImpl("Purchase Date Box");
+          case BoxType.UNKNOWN_XID_BOX: return new UnknownXidBox();
+          case BoxType.COVER_BOX: return new BoxImpl("Cover Box");
           default:
           {
             Console.ForegroundColor = ConsoleColor.Yellow;
