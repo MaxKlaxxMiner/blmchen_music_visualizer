@@ -48,6 +48,8 @@
     <Compile Include="aac\mp4\boxes\BoxFactory.cs" />
     <Compile Include="aac\mp4\boxes\BoxImpl.cs" />
     <Compile Include="aac\mp4\boxes\BoxType.cs" />
+    <Compile Include="aac\mp4\boxes\impl\unkown\UnknownPinfBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\unkown\UnknownSbtdBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\SampleDescriptionBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\DataEntryUrlBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\DataReferenceBox.cs" />

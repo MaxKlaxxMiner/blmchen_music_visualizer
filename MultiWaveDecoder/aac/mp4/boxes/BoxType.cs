@@ -848,5 +848,16 @@ namespace MultiWaveDecoder
     /// priv
     /// </summary>
     FAIRPLAY_PRIVATE_KEY_BOX = 1886546294,
+
+    // --- Unkown Box-Types (from iTunes music files) ---
+
+    /// <summary>
+    /// sbtd
+    /// </summary>
+    UNKOWN_SBTD_BOX = 1935832164,
+    /// <summary>
+    /// pinf
+    /// </summary>
+    UNKOWN_PINF_BOX = 1885957734,
   }
 }
