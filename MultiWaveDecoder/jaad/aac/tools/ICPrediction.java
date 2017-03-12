@@ -19,9 +19,9 @@ public class ICPrediction {
 	private static int MAX_PREDICTORS = 672;
 	private static float A = 0.953125f; //61.0 / 64
 	private static float ALPHA = 0.90625f;  //29.0 / 32
-	private boolean predictorReset;
+	private bool predictorReset;
 	private int predictorResetGroup;
-	private boolean[] predictionUsed;
+	private bool[] predictionUsed;
 	private PredictorState[] states;
 
 	private static class PredictorState {
@@ -46,7 +46,7 @@ public class ICPrediction {
 
 		int maxPredSFB = sf.getMaximalPredictionSFB();
 		int length = Math.min(maxSFB, maxPredSFB);
-		predictionUsed = new boolean[length];
+		predictionUsed = new bool[length];
 		for(int sfb = 0; sfb<length; sfb++) {
 			predictionUsed[sfb] = in.readBool();
 		}
@@ -102,7 +102,7 @@ public class ICPrediction {
 		}
 	}
 
-	private void predict(float[] data, int off, boolean output) {
+	private void predict(float[] data, int off, bool output) {
 		if(states[off]==null) states[off] = new PredictorState();
 		PredictorState state = states[off];
 		float r0 = state.r0, r1 = state.r1;

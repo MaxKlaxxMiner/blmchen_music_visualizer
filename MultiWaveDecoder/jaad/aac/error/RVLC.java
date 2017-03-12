@@ -16,7 +16,7 @@ public class RVLC implements RVLCTables {
 
 	public void decode(BitStream in, ICStream ics, int[][] scaleFactors) throws AACException {
 		int bits = (ics.getInfo().isEightShortFrame()) ? 11 : 9;
-		boolean sfConcealment = in.readBool();
+		bool sfConcealment = in.readBool();
 		int revGlobalGain = in.readBits(8);
 		int rvlcSFLen = in.readBits(bits);
 
@@ -28,7 +28,7 @@ public class RVLC implements RVLCTables {
 		int sf = ics.getGlobalGain();
 		int intensityPosition = 0;
 		int noiseEnergy = sf-90-256;
-		boolean intensityUsed = false, noiseUsed = false;
+		bool intensityUsed = false, noiseUsed = false;
 
 		int sfb;
 		for(int g = 0; g<windowGroupCount; g++) {
@@ -75,7 +75,7 @@ public class RVLC implements RVLCTables {
 
 		int escapesLen = in.readBits(8);
 
-		boolean noiseUsed = false;
+		bool noiseUsed = false;
 
 		int sfb, val;
 		for(int g = 0; g<windowGroupCount; g++) {

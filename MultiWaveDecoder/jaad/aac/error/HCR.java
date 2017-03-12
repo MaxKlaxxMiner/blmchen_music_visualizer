@@ -80,8 +80,8 @@ public class HCR implements Constants {
 		return i;
 	}
 
-	private static boolean isGoodCB(int cb, int sectCB) {
-		boolean b = false;
+	private static bool isGoodCB(int cb, int sectCB) {
+		bool b = false;
 		if((sectCB>HCB.ZERO_HCB&&sectCB<=HCB.ESCAPE_HCB)||(sectCB>=VCB11_FIRST&&sectCB<=VCB11_LAST)) {
 			if(cb<HCB.ESCAPE_HCB) b = ((sectCB==cb)||(sectCB==cb+1));
 			else b = (sectCB==cb);
@@ -90,7 +90,7 @@ public class HCR implements Constants {
 	}
 
 	//sectionDataResilience = hDecoder->aacSectionDataResilienceFlag
-	public static void decodeReorderedSpectralData(ICStream ics, BitStream in, short[] spectralData, boolean sectionDataResilience) throws AACException {
+	public static void decodeReorderedSpectralData(ICStream ics, BitStream in, short[] spectralData, bool sectionDataResilience) throws AACException {
 		ICSInfo info = ics.getInfo();
 		int windowGroupCount = info.getWindowGroupCount();
 		int maxSFB = info.getMaxSFB();

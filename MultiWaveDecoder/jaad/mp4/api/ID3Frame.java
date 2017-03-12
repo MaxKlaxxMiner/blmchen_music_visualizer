@@ -122,7 +122,7 @@ class ID3Frame {
 		return size;
 	}
 
-	public boolean isInGroup() {
+	public bool isInGroup() {
 		return (flags&0x40)==0x40;
 	}
 
@@ -130,11 +130,11 @@ class ID3Frame {
 		return groupID;
 	}
 
-	public boolean isCompressed() {
+	public bool isCompressed() {
 		return (flags&8)==8;
 	}
 
-	public boolean isEncrypted() {
+	public bool isEncrypted() {
 		return (flags&4)==4;
 	}
 

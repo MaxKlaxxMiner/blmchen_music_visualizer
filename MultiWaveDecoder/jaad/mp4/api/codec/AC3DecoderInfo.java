@@ -12,7 +12,7 @@ public class AC3DecoderInfo extends DecoderInfo {
 		this.box = (AC3SpecificBox) box;
 	}
 
-	public boolean isLfeon() {
+	public bool isLfeon() {
 		return box.isLfeon();
 	}
 

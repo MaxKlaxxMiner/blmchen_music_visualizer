@@ -63,7 +63,7 @@ class FBT implements Constants {
 	 version for bs_freq_scale = 0
 	 */
 	public static int master_frequency_table_fs0(SBR sbr, int k0, int k2,
-		boolean bs_alter_scale) {
+		bool bs_alter_scale) {
 		int incr;
 		int k;
 		int dk;
@@ -136,9 +136,9 @@ class FBT implements Constants {
 	 version for bs_freq_scale > 0
 	 */
 	public static int master_frequency_table(SBR sbr, int k0, int k2,
-		int bs_freq_scale, boolean bs_alter_scale) {
+		int bs_freq_scale, bool bs_alter_scale) {
 		int k, bands;
-		boolean twoRegions;
+		bool twoRegions;
 		int k1;
 		int nrBand0, nrBand1;
 		int[] vDk0 = new int[64], vDk1 = new int[64];
@@ -371,7 +371,7 @@ class FBT implements Constants {
 				if(nOctaves<limiterBandsCompare[s-1]) {
 					int i;
 					if(limTable[k]!=limTable[k-1]) {
-						boolean found = false, found2 = false;
+						bool found = false, found2 = false;
 						for(i = 0; i<=sbr.noPatches; i++) {
 							if(limTable[k]==patchBorders[i])
 								found = true;

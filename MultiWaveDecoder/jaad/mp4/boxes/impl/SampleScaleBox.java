@@ -30,7 +30,7 @@ import net.sourceforge.jaad.mp4.boxes.FullBox;
  */
 public class SampleScaleBox extends FullBox {
 
-	private boolean constrained;
+	private bool constrained;
 	private int scaleMethod, displayCenterX, displayCenterY;
 
 	public SampleScaleBox() {
@@ -60,7 +60,7 @@ public class SampleScaleBox extends FullBox {
 	 *
 	 * @return true if the samples should be scaled by the scale method
 	 */
-	public boolean isConstrained() {
+	public bool isConstrained() {
 		return constrained;
 	}
 

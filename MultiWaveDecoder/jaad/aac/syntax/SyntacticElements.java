@@ -12,7 +12,7 @@ public class SyntacticElements implements Constants {
 
 	//global properties
 	private DecoderConfig config;
-	private boolean sbrPresent, psPresent;
+	private bool sbrPresent, psPresent;
 	private int bitsRead;
 	//elements
 	private PCE pce;
@@ -50,7 +50,7 @@ public class SyntacticElements implements Constants {
 
 		int type;
 		Element prev = null;
-		boolean content = true;
+		bool content = true;
 		if(!config.getProfile().isErrorResilientProfile()) {
 			while(content&&(type = in.readBits(3))!=ELEMENT_END) {
 				switch(type) {
@@ -326,7 +326,7 @@ public class SyntacticElements implements Constants {
 		}
 	}
 
-	private void processIndependentCoupling(boolean channelPair, int elementID, float[] data1, float[] data2) {
+	private void processIndependentCoupling(bool channelPair, int elementID, float[] data1, float[] data2) {
 		int index, c, chSelect;
 		CCE cce;
 		for(int i = 0; i<cces.length; i++) {
@@ -351,7 +351,7 @@ public class SyntacticElements implements Constants {
 		}
 	}
 
-	private void processDependentCoupling(boolean channelPair, int elementID, int couplingPoint, float[] data1, float[] data2) {
+	private void processDependentCoupling(bool channelPair, int elementID, int couplingPoint, float[] data1, float[] data2) {
 		int index, c, chSelect;
 		CCE cce;
 		for(int i = 0; i<cces.length; i++) {
@@ -377,7 +377,7 @@ public class SyntacticElements implements Constants {
 	}
 
 	public void sendToOutput(SampleBuffer buffer) {
-		boolean be = buffer.isBigEndian();
+		bool be = buffer.isBigEndian();
 
 		int chs = data.length;
 		int mult = (sbrPresent&&config.isSBREnabled()) ? 2 : 1;

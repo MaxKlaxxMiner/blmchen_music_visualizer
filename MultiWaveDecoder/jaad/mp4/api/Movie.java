@@ -100,7 +100,7 @@ public class Movie {
 	 * 
 	 * @return true if this movie contains any metadata
 	 */
-	public boolean containsMetaData() {
+	public bool containsMetaData() {
 		return metaData.containsMetaData();
 	}
 
@@ -154,7 +154,7 @@ public class Movie {
 	 *
 	 * @return true if there is at least one track in this movie that has at least one more frame to read.
 	 */
-	public boolean hasMoreFrames() {
+	public bool hasMoreFrames() {
 		for(Track track : tracks) {
 			if(track.hasMoreFrames()) return true;
 		}

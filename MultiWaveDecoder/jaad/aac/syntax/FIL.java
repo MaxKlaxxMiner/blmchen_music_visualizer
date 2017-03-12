@@ -8,23 +8,23 @@ class FIL extends Element implements Constants {
 	public static class DynamicRangeInfo {
 
 		private static int MAX_NBR_BANDS = 7;
-		private boolean[] excludeMask;
-		private boolean[] additionalExcludedChannels;
-		private boolean pceTagPresent;
+		private bool[] excludeMask;
+		private bool[] additionalExcludedChannels;
+		private bool pceTagPresent;
 		private int pceInstanceTag;
 		private int tagReservedBits;
-		private boolean excludedChannelsPresent;
-		private boolean bandsPresent;
+		private bool excludedChannelsPresent;
+		private bool bandsPresent;
 		private int bandsIncrement, interpolationScheme;
 		private int[] bandTop;
-		private boolean progRefLevelPresent;
+		private bool progRefLevelPresent;
 		private int progRefLevel, progRefLevelReservedBits;
-		private boolean[] dynRngSgn;
+		private bool[] dynRngSgn;
 		private int[] dynRngCtl;
 
 		public DynamicRangeInfo() {
-			excludeMask = new boolean[MAX_NBR_BANDS];
-			additionalExcludedChannels = new boolean[MAX_NBR_BANDS];
+			excludeMask = new bool[MAX_NBR_BANDS];
+			additionalExcludedChannels = new bool[MAX_NBR_BANDS];
 		}
 	}
 	private static int TYPE_FILL = 0;
@@ -33,15 +33,15 @@ class FIL extends Element implements Constants {
 	private static int TYPE_DYNAMIC_RANGE = 11;
 	private static int TYPE_SBR_DATA = 13;
 	private static int TYPE_SBR_DATA_CRC = 14;
-	private boolean downSampledSBR;
+	private bool downSampledSBR;
 	private DynamicRangeInfo dri;
 
-	FIL(boolean downSampledSBR) {
+	FIL(bool downSampledSBR) {
 		super();
 		this.downSampledSBR = downSampledSBR;
 	}
 
-	void decode(BitStream in, Element prev, SampleFrequency sf, boolean sbrEnabled, boolean smallFrames) throws AACException {
+	void decode(BitStream in, Element prev, SampleFrequency sf, bool sbrEnabled, bool smallFrames) throws AACException {
 		int count = in.readBits(4);
 		if(count==15) count += in.readBits(8)-1;
 		count *= 8; //convert to bits
@@ -59,7 +59,7 @@ class FIL extends Element implements Constants {
 		else if(bitsLeft<0) throw new AACException("FIL element overread: "+bitsLeft);
 	}
 
-	private int decodeExtensionPayload(BitStream in, int count, Element prev, SampleFrequency sf, boolean sbrEnabled, boolean smallFrames) throws AACException {
+	private int decodeExtensionPayload(BitStream in, int count, Element prev, SampleFrequency sf, bool sbrEnabled, bool smallFrames) throws AACException {
 		int type = in.readBits(4);
 		int ret = count-4;
 		switch(type) {
@@ -128,7 +128,7 @@ class FIL extends Element implements Constants {
 			ret -= 8;
 		}
 
-		dri.dynRngSgn = new boolean[bandCount];
+		dri.dynRngSgn = new bool[bandCount];
 		dri.dynRngCtl = new int[bandCount];
 		for(int i = 0; i<bandCount; i++) {
 			dri.dynRngSgn[i] = in.readBool();

@@ -38,7 +38,7 @@ public class Decoder implements Constants {
 	 * @return true if the specified profile can be decoded
 	 * @see Profile#isDecodingSupported()
 	 */
-	public static boolean canDecode(Profile profile) {
+	public static bool canDecode(Profile profile) {
 		return profile.isDecodingSupported();
 	}
 

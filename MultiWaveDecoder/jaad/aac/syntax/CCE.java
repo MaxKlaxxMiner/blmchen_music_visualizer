@@ -19,7 +19,7 @@ class CCE extends Element implements Constants {
 	private float[] iqData;
 	private int couplingPoint;
 	private int coupledCount;
-	private boolean[] channelPair;
+	private bool[] channelPair;
 	private int[] idSelect;
 	private int[] chSelect;
 	/*[0] shared list of gains; [1] list of gains for right channel;
@@ -30,7 +30,7 @@ class CCE extends Element implements Constants {
 	CCE(int frameLength) {
 		super();
 		ics = new ICStream(frameLength);
-		channelPair = new boolean[8];
+		channelPair = new bool[8];
 		idSelect = new int[8];
 		chSelect = new int[8];
 		gain = new float[16][120];
@@ -44,7 +44,7 @@ class CCE extends Element implements Constants {
 		return coupledCount;
 	}
 
-	boolean isChannelPair(int index) {
+	bool isChannelPair(int index) {
 		return channelPair[index];
 	}
 
@@ -74,7 +74,7 @@ class CCE extends Element implements Constants {
 		couplingPoint += in.readBit();
 		couplingPoint |= (couplingPoint>>1);
 
-		boolean sign = in.readBool();
+		bool sign = in.readBool();
 		double scale = CCE_SCALE[in.readBits(2)];
 
 		ics.decode(in, false, conf);

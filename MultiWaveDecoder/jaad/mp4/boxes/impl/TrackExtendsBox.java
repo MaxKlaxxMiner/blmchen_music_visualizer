@@ -120,7 +120,7 @@ public class TrackExtendsBox extends FullBox {
 		return (int) ((defaultSampleFlags>>17)&7);
 	}
 
-	public boolean isSampleDifferenceSample() {
+	public bool isSampleDifferenceSample() {
 		return ((defaultSampleFlags>>16)&1)==1;
 	}
 

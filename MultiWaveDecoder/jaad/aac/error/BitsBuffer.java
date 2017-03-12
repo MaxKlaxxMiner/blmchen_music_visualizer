@@ -29,10 +29,10 @@ public class BitsBuffer {
 		}
 	}
 
-	public boolean flushBits(int bits) {
+	public bool flushBits(int bits) {
 		len -= bits;
 
-		boolean b;
+		bool b;
 		if(len<0) {
 			len = 0;
 			b = false;

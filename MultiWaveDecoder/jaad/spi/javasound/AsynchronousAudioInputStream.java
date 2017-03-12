@@ -56,7 +56,7 @@ abstract class AsynchronousAudioInputStream extends AudioInputStream implements 
 	}
 
 	@Override
-	public boolean markSupported() {
+	public bool markSupported() {
 		return false;
 	}
 

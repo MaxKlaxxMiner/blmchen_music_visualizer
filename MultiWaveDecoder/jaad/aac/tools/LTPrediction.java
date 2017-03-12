@@ -29,8 +29,8 @@ public class LTPrediction implements Constants {
 	private int frameLength;
 	private int[] states;
 	private int coef, lag, lastBand;
-	private boolean lagUpdate;
-	private boolean[] shortUsed, shortLagPresent, longUsed;
+	private bool lagUpdate;
+	private bool[] shortUsed, shortLagPresent, longUsed;
 	private int[] shortLag;
 
 	public LTPrediction(int frameLength) {
@@ -51,8 +51,8 @@ public class LTPrediction implements Constants {
 		int windowCount = info.getWindowCount();
 
 		if(info.isEightShortFrame()) {
-			shortUsed = new boolean[windowCount];
-			shortLagPresent = new boolean[windowCount];
+			shortUsed = new bool[windowCount];
+			shortLagPresent = new bool[windowCount];
 			shortLag = new int[windowCount];
 			for(int w = 0; w<windowCount; w++) {
 				if((shortUsed[w] = in.readBool())) {
@@ -63,7 +63,7 @@ public class LTPrediction implements Constants {
 		}
 		else {
 			lastBand = Math.min(info.getMaxSFB(), MAX_LTP_SFB);
-			longUsed = new boolean[lastBand];
+			longUsed = new bool[lastBand];
 			for(int i = 0; i<lastBand; i++) {
 				longUsed[i] = in.readBool();
 			}
@@ -126,7 +126,7 @@ public class LTPrediction implements Constants {
 		}
 	}
 
-	public static boolean isLTPProfile(Profile profile) {
+	public static bool isLTPProfile(Profile profile) {
 		return profile.equals(Profile.AAC_LTP)||profile.equals(Profile.ER_AAC_LTP)||profile.equals(Profile.AAC_LD);
 	}
 

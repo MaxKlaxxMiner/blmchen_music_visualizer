@@ -6,7 +6,7 @@ import net.sourceforge.jaad.aac.syntax.BitStream;
 //TODO: implement decodeSpectralDataER
 public class Huffman implements Codebooks {
 
-	private static boolean[] UNSIGNED = {false, false, true, true, false, false, true, true, true, true, true};
+	private static bool[] UNSIGNED = {false, false, true, true, false, false, true, true, true, true, true};
 	private static int QUAD_LEN = 4, PAIR_LEN = 2;
 
 	private Huffman() {
@@ -36,7 +36,7 @@ public class Huffman implements Codebooks {
 	}
 
 	private static int getEscape(BitStream in, int s) throws AACException {
-		boolean neg = s<0;
+		bool neg = s<0;
 
 		int i = 4;
 		while(in.readBool()) {

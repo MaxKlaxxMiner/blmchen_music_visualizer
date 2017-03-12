@@ -42,6 +42,7 @@
     <Compile Include="aac\Main.cs" />
     <Compile Include="aac\mp4\api\Movie.cs" />
     <Compile Include="aac\mp4\boxes\BoxUtils.cs" />
+    <Compile Include="aac\mp4\boxes\ESDBox.cs" />
     <Compile Include="aac\mp4\boxes\FullBox.cs" />
     <Compile Include="aac\mp4\boxes\IBox.cs" />
     <Compile Include="aac\mp4\boxes\BoxFactory.cs" />
@@ -65,6 +66,14 @@
     <Compile Include="aac\mp4\MP4Container.cs" />
     <Compile Include="aac\mp4\MP4Exception.cs" />
     <Compile Include="aac\mp4\MP4InputStream.cs" />
+    <Compile Include="aac\mp4\od\DecoderSpecificInfo.cs" />
+    <Compile Include="aac\mp4\od\DecoderConfigDescriptor.cs" />
+    <Compile Include="aac\mp4\od\InitialObjectDescriptor.cs" />
+    <Compile Include="aac\mp4\od\ObjectDescriptor.cs" />
+    <Compile Include="aac\mp4\od\SLConfigDescriptor.cs" />
+    <Compile Include="aac\mp4\od\UnknownDescriptor.cs" />
+    <Compile Include="aac\mp4\od\ESDescriptor.cs" />
+    <Compile Include="aac\mp4\od\Descriptor.cs" />
     <Compile Include="aac\util\wav\WaveFileWriter.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -184,7 +193,6 @@
     <Content Include="jaad\mp4\boxes\impl\DegradationPriorityBox.java" />
     <Content Include="jaad\mp4\boxes\impl\drm\FairPlayDataBox.java" />
     <Content Include="jaad\mp4\boxes\impl\EditListBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\ESDBox.java" />
     <Content Include="jaad\mp4\boxes\impl\fd\Base64Decoder.java" />
     <Content Include="jaad\mp4\boxes\impl\fd\FDItemInformationBox.java" />
     <Content Include="jaad\mp4\boxes\impl\fd\FDSessionGroupBox.java" />
@@ -275,15 +283,6 @@
     <Content Include="jaad\mp4\boxes\impl\XMLBox.java" />
     <Content Include="jaad\mp4\MP4Container.java" />
     <Content Include="jaad\mp4\MP4InputStream.java" />
-    <Content Include="jaad\mp4\od\DecoderConfigDescriptor.java" />
-    <Content Include="jaad\mp4\od\DecoderSpecificInfo.java" />
-    <Content Include="jaad\mp4\od\Descriptor.java" />
-    <Content Include="jaad\mp4\od\ESDescriptor.java" />
-    <Content Include="jaad\mp4\od\InitialObjectDescriptor.java" />
-    <Content Include="jaad\mp4\od\ObjectDescriptor.java" />
-    <Content Include="jaad\mp4\od\package-info.java" />
-    <Content Include="jaad\mp4\od\SLConfigDescriptor.java" />
-    <Content Include="jaad\mp4\od\UnknownDescriptor.java" />
     <Content Include="jaad\mp4\package-info.java" />
     <Content Include="jaad\Play.java" />
     <Content Include="jaad\Radio.java" />

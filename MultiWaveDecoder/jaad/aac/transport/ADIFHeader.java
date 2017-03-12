@@ -8,15 +8,15 @@ public class ADIFHeader {
 
 	private static long ADIF_ID = 0x41444946; //'ADIF'
 	private long id;
-	private boolean copyrightIDPresent;
+	private bool copyrightIDPresent;
 	private byte[] copyrightID;
-	private boolean originalCopy, home, bitstreamType;
+	private bool originalCopy, home, bitstreamType;
 	private int bitrate;
 	private int pceCount;
 	private int[] adifBufferFullness;
 	private PCE[] pces;
 
-	public static boolean isPresent(BitStream in) throws AACException {
+	public static bool isPresent(BitStream in) throws AACException {
 		return in.peekBits(32)==ADIF_ID;
 	}
 

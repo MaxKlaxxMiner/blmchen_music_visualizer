@@ -463,7 +463,7 @@ public class MetaData {
 		contents.put(field, value);
 	}
 
-	boolean containsMetaData() {
+	bool containsMetaData() {
 		return !contents.isEmpty();
 	}
 

@@ -8,10 +8,10 @@ import net.sourceforge.jaad.aac.SampleFrequency;
 class ADTSFrame {
 
 	//fixed
-	private boolean id, protectionAbsent, privateBit, copy, home;
+	private bool id, protectionAbsent, privateBit, copy, home;
 	private int layer, profile, sampleFrequency, channelConfiguration;
 	//variable
-	private boolean copyrightIDBit, copyrightIDStart;
+	private bool copyrightIDBit, copyrightIDStart;
 	private int frameLength, adtsBufferFullness, rawDataBlockCount;
 	//error check
 	private int[] rawDataBlockPosition;

@@ -32,7 +32,7 @@ class Filterbank implements PSTables {
 		temp = new float[frame_len][12][2];
 	}
 
-	void hybrid_analysis(float[][][] X, float[][][] X_hybrid, boolean use34, int numTimeSlotsRate) {
+	void hybrid_analysis(float[][][] X, float[][][] X_hybrid, bool use34, int numTimeSlotsRate) {
 		int k, n, band;
 		int offset = 0;
 		int qmf_bands = (use34) ? 5 : 3;
@@ -337,7 +337,7 @@ class Filterbank implements PSTables {
 	}
 
 	void hybrid_synthesis(float[][][] X, float[][][] X_hybrid,
-		boolean use34, int numTimeSlotsRate) {
+		bool use34, int numTimeSlotsRate) {
 		int k, n, band;
 		int offset = 0;
 		int qmf_bands = (use34) ? 5 : 3;

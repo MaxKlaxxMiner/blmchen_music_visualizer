@@ -23,7 +23,7 @@ public class SubSampleInformationBox extends FullBox {
 	private long[] sampleDelta;
 	private long[][] subsampleSize;
 	private int[][] subsamplePriority;
-	private boolean[][] discardable;
+	private bool[][] discardable;
 
 	public SubSampleInformationBox() {
 		super("Sub Sample Information Box");
@@ -38,7 +38,7 @@ public class SubSampleInformationBox extends FullBox {
 		sampleDelta = new long[entryCount];
 		subsampleSize = new long[entryCount][];
 		subsamplePriority = new int[entryCount][];
-		discardable = new boolean[entryCount][];
+		discardable = new bool[entryCount][];
 
 		int j, subsampleCount;
 		for(int i = 0; i<entryCount; i++) {
@@ -46,7 +46,7 @@ public class SubSampleInformationBox extends FullBox {
 			subsampleCount = (int) in.readBytes(2);
 			subsampleSize[i] = new long[subsampleCount];
 			subsamplePriority[i] = new int[subsampleCount];
-			discardable[i] = new boolean[subsampleCount];
+			discardable[i] = new bool[subsampleCount];
 
 			for(j = 0; j<subsampleCount; j++) {
 				subsampleSize[i][j] = in.readBytes(len);
@@ -102,7 +102,7 @@ public class SubSampleInformationBox extends FullBox {
 	 *
 	 * @return a list of flags indicating if a specific subsample is discardable
 	 */
-	public boolean[][] getDiscardable() {
+	public bool[][] getDiscardable() {
 		return discardable;
 	}
 }

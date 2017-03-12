@@ -21,9 +21,9 @@ import net.sourceforge.jaad.mp4.boxes.FullBox;
 public class TrackFragmentRunBox extends FullBox {
 
 	private int sampleCount;
-	private boolean dataOffsetPresent, firstSampleFlagsPresent;
+	private bool dataOffsetPresent, firstSampleFlagsPresent;
 	private long dataOffset, firstSampleFlags;
-	private boolean sampleDurationPresent, sampleSizePresent, sampleFlagsPresent,
+	private bool sampleDurationPresent, sampleSizePresent, sampleFlagsPresent,
 			sampleCompositionTimeOffsetPresent;
 	private long[] sampleDuration, sampleSize, sampleFlags, sampleCompositionTimeOffset;
 
@@ -66,7 +66,7 @@ public class TrackFragmentRunBox extends FullBox {
 		return sampleCount;
 	}
 
-	public boolean isDataOffsetPresent() {
+	public bool isDataOffsetPresent() {
 		return dataOffsetPresent;
 	}
 
@@ -74,7 +74,7 @@ public class TrackFragmentRunBox extends FullBox {
 		return dataOffset;
 	}
 
-	public boolean isFirstSampleFlagsPresent() {
+	public bool isFirstSampleFlagsPresent() {
 		return firstSampleFlagsPresent;
 	}
 
@@ -82,7 +82,7 @@ public class TrackFragmentRunBox extends FullBox {
 		return firstSampleFlags;
 	}
 
-	public boolean isSampleDurationPresent() {
+	public bool isSampleDurationPresent() {
 		return sampleDurationPresent;
 	}
 
@@ -90,7 +90,7 @@ public class TrackFragmentRunBox extends FullBox {
 		return sampleDuration;
 	}
 
-	public boolean isSampleSizePresent() {
+	public bool isSampleSizePresent() {
 		return sampleSizePresent;
 	}
 
@@ -98,7 +98,7 @@ public class TrackFragmentRunBox extends FullBox {
 		return sampleSize;
 	}
 
-	public boolean isSampleFlagsPresent() {
+	public bool isSampleFlagsPresent() {
 		return sampleFlagsPresent;
 	}
 
@@ -106,7 +106,7 @@ public class TrackFragmentRunBox extends FullBox {
 		return sampleFlags;
 	}
 
-	public boolean isSampleCompositionTimeOffsetPresent() {
+	public bool isSampleCompositionTimeOffsetPresent() {
 		return sampleCompositionTimeOffsetPresent;
 	}
 

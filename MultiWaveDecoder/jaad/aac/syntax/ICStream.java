@@ -26,7 +26,7 @@ public class ICStream implements Constants, HCB, ScaleFactorTable, IQTable {
 	private float[] data;
 	private float[] scaleFactors;
 	private int globalGain;
-	private boolean pulseDataPresent, tnsDataPresent, gainControlPresent;
+	private bool pulseDataPresent, tnsDataPresent, gainControlPresent;
 	//only allocated if needed
 	private TNS tns;
 	private GainControl gainControl;
@@ -34,7 +34,7 @@ public class ICStream implements Constants, HCB, ScaleFactorTable, IQTable {
 	private int pulseCount;
 	private int pulseStartSWB;
 	//error resilience
-	private boolean noiseUsed;
+	private bool noiseUsed;
 	private int reorderedSpectralDataLen, longestCodewordLen;
 	private RVLC rvlc;
 
@@ -48,9 +48,9 @@ public class ICStream implements Constants, HCB, ScaleFactorTable, IQTable {
 	}
 
 	/* ========= decoding ========== */
-	public void decode(BitStream in, boolean commonWindow, DecoderConfig conf) throws AACException {
+	public void decode(BitStream in, bool commonWindow, DecoderConfig conf) throws AACException {
 		if(conf.isScalefactorResilienceUsed()&&rvlc==null) rvlc = new RVLC();
-		boolean er = conf.getProfile().isErrorResilientProfile();
+		bool er = conf.getProfile().isErrorResilientProfile();
 
 		globalGain = in.readBits(8);
 
@@ -93,7 +93,7 @@ public class ICStream implements Constants, HCB, ScaleFactorTable, IQTable {
 		else decodeSpectralData(in);
 	}
 
-	public void decodeSectionData(BitStream in, boolean sectionDataResilienceUsed) throws AACException {
+	public void decodeSectionData(BitStream in, bool sectionDataResilienceUsed) throws AACException {
 		Arrays.fill(sfbCB, 0);
 		Arrays.fill(sectEnd, 0);
 		int bits = info.isEightShortFrame() ? 3 : 5;
@@ -152,7 +152,7 @@ public class ICStream implements Constants, HCB, ScaleFactorTable, IQTable {
 		int[] offset = {globalGain, globalGain-90, 0};
 
 		int tmp;
-		boolean noiseFlag = true;
+		bool noiseFlag = true;
 
 		int sfb, idx = 0;
 		for(int g = 0; g<windowGroups; g++) {
@@ -279,7 +279,7 @@ public class ICStream implements Constants, HCB, ScaleFactorTable, IQTable {
 		return scaleFactors;
 	}
 
-	public boolean isTNSDataPresent() {
+	public bool isTNSDataPresent() {
 		return tnsDataPresent;
 	}
 
@@ -291,7 +291,7 @@ public class ICStream implements Constants, HCB, ScaleFactorTable, IQTable {
 		return globalGain;
 	}
 
-	public boolean isNoiseUsed() {
+	public bool isNoiseUsed() {
 		return noiseUsed;
 	}
 
@@ -303,7 +303,7 @@ public class ICStream implements Constants, HCB, ScaleFactorTable, IQTable {
 		return reorderedSpectralDataLen;
 	}
 
-	public boolean isGainControlPresent() {
+	public bool isGainControlPresent() {
 		return gainControlPresent;
 	}
 

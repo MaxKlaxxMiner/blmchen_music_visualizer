@@ -58,7 +58,7 @@ public class BitStream {
 	 * Reads the next four bytes.
 	 * @param peek if true, the stream pointer will not be increased
 	 */
-	protected int readCache(boolean peek) throws AACException {
+	protected int readCache(bool peek) throws AACException {
 		int i;
 		if(pos>buffer.length-WORD_BYTES) throw new AACException("end of stream", true);
 		else i = ((buffer[pos]&BYTE_MASK)<<24)
@@ -103,7 +103,7 @@ public class BitStream {
 		return i;
 	}
 
-	public boolean readBool() throws AACException {
+	public bool readBool() throws AACException {
 		return (readBit()&0x1)!=0;
 	}
 

@@ -10,7 +10,7 @@ public class SampleBuffer {
 	private int sampleRate, channels, bitsPerSample;
 	private double length, bitrate, encodedBitrate;
 	private byte[] data;
-	private boolean bigEndian;
+	private bool bigEndian;
 
 	public SampleBuffer() {
 		data = new byte[0];
@@ -84,7 +84,7 @@ public class SampleBuffer {
 	 * 
 	 * @return true if the data is in big endian, false if it is in little endian
 	 */
-	public boolean isBigEndian() {
+	public bool isBigEndian() {
 		return bigEndian;
 	}
 
@@ -94,7 +94,7 @@ public class SampleBuffer {
 	 * @param bigEndian if true the data will be in big endian, else in little 
 	 * endian
 	 */
-	public void setBigEndian(boolean bigEndian) {
+	public void setBigEndian(bool bigEndian) {
 		if(bigEndian!=this.bigEndian) {
 			byte tmp;
 			for(int i = 0; i<data.length; i += 2) {

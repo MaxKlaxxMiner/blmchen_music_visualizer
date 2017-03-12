@@ -247,5 +247,10 @@ namespace MultiWaveDecoder
 
       return i == BYTE_ORDER_MASK ? Encoding.BigEndianUnicode.GetString(b2) : Encoding.UTF8.GetString(b2);
     }
+
+    public override string ToString()
+    {
+      return (new { offset }).ToString();
+    }
   }
 }

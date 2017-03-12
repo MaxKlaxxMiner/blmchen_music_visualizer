@@ -48,9 +48,9 @@ public class ICSInfo implements Constants, ScaleFactorBands {
 	private int[] windowShape;
 	private int maxSFB;
 	//prediction
-	private boolean predictionDataPresent;
+	private bool predictionDataPresent;
 	private ICPrediction icPredict;
-	boolean ltpData1Present, ltpData2Present;
+	bool ltpData1Present, ltpData2Present;
 	private LTPrediction ltPredict1, ltPredict2;
 	//windows/sfbs
 	private int windowCount;
@@ -69,7 +69,7 @@ public class ICSInfo implements Constants, ScaleFactorBands {
 	}
 
 	/* ========== decoding ========== */
-	public void decode(BitStream in, DecoderConfig conf, boolean commonWindow) throws AACException {
+	public void decode(BitStream in, DecoderConfig conf, bool commonWindow) throws AACException {
 		SampleFrequency sf = conf.getSampleFrequency();
 		if(sf.equals(SampleFrequency.SAMPLE_FREQUENCY_NONE)) throw new AACException("invalid sample frequency");
 
@@ -105,7 +105,7 @@ public class ICSInfo implements Constants, ScaleFactorBands {
 		}
 	}
 
-	private void readPredictionData(BitStream in, Profile profile, SampleFrequency sf, boolean commonWindow) throws AACException {
+	private void readPredictionData(BitStream in, Profile profile, SampleFrequency sf, bool commonWindow) throws AACException {
 		switch(profile) {
 			case AAC_MAIN:
 				if(icPredict==null) icPredict = new ICPrediction();
@@ -169,7 +169,7 @@ public class ICSInfo implements Constants, ScaleFactorBands {
 		return windowSequence;
 	}
 
-	public boolean isEightShortFrame() {
+	public bool isEightShortFrame() {
 		return windowSequence.equals(WindowSequence.EIGHT_SHORT_SEQUENCE);
 	}
 
@@ -177,7 +177,7 @@ public class ICSInfo implements Constants, ScaleFactorBands {
 		return windowShape[index];
 	}
 
-	public boolean isICPredictionPresent() {
+	public bool isICPredictionPresent() {
 		return predictionDataPresent;
 	}
 
@@ -185,7 +185,7 @@ public class ICSInfo implements Constants, ScaleFactorBands {
 		return icPredict;
 	}
 
-	public boolean isLTPrediction1Present() {
+	public bool isLTPrediction1Present() {
 		return ltpData1Present;
 	}
 
@@ -193,7 +193,7 @@ public class ICSInfo implements Constants, ScaleFactorBands {
 		return ltPredict1;
 	}
 
-	public boolean isLTPrediction2Present() {
+	public bool isLTPrediction2Present() {
 		return ltpData2Present;
 	}
 

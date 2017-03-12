@@ -14,10 +14,10 @@ import net.sourceforge.jaad.mp4.boxes.FullBox;
 public class TrackFragmentHeaderBox extends FullBox {
 
 	private long trackID;
-	private boolean baseDataOffsetPresent, sampleDescriptionIndexPresent,
+	private bool baseDataOffsetPresent, sampleDescriptionIndexPresent,
 			defaultSampleDurationPresent, defaultSampleSizePresent,
 			defaultSampleFlagsPresent;
-	private boolean durationIsEmpty;
+	private bool durationIsEmpty;
 	private long baseDataOffset, sampleDescriptionIndex, defaultSampleDuration,
 			defaultSampleSize, defaultSampleFlags;
 
@@ -54,7 +54,7 @@ public class TrackFragmentHeaderBox extends FullBox {
 		return trackID;
 	}
 
-	public boolean isBaseDataOffsetPresent() {
+	public bool isBaseDataOffsetPresent() {
 		return baseDataOffsetPresent;
 	}
 
@@ -62,7 +62,7 @@ public class TrackFragmentHeaderBox extends FullBox {
 		return baseDataOffset;
 	}
 
-	public boolean isSampleDescriptionIndexPresent() {
+	public bool isSampleDescriptionIndexPresent() {
 		return sampleDescriptionIndexPresent;
 	}
 
@@ -70,7 +70,7 @@ public class TrackFragmentHeaderBox extends FullBox {
 		return sampleDescriptionIndex;
 	}
 
-	public boolean isDefaultSampleDurationPresent() {
+	public bool isDefaultSampleDurationPresent() {
 		return defaultSampleDurationPresent;
 	}
 
@@ -78,7 +78,7 @@ public class TrackFragmentHeaderBox extends FullBox {
 		return defaultSampleDuration;
 	}
 
-	public boolean isDefaultSampleSizePresent() {
+	public bool isDefaultSampleSizePresent() {
 		return defaultSampleSizePresent;
 	}
 
@@ -86,7 +86,7 @@ public class TrackFragmentHeaderBox extends FullBox {
 		return defaultSampleSize;
 	}
 
-	public boolean isDefaultSampleFlagsPresent() {
+	public bool isDefaultSampleFlagsPresent() {
 		return defaultSampleFlagsPresent;
 	}
 
@@ -94,7 +94,7 @@ public class TrackFragmentHeaderBox extends FullBox {
 		return defaultSampleFlags;
 	}
 
-	public boolean isDurationIsEmpty() {
+	public bool isDurationIsEmpty() {
 		return durationIsEmpty;
 	}
 }

@@ -44,9 +44,9 @@ public enum Profile {
 	}
 	private int num;
 	private string descr;
-	private boolean supported;
+	private bool supported;
 
-	private Profile(int num, string descr, boolean supported) {
+	private Profile(int num, string descr, bool supported) {
 		this.num = num;
 		this.descr = descr;
 		this.supported = supported;
@@ -80,23 +80,23 @@ public enum Profile {
 	}
 
 	/**
-	 * Returns a boolean, indicating if this profile can be decoded by the
+	 * Returns a bool, indicating if this profile can be decoded by the
 	 * <code>Decoder</code>.
 	 * @see Decoder#canDecode(net.sourceforge.jaad.aac.Profile) 
 	 * @return true if the profile is supported
 	 */
-	public boolean isDecodingSupported() {
+	public bool isDecodingSupported() {
 		return supported;
 	}
 
 	/**
-	 * Returns a boolean, indicating if this profile contains error resilient
+	 * Returns a bool, indicating if this profile contains error resilient
 	 * tools. That is, if it's index is higher than 16, since the first error
 	 * resilient profile is ER_AAC_LC (17).
 	 * This method is mainly used internally.
 	 * @return true if the profile uses error resilience
 	 */
-	public boolean isErrorResilientProfile() {
+	public bool isErrorResilientProfile() {
 		return num>16;
 	}
 }

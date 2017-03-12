@@ -14,7 +14,7 @@ import net.sourceforge.jaad.mp4.MP4InputStream;
 public class AC3SpecificBox extends CodecSpecificBox {
 
 	private int fscod, bsid, bsmod, acmod, bitRateCode;
-	private boolean lfeon;
+	private bool lfeon;
 
 	public AC3SpecificBox() {
 		super("AC-3 Specific Box");
@@ -85,7 +85,7 @@ public class AC3SpecificBox extends CodecSpecificBox {
 	 * 
 	 * @return the value of the 'lfeon' field
 	 */
-	public boolean isLfeon() {
+	public bool isLfeon() {
 		return lfeon;
 	}
 

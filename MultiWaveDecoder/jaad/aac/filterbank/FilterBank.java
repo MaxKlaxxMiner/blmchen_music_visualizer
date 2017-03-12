@@ -13,7 +13,7 @@ public class FilterBank implements Constants, SineWindows, KBDWindows {
 	private float[] buf;
 	private float[][] overlaps;
 
-	public FilterBank(boolean smallFrames, int channels) throws AACException {
+	public FilterBank(bool smallFrames, int channels) throws AACException {
 		if(smallFrames) {
 			length = WINDOW_SMALL_LEN_LONG;
 			shortLen = WINDOW_SMALL_LEN_SHORT;

@@ -8,15 +8,15 @@ import net.sourceforge.jaad.aac.syntax.BitStream;
 
 public class SBR implements Constants, net.sourceforge.jaad.aac.syntax.Constants, HuffmanTables {
 
-	private boolean downSampledSBR;
+	private bool downSampledSBR;
 	SampleFrequency sample_rate;
 	int maxAACLine;
 
 	int rate;
-	boolean just_seeked;
+	bool just_seeked;
 	int ret;
 
-	boolean[] amp_res = new boolean[2];
+	bool[] amp_res = new bool[2];
 
 	int k0;
 	int kx;
@@ -84,7 +84,7 @@ public class SBR implements Constants, net.sourceforge.jaad.aac.syntax.Constants
 	int bs_stop_freq_prev;
 	int bs_xover_band_prev;
 	int bs_freq_scale_prev;
-	boolean bs_alter_scale_prev;
+	bool bs_alter_scale_prev;
 	int bs_noise_bands_prev;
 
 	int[] prevEnvIsShort = new int[2];
@@ -94,11 +94,11 @@ public class SBR implements Constants, net.sourceforge.jaad.aac.syntax.Constants
 	int bsco_prev;
 	int M_prev;
 
-	boolean Reset;
+	bool Reset;
 	int frame;
 	int header_count;
 
-	boolean stereo;
+	bool stereo;
 	AnalysisFilterbank[] qmfa = new AnalysisFilterbank[2];
 	SynthesisFilterbank[] qmfs = new SynthesisFilterbank[2];
 
@@ -110,35 +110,35 @@ public class SBR implements Constants, net.sourceforge.jaad.aac.syntax.Constants
 	int tHFAdj;
 
 	PS ps;
-	boolean ps_used;
-	boolean psResetFlag;
+	bool ps_used;
+	bool psResetFlag;
 
 	/* to get it compiling */
 	/* we'll see during the coding of all the tools, whether
 	 these are all used or not.
 	 */
-	boolean bs_header_flag;
+	bool bs_header_flag;
 	int bs_crc_flag;
 	int bs_sbr_crc_bits;
 	int bs_protocol_version;
-	boolean bs_amp_res;
+	bool bs_amp_res;
 	int bs_start_freq;
 	int bs_stop_freq;
 	int bs_xover_band;
 	int bs_freq_scale;
-	boolean bs_alter_scale;
+	bool bs_alter_scale;
 	int bs_noise_bands;
 	int bs_limiter_bands;
 	int bs_limiter_gains;
-	boolean bs_interpol_freq;
-	boolean bs_smoothing_mode;
+	bool bs_interpol_freq;
+	bool bs_smoothing_mode;
 	int bs_samplerate_mode;
-	boolean[] bs_add_harmonic_flag = new boolean[2];
-	boolean[] bs_add_harmonic_flag_prev = new boolean[2];
-	boolean bs_extended_data;
+	bool[] bs_add_harmonic_flag = new bool[2];
+	bool[] bs_add_harmonic_flag_prev = new bool[2];
+	bool bs_extended_data;
 	int bs_extension_id;
 	int bs_extension_data;
-	boolean bs_coupling;
+	bool bs_coupling;
 	int[] bs_frame_class = new int[2];
 	int[][] bs_rel_bord = new int[2][9];
 	int[][] bs_rel_bord_0 = new int[2][9];
@@ -151,7 +151,7 @@ public class SBR implements Constants, net.sourceforge.jaad.aac.syntax.Constants
 	int[][] bs_df_env = new int[2][9];
 	int[][] bs_df_noise = new int[2][3];
 
-	public SBR(boolean smallFrames, boolean stereo, SampleFrequency sample_rate, boolean downSampledSBR) {
+	public SBR(bool smallFrames, bool stereo, SampleFrequency sample_rate, bool downSampledSBR) {
 		this.downSampledSBR = downSampledSBR;
 		this.stereo = stereo;
 		this.sample_rate = sample_rate;
@@ -295,7 +295,7 @@ public class SBR implements Constants, net.sourceforge.jaad.aac.syntax.Constants
 
 	int calc_sbr_tables(int start_freq, int stop_freq,
 		int samplerate_mode, int freq_scale,
-		boolean alter_scale, int xover_band) {
+		bool alter_scale, int xover_band) {
 		int result = 0;
 		int k2;
 
@@ -341,7 +341,7 @@ public class SBR implements Constants, net.sourceforge.jaad.aac.syntax.Constants
 		int saved_start_freq, saved_samplerate_mode;
 		int saved_stop_freq, saved_freq_scale;
 		int saved_xover_band;
-		boolean saved_alter_scale;
+		bool saved_alter_scale;
 
 		int bs_extension_type = ld.readBits(4);
 
@@ -437,7 +437,7 @@ public class SBR implements Constants, net.sourceforge.jaad.aac.syntax.Constants
 
 	/* table 3 */
 	private void sbr_header(BitStream ld) throws AACException {
-		boolean bs_header_extra_1, bs_header_extra_2;
+		bool bs_header_extra_1, bs_header_extra_2;
 
 		this.header_count++;
 
@@ -1073,7 +1073,7 @@ public class SBR implements Constants, net.sourceforge.jaad.aac.syntax.Constants
 	}
 
 	private int sbr_process_channel(float[] channel_buf, float[][][] X,
-		int ch, boolean dont_process) {
+		int ch, bool dont_process) {
 		int k, l;
 		int ret = 0;
 
@@ -1144,8 +1144,8 @@ public class SBR implements Constants, net.sourceforge.jaad.aac.syntax.Constants
 	}
 
 	public int process(float[] left_chan, float[] right_chan,
-		boolean just_seeked) {
-		boolean dont_process = false;
+		bool just_seeked) {
+		bool dont_process = false;
 		int ret = 0;
 		float[][][] X = new float[MAX_NTSR][64][2];
 
@@ -1205,8 +1205,8 @@ public class SBR implements Constants, net.sourceforge.jaad.aac.syntax.Constants
 	}
 
 	public int process(float[] channel,
-		boolean just_seeked) {
-		boolean dont_process = false;
+		bool just_seeked) {
+		bool dont_process = false;
 		int ret = 0;
 		float[][][] X = new float[MAX_NTSR][64][2];
 
@@ -1254,9 +1254,9 @@ public class SBR implements Constants, net.sourceforge.jaad.aac.syntax.Constants
 	}
 
 	public int processPS(float[] left_channel, float[] right_channel,
-		boolean just_seeked) {
+		bool just_seeked) {
 		int l, k;
-		boolean dont_process = false;
+		bool dont_process = false;
 		int ret = 0;
 		float[][][] X_left = new float[38][64][2];
 		float[][][] X_right = new float[38][64][2];
@@ -1322,7 +1322,7 @@ public class SBR implements Constants, net.sourceforge.jaad.aac.syntax.Constants
 		return 0;
 	}
 
-	public boolean isPSUsed() {
+	public bool isPSUsed() {
 		return ps_used;
 	}
 }

@@ -123,10 +123,10 @@ public class ITunesMetadataBox extends FullBox {
 	}
 
 	/**
-	 * Returns the content as a boolean (flag) value.
-	 * @return the metadata as a boolean
+	 * Returns the content as a bool (flag) value.
+	 * @return the metadata as a bool
 	 */
-	public boolean getBoolean() {
+	public bool getBoolean() {
 		return getNumber()!=0;
 	}
 

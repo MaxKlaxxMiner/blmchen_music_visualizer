@@ -6,7 +6,7 @@ import net.sourceforge.jaad.mp4.boxes.FullBox;
 
 public class OMAAccessUnitFormatBox extends FullBox {
 
-	private boolean selectiveEncrypted;
+	private bool selectiveEncrypted;
 	private int keyIndicatorLength, initialVectorLength;
 
 	public OMAAccessUnitFormatBox() {
@@ -23,7 +23,7 @@ public class OMAAccessUnitFormatBox extends FullBox {
 		initialVectorLength = in.read();
 	}
 
-	public boolean isSelectiveEncrypted() {
+	public bool isSelectiveEncrypted() {
 		return selectiveEncrypted;
 	}
 

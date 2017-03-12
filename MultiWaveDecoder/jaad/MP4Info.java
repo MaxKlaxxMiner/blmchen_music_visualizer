@@ -18,7 +18,7 @@ public class MP4Info {
 		try {
 			if(args.length<1) printUsage();
 			else {
-				boolean boxes = false;
+				bool boxes = false;
 				string file;
 				if(args.length>1) {
 					if(args[0].equals("-b")) boxes = true;

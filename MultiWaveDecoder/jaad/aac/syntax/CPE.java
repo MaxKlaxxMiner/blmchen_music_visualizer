@@ -10,13 +10,13 @@ import net.sourceforge.jaad.aac.tools.MSMask;
 public class CPE extends Element implements Constants {
 
 	private MSMask msMask;
-	private boolean[] msUsed;
-	private boolean commonWindow;
+	private bool[] msUsed;
+	private bool commonWindow;
 	ICStream icsL, icsR;
 
 	CPE(int frameLength) {
 		super();
-		msUsed = new boolean[MAX_MS_MASK];
+		msUsed = new bool[MAX_MS_MASK];
 		icsL = new ICStream(frameLength);
 		icsR = new ICStream(frameLength);
 	}
@@ -72,15 +72,15 @@ public class CPE extends Element implements Constants {
 		return msMask;
 	}
 
-	public boolean isMSUsed(int off) {
+	public bool isMSUsed(int off) {
 		return msUsed[off];
 	}
 
-	public boolean isMSMaskPresent() {
+	public bool isMSMaskPresent() {
 		return !msMask.equals(MSMask.TYPE_ALL_0);
 	}
 
-	public boolean isCommonWindow() {
+	public bool isCommonWindow() {
 		return commonWindow;
 	}
 }

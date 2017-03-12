@@ -15,15 +15,15 @@ public class PCE extends Element {
 
 	public static class TaggedElement {
 
-		private boolean isCPE;
+		private bool isCPE;
 		private int tag;
 
-		public TaggedElement(boolean isCPE, int tag) {
+		public TaggedElement(bool isCPE, int tag) {
 			this.isCPE = isCPE;
 			this.tag = tag;
 		}
 
-		public boolean isIsCPE() {
+		public bool isIsCPE() {
 			return isCPE;
 		}
 
@@ -34,15 +34,15 @@ public class PCE extends Element {
 
 	public static class CCE {
 
-		private boolean isIndSW;
+		private bool isIndSW;
 		private int tag;
 
-		public CCE(boolean isIndSW, int tag) {
+		public CCE(bool isIndSW, int tag) {
 			this.isIndSW = isIndSW;
 			this.tag = tag;
 		}
 
-		public boolean isIsIndSW() {
+		public bool isIsIndSW() {
 			return isIndSW;
 		}
 
@@ -55,9 +55,9 @@ public class PCE extends Element {
 	private int frontChannelElementsCount, sideChannelElementsCount, backChannelElementsCount;
 	private int lfeChannelElementsCount, assocDataElementsCount;
 	private int validCCElementsCount;
-	private boolean monoMixdown, stereoMixdown, matrixMixdownIDXPresent;
+	private bool monoMixdown, stereoMixdown, matrixMixdownIDXPresent;
 	private int monoMixdownElementNumber, stereoMixdownElementNumber, matrixMixdownIDX;
-	private boolean pseudoSurround;
+	private bool pseudoSurround;
 	private TaggedElement[] frontElements, sideElements, backElements;
 	private int[] lfeElementTags;
 	private int[] assocDataElementTags;

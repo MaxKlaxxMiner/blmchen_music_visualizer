@@ -95,7 +95,7 @@ public class Radio {
 		}
 	}
 
-	private static boolean formatChanged(AudioFormat af, SampleBuffer buf) {
+	private static bool formatChanged(AudioFormat af, SampleBuffer buf) {
 		return af.getSampleRate()!=buf.getSampleRate()
 				||af.getChannels()!=buf.getChannels()
 				||af.getSampleSizeInBits()!=buf.getBitsPerSample()

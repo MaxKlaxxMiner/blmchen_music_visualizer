@@ -62,7 +62,7 @@ public class AACAudioFileReader extends AudioFileReader {
 	private AudioFileFormat getAudioFileFormat(InputStream in, int mediaLength) throws UnsupportedAudioFileException, IOException {
 		byte[] head = new byte[12];
 		in.read(head);
-		boolean canHandle = false;
+		bool canHandle = false;
 		if(new string(head, 4, 4).equals("ftyp"))
 			canHandle = true;
 		//This code is pulled directly from MP3-SPI.

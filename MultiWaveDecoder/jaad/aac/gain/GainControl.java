@@ -228,7 +228,7 @@ public class GainControl implements GCConstants {
 	 * calculates a fragment modification function by interpolating the gain
 	 * values of the gain change positions
 	 */
-	private float calculateFMD(int bd, int wd, boolean prev, int maxLocGain, int samples,
+	private float calculateFMD(int bd, int wd, bool prev, int maxLocGain, int samples,
 			int[] loc, float[] lev, float[] fmd) {
 		int[] m = new int[samples/2];
 		int[] lct = prev ? locationPrev[bd][wd] : location[bd][wd];

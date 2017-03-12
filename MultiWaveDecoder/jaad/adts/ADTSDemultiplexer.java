@@ -10,7 +10,7 @@ public class ADTSDemultiplexer {
 	private static int MAXIMUM_FRAME_SIZE = 6144;
 	private PushbackInputStream in;
 	private DataInputStream din;
-	private boolean first;
+	private bool first;
 	private ADTSFrame frame;
 
 	public ADTSDemultiplexer(InputStream in) throws IOException {
@@ -33,9 +33,9 @@ public class ADTSDemultiplexer {
 		return b;
 	}
 
-	private boolean findNextFrame() throws IOException {
+	private bool findNextFrame() throws IOException {
 		//find next ADTS ID
-		boolean found = false;
+		bool found = false;
 		int left = MAXIMUM_FRAME_SIZE;
 		int i;
 		while(!found&&left>0) {

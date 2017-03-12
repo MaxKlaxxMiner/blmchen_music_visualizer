@@ -18,13 +18,13 @@ public class TNS implements Constants, TNSTables {
 	//bitstream
 	private int[] nFilt;
 	private int[][] length, order;
-	private boolean[][] direction;
+	private bool[][] direction;
 	private float[][][] coef;
 
 	public TNS() {
 		nFilt = new int[8];
 		length = new int[8][4];
-		direction = new boolean[8][4];
+		direction = new bool[8][4];
 		order = new int[8][4];
 		coef = new float[8][4][TNS_MAX_ORDER];
 	}
@@ -57,7 +57,7 @@ public class TNS implements Constants, TNSTables {
 		}
 	}
 
-	public void process(ICStream ics, float[] spec, SampleFrequency sf, boolean decode) {
+	public void process(ICStream ics, float[] spec, SampleFrequency sf, bool decode) {
 		//TODO...
 	}
 }

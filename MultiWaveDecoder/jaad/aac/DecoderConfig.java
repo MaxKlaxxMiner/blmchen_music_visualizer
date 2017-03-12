@@ -16,14 +16,14 @@ public class DecoderConfig implements Constants {
 	private Profile profile, extProfile;
 	private SampleFrequency sampleFrequency;
 	private ChannelConfiguration channelConfiguration;
-	private boolean frameLengthFlag;
-	private boolean dependsOnCoreCoder;
+	private bool frameLengthFlag;
+	private bool dependsOnCoreCoder;
 	private int coreCoderDelay;
-	private boolean extensionFlag;
+	private bool extensionFlag;
 	//extension: SBR
-	private boolean sbrPresent, downSampledSBR, sbrEnabled;
+	private bool sbrPresent, downSampledSBR, sbrEnabled;
 	//extension: error resilience
-	private boolean sectionDataResilience, scalefactorResilience, spectralDataResilience;
+	private bool sectionDataResilience, scalefactorResilience, spectralDataResilience;
 
 	private DecoderConfig() {
 		profile = Profile.AAC_MAIN;
@@ -56,11 +56,11 @@ public class DecoderConfig implements Constants {
 		this.coreCoderDelay = coreCoderDelay;
 	}
 
-	public boolean isDependsOnCoreCoder() {
+	public bool isDependsOnCoreCoder() {
 		return dependsOnCoreCoder;
 	}
 
-	public void setDependsOnCoreCoder(boolean dependsOnCoreCoder) {
+	public void setDependsOnCoreCoder(bool dependsOnCoreCoder) {
 		this.dependsOnCoreCoder = dependsOnCoreCoder;
 	}
 
@@ -76,11 +76,11 @@ public class DecoderConfig implements Constants {
 		return frameLengthFlag ? WINDOW_SMALL_LEN_LONG : WINDOW_LEN_LONG;
 	}
 
-	public boolean isSmallFrameUsed() {
+	public bool isSmallFrameUsed() {
 		return frameLengthFlag;
 	}
 
-	public void setSmallFrameUsed(boolean shortFrame) {
+	public void setSmallFrameUsed(bool shortFrame) {
 		this.frameLengthFlag = shortFrame;
 	}
 
@@ -101,32 +101,32 @@ public class DecoderConfig implements Constants {
 	}
 
 	//=========== SBR =============
-	public boolean isSBRPresent() {
+	public bool isSBRPresent() {
 		return sbrPresent;
 	}
 
-	public boolean isSBRDownSampled() {
+	public bool isSBRDownSampled() {
 		return downSampledSBR;
 	}
 
-	public boolean isSBREnabled() {
+	public bool isSBREnabled() {
 		return sbrEnabled;
 	}
 
-	public void setSBREnabled(boolean enabled) {
+	public void setSBREnabled(bool enabled) {
 		sbrEnabled = enabled;
 	}
 
 	//=========== ER =============
-	public boolean isScalefactorResilienceUsed() {
+	public bool isScalefactorResilienceUsed() {
 		return scalefactorResilience;
 	}
 
-	public boolean isSectionDataResilienceUsed() {
+	public bool isSectionDataResilienceUsed() {
 		return sectionDataResilience;
 	}
 
-	public boolean isSpectralDataResilienceUsed() {
+	public bool isSpectralDataResilienceUsed() {
 		return spectralDataResilience;
 	}
 

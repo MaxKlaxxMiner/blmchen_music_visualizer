@@ -19,7 +19,7 @@ public class SampleSizeBox extends FullBox {
 	public void decode(MP4InputStream in) throws IOException {
 		super.decode(in);
 
-		boolean compact = type==BoxType.COMPACT_SAMPLE_SIZE_BOX;
+		bool compact = type==BoxType.COMPACT_SAMPLE_SIZE_BOX;
 
 		int sampleSize;
 		if(compact) {

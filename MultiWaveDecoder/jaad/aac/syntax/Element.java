@@ -17,12 +17,12 @@ public abstract class Element implements Constants {
 		return elementInstanceTag;
 	}
 
-	void decodeSBR(BitStream in, SampleFrequency sf, int count, boolean stereo, boolean crc, boolean downSampled,boolean smallFrames) throws AACException {
+	void decodeSBR(BitStream in, SampleFrequency sf, int count, bool stereo, bool crc, bool downSampled,bool smallFrames) throws AACException {
 		if(sbr==null) sbr = new SBR(smallFrames,elementInstanceTag==ELEMENT_CPE,sf,downSampled);
 		sbr.decode(in, count);
 	}
 
-	boolean isSBRPresent() {
+	bool isSBRPresent() {
 		return sbr!=null;
 	}
 

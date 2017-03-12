@@ -44,6 +44,7 @@ namespace MultiWaveDecoder
           case BoxType.SAMPLE_TABLE_BOX: return new BoxImpl("Sample Table Box");
           case BoxType.SAMPLE_DESCRIPTION_BOX: return new SampleDescriptionBox();
           case BoxType.MP4A_SAMPLE_ENTRY: return new AudioSampleEntry("MPEG-4 Audio Sample Entry");
+          case BoxType.ESD_BOX: return new ESDBox();
           default:
           {
             Console.ForegroundColor = ConsoleColor.Yellow;

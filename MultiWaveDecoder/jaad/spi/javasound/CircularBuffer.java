@@ -11,7 +11,7 @@ class CircularBuffer {
 	private byte[] data;
 	private Trigger trigger;
 	private long readPos, writePos;
-	private boolean open;
+	private bool open;
 
 	CircularBuffer(Trigger trigger) {
 		this.trigger = trigger;
@@ -25,7 +25,7 @@ class CircularBuffer {
 		open = false;
 	}
 
-	public boolean isOpen() {
+	public bool isOpen() {
 		return open;
 	}
 

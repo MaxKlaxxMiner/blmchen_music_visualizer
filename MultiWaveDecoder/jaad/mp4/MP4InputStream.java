@@ -163,7 +163,7 @@ public class MP4InputStream
 	 * 
 	 * @return true if random access is available
 	 */
-	public boolean hasRandomAccess() {
+	public bool hasRandomAccess() {
 		return fin!=null;
 	}
 

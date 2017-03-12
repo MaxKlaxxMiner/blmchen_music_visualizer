@@ -99,7 +99,7 @@ public enum SampleFrequency {
 	 * This method is mainly used internally.
 	 * @return the highest SFB for TNS
 	 */
-	public int getMaximalTNS_SFB(boolean shortWindow) {
+	public int getMaximalTNS_SFB(bool shortWindow) {
 		return maxTNS_SFB[shortWindow ? 1 : 0];
 	}
 

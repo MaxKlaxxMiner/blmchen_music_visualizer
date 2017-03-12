@@ -151,7 +151,7 @@ class HFAdjustment implements Constants, NoiseTable {
 		int m, l, i, n;
 		int fIndexNoise = 0;
 		int fIndexSine = 0;
-		boolean assembly_reset = false;
+		bool assembly_reset = false;
 
 		float G_filt, Q_filt;
 
@@ -167,7 +167,7 @@ class HFAdjustment implements Constants, NoiseTable {
 		fIndexSine = sbr.psi_is_prev[ch];
 
 		for(l = 0; l<sbr.L_E[ch]; l++) {
-			boolean no_noise = (l==sbr.l_A[ch]||l==sbr.prevEnvIsShort[ch]);
+			bool no_noise = (l==sbr.l_A[ch]||l==sbr.prevEnvIsShort[ch]);
 
 			h_SL = (sbr.bs_smoothing_mode) ? 0 : 4;
 			h_SL = (no_noise ? 0 : h_SL);

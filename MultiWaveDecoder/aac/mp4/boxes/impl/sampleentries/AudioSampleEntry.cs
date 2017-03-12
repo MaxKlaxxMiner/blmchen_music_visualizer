@@ -1,7 +1,7 @@
 ﻿// ReSharper disable InconsistentNaming
 namespace MultiWaveDecoder
 {
-  public class AudioSampleEntry : SampleEntry
+  public sealed class AudioSampleEntry : SampleEntry
   {
     int channelCount, sampleSize, sampleRate;
 

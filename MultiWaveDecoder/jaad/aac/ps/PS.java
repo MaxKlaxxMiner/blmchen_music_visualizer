@@ -7,7 +7,7 @@ import net.sourceforge.jaad.aac.syntax.BitStream;
 public class PS implements PSConstants, PSTables, HuffmanTables {
 
 	/* bitstream parameters */
-	boolean enable_iid, enable_icc, enable_ext;
+	bool enable_iid, enable_icc, enable_ext;
 	int iid_mode;
 	int icc_mode;
 	int nr_iid_par;
@@ -16,12 +16,12 @@ public class PS implements PSConstants, PSTables, HuffmanTables {
 	int frame_class;
 	int num_env;
 	int[] border_position = new int[MAX_PS_ENVELOPES+1];
-	boolean[] iid_dt = new boolean[MAX_PS_ENVELOPES];
-	boolean[] icc_dt = new boolean[MAX_PS_ENVELOPES];
-	boolean enable_ipdopd;
+	bool[] iid_dt = new bool[MAX_PS_ENVELOPES];
+	bool[] icc_dt = new bool[MAX_PS_ENVELOPES];
+	bool enable_ipdopd;
 	int ipd_mode;
-	boolean[] ipd_dt = new boolean[MAX_PS_ENVELOPES];
-	boolean[] opd_dt = new boolean[MAX_PS_ENVELOPES];
+	bool[] ipd_dt = new bool[MAX_PS_ENVELOPES];
+	bool[] opd_dt = new bool[MAX_PS_ENVELOPES];
 
 	/* indices */
 	int[] iid_index_prev = new int[34];
@@ -40,10 +40,10 @@ public class PS implements PSConstants, PSTables, HuffmanTables {
 	/* ps data was correctly read */
 	int ps_data_available;
 	/* a header has been read */
-	public boolean header_read;
+	public bool header_read;
 	/* hybrid filterbank parameters */
 	Filterbank hyb;
-	boolean use34hybrid_bands;
+	bool use34hybrid_bands;
 	int numTimeSlotsRate;
 	int num_groups;
 	int num_hybrid_groups;
@@ -283,7 +283,7 @@ public class PS implements PSConstants, PSTables, HuffmanTables {
 	}
 
 	/* read huffman data coded in either the frequency or the time direction */
-	private void huff_data(BitStream ld, boolean dt, int nr_par,
+	private void huff_data(BitStream ld, bool dt, int nr_par,
 		int[][] t_huff, int[][] f_huff, int[] par) throws AACException {
 		int n;
 
@@ -325,8 +325,8 @@ public class PS implements PSConstants, PSTables, HuffmanTables {
 
 
 	/* delta decode array */
-	private void delta_decode(boolean enable, int[] index, int[] index_prev,
-		boolean dt_flag, int nr_par, int stride,
+	private void delta_decode(bool enable, int[] index, int[] index_prev,
+		bool dt_flag, int nr_par, int stride,
 		int min_index, int max_index) {
 		int i;
 
@@ -380,8 +380,8 @@ public class PS implements PSConstants, PSTables, HuffmanTables {
 
 	/* delta modulo decode array */
 	/* in: log2 value of the modulo value to allow using AND instead of MOD */
-	private void delta_modulo_decode(boolean enable, int[] index, int[] index_prev,
-		boolean dt_flag, int nr_par, int stride,
+	private void delta_modulo_decode(bool enable, int[] index, int[] index_prev,
+		bool dt_flag, int nr_par, int stride,
 		int and_modulo) {
 		int i;
 

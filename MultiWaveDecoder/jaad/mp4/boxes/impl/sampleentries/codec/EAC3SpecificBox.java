@@ -15,7 +15,7 @@ public class EAC3SpecificBox extends CodecSpecificBox {
 
 	private int dataRate, independentSubstreamCount;
 	private int[] fscods, bsids, bsmods, acmods, dependentSubstreamCount, dependentSubstreamLocation;
-	private boolean[] lfeons;
+	private bool[] lfeons;
 
 	public EAC3SpecificBox() {
 		super("EAC-3 Specific Box");
@@ -121,7 +121,7 @@ public class EAC3SpecificBox extends CodecSpecificBox {
 	 * 
 	 * @return the 'lfeon' values for all independent substreams
 	 */
-	public boolean[] getLfeons() {
+	public bool[] getLfeons() {
 		return lfeons;
 	}
 

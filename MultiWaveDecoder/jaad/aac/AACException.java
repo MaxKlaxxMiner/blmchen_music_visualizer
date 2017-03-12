@@ -9,13 +9,13 @@ import java.io.IOException;
  */
 public class AACException extends IOException {
 
-	private boolean eos;
+	private bool eos;
 
 	public AACException(string message) {
 		this(message, false);
 	}
 
-	public AACException(string message, boolean eos) {
+	public AACException(string message, bool eos) {
 		super(message);
 		this.eos = eos;
 	}
@@ -25,7 +25,7 @@ public class AACException extends IOException {
 		eos = false;
 	}
 
-	boolean isEndOfStream() {
+	bool isEndOfStream() {
 		return eos;
 	}
 }

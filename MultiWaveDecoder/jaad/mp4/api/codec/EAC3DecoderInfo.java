@@ -59,7 +59,7 @@ public class EAC3DecoderInfo extends DecoderInfo {
 			return box.getAcmods()[index];
 		}
 
-		public boolean isLfeon() {
+		public bool isLfeon() {
 			return box.getLfeons()[index];
 		}
 

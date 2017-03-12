@@ -45,7 +45,7 @@ public abstract class Track {
 	private MP4InputStream in;
 	protected TrackHeaderBox tkhd;
 	private MediaHeaderBox mdhd;
-	private boolean inFile;
+	private bool inFile;
 	private List<Frame> frames;
 	private URL location;
 	private int currentFrame;
@@ -206,7 +206,7 @@ public abstract class Track {
 	 * it were not present.
 	 * @return true if the track is enabled
 	 */
-	public boolean isEnabled() {
+	public bool isEnabled() {
 		return tkhd.isTrackEnabled();
 	}
 
@@ -214,7 +214,7 @@ public abstract class Track {
 	 * Returns true if the track is used in the presentation.
 	 * @return true if the track is used
 	 */
-	public boolean isUsed() {
+	public bool isUsed() {
 		return tkhd.isTrackInMovie();
 	}
 
@@ -222,7 +222,7 @@ public abstract class Track {
 	 * Returns true if the track is used in previews.
 	 * @return true if the track is used in previews
 	 */
-	public boolean isUsedForPreview() {
+	public bool isUsedForPreview() {
 		return tkhd.isTrackInPreview();
 	}
 
@@ -257,7 +257,7 @@ public abstract class Track {
 	 * found.
 	 * @return true if the data is in this file (stream), false otherwise
 	 */
-	public boolean isInFile() {
+	public bool isInFile() {
 		return inFile;
 	}
 
@@ -314,7 +314,7 @@ public abstract class Track {
 	 * 
 	 * @return true if there is at least one more frame to read.
 	 */
-	public boolean hasMoreFrames() {
+	public bool hasMoreFrames() {
 		return currentFrame<frames.size();
 	}
 
