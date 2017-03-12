@@ -13,7 +13,7 @@ namespace MultiWaveDecoder
     readonly List<IBox> children = new List<IBox>();
 
     long size;
-    BoxType type;
+    protected BoxType type;
     long offset;
 
     public BoxImpl(string name)

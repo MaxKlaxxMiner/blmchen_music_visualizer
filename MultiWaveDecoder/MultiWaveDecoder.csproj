@@ -48,6 +48,7 @@
     <Compile Include="aac\mp4\boxes\BoxFactory.cs" />
     <Compile Include="aac\mp4\boxes\BoxImpl.cs" />
     <Compile Include="aac\mp4\boxes\BoxType.cs" />
+    <Compile Include="aac\mp4\boxes\impl\basic\SampleSizeBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\DecodingTimeToSampleBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\SampleToChunkBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\unkown\UnknownPinfBox.cs" />
@@ -269,7 +270,6 @@
     <Content Include="jaad\mp4\boxes\impl\samplegroupentries\SampleGroupDescriptionEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\samplegroupentries\VisualSampleGroupEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\SampleScaleBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\SampleSizeBox.java" />
     <Content Include="jaad\mp4\boxes\impl\SampleToGroupBox.java" />
     <Content Include="jaad\mp4\boxes\impl\SchemeTypeBox.java" />
     <Content Include="jaad\mp4\boxes\impl\ShadowSyncSampleBox.java" />

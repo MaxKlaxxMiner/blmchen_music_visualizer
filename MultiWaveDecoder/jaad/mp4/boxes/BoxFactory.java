@@ -54,7 +54,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(SAMPLE_DEPENDENCY_TYPE_BOX, SampleDependencyTypeBox.class);
 		BOX_CLASSES.put(SAMPLE_GROUP_DESCRIPTION_BOX, SampleGroupDescriptionBox.class);
 		BOX_CLASSES.put(SAMPLE_SCALE_BOX, SampleScaleBox.class);
-		BOX_CLASSES.put(SAMPLE_SIZE_BOX, SampleSizeBox.class);
 		BOX_CLASSES.put(SAMPLE_TO_GROUP_BOX, SampleToGroupBox.class);
 		BOX_CLASSES.put(SCHEME_TYPE_BOX, SchemeTypeBox.class);
 		BOX_CLASSES.put(SCHEME_INFORMATION_BOX, BoxImpl.class);
