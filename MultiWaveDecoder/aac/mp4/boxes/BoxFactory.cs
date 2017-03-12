@@ -47,6 +47,8 @@ namespace MultiWaveDecoder
           case BoxType.ESD_BOX: return new ESDBox();
           case BoxType.UNKOWN_SBTD_BOX: return new UnknownSbtdBox();
           case BoxType.UNKOWN_PINF_BOX: return new UnknownPinfBox();
+          case BoxType.DECODING_TIME_TO_SAMPLE_BOX: return new DecodingTimeToSampleBox();
+          case BoxType.SAMPLE_TO_CHUNK_BOX: return new SampleToChunkBox();
           default:
           {
             Console.ForegroundColor = ConsoleColor.Yellow;

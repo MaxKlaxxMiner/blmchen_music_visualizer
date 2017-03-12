@@ -19,7 +19,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(COMPOSITION_TIME_TO_SAMPLE_BOX, CompositionTimeToSampleBox.class);
 		BOX_CLASSES.put(COPYRIGHT_BOX, CopyrightBox.class);
 		BOX_CLASSES.put(DATA_ENTRY_URN_BOX, DataEntryUrnBox.class);
-		BOX_CLASSES.put(DECODING_TIME_TO_SAMPLE_BOX, DecodingTimeToSampleBox.class);
 		BOX_CLASSES.put(DEGRADATION_PRIORITY_BOX, DegradationPriorityBox.class);
 		BOX_CLASSES.put(EDIT_BOX, BoxImpl.class);
 		BOX_CLASSES.put(EDIT_LIST_BOX, EditListBox.class);
@@ -56,7 +55,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(SAMPLE_GROUP_DESCRIPTION_BOX, SampleGroupDescriptionBox.class);
 		BOX_CLASSES.put(SAMPLE_SCALE_BOX, SampleScaleBox.class);
 		BOX_CLASSES.put(SAMPLE_SIZE_BOX, SampleSizeBox.class);
-		BOX_CLASSES.put(SAMPLE_TO_CHUNK_BOX, SampleToChunkBox.class);
 		BOX_CLASSES.put(SAMPLE_TO_GROUP_BOX, SampleToGroupBox.class);
 		BOX_CLASSES.put(SCHEME_TYPE_BOX, SchemeTypeBox.class);
 		BOX_CLASSES.put(SCHEME_INFORMATION_BOX, BoxImpl.class);

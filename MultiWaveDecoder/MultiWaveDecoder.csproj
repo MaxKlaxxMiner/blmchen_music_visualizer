@@ -48,6 +48,8 @@
     <Compile Include="aac\mp4\boxes\BoxFactory.cs" />
     <Compile Include="aac\mp4\boxes\BoxImpl.cs" />
     <Compile Include="aac\mp4\boxes\BoxType.cs" />
+    <Compile Include="aac\mp4\boxes\impl\DecodingTimeToSampleBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\SampleToChunkBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\unkown\UnknownPinfBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\unkown\UnknownSbtdBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\SampleDescriptionBox.cs" />
@@ -191,7 +193,6 @@
     <Content Include="jaad\mp4\boxes\impl\CompositionTimeToSampleBox.java" />
     <Content Include="jaad\mp4\boxes\impl\CopyrightBox.java" />
     <Content Include="jaad\mp4\boxes\impl\DataEntryUrnBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\DecodingTimeToSampleBox.java" />
     <Content Include="jaad\mp4\boxes\impl\DegradationPriorityBox.java" />
     <Content Include="jaad\mp4\boxes\impl\drm\FairPlayDataBox.java" />
     <Content Include="jaad\mp4\boxes\impl\EditListBox.java" />
@@ -269,7 +270,6 @@
     <Content Include="jaad\mp4\boxes\impl\samplegroupentries\VisualSampleGroupEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\SampleScaleBox.java" />
     <Content Include="jaad\mp4\boxes\impl\SampleSizeBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\SampleToChunkBox.java" />
     <Content Include="jaad\mp4\boxes\impl\SampleToGroupBox.java" />
     <Content Include="jaad\mp4\boxes\impl\SchemeTypeBox.java" />
     <Content Include="jaad\mp4\boxes\impl\ShadowSyncSampleBox.java" />
