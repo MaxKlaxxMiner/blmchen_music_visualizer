@@ -854,10 +854,14 @@ namespace MultiWaveDecoder
     /// <summary>
     /// sbtd
     /// </summary>
-    UNKOWN_SBTD_BOX = 1935832164,
+    UNKNOWN_SBTD_BOX = 1935832164,
     /// <summary>
     /// pinf
     /// </summary>
-    UNKOWN_PINF_BOX = 1885957734,
+    UNKNOWN_PINF_BOX = 1885957734,
+    /// <summary>
+    /// ownr
+    /// </summary>
+    UNKNOWN_OWNR_BOX = 1870098034,
   }
 }

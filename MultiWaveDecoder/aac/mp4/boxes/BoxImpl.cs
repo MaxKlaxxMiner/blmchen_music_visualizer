@@ -9,7 +9,7 @@ namespace MultiWaveDecoder
   {
     readonly string name;
 
-    IBox parent;
+    protected IBox parent;
     readonly List<IBox> children = new List<IBox>();
 
     long size;

@@ -45,8 +45,8 @@ namespace MultiWaveDecoder
           case BoxType.SAMPLE_DESCRIPTION_BOX: return new SampleDescriptionBox();
           case BoxType.MP4A_SAMPLE_ENTRY: return new AudioSampleEntry("MPEG-4 Audio Sample Entry");
           case BoxType.ESD_BOX: return new ESDBox();
-          case BoxType.UNKOWN_SBTD_BOX: return new UnknownSbtdBox();
-          case BoxType.UNKOWN_PINF_BOX: return new UnknownPinfBox();
+          case BoxType.UNKNOWN_SBTD_BOX: return new UnknownSbtdBox();
+          case BoxType.UNKNOWN_PINF_BOX: return new UnknownPinfBox();
           case BoxType.DECODING_TIME_TO_SAMPLE_BOX: return new DecodingTimeToSampleBox();
           case BoxType.SAMPLE_TO_CHUNK_BOX: return new SampleToChunkBox();
           case BoxType.SAMPLE_SIZE_BOX: return new SampleSizeBox();
@@ -58,7 +58,19 @@ namespace MultiWaveDecoder
           case BoxType.ITUNES_METADATA_MEAN_BOX: return new ITunesMetadataMeanBox();
           case BoxType.FAIRPLAY_USER_NAME_BOX: return new FairPlayDataBox();
           case BoxType.ITUNES_METADATA_BOX: return new ITunesMetadataBox();
-//		BOX_CLASSES.put(FAIRPLAY_USER_NAME_BOX, FairPlayDataBox.class);
+          case BoxType.TRACK_NAME_BOX: return new BoxImpl("Track Name Box");
+          case BoxType.ARTIST_NAME_BOX: return new BoxImpl("Artist Name Box");
+          case BoxType.ALBUM_ARTIST_NAME_BOX: return new BoxImpl("Album Artist Name Box");
+          case BoxType.COMPOSER_NAME_BOX: return new BoxImpl("Composer Name Box");
+          case BoxType.ALBUM_NAME_BOX: return new BoxImpl("Album Name Box");
+          case BoxType.GENRE_BOX: return new GenreBox();
+          case BoxType.TRACK_NUMBER_BOX: return new BoxImpl("Track Number Box");
+          case BoxType.DISK_NUMBER_BOX: return new BoxImpl("Disk Number Box");
+          case BoxType.COMPILATION_PART_BOX: return new BoxImpl("Compilation Part Box");
+          case BoxType.GAPLESS_PLAYBACK_BOX: return new BoxImpl("Gapless Playback Box");
+          case BoxType.RELEASE_DATE_BOX: return new BoxImpl("Release Date Box");
+          case BoxType.ITUNES_PURCHASE_ACCOUNT_BOX: return new BoxImpl("iTunes Purchase Account Box");
+          case BoxType.UNKNOWN_OWNR_BOX: return new UnknownOwnrBox();
           default:
           {
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -73,6 +85,18 @@ namespace MultiWaveDecoder
       {
         Logger.LogBoxes("BoxFactory - could not call constructor for " + type + " '" + typeToString(type) + "': " + e);
         return new UnknownBox();
+      }
+    }
+
+    static string GetBoxPath(BoxType type, IBox parent)
+    {
+      if (parent == null)
+      {
+        return typeToString(type);
+      }
+      else
+      {
+        return GetBoxPath(parent.getType(), parent.getParent()) + "." + typeToString(type);
       }
     }
 
@@ -91,7 +115,7 @@ namespace MultiWaveDecoder
         if (size > parentLeft) throw new Exception("error while decoding box '" + type + "' ('" + typeToString(type) + "') at offset " + offset.ToString("N0") + ": box too large for parent");
       }
 
-      Logger.LogBoxes(typeToString(type));
+      Logger.LogBoxes("[" + offset.ToString("N0") + "] " + GetBoxPath(type, parent));
       var box = forType(type, inStream.getOffset());
       box.setParams(parent, size, type, offset);
       box.decode(inStream);
