@@ -48,6 +48,7 @@
     <Compile Include="aac\mp4\boxes\BoxFactory.cs" />
     <Compile Include="aac\mp4\boxes\BoxImpl.cs" />
     <Compile Include="aac\mp4\boxes\BoxType.cs" />
+    <Compile Include="aac\mp4\boxes\impl\basic\ChunkOffsetBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\SampleSizeBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\DecodingTimeToSampleBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\SampleToChunkBox.cs" />
@@ -188,7 +189,6 @@
     <Content Include="jaad\mp4\boxes\impl\BinaryXMLBox.java" />
     <Content Include="jaad\mp4\boxes\impl\BitRateBox.java" />
     <Content Include="jaad\mp4\boxes\impl\ChapterBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\ChunkOffsetBox.java" />
     <Content Include="jaad\mp4\boxes\impl\CleanApertureBox.java" />
     <Content Include="jaad\mp4\boxes\impl\ColorParameterBox.java" />
     <Content Include="jaad\mp4\boxes\impl\CompositionTimeToSampleBox.java" />
