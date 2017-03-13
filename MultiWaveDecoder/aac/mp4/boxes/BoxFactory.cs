@@ -46,7 +46,19 @@ namespace MultiWaveDecoder
           case BoxType.MP4A_SAMPLE_ENTRY: return new AudioSampleEntry("MPEG-4 Audio Sample Entry");
           case BoxType.ESD_BOX: return new ESDBox();
           case BoxType.UNKNOWN_SBTD_BOX: return new UnknownSbtdBox();
-          case BoxType.UNKNOWN_PINF_BOX: return new UnknownPinfBox();
+          case BoxType.ITUNES_PURCHASE_INFORMATION_BOX: return new BoxImpl("itunes Purchase Information Box");
+          case BoxType.ORIGINAL_FORMAT_BOX: return new OriginalFormatBox();
+          case BoxType.SCHEME_TYPE_BOX: return new SchemeTypeBox();
+          case BoxType.SCHEME_INFORMATION_BOX: return new BoxImpl("Scheme Information Box");
+          case BoxType.FAIRPLAY_USER_ID_BOX: return new FairPlayDataBox();
+          case BoxType.FAIRPLAY_CERT_BOX: return new FairPlayDataBox();
+          case BoxType.FAIRPLAY_RIGH_BOX: return new FairPlayDataBox();
+          case BoxType.FAIRPLAY_CHTB_BOX: return new FairPlayDataBox();
+          case BoxType.FAIRPLAY_SIGN_BOX: return new FairPlayDataBox();
+          case BoxType.FAIRPLAY_USER_NAME_BOX: return new FairPlayDataBox();
+
+          //case BoxType.FAIRPLAY_USER_ID_BOX
+
           case BoxType.DECODING_TIME_TO_SAMPLE_BOX: return new DecodingTimeToSampleBox();
           case BoxType.SAMPLE_TO_CHUNK_BOX: return new SampleToChunkBox();
           case BoxType.SAMPLE_SIZE_BOX: return new SampleSizeBox();
@@ -56,7 +68,6 @@ namespace MultiWaveDecoder
           case BoxType.ITUNES_META_LIST_BOX: return new BoxImpl("iTunes Meta List Box");
           case BoxType.CUSTOM_ITUNES_METADATA_BOX: return new BoxImpl("Custom iTunes Metadata Box");
           case BoxType.ITUNES_METADATA_MEAN_BOX: return new ITunesMetadataMeanBox();
-          case BoxType.FAIRPLAY_USER_NAME_BOX: return new FairPlayDataBox();
           case BoxType.ITUNES_METADATA_BOX: return new ITunesMetadataBox();
           case BoxType.TRACK_NAME_BOX: return new BoxImpl("Track Name Box");
           case BoxType.ARTIST_NAME_BOX: return new BoxImpl("Artist Name Box");
@@ -70,18 +81,18 @@ namespace MultiWaveDecoder
           case BoxType.GAPLESS_PLAYBACK_BOX: return new BoxImpl("Gapless Playback Box");
           case BoxType.RELEASE_DATE_BOX: return new BoxImpl("Release Date Box");
           case BoxType.ITUNES_PURCHASE_ACCOUNT_BOX: return new BoxImpl("iTunes Purchase Account Box");
-          case BoxType.UNKNOWN_OWNR_BOX: return new UnknownOwnrBox();
+          case BoxType.ITUNES_OWNER_NAME_BOX: return new BoxImpl("iTunes Owner Name Box");
           case BoxType.COPYRIGHT_BOX: return new CopyrightBox();
           case BoxType.ITUNES_CATALOGUE_ID_BOX: return new BoxImpl("iTunes Catalogue ID Box");
           case BoxType.RATING_BOX: return new RatingBox();
-          case BoxType.UNKNOWN_ATID_BOX: return new UnknownAtIdBox();
-          case BoxType.UNKNOWN_CMID_BOX: return new UnknownCmIdBox();
-          case BoxType.UNKNOWN_PLID_BOX: return new UnknownPlIdBox();
-          case BoxType.UNKNOWN_GEID_BOX: return new UnknownGeIdBox();
+          case BoxType.UNKNOWN_ATID_BOX: return new BoxImpl("Unknown 'atID' Box");
+          case BoxType.UNKNOWN_CMID_BOX: return new BoxImpl("Unknown 'cmID' Box");
+          case BoxType.UNKNOWN_PLID_BOX: return new BoxImpl("Unknown 'plID' Box");
+          case BoxType.UNKNOWN_GEID_BOX: return new BoxImpl("Unknown 'geID' Box");
           case BoxType.ITUNES_COUNTRY_CODE_BOX: return new BoxImpl("iTunes Country Code Box");
           case BoxType.META_TYPE_BOX: return new BoxImpl("Meta Type Box");
           case BoxType.PURCHASE_DATE_BOX: return new BoxImpl("Purchase Date Box");
-          case BoxType.UNKNOWN_XID_BOX: return new UnknownXidBox();
+          case BoxType.UNKNOWN_XID_BOX: return new BoxImpl("Unknown 'xid ' Box");
           case BoxType.COVER_BOX: return new BoxImpl("Cover Box");
           default:
           {
@@ -106,10 +117,8 @@ namespace MultiWaveDecoder
       {
         return typeToString(type);
       }
-      else
-      {
-        return GetBoxPath(parent.getType(), parent.getParent()) + "." + typeToString(type);
-      }
+
+      return GetBoxPath(parent.getType(), parent.getParent()) + "." + typeToString(type);
     }
 
     public static IBox parseBox(IBox parent, MP4InputStream inStream)

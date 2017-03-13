@@ -53,7 +53,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(SAMPLE_SCALE_BOX, SampleScaleBox.class);
 		BOX_CLASSES.put(SAMPLE_TO_GROUP_BOX, SampleToGroupBox.class);
 		BOX_CLASSES.put(SCHEME_TYPE_BOX, SchemeTypeBox.class);
-		BOX_CLASSES.put(SCHEME_INFORMATION_BOX, BoxImpl.class);
 		BOX_CLASSES.put(SHADOW_SYNC_SAMPLE_BOX, ShadowSyncSampleBox.class);
 		BOX_CLASSES.put(SUB_SAMPLE_INFORMATION_BOX, SubSampleInformationBox.class);
 		BOX_CLASSES.put(SYNC_SAMPLE_BOX, SyncSampleBox.class);
@@ -154,7 +153,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(OMA_KEY_MANAGEMENT_BOX, FullBox.class);
 		BOX_CLASSES.put(OMA_RIGHTS_OBJECT_BOX, OMARightsObjectBox.class);
 		BOX_CLASSES.put(OMA_TRANSACTION_TRACKING_BOX, OMATransactionTrackingBox.class);
-		BOX_CLASSES.put(FAIRPLAY_USER_ID_BOX, FairPlayDataBox.class);
 		BOX_CLASSES.put(FAIRPLAY_USER_KEY_BOX, FairPlayDataBox.class);
 		BOX_CLASSES.put(FAIRPLAY_IV_BOX, FairPlayDataBox.class);
 		BOX_CLASSES.put(FAIRPLAY_PRIVATE_KEY_BOX, FairPlayDataBox.class);
@@ -167,7 +165,6 @@ public class BoxFactory implements BoxTypes
 		PARAMETER.put(NULL_MEDIA_HEADER_BOX, new string[]{"Null Media Header Box"});
 		PARAMETER.put(PARTITION_ENTRY, new string[]{"Partition Entry"});
 		PARAMETER.put(PROTECTION_SCHEME_INFORMATION_BOX, new string[]{"Protection Scheme Information Box"});
-		PARAMETER.put(SCHEME_INFORMATION_BOX, new string[]{"Scheme Information Box"});
 		PARAMETER.put(TRACK_FRAGMENT_BOX, new string[]{"Track Fragment Box"});
 		PARAMETER.put(ALBUM_ARTIST_SORT_BOX, new string[]{"Album Artist Sort Box"});
 		PARAMETER.put(ALBUM_SORT_BOX, new string[]{"Album Sort Box"});

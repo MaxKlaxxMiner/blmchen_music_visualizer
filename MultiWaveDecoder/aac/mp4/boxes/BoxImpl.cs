@@ -27,7 +27,6 @@ namespace MultiWaveDecoder
     /// <param name="inStream">an input stream</param>
     public virtual void decode(MP4InputStream inStream)
     {
-
     }
 
     public void setParams(IBox parent, long size, BoxType type, long offset)
