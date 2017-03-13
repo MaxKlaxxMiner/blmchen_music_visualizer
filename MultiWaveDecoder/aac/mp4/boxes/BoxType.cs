@@ -848,6 +848,22 @@ namespace MultiWaveDecoder
     /// priv
     /// </summary>
     FAIRPLAY_PRIVATE_KEY_BOX = 1886546294,
+    /// <summary>
+    /// cert
+    /// </summary>
+    FAIRPLAY_CERT_BOX = 1667592820,
+    /// <summary>
+    /// righ
+    /// </summary>
+    FAIRPLAY_RIGH_BOX = 1919510376,
+    /// <summary>
+    /// chtb
+    /// </summary>
+    FAIRPLAY_CHTB_BOX = 1667789922,
+    /// <summary>
+    /// sign
+    /// </summary>
+    FAIRPLAY_SIGN_BOX = 1936287598,
 
     // --- Unkown Box-Types (from iTunes music files) ---
 
@@ -858,11 +874,11 @@ namespace MultiWaveDecoder
     /// <summary>
     /// pinf
     /// </summary>
-    UNKNOWN_PINF_BOX = 1885957734,
+    ITUNES_PURCHASE_INFORMATION_BOX = 1885957734,
     /// <summary>
     /// ownr
     /// </summary>
-    UNKNOWN_OWNR_BOX = 1870098034,
+    ITUNES_OWNER_NAME_BOX = 1870098034,
     /// <summary>
     /// atID
     /// </summary>

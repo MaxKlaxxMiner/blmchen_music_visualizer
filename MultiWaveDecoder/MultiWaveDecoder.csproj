@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +50,8 @@
     <Compile Include="aac\mp4\boxes\BoxImpl.cs" />
     <Compile Include="aac\mp4\boxes\BoxType.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\ChunkOffsetBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\basic\SchemeTypeBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\basic\OriginalFormatBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\CopyrightBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\MetaBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\SampleSizeBox.cs" />
@@ -59,13 +62,6 @@
     <Compile Include="aac\mp4\boxes\impl\meta\GenreBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\ITunesMetadataMeanBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\ITunesMetadataBox.cs" />
-    <Compile Include="aac\mp4\boxes\impl\unkown\UnknownXidBox.cs" />
-    <Compile Include="aac\mp4\boxes\impl\unkown\UnknownGeIdBox.cs" />
-    <Compile Include="aac\mp4\boxes\impl\unkown\UnknownPlIdBox.cs" />
-    <Compile Include="aac\mp4\boxes\impl\unkown\UnknownCmIdBox.cs" />
-    <Compile Include="aac\mp4\boxes\impl\unkown\UnknownAtIdBox.cs" />
-    <Compile Include="aac\mp4\boxes\impl\unkown\UnknownPinfBox.cs" />
-    <Compile Include="aac\mp4\boxes\impl\unkown\UnknownOwnrBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\unkown\UnknownSbtdBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\SampleDescriptionBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\DataEntryUrlBox.cs" />
@@ -81,7 +77,7 @@
     <Compile Include="aac\mp4\boxes\impl\basic\FreeSpaceBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\MediaDataBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\ProgressiveDownloadInformationBox.cs" />
-    <Compile Include="aac\mp4\boxes\UnknownBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\unkown\UnknownBox.cs" />
     <Compile Include="aac\mp4\MP4Container.cs" />
     <Compile Include="aac\mp4\MP4Exception.cs" />
     <Compile Include="aac\mp4\MP4InputStream.cs" />
@@ -247,7 +243,6 @@
     <Content Include="jaad\mp4\boxes\impl\oma\OMATransactionTrackingBox.java" />
     <Content Include="jaad\mp4\boxes\impl\oma\OMAURLBox.java" />
     <Content Include="jaad\mp4\boxes\impl\oma\package-info.java" />
-    <Content Include="jaad\mp4\boxes\impl\OriginalFormatBox.java" />
     <Content Include="jaad\mp4\boxes\impl\package-info.java" />
     <Content Include="jaad\mp4\boxes\impl\PaddingBitBox.java" />
     <Content Include="jaad\mp4\boxes\impl\PixelAspectRatioBox.java" />
@@ -277,7 +272,6 @@
     <Content Include="jaad\mp4\boxes\impl\samplegroupentries\VisualSampleGroupEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\SampleScaleBox.java" />
     <Content Include="jaad\mp4\boxes\impl\SampleToGroupBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\SchemeTypeBox.java" />
     <Content Include="jaad\mp4\boxes\impl\ShadowSyncSampleBox.java" />
     <Content Include="jaad\mp4\boxes\impl\SubSampleInformationBox.java" />
     <Content Include="jaad\mp4\boxes\impl\SyncSampleBox.java" />
