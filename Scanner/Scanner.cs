@@ -36,6 +36,8 @@ namespace Scanner
       //var m4AData = File.ReadAllBytes(finfo.FullName);
 
       Main.main(new[] { "-mp4", finfo.FullName, "test.wav" });
+
+      pictureBox1.Image = Main.coverPicture;
     }
 
     private void Scanner_Load(object sender, EventArgs e)

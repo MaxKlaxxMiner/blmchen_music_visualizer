@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+
 // ReSharper disable InconsistentNaming
 
 namespace MultiWaveDecoder
@@ -63,6 +65,22 @@ namespace MultiWaveDecoder
           if (pdin == null) pdin = (ProgressiveDownloadInformationBox)box;
         }
       }
+    }
+
+    public IBox GetBoxFromPath(string path)
+    {
+      var pathIds = path.Split('.').Where(str => str.Length == 4).Select(str => str[0] * 16777216 + str[1] * 65536 + str[2] * 256 + str[3]).ToArray();
+
+      if (pathIds.Length == 0 || (BoxType)pathIds[0] != moov.getType()) return null;
+
+      var tmp = moov;
+
+      for (int i = 1; tmp != null && i < pathIds.Length; i++)
+      {
+        tmp = tmp.getChild((BoxType)pathIds[i]);
+      }
+
+      return tmp;
     }
   }
 }
