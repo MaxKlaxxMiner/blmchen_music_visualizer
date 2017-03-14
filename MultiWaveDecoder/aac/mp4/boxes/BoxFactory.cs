@@ -101,6 +101,11 @@ namespace MultiWaveDecoder
           case BoxType.EDIT_LIST_BOX: return new EditListBox();
           case BoxType.VIDEO_MEDIA_HEADER_BOX: return new VideoMediaHeaderBox();
           case BoxType.MP4V_SAMPLE_ENTRY: return new VideoSampleEntry("MPEG-4 Video Sample Entry");
+          case BoxType.SYNC_SAMPLE_BOX: return new SyncSampleBox();
+          case BoxType.NULL_MEDIA_HEADER_BOX: return new FullBox("Null Media Header Box");
+          case BoxType.MPEG_SAMPLE_ENTRY: return new MPEGSampleEntry();
+          case BoxType.TRACK_REFERENCE_BOX: return new TrackReferenceBox();
+          case BoxType.OBJECT_DESCRIPTOR_BOX: return new ObjectDescriptorBox();
 
           default:
           {

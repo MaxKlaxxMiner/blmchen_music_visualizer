@@ -38,7 +38,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(MOVIE_FRAGMENT_RANDOM_ACCESS_BOX, BoxImpl.class);
 		BOX_CLASSES.put(MOVIE_FRAGMENT_RANDOM_ACCESS_OFFSET_BOX, MovieFragmentRandomAccessOffsetBox.class);
 		BOX_CLASSES.put(NERO_METADATA_TAGS_BOX, NeroMetadataTagsBox.class);
-		BOX_CLASSES.put(NULL_MEDIA_HEADER_BOX, FullBox.class);
 		BOX_CLASSES.put(ORIGINAL_FORMAT_BOX, OriginalFormatBox.class);
 		BOX_CLASSES.put(PADDING_BIT_BOX, PaddingBitBox.class);
 		BOX_CLASSES.put(PARTITION_ENTRY, BoxImpl.class);
@@ -53,7 +52,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(SCHEME_TYPE_BOX, SchemeTypeBox.class);
 		BOX_CLASSES.put(SHADOW_SYNC_SAMPLE_BOX, ShadowSyncSampleBox.class);
 		BOX_CLASSES.put(SUB_SAMPLE_INFORMATION_BOX, SubSampleInformationBox.class);
-		BOX_CLASSES.put(SYNC_SAMPLE_BOX, SyncSampleBox.class);
 		BOX_CLASSES.put(TRACK_EXTENDS_BOX, TrackExtendsBox.class);
 		BOX_CLASSES.put(TRACK_FRAGMENT_BOX, BoxImpl.class);
 		BOX_CLASSES.put(TRACK_FRAGMENT_HEADER_BOX, TrackFragmentHeaderBox.class);
@@ -62,7 +60,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(TRACK_REFERENCE_BOX, TrackReferenceBox.class);
 		BOX_CLASSES.put(TRACK_SELECTION_BOX, TrackSelectionBox.class);
 		BOX_CLASSES.put(XML_BOX, XMLBox.class);
-		BOX_CLASSES.put(OBJECT_DESCRIPTOR_BOX, ObjectDescriptorBox.class);
 		BOX_CLASSES.put(SAMPLE_DEPENDENCY_BOX, SampleDependencyBox.class);
 		BOX_CLASSES.put(ID3_TAG_BOX, ID3TagBox.class);
 		BOX_CLASSES.put(ITUNES_METADATA_BOX, ITunesMetadataBox.class);
@@ -118,7 +115,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(QCELP_SAMPLE_ENTRY, AudioSampleEntry.class);
 		BOX_CLASSES.put(SMV_SAMPLE_ENTRY, AudioSampleEntry.class);
 		BOX_CLASSES.put(ENCRYPTED_AUDIO_SAMPLE_ENTRY, AudioSampleEntry.class);
-		BOX_CLASSES.put(MPEG_SAMPLE_ENTRY, MPEGSampleEntry.class);
 		BOX_CLASSES.put(TEXT_METADATA_SAMPLE_ENTRY, TextMetadataSampleEntry.class);
 		BOX_CLASSES.put(XML_METADATA_SAMPLE_ENTRY, XMLMetadataSampleEntry.class);
 		BOX_CLASSES.put(RTP_HINT_SAMPLE_ENTRY, RTPHintSampleEntry.class);
@@ -153,7 +149,6 @@ public class BoxFactory implements BoxTypes
 		PARAMETER.put(MOVIE_EXTENDS_BOX, new string[]{"Movie Extends Box"});
 		PARAMETER.put(MOVIE_FRAGMENT_BOX, new string[]{"Movie Fragment Box"});
 		PARAMETER.put(MOVIE_FRAGMENT_RANDOM_ACCESS_BOX, new string[]{"Movie Fragment Random Access Box"});
-		PARAMETER.put(NULL_MEDIA_HEADER_BOX, new string[]{"Null Media Header Box"});
 		PARAMETER.put(PARTITION_ENTRY, new string[]{"Partition Entry"});
 		PARAMETER.put(PROTECTION_SCHEME_INFORMATION_BOX, new string[]{"Protection Scheme Information Box"});
 		PARAMETER.put(TRACK_FRAGMENT_BOX, new string[]{"Track Fragment Box"});

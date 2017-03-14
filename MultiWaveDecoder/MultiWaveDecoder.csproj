@@ -43,6 +43,9 @@
     <Compile Include="aac\Main.cs" />
     <Compile Include="aac\mp4\api\Movie.cs" />
     <Compile Include="aac\mp4\boxes\BoxUtils.cs" />
+    <Compile Include="aac\mp4\boxes\impl\basic\ObjectDescriptorBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\basic\TrackReferenceBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\basic\SyncSampleBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\VideoMediaHeaderBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\ESDBox.cs" />
     <Compile Include="aac\mp4\boxes\FullBox.cs" />
@@ -65,6 +68,7 @@
     <Compile Include="aac\mp4\boxes\impl\meta\GenreBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\ITunesMetadataMeanBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\ITunesMetadataBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\sampleentries\MPEGSampleEntry.cs" />
     <Compile Include="aac\mp4\boxes\impl\sampleentries\VideoSampleEntry.cs" />
     <Compile Include="aac\mp4\boxes\impl\unkown\UnknownSbtdBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\SampleDescriptionBox.cs" />
@@ -233,7 +237,6 @@
     <Content Include="jaad\mp4\boxes\impl\MovieExtendsHeaderBox.java" />
     <Content Include="jaad\mp4\boxes\impl\MovieFragmentHeaderBox.java" />
     <Content Include="jaad\mp4\boxes\impl\MovieFragmentRandomAccessOffsetBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\ObjectDescriptorBox.java" />
     <Content Include="jaad\mp4\boxes\impl\oma\OMAAccessUnitFormatBox.java" />
     <Content Include="jaad\mp4\boxes\impl\oma\OMACommonHeadersBox.java" />
     <Content Include="jaad\mp4\boxes\impl\oma\OMAContentIDBox.java" />
@@ -258,7 +261,6 @@
     <Content Include="jaad\mp4\boxes\impl\sampleentries\codec\SMVSpecificBox.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\FDHintSampleEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\MetadataSampleEntry.java" />
-    <Content Include="jaad\mp4\boxes\impl\sampleentries\MPEGSampleEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\RTPHintSampleEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\TextMetadataSampleEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\XMLMetadataSampleEntry.java" />
@@ -271,12 +273,10 @@
     <Content Include="jaad\mp4\boxes\impl\SampleToGroupBox.java" />
     <Content Include="jaad\mp4\boxes\impl\ShadowSyncSampleBox.java" />
     <Content Include="jaad\mp4\boxes\impl\SubSampleInformationBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\SyncSampleBox.java" />
     <Content Include="jaad\mp4\boxes\impl\TrackExtendsBox.java" />
     <Content Include="jaad\mp4\boxes\impl\TrackFragmentHeaderBox.java" />
     <Content Include="jaad\mp4\boxes\impl\TrackFragmentRandomAccessBox.java" />
     <Content Include="jaad\mp4\boxes\impl\TrackFragmentRunBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\TrackReferenceBox.java" />
     <Content Include="jaad\mp4\boxes\impl\TrackSelectionBox.java" />
     <Content Include="jaad\mp4\boxes\impl\XMLBox.java" />
     <Content Include="jaad\mp4\MP4Container.java" />
