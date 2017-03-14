@@ -69,7 +69,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(COMPOSER_SORT_BOX, BoxImpl.class);
 		BOX_CLASSES.put(CUSTOM_GENRE_BOX, BoxImpl.class);
 		BOX_CLASSES.put(DESCRIPTION_BOX, BoxImpl.class);
-		BOX_CLASSES.put(ENCODER_NAME_BOX, EncoderBox.class);
 		BOX_CLASSES.put(EPISODE_GLOBAL_UNIQUE_ID_BOX, BoxImpl.class);
 		BOX_CLASSES.put(GROUPING_BOX, BoxImpl.class);
 		BOX_CLASSES.put(HD_VIDEO_BOX, BoxImpl.class);

@@ -117,6 +117,7 @@ namespace MultiWaveDecoder
           case BoxType.AVC_SPECIFIC_BOX: return new AVCSpecificBox();
           case BoxType.UNKNOWN_WAVE_BOX: return new BoxImpl("Unknown 'wave' Box");
           case BoxType.REQUIREMENT_BOX: return new RequirementBox();
+          case BoxType.ENCODER_NAME_BOX: return new EncoderBox();
 
           default:
           {

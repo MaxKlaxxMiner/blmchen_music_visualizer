@@ -27,9 +27,7 @@ namespace Scanner
     /// Größe: 7,43 MB (7.797.942 Bytes)
     /// Dauer: 3:34
     /// </summary>
-    //static readonly string TestFileM4A = Environment.ExpandEnvironmentVariables(MusicPathiTunes + @"Blümchen\Für immer und ewig\2-01 Heut' ist mein Tag.m4a");
-
-    static readonly string TestFileM4A = @"C:\Users\Max\Desktop\prog\Spiele\blmchen_music_visualizer\TestFiles\zodiac_audio.mp4";
+    static readonly string TestFileM4A = Environment.ExpandEnvironmentVariables(MusicPathiTunes + @"Blümchen\Für immer und ewig\2-01 Heut' ist mein Tag.m4a");
 
     public Scanner()
     {
