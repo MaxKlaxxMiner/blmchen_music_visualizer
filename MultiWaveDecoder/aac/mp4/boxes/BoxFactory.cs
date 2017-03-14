@@ -115,6 +115,8 @@ namespace MultiWaveDecoder
           case BoxType.THREE_GPP_RECORDING_YEAR_BOX: return new ThreeGPPRecordingYearBox();
           case BoxType.AVC_SAMPLE_ENTRY: return new VideoSampleEntry("AVC Video Sample Entry");
           case BoxType.AVC_SPECIFIC_BOX: return new AVCSpecificBox();
+          case BoxType.UNKNOWN_WAVE_BOX: return new BoxImpl("Unknown 'wave' Box");
+          case BoxType.REQUIREMENT_BOX: return new RequirementBox();
 
           default:
           {
@@ -150,6 +152,10 @@ namespace MultiWaveDecoder
       var type = (BoxType)(uint)inStream.readBytes(4);
       if (size == 1) size = inStream.readBytes(8);
       if (type == BoxType.EXTENDED_TYPE) inStream.skipBytes(16);
+      if (type == 0)
+      {
+        return new UnknownBox();
+      }
 
       // --- error protection ---
       if (parent != null)

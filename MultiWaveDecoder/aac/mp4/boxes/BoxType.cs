@@ -903,5 +903,9 @@ namespace MultiWaveDecoder
     /// hnti
     /// </summary>
     UNKNOWN_HNTI_BOX = 1752069225,
+    /// <summary>
+    /// wave
+    /// </summary>
+    UNKNOWN_WAVE_BOX = 2002876005,
   }
 }

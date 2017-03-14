@@ -64,6 +64,7 @@
     <Compile Include="aac\mp4\boxes\impl\basic\DecodingTimeToSampleBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\SampleToChunkBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\drm\FairPlayDataBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\meta\RequirementBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\ThreeGPPRecordingYearBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\ThreeGPPAlbumBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\ThreeGPPMetadataBox.cs" />
@@ -72,7 +73,7 @@
     <Compile Include="aac\mp4\boxes\impl\meta\GenreBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\ITunesMetadataMeanBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\ITunesMetadataBox.cs" />
-    <Compile Include="aac\mp4\boxes\impl\sampleentries\codec\Class1.cs" />
+    <Compile Include="aac\mp4\boxes\impl\sampleentries\codec\AVCSpecificBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\sampleentries\codec\CodecSpecificBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\sampleentries\RTPHintSampleEntry.cs" />
     <Compile Include="aac\mp4\boxes\impl\sampleentries\MPEGSampleEntry.cs" />
@@ -234,7 +235,6 @@
     <Content Include="jaad\mp4\boxes\impl\meta\ID3TagBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\ITunesMetadataNameBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\NeroMetadataTagsBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\meta\RequirementBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\ThreeGPPClassificationBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\ThreeGPPKeywordsBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\ThreeGPPLocationBox.java" />
