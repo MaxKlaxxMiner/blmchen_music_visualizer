@@ -65,6 +65,7 @@ namespace MultiWaveDecoder
         case TYPE_DECODER_CONFIG_DESCRIPTOR: return new DecoderConfigDescriptor();
         case TYPE_DECODER_SPECIFIC_INFO: return new DecoderSpecificInfo();
         case TYPE_SL_CONFIG_DESCRIPTOR: return new SLConfigDescriptor();
+        case TYPE_ES_ID_INC: return new DecoderEsId();
         default:
         {
           Logger.LogBoxes("Unknown descriptor type: " + tag);

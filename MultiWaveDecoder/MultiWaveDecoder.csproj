@@ -91,6 +91,7 @@
     <Compile Include="aac\mp4\MP4Container.cs" />
     <Compile Include="aac\mp4\MP4Exception.cs" />
     <Compile Include="aac\mp4\MP4InputStream.cs" />
+    <Compile Include="aac\mp4\od\DecoderEsId.cs" />
     <Compile Include="aac\mp4\od\DecoderSpecificInfo.cs" />
     <Compile Include="aac\mp4\od\DecoderConfigDescriptor.cs" />
     <Compile Include="aac\mp4\od\InitialObjectDescriptor.cs" />
