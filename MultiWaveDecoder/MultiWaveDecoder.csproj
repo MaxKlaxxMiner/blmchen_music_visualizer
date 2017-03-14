@@ -101,7 +101,6 @@
     <Content Include="jaad\aac\DecoderConfig.java" />
     <Content Include="jaad\aac\error\BitsBuffer.java" />
     <Content Include="jaad\aac\error\HCR.java" />
-    <Content Include="jaad\aac\error\package-info.java" />
     <Content Include="jaad\aac\error\RVLC.java" />
     <Content Include="jaad\aac\error\RVLCTables.java" />
     <Content Include="jaad\aac\filterbank\FFT.java" />
@@ -210,7 +209,6 @@
     <Content Include="jaad\mp4\boxes\impl\fd\FECReservoirBox.java" />
     <Content Include="jaad\mp4\boxes\impl\fd\FilePartitionBox.java" />
     <Content Include="jaad\mp4\boxes\impl\fd\GroupIDToNameBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\fd\package-info.java" />
     <Content Include="jaad\mp4\boxes\impl\HintMediaHeaderBox.java" />
     <Content Include="jaad\mp4\boxes\impl\IPMPControlBox.java" />
     <Content Include="jaad\mp4\boxes\impl\IPMPInfoBox.java" />
@@ -242,8 +240,6 @@
     <Content Include="jaad\mp4\boxes\impl\oma\OMARightsObjectBox.java" />
     <Content Include="jaad\mp4\boxes\impl\oma\OMATransactionTrackingBox.java" />
     <Content Include="jaad\mp4\boxes\impl\oma\OMAURLBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\oma\package-info.java" />
-    <Content Include="jaad\mp4\boxes\impl\package-info.java" />
     <Content Include="jaad\mp4\boxes\impl\PaddingBitBox.java" />
     <Content Include="jaad\mp4\boxes\impl\PixelAspectRatioBox.java" />
     <Content Include="jaad\mp4\boxes\impl\PrimaryItemBox.java" />
@@ -285,7 +281,6 @@
     <Content Include="jaad\mp4\boxes\impl\XMLBox.java" />
     <Content Include="jaad\mp4\MP4Container.java" />
     <Content Include="jaad\mp4\MP4InputStream.java" />
-    <Content Include="jaad\mp4\package-info.java" />
     <Content Include="jaad\Play.java" />
     <Content Include="jaad\Radio.java" />
     <Content Include="jaad\spi\javasound\AACAudioFileReader.java" />
@@ -293,8 +288,6 @@
     <Content Include="jaad\spi\javasound\AsynchronousAudioInputStream.java" />
     <Content Include="jaad\spi\javasound\CircularBuffer.java" />
     <Content Include="jaad\spi\javasound\MP4AudioInputStream.java" />
-    <Content Include="jaad\spi\javasound\package-info.java" />
-    <Content Include="jaad\spi\package-info.java" />
     <Content Include="jaad\util\wav\WaveFileWriter.java" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
