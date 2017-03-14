@@ -97,6 +97,8 @@ namespace MultiWaveDecoder
           case BoxType.ALBUM_SORT_BOX: return new BoxImpl("Album Sort Box");
           case BoxType.ARTIST_SORT_BOX: return new BoxImpl("Artist Sort Box");
           case BoxType.ENCODER_TOOL_BOX: return new EncoderBox();
+          case BoxType.EDIT_BOX: return new BoxImpl("Edit Box");
+          case BoxType.EDIT_LIST_BOX: return new EditListBox();
 
           default:
           {

@@ -18,8 +18,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(COMPOSITION_TIME_TO_SAMPLE_BOX, CompositionTimeToSampleBox.class);
 		BOX_CLASSES.put(DATA_ENTRY_URN_BOX, DataEntryUrnBox.class);
 		BOX_CLASSES.put(DEGRADATION_PRIORITY_BOX, DegradationPriorityBox.class);
-		BOX_CLASSES.put(EDIT_BOX, BoxImpl.class);
-		BOX_CLASSES.put(EDIT_LIST_BOX, EditListBox.class);
 		BOX_CLASSES.put(FD_ITEM_INFORMATION_BOX, FDItemInformationBox.class);
 		BOX_CLASSES.put(FD_SESSION_GROUP_BOX, FDSessionGroupBox.class);
 		BOX_CLASSES.put(FEC_RESERVOIR_BOX, FECReservoirBox.class);
@@ -154,7 +152,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(FAIRPLAY_PRIVATE_KEY_BOX, FairPlayDataBox.class);
 		//parameter
 		PARAMETER.put(ADDITIONAL_METADATA_CONTAINER_BOX, new string[]{"Additional Metadata Container Box"});
-		PARAMETER.put(EDIT_BOX, new string[]{"Edit Box"});
 		PARAMETER.put(MOVIE_EXTENDS_BOX, new string[]{"Movie Extends Box"});
 		PARAMETER.put(MOVIE_FRAGMENT_BOX, new string[]{"Movie Fragment Box"});
 		PARAMETER.put(MOVIE_FRAGMENT_RANDOM_ACCESS_BOX, new string[]{"Movie Fragment Random Access Box"});

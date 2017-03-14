@@ -43,13 +43,14 @@
     <Compile Include="aac\Main.cs" />
     <Compile Include="aac\mp4\api\Movie.cs" />
     <Compile Include="aac\mp4\boxes\BoxUtils.cs" />
-    <Compile Include="aac\mp4\boxes\ESDBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\basic\ESDBox.cs" />
     <Compile Include="aac\mp4\boxes\FullBox.cs" />
     <Compile Include="aac\mp4\boxes\IBox.cs" />
     <Compile Include="aac\mp4\boxes\BoxFactory.cs" />
     <Compile Include="aac\mp4\boxes\BoxImpl.cs" />
     <Compile Include="aac\mp4\boxes\BoxType.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\ChunkOffsetBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\basic\EditListBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\SchemeTypeBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\OriginalFormatBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\CopyrightBox.cs" />
@@ -203,7 +204,6 @@
     <Content Include="jaad\mp4\boxes\impl\CompositionTimeToSampleBox.java" />
     <Content Include="jaad\mp4\boxes\impl\DataEntryUrnBox.java" />
     <Content Include="jaad\mp4\boxes\impl\DegradationPriorityBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\EditListBox.java" />
     <Content Include="jaad\mp4\boxes\impl\fd\Base64Decoder.java" />
     <Content Include="jaad\mp4\boxes\impl\fd\FDItemInformationBox.java" />
     <Content Include="jaad\mp4\boxes\impl\fd\FDSessionGroupBox.java" />
