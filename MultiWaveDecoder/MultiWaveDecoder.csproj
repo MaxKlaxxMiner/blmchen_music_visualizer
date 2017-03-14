@@ -43,6 +43,7 @@
     <Compile Include="aac\Main.cs" />
     <Compile Include="aac\mp4\api\Movie.cs" />
     <Compile Include="aac\mp4\boxes\BoxUtils.cs" />
+    <Compile Include="aac\mp4\boxes\impl\basic\VideoMediaHeaderBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\ESDBox.cs" />
     <Compile Include="aac\mp4\boxes\FullBox.cs" />
     <Compile Include="aac\mp4\boxes\IBox.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="aac\mp4\boxes\impl\meta\GenreBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\ITunesMetadataMeanBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\ITunesMetadataBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\sampleentries\VideoSampleEntry.cs" />
     <Compile Include="aac\mp4\boxes\impl\unkown\UnknownSbtdBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\SampleDescriptionBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\DataEntryUrlBox.cs" />
@@ -259,7 +261,6 @@
     <Content Include="jaad\mp4\boxes\impl\sampleentries\MPEGSampleEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\RTPHintSampleEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\TextMetadataSampleEntry.java" />
-    <Content Include="jaad\mp4\boxes\impl\sampleentries\VideoSampleEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\XMLMetadataSampleEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\SampleGroupDescriptionBox.java" />
     <Content Include="jaad\mp4\boxes\impl\samplegroupentries\AudioSampleGroupEntry.java" />
@@ -277,7 +278,6 @@
     <Content Include="jaad\mp4\boxes\impl\TrackFragmentRunBox.java" />
     <Content Include="jaad\mp4\boxes\impl\TrackReferenceBox.java" />
     <Content Include="jaad\mp4\boxes\impl\TrackSelectionBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\VideoMediaHeaderBox.java" />
     <Content Include="jaad\mp4\boxes\impl\XMLBox.java" />
     <Content Include="jaad\mp4\MP4Container.java" />
     <Content Include="jaad\mp4\MP4InputStream.java" />

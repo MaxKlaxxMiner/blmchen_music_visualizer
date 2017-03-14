@@ -61,7 +61,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(TRACK_FRAGMENT_RUN_BOX, TrackFragmentRunBox.class);
 		BOX_CLASSES.put(TRACK_REFERENCE_BOX, TrackReferenceBox.class);
 		BOX_CLASSES.put(TRACK_SELECTION_BOX, TrackSelectionBox.class);
-		BOX_CLASSES.put(VIDEO_MEDIA_HEADER_BOX, VideoMediaHeaderBox.class);
 		BOX_CLASSES.put(XML_BOX, XMLBox.class);
 		BOX_CLASSES.put(OBJECT_DESCRIPTOR_BOX, ObjectDescriptorBox.class);
 		BOX_CLASSES.put(SAMPLE_DEPENDENCY_BOX, SampleDependencyBox.class);
@@ -107,7 +106,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(GOOGLE_SOURCE_DATA_BOX, BoxImpl.class);
 		BOX_CLASSES.put(GOOGLE_START_TIME_BOX, BoxImpl.class);
 		BOX_CLASSES.put(GOOGLE_TRACK_DURATION_BOX, BoxImpl.class);
-		BOX_CLASSES.put(MP4V_SAMPLE_ENTRY, VideoSampleEntry.class);
 		BOX_CLASSES.put(H263_SAMPLE_ENTRY, VideoSampleEntry.class);
 		BOX_CLASSES.put(ENCRYPTED_VIDEO_SAMPLE_ENTRY, VideoSampleEntry.class);
 		BOX_CLASSES.put(AVC_SAMPLE_ENTRY, VideoSampleEntry.class);
@@ -192,7 +190,6 @@ public class BoxFactory implements BoxTypes
 		PARAMETER.put(GOOGLE_SOURCE_DATA_BOX, new string[]{"Google Source Data Box"});
 		PARAMETER.put(GOOGLE_START_TIME_BOX, new string[]{"Google Start Time Box"});
 		PARAMETER.put(GOOGLE_TRACK_DURATION_BOX, new string[]{"Google Track Duration Box"});
-		PARAMETER.put(MP4V_SAMPLE_ENTRY, new string[]{"MPEG-4 Video Sample Entry"});
 		PARAMETER.put(H263_SAMPLE_ENTRY, new string[]{"H263 Video Sample Entry"});
 		PARAMETER.put(ENCRYPTED_VIDEO_SAMPLE_ENTRY, new string[]{"Encrypted Video Sample Entry"});
 		PARAMETER.put(AVC_SAMPLE_ENTRY, new string[]{"AVC Video Sample Entry"});

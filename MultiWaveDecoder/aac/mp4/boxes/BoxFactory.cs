@@ -99,6 +99,8 @@ namespace MultiWaveDecoder
           case BoxType.ENCODER_TOOL_BOX: return new EncoderBox();
           case BoxType.EDIT_BOX: return new BoxImpl("Edit Box");
           case BoxType.EDIT_LIST_BOX: return new EditListBox();
+          case BoxType.VIDEO_MEDIA_HEADER_BOX: return new VideoMediaHeaderBox();
+          case BoxType.MP4V_SAMPLE_ENTRY: return new VideoSampleEntry("MPEG-4 Video Sample Entry");
 
           default:
           {
