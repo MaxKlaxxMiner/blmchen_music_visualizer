@@ -69,6 +69,7 @@
     <Compile Include="aac\mp4\boxes\impl\meta\GenreBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\ITunesMetadataMeanBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\ITunesMetadataBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\sampleentries\RTPHintSampleEntry.cs" />
     <Compile Include="aac\mp4\boxes\impl\sampleentries\MPEGSampleEntry.cs" />
     <Compile Include="aac\mp4\boxes\impl\sampleentries\VideoSampleEntry.cs" />
     <Compile Include="aac\mp4\boxes\impl\unkown\UnknownSbtdBox.cs" />
@@ -261,7 +262,6 @@
     <Content Include="jaad\mp4\boxes\impl\sampleentries\codec\SMVSpecificBox.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\FDHintSampleEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\MetadataSampleEntry.java" />
-    <Content Include="jaad\mp4\boxes\impl\sampleentries\RTPHintSampleEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\TextMetadataSampleEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\XMLMetadataSampleEntry.java" />
     <Content Include="jaad\mp4\boxes\impl\SampleGroupDescriptionBox.java" />

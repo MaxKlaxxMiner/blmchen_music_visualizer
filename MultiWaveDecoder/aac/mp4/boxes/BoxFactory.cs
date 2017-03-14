@@ -107,6 +107,8 @@ namespace MultiWaveDecoder
           case BoxType.TRACK_REFERENCE_BOX: return new TrackReferenceBox();
           case BoxType.OBJECT_DESCRIPTOR_BOX: return new ObjectDescriptorBox();
           case BoxType.COMPOSITION_TIME_TO_SAMPLE_BOX: return new CompositionTimeToSampleBox();
+          case BoxType.UNKNOWN_HNTI_BOX: return new BoxImpl("Unknown 'hnti' Box");
+          case BoxType.RTP_HINT_SAMPLE_ENTRY: return new RTPHintSampleEntry();
 
           default:
           {

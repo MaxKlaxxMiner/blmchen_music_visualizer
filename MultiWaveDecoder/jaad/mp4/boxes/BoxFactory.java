@@ -116,7 +116,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(ENCRYPTED_AUDIO_SAMPLE_ENTRY, AudioSampleEntry.class);
 		BOX_CLASSES.put(TEXT_METADATA_SAMPLE_ENTRY, TextMetadataSampleEntry.class);
 		BOX_CLASSES.put(XML_METADATA_SAMPLE_ENTRY, XMLMetadataSampleEntry.class);
-		BOX_CLASSES.put(RTP_HINT_SAMPLE_ENTRY, RTPHintSampleEntry.class);
 		BOX_CLASSES.put(FD_HINT_SAMPLE_ENTRY, FDHintSampleEntry.class);
 		BOX_CLASSES.put(H263_SPECIFIC_BOX, H263SpecificBox.class);
 		BOX_CLASSES.put(AVC_SPECIFIC_BOX, AVCSpecificBox.class);

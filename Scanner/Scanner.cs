@@ -29,7 +29,7 @@ namespace Scanner
     /// </summary>
     //static readonly string TestFileM4A = Environment.ExpandEnvironmentVariables(MusicPathiTunes + @"Blümchen\Für immer und ewig\2-01 Heut' ist mein Tag.m4a");
 
-    static readonly string TestFileM4A = @"C:\Users\Max\Desktop\prog\Spiele\blmchen_music_visualizer\TestFiles\ct_faac.mp4";
+    static readonly string TestFileM4A = @"C:\Users\Max\Desktop\prog\Spiele\blmchen_music_visualizer\TestFiles\ct_nero-heaac.mp4";
 
     public Scanner()
     {
