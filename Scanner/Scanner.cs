@@ -17,6 +17,8 @@ namespace Scanner
     /// </summary>
     const string MusicPathiTunes = @"%USERPROFILE%\Music\iTunes\iTunes Media\Music\";
 
+    // --- Testfiles: http://samples.mplayerhq.hu ---
+
     /// <summary>
     /// Album: Blümchen - Für immer und ewig
     /// Interpret: Blümchen
@@ -25,7 +27,9 @@ namespace Scanner
     /// Größe: 7,43 MB (7.797.942 Bytes)
     /// Dauer: 3:34
     /// </summary>
-    static readonly string TestFileM4A = Environment.ExpandEnvironmentVariables(MusicPathiTunes + @"Blümchen\Für immer und ewig\2-01 Heut' ist mein Tag.m4a");
+    //static readonly string TestFileM4A = Environment.ExpandEnvironmentVariables(MusicPathiTunes + @"Blümchen\Für immer und ewig\2-01 Heut' ist mein Tag.m4a");
+
+    static readonly string TestFileM4A = @"C:\Users\Max\Desktop\prog\Spiele\blmchen_music_visualizer\TestFiles\bad_concat.mp4";
 
     public Scanner()
     {

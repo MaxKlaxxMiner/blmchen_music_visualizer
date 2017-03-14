@@ -1,8 +1,6 @@
 ﻿// ReSharper disable InconsistentNaming
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace MultiWaveDecoder
 {
@@ -93,6 +91,13 @@ namespace MultiWaveDecoder
           case BoxType.PURCHASE_DATE_BOX: return new BoxImpl("Purchase Date Box");
           case BoxType.UNKNOWN_XID_BOX: return new BoxImpl("Unknown 'xid ' Box");
           case BoxType.COVER_BOX: return new BoxImpl("Cover Box");
+
+          // --- extra ---
+          case BoxType.TRACK_SORT_BOX: return new BoxImpl("Track Sort Box");
+          case BoxType.ALBUM_SORT_BOX: return new BoxImpl("Album Sort Box");
+          case BoxType.ARTIST_SORT_BOX: return new BoxImpl("Artist Sort Box");
+          case BoxType.ENCODER_TOOL_BOX: return new EncoderBox();
+
           default:
           {
             Console.ForegroundColor = ConsoleColor.Yellow;

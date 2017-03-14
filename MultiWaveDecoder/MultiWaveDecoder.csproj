@@ -58,6 +58,7 @@
     <Compile Include="aac\mp4\boxes\impl\basic\DecodingTimeToSampleBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\SampleToChunkBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\drm\FairPlayDataBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\meta\EncoderBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\RatingBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\GenreBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\ITunesMetadataMeanBox.cs" />
@@ -217,7 +218,6 @@
     <Content Include="jaad\mp4\boxes\impl\ItemLocationBox.java" />
     <Content Include="jaad\mp4\boxes\impl\ItemProtectionBox.java" />
     <Content Include="jaad\mp4\boxes\impl\MetaBoxRelationBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\meta\EncoderBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\ID3TagBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\ITunesMetadataNameBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\NeroMetadataTagsBox.java" />

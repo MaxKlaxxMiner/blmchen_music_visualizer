@@ -71,15 +71,12 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(ITUNES_METADATA_BOX, ITunesMetadataBox.class);
 		BOX_CLASSES.put(ITUNES_METADATA_NAME_BOX, ITunesMetadataNameBox.class);
 		BOX_CLASSES.put(ALBUM_ARTIST_SORT_BOX, BoxImpl.class);
-		BOX_CLASSES.put(ALBUM_SORT_BOX, BoxImpl.class);
-		BOX_CLASSES.put(ARTIST_SORT_BOX, BoxImpl.class);
 		BOX_CLASSES.put(CATEGORY_BOX, BoxImpl.class);
 		BOX_CLASSES.put(COMMENTS_BOX, BoxImpl.class);
 		BOX_CLASSES.put(COMPOSER_SORT_BOX, BoxImpl.class);
 		BOX_CLASSES.put(CUSTOM_GENRE_BOX, BoxImpl.class);
 		BOX_CLASSES.put(DESCRIPTION_BOX, BoxImpl.class);
 		BOX_CLASSES.put(ENCODER_NAME_BOX, EncoderBox.class);
-		BOX_CLASSES.put(ENCODER_TOOL_BOX, EncoderBox.class);
 		BOX_CLASSES.put(EPISODE_GLOBAL_UNIQUE_ID_BOX, BoxImpl.class);
 		BOX_CLASSES.put(GROUPING_BOX, BoxImpl.class);
 		BOX_CLASSES.put(HD_VIDEO_BOX, BoxImpl.class);
@@ -91,7 +88,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(PODCAST_URL_BOX, BoxImpl.class);
 		BOX_CLASSES.put(REQUIREMENT_BOX, RequirementBox.class);
 		BOX_CLASSES.put(TEMPO_BOX, BoxImpl.class);
-		BOX_CLASSES.put(TRACK_SORT_BOX, BoxImpl.class);
 		BOX_CLASSES.put(TV_EPISODE_BOX, BoxImpl.class);
 		BOX_CLASSES.put(TV_EPISODE_NUMBER_BOX, BoxImpl.class);
 		BOX_CLASSES.put(TV_NETWORK_NAME_BOX, BoxImpl.class);
@@ -167,8 +163,6 @@ public class BoxFactory implements BoxTypes
 		PARAMETER.put(PROTECTION_SCHEME_INFORMATION_BOX, new string[]{"Protection Scheme Information Box"});
 		PARAMETER.put(TRACK_FRAGMENT_BOX, new string[]{"Track Fragment Box"});
 		PARAMETER.put(ALBUM_ARTIST_SORT_BOX, new string[]{"Album Artist Sort Box"});
-		PARAMETER.put(ALBUM_SORT_BOX, new string[]{"Album Sort Box"});
-		PARAMETER.put(ARTIST_SORT_BOX, new string[]{"Artist Sort Box"});
 		PARAMETER.put(CATEGORY_BOX, new string[]{"Category Box"});
 		PARAMETER.put(COMMENTS_BOX, new string[]{"Comments Box"});
 		PARAMETER.put(COMPOSER_SORT_BOX, new string[]{"Composer Sort Box"});
@@ -184,7 +178,6 @@ public class BoxFactory implements BoxTypes
 		PARAMETER.put(PODCAST_BOX, new string[]{"Podcast Box"});
 		PARAMETER.put(PODCAST_URL_BOX, new string[]{"Podcast URL Box"});
 		PARAMETER.put(TEMPO_BOX, new string[]{"Tempo Box"});
-		PARAMETER.put(TRACK_SORT_BOX, new string[]{"Track Sort Box"});
 		PARAMETER.put(TV_EPISODE_BOX, new string[]{"TV Episode Box"});
 		PARAMETER.put(TV_EPISODE_NUMBER_BOX, new string[]{"TV Episode Number Box"});
 		PARAMETER.put(TV_NETWORK_NAME_BOX, new string[]{"TV Network Name Box"});
