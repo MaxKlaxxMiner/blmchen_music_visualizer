@@ -72,6 +72,8 @@
     <Compile Include="aac\mp4\boxes\impl\meta\GenreBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\ITunesMetadataMeanBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\ITunesMetadataBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\sampleentries\codec\Class1.cs" />
+    <Compile Include="aac\mp4\boxes\impl\sampleentries\codec\CodecSpecificBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\sampleentries\RTPHintSampleEntry.cs" />
     <Compile Include="aac\mp4\boxes\impl\sampleentries\MPEGSampleEntry.cs" />
     <Compile Include="aac\mp4\boxes\impl\sampleentries\VideoSampleEntry.cs" />
@@ -254,8 +256,6 @@
     <Content Include="jaad\mp4\boxes\impl\SampleDependencyTypeBox.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\codec\AC3SpecificBox.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\codec\AMRSpecificBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\sampleentries\codec\AVCSpecificBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\sampleentries\codec\CodecSpecificBox.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\codec\EAC3SpecificBox.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\codec\EVRCSpecificBox.java" />
     <Content Include="jaad\mp4\boxes\impl\sampleentries\codec\H263SpecificBox.java" />

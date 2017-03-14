@@ -113,6 +113,8 @@ namespace MultiWaveDecoder
           case BoxType.THREE_GPP_PERFORMER_BOX: return new ThreeGPPMetadataBox("3GPP Performer Box");
           case BoxType.THREE_GPP_ALBUM_BOX: return new ThreeGPPAlbumBox();
           case BoxType.THREE_GPP_RECORDING_YEAR_BOX: return new ThreeGPPRecordingYearBox();
+          case BoxType.AVC_SAMPLE_ENTRY: return new VideoSampleEntry("AVC Video Sample Entry");
+          case BoxType.AVC_SPECIFIC_BOX: return new AVCSpecificBox();
 
           default:
           {

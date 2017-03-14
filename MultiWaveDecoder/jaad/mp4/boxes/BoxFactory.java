@@ -100,7 +100,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(GOOGLE_TRACK_DURATION_BOX, BoxImpl.class);
 		BOX_CLASSES.put(H263_SAMPLE_ENTRY, VideoSampleEntry.class);
 		BOX_CLASSES.put(ENCRYPTED_VIDEO_SAMPLE_ENTRY, VideoSampleEntry.class);
-		BOX_CLASSES.put(AVC_SAMPLE_ENTRY, VideoSampleEntry.class);
 		BOX_CLASSES.put(AC3_SAMPLE_ENTRY, AudioSampleEntry.class);
 		BOX_CLASSES.put(EAC3_SAMPLE_ENTRY, AudioSampleEntry.class);
 		BOX_CLASSES.put(DRMS_SAMPLE_ENTRY, AudioSampleEntry.class);
@@ -114,7 +113,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(XML_METADATA_SAMPLE_ENTRY, XMLMetadataSampleEntry.class);
 		BOX_CLASSES.put(FD_HINT_SAMPLE_ENTRY, FDHintSampleEntry.class);
 		BOX_CLASSES.put(H263_SPECIFIC_BOX, H263SpecificBox.class);
-		BOX_CLASSES.put(AVC_SPECIFIC_BOX, AVCSpecificBox.class);
 		BOX_CLASSES.put(AC3_SPECIFIC_BOX, AC3SpecificBox.class);
 		BOX_CLASSES.put(EAC3_SPECIFIC_BOX, EAC3SpecificBox.class);
 		BOX_CLASSES.put(AMR_SPECIFIC_BOX, AMRSpecificBox.class);
@@ -179,7 +177,6 @@ public class BoxFactory implements BoxTypes
 		PARAMETER.put(GOOGLE_TRACK_DURATION_BOX, new string[]{"Google Track Duration Box"});
 		PARAMETER.put(H263_SAMPLE_ENTRY, new string[]{"H263 Video Sample Entry"});
 		PARAMETER.put(ENCRYPTED_VIDEO_SAMPLE_ENTRY, new string[]{"Encrypted Video Sample Entry"});
-		PARAMETER.put(AVC_SAMPLE_ENTRY, new string[]{"AVC Video Sample Entry"});
 		PARAMETER.put(AC3_SAMPLE_ENTRY, new string[]{"AC-3 Audio Sample Entry"});
 		PARAMETER.put(EAC3_SAMPLE_ENTRY, new string[]{"Extended AC-3 Audio Sample Entry"});
 		PARAMETER.put(DRMS_SAMPLE_ENTRY, new string[]{"DRMS Audio Sample Entry"});
