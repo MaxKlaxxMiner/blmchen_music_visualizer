@@ -87,15 +87,11 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(TV_SEASON_BOX, BoxImpl.class);
 		BOX_CLASSES.put(TV_SHOW_BOX, BoxImpl.class);
 		BOX_CLASSES.put(TV_SHOW_SORT_BOX, BoxImpl.class);
-		BOX_CLASSES.put(THREE_GPP_ALBUM_BOX, ThreeGPPAlbumBox.class);
 		BOX_CLASSES.put(THREE_GPP_AUTHOR_BOX, ThreeGPPMetadataBox.class);
 		BOX_CLASSES.put(THREE_GPP_CLASSIFICATION_BOX, ThreeGPPMetadataBox.class);
 		BOX_CLASSES.put(THREE_GPP_DESCRIPTION_BOX, ThreeGPPMetadataBox.class);
 		BOX_CLASSES.put(THREE_GPP_KEYWORDS_BOX, ThreeGPPKeywordsBox.class);
 		BOX_CLASSES.put(THREE_GPP_LOCATION_INFORMATION_BOX, ThreeGPPLocationBox.class);
-		BOX_CLASSES.put(THREE_GPP_PERFORMER_BOX, ThreeGPPMetadataBox.class);
-		BOX_CLASSES.put(THREE_GPP_RECORDING_YEAR_BOX, ThreeGPPRecordingYearBox.class);
-		BOX_CLASSES.put(THREE_GPP_TITLE_BOX, ThreeGPPMetadataBox.class);
 		BOX_CLASSES.put(GOOGLE_HOST_HEADER_BOX, BoxImpl.class);
 		BOX_CLASSES.put(GOOGLE_PING_MESSAGE_BOX, BoxImpl.class);
 		BOX_CLASSES.put(GOOGLE_PING_URL_BOX, BoxImpl.class);
@@ -175,9 +171,7 @@ public class BoxFactory implements BoxTypes
 		PARAMETER.put(THREE_GPP_AUTHOR_BOX, new string[]{"3GPP Author Box"});
 		PARAMETER.put(THREE_GPP_CLASSIFICATION_BOX, new string[]{"3GPP Classification Box"});
 		PARAMETER.put(THREE_GPP_DESCRIPTION_BOX, new string[]{"3GPP Description Box"});
-		PARAMETER.put(THREE_GPP_PERFORMER_BOX, new string[]{"3GPP Performer Box"});
-		PARAMETER.put(THREE_GPP_TITLE_BOX, new string[]{"3GPP Title Box"});
-		PARAMETER.put(GOOGLE_HOST_HEADER_BOX, new string[]{"Google Host Header Box"});
+1		PARAMETER.put(GOOGLE_HOST_HEADER_BOX, new string[]{"Google Host Header Box"});
 		PARAMETER.put(GOOGLE_PING_MESSAGE_BOX, new string[]{"Google Ping Message Box"});
 		PARAMETER.put(GOOGLE_PING_URL_BOX, new string[]{"Google Ping URL Box"});
 		PARAMETER.put(GOOGLE_SOURCE_DATA_BOX, new string[]{"Google Source Data Box"});

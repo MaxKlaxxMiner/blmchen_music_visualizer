@@ -64,6 +64,9 @@
     <Compile Include="aac\mp4\boxes\impl\basic\DecodingTimeToSampleBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\SampleToChunkBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\drm\FairPlayDataBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\meta\ThreeGPPRecordingYearBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\meta\ThreeGPPAlbumBox.cs" />
+    <Compile Include="aac\mp4\boxes\impl\meta\ThreeGPPMetadataBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\EncoderBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\RatingBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\meta\GenreBox.cs" />
@@ -230,12 +233,9 @@
     <Content Include="jaad\mp4\boxes\impl\meta\ITunesMetadataNameBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\NeroMetadataTagsBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\RequirementBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\meta\ThreeGPPAlbumBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\ThreeGPPClassificationBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\ThreeGPPKeywordsBox.java" />
     <Content Include="jaad\mp4\boxes\impl\meta\ThreeGPPLocationBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\meta\ThreeGPPMetadataBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\meta\ThreeGPPRecordingYearBox.java" />
     <Content Include="jaad\mp4\boxes\impl\MovieExtendsHeaderBox.java" />
     <Content Include="jaad\mp4\boxes\impl\MovieFragmentHeaderBox.java" />
     <Content Include="jaad\mp4\boxes\impl\MovieFragmentRandomAccessOffsetBox.java" />

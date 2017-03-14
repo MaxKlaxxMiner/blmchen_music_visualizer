@@ -109,6 +109,10 @@ namespace MultiWaveDecoder
           case BoxType.COMPOSITION_TIME_TO_SAMPLE_BOX: return new CompositionTimeToSampleBox();
           case BoxType.UNKNOWN_HNTI_BOX: return new BoxImpl("Unknown 'hnti' Box");
           case BoxType.RTP_HINT_SAMPLE_ENTRY: return new RTPHintSampleEntry();
+          case BoxType.THREE_GPP_TITLE_BOX: return new ThreeGPPMetadataBox("3GPP Title Box");
+          case BoxType.THREE_GPP_PERFORMER_BOX: return new ThreeGPPMetadataBox("3GPP Performer Box");
+          case BoxType.THREE_GPP_ALBUM_BOX: return new ThreeGPPAlbumBox();
+          case BoxType.THREE_GPP_RECORDING_YEAR_BOX: return new ThreeGPPRecordingYearBox();
 
           default:
           {
