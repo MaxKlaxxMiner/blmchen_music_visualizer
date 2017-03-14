@@ -18,7 +18,7 @@ namespace MultiWaveDecoder
     {
       bool predefined = inStream.read() == 1;
 
-      int minSize = predefined ? 16 : 2;
+      int minSize = predefined ? 2 : 16;
 
       if (size < minSize) return; // JFIX - impossible to read (Encoder may not have considered ISO 14496-1 - 10.2.3 ?)
 

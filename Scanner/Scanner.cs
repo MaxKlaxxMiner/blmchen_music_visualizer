@@ -17,6 +17,8 @@ namespace Scanner
     /// </summary>
     const string MusicPathiTunes = @"%USERPROFILE%\Music\iTunes\iTunes Media\Music\";
 
+    // --- Testfiles: http://samples.mplayerhq.hu ---
+
     /// <summary>
     /// Album: Blümchen - Für immer und ewig
     /// Interpret: Blümchen

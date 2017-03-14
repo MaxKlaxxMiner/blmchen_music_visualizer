@@ -1,8 +1,6 @@
 ﻿// ReSharper disable InconsistentNaming
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace MultiWaveDecoder
 {
@@ -58,9 +56,6 @@ namespace MultiWaveDecoder
           case BoxType.FAIRPLAY_CHTB_BOX: return new FairPlayDataBox();
           case BoxType.FAIRPLAY_SIGN_BOX: return new FairPlayDataBox();
           case BoxType.FAIRPLAY_USER_NAME_BOX: return new FairPlayDataBox();
-
-          //case BoxType.FAIRPLAY_USER_ID_BOX
-
           case BoxType.DECODING_TIME_TO_SAMPLE_BOX: return new DecodingTimeToSampleBox();
           case BoxType.SAMPLE_TO_CHUNK_BOX: return new SampleToChunkBox();
           case BoxType.SAMPLE_SIZE_BOX: return new SampleSizeBox();
@@ -96,6 +91,34 @@ namespace MultiWaveDecoder
           case BoxType.PURCHASE_DATE_BOX: return new BoxImpl("Purchase Date Box");
           case BoxType.UNKNOWN_XID_BOX: return new BoxImpl("Unknown 'xid ' Box");
           case BoxType.COVER_BOX: return new BoxImpl("Cover Box");
+
+          // --- extra ---
+          case BoxType.TRACK_SORT_BOX: return new BoxImpl("Track Sort Box");
+          case BoxType.ALBUM_SORT_BOX: return new BoxImpl("Album Sort Box");
+          case BoxType.ARTIST_SORT_BOX: return new BoxImpl("Artist Sort Box");
+          case BoxType.ENCODER_TOOL_BOX: return new EncoderBox();
+          case BoxType.EDIT_BOX: return new BoxImpl("Edit Box");
+          case BoxType.EDIT_LIST_BOX: return new EditListBox();
+          case BoxType.VIDEO_MEDIA_HEADER_BOX: return new VideoMediaHeaderBox();
+          case BoxType.MP4V_SAMPLE_ENTRY: return new VideoSampleEntry("MPEG-4 Video Sample Entry");
+          case BoxType.SYNC_SAMPLE_BOX: return new SyncSampleBox();
+          case BoxType.NULL_MEDIA_HEADER_BOX: return new FullBox("Null Media Header Box");
+          case BoxType.MPEG_SAMPLE_ENTRY: return new MPEGSampleEntry();
+          case BoxType.TRACK_REFERENCE_BOX: return new TrackReferenceBox();
+          case BoxType.OBJECT_DESCRIPTOR_BOX: return new ObjectDescriptorBox();
+          case BoxType.COMPOSITION_TIME_TO_SAMPLE_BOX: return new CompositionTimeToSampleBox();
+          case BoxType.UNKNOWN_HNTI_BOX: return new BoxImpl("Unknown 'hnti' Box");
+          case BoxType.RTP_HINT_SAMPLE_ENTRY: return new RTPHintSampleEntry();
+          case BoxType.THREE_GPP_TITLE_BOX: return new ThreeGPPMetadataBox("3GPP Title Box");
+          case BoxType.THREE_GPP_PERFORMER_BOX: return new ThreeGPPMetadataBox("3GPP Performer Box");
+          case BoxType.THREE_GPP_ALBUM_BOX: return new ThreeGPPAlbumBox();
+          case BoxType.THREE_GPP_RECORDING_YEAR_BOX: return new ThreeGPPRecordingYearBox();
+          case BoxType.AVC_SAMPLE_ENTRY: return new VideoSampleEntry("AVC Video Sample Entry");
+          case BoxType.AVC_SPECIFIC_BOX: return new AVCSpecificBox();
+          case BoxType.UNKNOWN_WAVE_BOX: return new BoxImpl("Unknown 'wave' Box");
+          case BoxType.REQUIREMENT_BOX: return new RequirementBox();
+          case BoxType.ENCODER_NAME_BOX: return new EncoderBox();
+
           default:
           {
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -130,6 +153,10 @@ namespace MultiWaveDecoder
       var type = (BoxType)(uint)inStream.readBytes(4);
       if (size == 1) size = inStream.readBytes(8);
       if (type == BoxType.EXTENDED_TYPE) inStream.skipBytes(16);
+      if (type == 0)
+      {
+        return new UnknownBox();
+      }
 
       // --- error protection ---
       if (parent != null)

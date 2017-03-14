@@ -9,6 +9,12 @@ namespace MultiWaveDecoder
 
     public override void decode(MP4InputStream inStream)
     {
+      if (getLeft(inStream) < 8)
+      {
+        inStream.skipBytes(getLeft(inStream));
+        return;
+      }
+
       base.decode(inStream);
 
       inStream.skipBytes(8); //reserved
@@ -18,6 +24,11 @@ namespace MultiWaveDecoder
       inStream.skipBytes(2); //reserved
       sampleRate = (int)inStream.readBytes(2);
       inStream.skipBytes(2); //not used by samplerate
+
+      if (channelCount == 6)
+      {
+        inStream.skipBytes(16);
+      }
 
       readChildren(inStream);
     }

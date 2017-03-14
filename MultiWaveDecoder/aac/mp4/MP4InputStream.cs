@@ -229,8 +229,6 @@ namespace MultiWaveDecoder
     /// <returns>the decoded string</returns>
     public string readUTFString(int max)
     {
-      throw new NotImplementedException("todo: test");
-
       // --- read byte order mask ---
       var bom = new byte[2];
       read(bom, 0, 2);
