@@ -43,6 +43,7 @@
     <Compile Include="aac\Main.cs" />
     <Compile Include="aac\mp4\api\Movie.cs" />
     <Compile Include="aac\mp4\boxes\BoxUtils.cs" />
+    <Compile Include="aac\mp4\boxes\impl\basic\CompositionTimeToSampleBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\ObjectDescriptorBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\TrackReferenceBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\SyncSampleBox.cs" />
@@ -207,7 +208,6 @@
     <Content Include="jaad\mp4\boxes\impl\ChapterBox.java" />
     <Content Include="jaad\mp4\boxes\impl\CleanApertureBox.java" />
     <Content Include="jaad\mp4\boxes\impl\ColorParameterBox.java" />
-    <Content Include="jaad\mp4\boxes\impl\CompositionTimeToSampleBox.java" />
     <Content Include="jaad\mp4\boxes\impl\DataEntryUrnBox.java" />
     <Content Include="jaad\mp4\boxes\impl\DegradationPriorityBox.java" />
     <Content Include="jaad\mp4\boxes\impl\fd\Base64Decoder.java" />

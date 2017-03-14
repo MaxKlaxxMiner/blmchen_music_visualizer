@@ -106,6 +106,7 @@ namespace MultiWaveDecoder
           case BoxType.MPEG_SAMPLE_ENTRY: return new MPEGSampleEntry();
           case BoxType.TRACK_REFERENCE_BOX: return new TrackReferenceBox();
           case BoxType.OBJECT_DESCRIPTOR_BOX: return new ObjectDescriptorBox();
+          case BoxType.COMPOSITION_TIME_TO_SAMPLE_BOX: return new CompositionTimeToSampleBox();
 
           default:
           {

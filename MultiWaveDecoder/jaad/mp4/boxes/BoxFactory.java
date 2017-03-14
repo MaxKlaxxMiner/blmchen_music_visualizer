@@ -15,7 +15,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(CHUNK_LARGE_OFFSET_BOX, ChunkOffsetBox.class);
 		BOX_CLASSES.put(CLEAN_APERTURE_BOX, CleanApertureBox.class);
 		BOX_CLASSES.put(COMPACT_SAMPLE_SIZE_BOX, SampleSizeBox.class);
-		BOX_CLASSES.put(COMPOSITION_TIME_TO_SAMPLE_BOX, CompositionTimeToSampleBox.class);
 		BOX_CLASSES.put(DATA_ENTRY_URN_BOX, DataEntryUrnBox.class);
 		BOX_CLASSES.put(DEGRADATION_PRIORITY_BOX, DegradationPriorityBox.class);
 		BOX_CLASSES.put(FD_ITEM_INFORMATION_BOX, FDItemInformationBox.class);
