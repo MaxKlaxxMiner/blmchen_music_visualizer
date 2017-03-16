@@ -309,6 +309,17 @@ namespace MultiWaveDecoder
       peek(b, 0, b.Length);
     }
 
+    public bool hasRandomAccess()
+    {
+      return inStream.CanSeek;
+    }
+
+    public void seek(long offset)
+    {
+      inStream.Seek(offset, SeekOrigin.Begin);
+      peeked.Clear();
+    }
+
     public override string ToString()
     {
       return (new { offset }).ToString();

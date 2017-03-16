@@ -67,6 +67,13 @@ namespace MultiWaveDecoder
       }
     }
 
+    // TODO: pdin, movie fragments??
+    public Movie getMovie()
+    {
+      if (moov == null) return null;
+      return movie ?? (movie = new Movie(moov, inStream));
+    }
+
     public IBox GetBoxFromPath(string path)
     {
       var pathIds = path.Split('.').Where(str => str.Length == 4).Select(str => str[0] * 16777216 + str[1] * 65536 + str[2] * 256 + str[3]).ToArray();

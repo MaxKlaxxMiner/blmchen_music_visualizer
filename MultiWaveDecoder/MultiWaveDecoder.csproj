@@ -41,7 +41,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="aac\Main.cs" />
+    <Compile Include="aac\mp4\api\Artwork.cs" />
+    <Compile Include="aac\mp4\api\AudioTrack.cs" />
+    <Compile Include="aac\mp4\api\drm\ITunesProtection.cs" />
+    <Compile Include="aac\mp4\api\MetaData.cs" />
+    <Compile Include="aac\mp4\api\Protection.cs" />
+    <Compile Include="aac\mp4\api\FrameType.cs" />
+    <Compile Include="aac\mp4\api\Frame.cs" />
+    <Compile Include="aac\mp4\api\Track.cs" />
     <Compile Include="aac\mp4\api\Movie.cs" />
+    <Compile Include="aac\mp4\api\VideoTrack.cs" />
     <Compile Include="aac\mp4\boxes\BoxUtils.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\CompositionTimeToSampleBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\ObjectDescriptorBox.cs" />
@@ -186,7 +195,6 @@
     <Content Include="jaad\adts\ADTSDemultiplexer.java" />
     <Content Include="jaad\adts\ADTSFrame.java" />
     <Content Include="jaad\MP4Info.java" />
-    <Content Include="jaad\mp4\api\Artwork.java" />
     <Content Include="jaad\mp4\api\AudioTrack.java" />
     <Content Include="jaad\mp4\api\Brand.java" />
     <Content Include="jaad\mp4\api\codec\AC3DecoderInfo.java" />
@@ -198,15 +206,9 @@
     <Content Include="jaad\mp4\api\codec\QCELPDecoderInfo.java" />
     <Content Include="jaad\mp4\api\codec\SMVDecoderInfo.java" />
     <Content Include="jaad\mp4\api\DecoderInfo.java" />
-    <Content Include="jaad\mp4\api\drm\ITunesProtection.java" />
-    <Content Include="jaad\mp4\api\Frame.java" />
     <Content Include="jaad\mp4\api\ID3Frame.java" />
     <Content Include="jaad\mp4\api\ID3Tag.java" />
     <Content Include="jaad\mp4\api\MetaData.java" />
-    <Content Include="jaad\mp4\api\Movie.java" />
-    <Content Include="jaad\mp4\api\Protection.java" />
-    <Content Include="jaad\mp4\api\Track.java" />
-    <Content Include="jaad\mp4\api\Type.java" />
     <Content Include="jaad\mp4\api\Utils.java" />
     <Content Include="jaad\mp4\api\VideoTrack.java" />
     <Content Include="jaad\mp4\boxes\BoxFactory.java" />
@@ -281,7 +283,6 @@
     <Content Include="jaad\mp4\boxes\impl\TrackSelectionBox.java" />
     <Content Include="jaad\mp4\boxes\impl\XMLBox.java" />
     <Content Include="jaad\mp4\MP4Container.java" />
-    <Content Include="jaad\mp4\MP4InputStream.java" />
     <Content Include="jaad\Play.java" />
     <Content Include="jaad\Radio.java" />
     <Content Include="jaad\spi\javasound\AACAudioFileReader.java" />

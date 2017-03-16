@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 
 // ReSharper disable InconsistentNaming
 
@@ -27,21 +29,20 @@ namespace MultiWaveDecoder
       using (var inFileStream = File.OpenRead(inFile))
       {
         var cont = new MP4Container(inFileStream);
-        var jpeg = cont.GetBoxFromPath("moov.udta.meta.ilst.covr.data") as ITunesMetadataBox;
-        if (jpeg != null)
+
+        var movie = cont.getMovie();
+
+        // --- read cover-picture if exists ---
+        if (movie.containsMetaData())
         {
-          var data = jpeg.getData();
-          if (data.Length > 100
-            && data[0] == 0xFF && data[1] == 0xD8 && data[2] == 0xff && data[3] == 0xE0 // JPEG Start-Marker
-            && data[data.Length - 2] == 0xFF && data[data.Length - 1] == 0xD9)          // JPEG End-Marker
+          var meta = movie.getMetaData();
+          if (meta.contains(MetaData.Fields.COVER_ARTWORKS))
           {
-            coverPicture = new Bitmap(new MemoryStream(data));
+            coverPicture = meta.get(MetaData.Fields.COVER_ARTWORKS).First().getImage();
           }
         }
 
-        //throw new NotImplementedException();
 
-        //Movie movie = cont.getMovie();
         //  List<Track> tracks = movie.getTracks(AudioTrack.AudioCodec.AAC);
         //  if (tracks.isEmpty()) throw new Exception("movie does not contain any AAC track");
         //  AudioTrack track = (AudioTrack)tracks.get(0);

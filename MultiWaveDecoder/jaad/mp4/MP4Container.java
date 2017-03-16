@@ -21,13 +21,6 @@ public class MP4Container {
 		return compatible;
 	}
 
-	//TODO: pdin, movie fragments??
-	public Movie getMovie() {
-		if(moov==null) return null;
-		else if(movie==null) movie = new Movie(moov, in);
-		return movie;
-	}
-
 	public List<Box> getBoxes() {
 		return Collections.unmodifiableList(boxes);
 	}
