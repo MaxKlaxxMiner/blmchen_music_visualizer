@@ -1,23 +1,5 @@
 public abstract class Track {
 
-	//TODO: implement other entry descriptors
-	protected void findDecoderSpecificInfo(ESDBox esds) {
-		Descriptor ed = esds.getEntryDescriptor();
-		List<Descriptor> children = ed.getChildren();
-		List<Descriptor> children2;
-
-		for(Descriptor e : children) {
-			children2 = e.getChildren();
-			for(Descriptor e2 : children2) {
-				switch(e2.getType()) {
-					case Descriptor.TYPE_DECODER_SPECIFIC_INFO:
-						decoderSpecificInfo = (DecoderSpecificInfo) e2;
-						break;
-				}
-			}
-		}
-	}
-
 	protected <T> void parseSampleEntry(Box sampleEntry, Class<T> clazz) {
 		T type;
 		try {

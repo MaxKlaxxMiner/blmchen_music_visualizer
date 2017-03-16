@@ -30,6 +30,11 @@ namespace MultiWaveDecoder
 
         return new VideoCodec { code = (int)ac };
       }
+
+      public override string ToString()
+      {
+        return "VideoCodec." + ((CodecType)code);
+      }
     }
     private VideoMediaHeaderBox vmhd;
     private VideoSampleEntry sampleEntry;

@@ -19,7 +19,7 @@ namespace MultiWaveDecoder
     int currentFrame = 0;
 
     // --- info structures ---
-    //protected DecoderSpecificInfo decoderSpecificInfo;
+    protected DecoderSpecificInfo decoderSpecificInfo;
     //protected DecoderInfo decoderInfo;
     //protected Protection protection;
 
@@ -115,6 +115,30 @@ namespace MultiWaveDecoder
       // frames need not to be time-ordered: sort by timestamp
       // TODO: is it possible to add them to the specific position?
       frames.Sort();
+    }
+
+    // TODO: implement other entry descriptors
+    protected void findDecoderSpecificInfo(ESDBox esds)
+    {
+      Descriptor ed = esds.getEntryDescriptor();
+      var children = ed.getChildren();
+
+      foreach (var e in children)
+      {
+        var children2 = e.getChildren();
+        foreach (var e2 in children2)
+        {
+          switch (e2.getType())
+          {
+            case Descriptor.TYPE_DECODER_SPECIFIC_INFO: decoderSpecificInfo = (DecoderSpecificInfo)e2; break;
+          }
+        }
+      }
+    }
+
+    public override string ToString()
+    {
+      return (new { currentFrame, frames = "Frame[" + frames.Count + "]", codec = getCodec() }).ToString();
     }
   }
 }

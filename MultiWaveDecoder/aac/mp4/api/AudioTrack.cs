@@ -21,7 +21,12 @@ namespace MultiWaveDecoder
         UNKNOWN_AUDIO_CODEC
       }
 
-      static Codec forType(BoxType type)
+      public AudioCodec(CodecType codec)
+      {
+        code = (int)codec;
+      }
+
+      public static Codec forType(BoxType type)
       {
         CodecType ac;
 
@@ -38,7 +43,12 @@ namespace MultiWaveDecoder
           default: ac = CodecType.UNKNOWN_AUDIO_CODEC; break;
         }
 
-        return new AudioCodec { code = (int)ac };
+        return new AudioCodec(ac);
+      }
+
+      public override string ToString()
+      {
+        return "AudioCodec." + ((CodecType)code);
       }
     }
 
@@ -55,27 +65,37 @@ namespace MultiWaveDecoder
 
       var stbl = minf.getChild(BoxType.SAMPLE_TABLE_BOX);
 
-      throw new NotImplementedException();
+      // sample descriptions: 'mp4a' and 'enca' have an ESDBox, all others have a CodecSpecificBox
+      var stsd = (SampleDescriptionBox)stbl.getChild(BoxType.SAMPLE_DESCRIPTION_BOX);
 
-      ////sample descriptions: 'mp4a' and 'enca' have an ESDBox, all others have a CodecSpecificBox
-      //var stsd = (SampleDescriptionBox) stbl.getChild(BoxType.SAMPLE_DESCRIPTION_BOX);
-      //if(stsd.getChildren().get(0) instanceof AudioSampleEntry) {
-      //  sampleEntry = (AudioSampleEntry) stsd.getChildren().get(0);
-      //  long type = sampleEntry.getType();
-      //  if(sampleEntry.hasChild(BoxType.ESD_BOX)) findDecoderSpecificInfo((ESDBox) sampleEntry.getChild(BoxType.ESD_BOX));
-      //  else decoderInfo = DecoderInfo.parse((CodecSpecificBox) sampleEntry.getChildren().get(0));
+      sampleEntry = stsd.getChildren()[0] as AudioSampleEntry;
 
-      //  if(type==BoxType.ENCRYPTED_AUDIO_SAMPLE_ENTRY||type==BoxType.DRMS_SAMPLE_ENTRY) {
-      //    findDecoderSpecificInfo((ESDBox) sampleEntry.getChild(BoxType.ESD_BOX));
-      //    protection = Protection.parse(sampleEntry.getChild(BoxType.PROTECTION_SCHEME_INFORMATION_BOX));
-      //    codec = protection.getOriginalFormat();
-      //  }
-      //  else codec = AudioCodec.forType(sampleEntry.getType());
-      //}
-      //else {
-      //  sampleEntry = null;
-      //  codec = AudioCodec.UNKNOWN_AUDIO_CODEC;
-      //}
+      if (sampleEntry != null)
+      {
+        var type = sampleEntry.getType();
+        if (sampleEntry.hasChild(BoxType.ESD_BOX))
+        {
+          findDecoderSpecificInfo((ESDBox)sampleEntry.getChild(BoxType.ESD_BOX));
+        }
+        else
+        {
+          throw new NotImplementedException();
+          // decoderInfo = DecoderInfo.parse((CodecSpecificBox)sampleEntry.getChildren()[0]);
+        }
+
+        if (type == BoxType.ENCRYPTED_AUDIO_SAMPLE_ENTRY || type == BoxType.DRMS_SAMPLE_ENTRY)
+        {
+          findDecoderSpecificInfo((ESDBox)sampleEntry.getChild(BoxType.ESD_BOX));
+          throw new NotImplementedException();
+          //          protection = Protection.parse(sampleEntry.getChild(BoxType.PROTECTION_SCHEME_INFORMATION_BOX));
+          //          codec = protection.getOriginalFormat();
+        }
+        else codec = AudioCodec.forType(sampleEntry.getType());
+      }
+      else
+      {
+        codec = new AudioCodec(AudioCodec.CodecType.UNKNOWN_AUDIO_CODEC);
+      }
     }
 
     protected override FrameType getType()
