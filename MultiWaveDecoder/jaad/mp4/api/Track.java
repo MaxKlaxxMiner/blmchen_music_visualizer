@@ -14,69 +14,6 @@ public abstract class Track {
 		//TODO: currently only marker interface
 	}
 
-	private void parseSampleTable(Box stbl) {
-		double timeScale = mdhd.getTimeScale();
-		Type type = getType();
-
-		//sample sizes
-		long[] sampleSizes = ((SampleSizeBox) stbl.getChild(BoxType.SAMPLE_SIZE_BOX)).getSampleSizes();
-
-		//chunk offsets
-		ChunkOffsetBox stco;
-		if(stbl.hasChild(BoxType.CHUNK_OFFSET_BOX)) stco = (ChunkOffsetBox) stbl.getChild(BoxType.CHUNK_OFFSET_BOX);
-		else stco = (ChunkOffsetBox) stbl.getChild(BoxType.CHUNK_LARGE_OFFSET_BOX);
-		long[] chunkOffsets = stco.getChunks();
-
-		//samples to chunks
-		SampleToChunkBox stsc = ((SampleToChunkBox) stbl.getChild(BoxType.SAMPLE_TO_CHUNK_BOX));
-		long[] firstChunks = stsc.getFirstChunks();
-		long[] samplesPerChunk = stsc.getSamplesPerChunk();
-
-		//sample durations/timestamps
-		DecodingTimeToSampleBox stts = (DecodingTimeToSampleBox) stbl.getChild(BoxType.DECODING_TIME_TO_SAMPLE_BOX);
-		long[] sampleCounts = stts.getSampleCounts();
-		long[] sampleDeltas = stts.getSampleDeltas();
-		long[] timeOffsets = new long[sampleSizes.length];
-		long tmp = 0;
-		int off = 0;
-		for(int i = 0; i<sampleCounts.length; i++) {
-			for(int j = 0; j<sampleCounts[i]; j++) {
-				timeOffsets[off+j] = tmp;
-				tmp += sampleDeltas[i];
-			}
-			off += sampleCounts[i];
-		}
-
-		//create samples
-		int current = 0;
-		int lastChunk;
-		double timeStamp;
-		long offset = 0;
-		//iterate over all chunk groups
-		for(int i = 0; i<firstChunks.length; i++) {
-			if(i<firstChunks.length-1) lastChunk = (int) firstChunks[i+1]-1;
-			else lastChunk = chunkOffsets.length;
-
-			//iterate over all chunks in current group
-			for(int j = (int) firstChunks[i]-1; j<lastChunk; j++) {
-				offset = chunkOffsets[j];
-
-				//iterate over all samples in current chunk
-				for(int k = 0; k<samplesPerChunk[i]; k++) {
-					//create samples
-					timeStamp = ((double) timeOffsets[current])/timeScale;
-					frames.add(new Frame(type, offset, sampleSizes[current], timeStamp));
-					offset += sampleSizes[current];
-					current++;
-				}
-			}
-		}
-
-		//frames need not to be time-ordered: sort by timestamp
-		//TODO: is it possible to add them to the specific position?
-		Collections.sort(frames);
-	}
-
 	//TODO: implement other entry descriptors
 	protected void findDecoderSpecificInfo(ESDBox esds) {
 		Descriptor ed = esds.getEntryDescriptor();
@@ -110,8 +47,6 @@ public abstract class Track {
 			ex.printStackTrace();
 		}
 	}
-
-	public abstract Type getType();
 
 	public abstract Codec getCodec();
 

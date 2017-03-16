@@ -21,11 +21,6 @@ public class VideoTrack extends Track {
 	private Codec codec;
 
 	@Override
-	public Type getType() {
-		return Type.VIDEO;
-	}
-
-	@Override
 	public Codec getCodec() {
 		return codec;
 	}

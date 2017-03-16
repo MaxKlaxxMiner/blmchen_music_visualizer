@@ -33,5 +33,10 @@ namespace MultiWaveDecoder
       //    codec = VideoCodec.UNKNOWN_VIDEO_CODEC;
       //  }
     }
+
+    protected override FrameType getType()
+    {
+      return FrameType.VIDEO;
+    }
   }
 }

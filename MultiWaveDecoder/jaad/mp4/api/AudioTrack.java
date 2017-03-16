@@ -31,11 +31,6 @@ public class AudioTrack extends Track {
 	private Codec codec;
 
 	@Override
-	public Type getType() {
-		return Type.AUDIO;
-	}
-
-	@Override
 	public Codec getCodec() {
 		return codec;
 	}

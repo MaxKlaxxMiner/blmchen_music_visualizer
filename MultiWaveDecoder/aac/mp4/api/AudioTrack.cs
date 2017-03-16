@@ -37,5 +37,10 @@ namespace MultiWaveDecoder
       //  codec = AudioCodec.UNKNOWN_AUDIO_CODEC;
       //}
     }
+
+    protected override FrameType getType()
+    {
+      return FrameType.AUDIO;
+    }
   }
 }
