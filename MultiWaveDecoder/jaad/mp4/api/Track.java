@@ -1,18 +1,4 @@
-/**
- * This class represents a track in a movie.
- *
- * Each track contains either a decoder specific info as a byte array or a
- * <code>DecoderInfo</code> object that contains necessary information for the
- * decoder.
- *
- * @author in-somnia
- */
-//TODO: expand javadoc; use generics for subclasses?
 public abstract class Track {
-
-	public interface Codec {
-		//TODO: currently only marker interface
-	}
 
 	//TODO: implement other entry descriptors
 	protected void findDecoderSpecificInfo(ESDBox esds) {
@@ -47,8 +33,6 @@ public abstract class Track {
 			ex.printStackTrace();
 		}
 	}
-
-	public abstract Codec getCodec();
 
 	//tkhd
 	/**

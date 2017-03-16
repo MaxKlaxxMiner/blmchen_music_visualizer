@@ -3,6 +3,13 @@
 
 namespace MultiWaveDecoder
 {
+  /// <summary>
+  /// This class represents a track in a movie.
+  /// 
+  /// Each track contains either a decoder specific info as a byte array or a <code>DecoderInfo</code> object that contains necessary information for the decoder.
+  /// 
+  /// TODO: expand javadoc; use generics for subclasses?
+  /// </summary>
   public abstract class Track
   {
     readonly MP4InputStream inStream;
@@ -15,6 +22,15 @@ namespace MultiWaveDecoder
     //protected DecoderSpecificInfo decoderSpecificInfo;
     //protected DecoderInfo decoderInfo;
     //protected Protection protection;
+
+    public abstract class Codec
+    {
+      public int code;
+    }
+
+    protected abstract FrameType getType();
+
+    protected abstract Codec getCodec();
 
     protected Track(IBox trak, MP4InputStream inStream)
     {
@@ -33,8 +49,6 @@ namespace MultiWaveDecoder
       var stbl = minf.getChild(BoxType.SAMPLE_TABLE_BOX);
       if (stbl.hasChildren()) parseSampleTable(stbl);
     }
-
-    protected abstract FrameType getType();
 
     private void parseSampleTable(IBox stbl)
     {
