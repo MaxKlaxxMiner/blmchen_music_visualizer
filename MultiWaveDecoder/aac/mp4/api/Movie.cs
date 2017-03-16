@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 // ReSharper disable InconsistentNaming
 
 namespace MultiWaveDecoder
@@ -9,8 +8,8 @@ namespace MultiWaveDecoder
     readonly MP4InputStream inStream;
     readonly MovieHeaderBox mvhd;
     readonly List<Track> tracks = new List<Track>();
-    //private MetaData metaData;
-    //private List<Protection> protections;
+    readonly MetaData metaData;
+    readonly List<Protection> protections;
 
     public Movie(IBox moov, MP4InputStream inStream)
     {
@@ -24,24 +23,25 @@ namespace MultiWaveDecoder
         if (track != null) tracks.Add(track);
       }
 
-      throw new NotImplementedException();
+      // --- read metadata: moov.meta/moov.udta.meta ---
+      metaData = new MetaData();
+      if (moov.hasChild(BoxType.META_BOX)) metaData.parse(null, moov.getChild(BoxType.META_BOX));
+      else if (moov.hasChild(BoxType.USER_DATA_BOX))
+      {
+        var udta = moov.getChild(BoxType.USER_DATA_BOX);
+        if (udta.hasChild(BoxType.META_BOX)) metaData.parse(udta, udta.getChild(BoxType.META_BOX));
+      }
 
-      //  //read metadata: moov.meta/moov.udta.meta
-      //  metaData = new MetaData();
-      //  if(moov.hasChild(BoxType.META_BOX)) metaData.parse(null, moov.getChild(BoxType.META_BOX));
-      //  else if(moov.hasChild(BoxType.USER_DATA_BOX)) {
-      //    Box udta = moov.getChild(BoxType.USER_DATA_BOX);
-      //    if(udta.hasChild(BoxType.META_BOX)) metaData.parse(udta, udta.getChild(BoxType.META_BOX));
-      //  }
-
-      //  //detect DRM
-      //  protections = new ArrayList<Protection>();
-      //  if(moov.hasChild(BoxType.ITEM_PROTECTION_BOX)) {
-      //    Box ipro = moov.getChild(BoxType.ITEM_PROTECTION_BOX);
-      //    for(Box sinf : ipro.getChildren(BoxType.PROTECTION_SCHEME_INFORMATION_BOX)) {
-      //      protections.add(Protection.parse(sinf));
-      //    }
-      //  }
+      // --- detect DRM ---
+      protections = new List<Protection>();
+      if (moov.hasChild(BoxType.ITEM_PROTECTION_BOX))
+      {
+        var ipro = moov.getChild(BoxType.ITEM_PROTECTION_BOX);
+        foreach (var sinf in ipro.getChildren(BoxType.PROTECTION_SCHEME_INFORMATION_BOX))
+        {
+          protections.Add(Protection.parse(sinf));
+        }
+      }
     }
 
     // TODO: support hint and meta

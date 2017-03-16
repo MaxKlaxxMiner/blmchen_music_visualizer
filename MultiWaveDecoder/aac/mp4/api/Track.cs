@@ -21,7 +21,7 @@ namespace MultiWaveDecoder
     // --- info structures ---
     protected DecoderSpecificInfo decoderSpecificInfo;
     //protected DecoderInfo decoderInfo;
-    //protected Protection protection;
+    protected Protection protection;
 
     public abstract class Codec
     {

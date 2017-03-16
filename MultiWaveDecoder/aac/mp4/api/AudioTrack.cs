@@ -86,9 +86,8 @@ namespace MultiWaveDecoder
         if (type == BoxType.ENCRYPTED_AUDIO_SAMPLE_ENTRY || type == BoxType.DRMS_SAMPLE_ENTRY)
         {
           findDecoderSpecificInfo((ESDBox)sampleEntry.getChild(BoxType.ESD_BOX));
-          throw new NotImplementedException();
-          //          protection = Protection.parse(sampleEntry.getChild(BoxType.PROTECTION_SCHEME_INFORMATION_BOX));
-          //          codec = protection.getOriginalFormat();
+          protection = Protection.parse(sampleEntry.getChild(BoxType.PROTECTION_SCHEME_INFORMATION_BOX));
+          codec = protection.getOriginalFormat();
         }
         else codec = AudioCodec.forType(sampleEntry.getType());
       }
