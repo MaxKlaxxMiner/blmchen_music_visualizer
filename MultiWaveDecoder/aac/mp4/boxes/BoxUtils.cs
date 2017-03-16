@@ -1,4 +1,7 @@
 ﻿// ReSharper disable InconsistentNaming
+
+using System;
+
 namespace MultiWaveDecoder
 {
   public static class BoxUtils
@@ -21,6 +24,12 @@ namespace MultiWaveDecoder
       if (l == UNDETERMINED) x = -1;
       else x = l;
       return x;
+    }
+
+    public static DateTime getDate(long ts)
+    {
+      // in seconds since midnight, Jan. 1, 1904, in UTC time.
+      return new DateTime(1904, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(ts);
     }
   }
 }

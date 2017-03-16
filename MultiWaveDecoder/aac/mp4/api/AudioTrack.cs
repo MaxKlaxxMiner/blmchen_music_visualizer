@@ -97,12 +97,12 @@ namespace MultiWaveDecoder
       }
     }
 
-    protected override FrameType getType()
+    public override FrameType getType()
     {
       return FrameType.AUDIO;
     }
 
-    protected override Codec getCodec()
+    public override Codec getCodec()
     {
       return codec;
     }

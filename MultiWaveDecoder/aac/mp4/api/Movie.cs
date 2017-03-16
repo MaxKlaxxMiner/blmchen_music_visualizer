@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 // ReSharper disable InconsistentNaming
 
 namespace MultiWaveDecoder
@@ -54,6 +55,133 @@ namespace MultiWaveDecoder
         case HandlerBox.TYPE_SOUND: return new AudioTrack(trak, inStream);
         default: return null;
       }
+    }
+
+    /// <summary>
+    /// Returns an unmodifiable list of all tracks in this movie. The tracks are ordered as they appeare in the file/stream.
+    /// </summary>
+    /// <returns>the tracks contained by this movie</returns>
+    public Track[] getTracks()
+    {
+      return tracks.ToArray();
+    }
+
+    /// <summary>
+    /// Returns an unmodifiable list of all tracks in this movie with the specified type. The tracks are ordered as they appeare in the file/stream.
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
+    public Track[] getTracks(FrameType type)
+    {
+      var l = new List<Track>();
+
+      foreach (var t in tracks)
+      {
+        if (t.getType() == type) l.Add(t);
+      }
+
+      return l.ToArray();
+    }
+
+    /// <summary>
+    /// Returns an unmodifiable list of all tracks in this movie whose samples are encoded with the specified codec. The tracks are ordered as they appeare in the file/stream.
+    /// </summary>
+    /// <param name="codec"></param>
+    /// <returns>the tracks contained by this movie with the passed type</returns>
+    public Track[] getTracks(Track.Codec codec)
+    {
+      var l = new List<Track>();
+
+      foreach (var t in tracks)
+      {
+        if (t.getCodec().code == codec.code && t.getCodec().GetType() == codec.GetType()) l.Add(t);
+      }
+
+      return l.ToArray();
+    }
+
+    /// <summary>
+    /// Indicates if this movie contains metadata. If false the <code>MetaData</code> object returned by <code>getMetaData()</code> will not contain any field.
+    /// </summary>
+    /// <returns>true if this movie contains any metadata</returns>
+    public bool containsMetaData()
+    {
+      return metaData.containsMetaData();
+    }
+
+    /// <summary>
+    /// Returns the MetaData object for this movie.
+    /// </summary>
+    /// <returns>the MetaData for this movie</returns>
+    public MetaData getMetaData()
+    {
+      return metaData;
+    }
+
+    /// <summary>
+    /// Returns the <code>ProtectionInformation</code> objects that contains details about the DRM systems used. If no protection is present the returned list will be empty.
+    /// </summary>
+    /// <returns>a list of protection informations</returns>
+    public Protection[] getProtections()
+    {
+      return protections.ToArray();
+    }
+
+    /// <summary>
+    /// Returns the time this movie was created.
+    /// </summary>
+    /// <returns>the creation time</returns>
+    public DateTime getCreationTime()
+    {
+      return BoxUtils.getDate(mvhd.getCreationTime());
+    }
+
+    /// <summary>
+    /// Returns the last time this movie was modified.
+    /// </summary>
+    /// <returns>the modification time</returns>
+    public DateTime getModificationTime()
+    {
+      return BoxUtils.getDate(mvhd.getModificationTime());
+    }
+
+    /// <summary>
+    /// Returns the duration in seconds.
+    /// </summary>
+    /// <returns>the duration</returns>
+    public double getDuration()
+    {
+      return mvhd.getDuration() / (double)mvhd.getTimeScale();
+    }
+
+    /// <summary>
+    /// Indicates if there are more frames to be read in this movie.
+    /// </summary>
+    /// <returns>true if there is at least one track in this movie that has at least one more frame to read.</returns>
+    public bool hasMoreFrames()
+    {
+      foreach (var track in tracks)
+      {
+        if (track.hasMoreFrames()) return true;
+      }
+      return false;
+    }
+
+    /// <summary>
+    /// Reads the next frame from this movie (from one of the contained tracks).
+    /// The frame is the next in time-order, thus the next for playback. If none of the tracks contains any more frames, null is returned.
+    /// </summary>
+    /// <returns>the next frame or null if there are no more frames to read from this movie.</returns>
+    public Frame readNextFrame()
+    {
+      Track track = null;
+
+      foreach (var t in tracks)
+      {
+        if (t.hasMoreFrames() && (track == null || t.getNextTimeStamp() < track.getNextTimeStamp())) track = t;
+      }
+
+      return (track == null) ? null : track.readNextFrame();
     }
   }
 }

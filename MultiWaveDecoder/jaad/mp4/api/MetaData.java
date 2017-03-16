@@ -112,17 +112,4 @@ public class MetaData {
 			}
 		}
 	}
-
-	bool containsMetaData() {
-		return !contents.isEmpty();
-	}
-
-	@SuppressWarnings("unchecked")
-	public <T> T get(Field<T> field) {
-		return (T) contents.get(field);
-	}
-
-	public Map<Field<?>, Object> getAll() {
-		return Collections.unmodifiableMap(contents);
-	}
 }

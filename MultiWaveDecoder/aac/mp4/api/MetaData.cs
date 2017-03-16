@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 // ReSharper disable InconsistentNaming
 // ReSharper disable MemberCanBeMadeStatic.Local
@@ -17,22 +18,17 @@ namespace MultiWaveDecoder
   {
     #region # static class Fields
     // ReSharper disable once UnusedTypeParameter
-    sealed class Field<T>
+    public sealed class Field<T>
     {
-      readonly string name;
+      public readonly string name;
 
       public Field(string name)
       {
         this.name = name;
       }
-
-      public string getName()
-      {
-        return name;
-      }
     }
 
-    static class Fields
+    public static class Fields
     {
       public static readonly Field<string> ARTIST = new Field<string>("Artist");
       public static readonly Field<string> TITLE = new Field<string>("Title");
@@ -46,7 +42,7 @@ namespace MultiWaveDecoder
       public static readonly Field<string> COMMENTS = new Field<string>("Comments");
       public static readonly Field<int> TEMPO = new Field<int>("Tempo");
       public static readonly Field<int> LENGTH_IN_MILLISECONDS = new Field<int>("Length in milliseconds");
-      //public static Field<Date> RELEASE_DATE = new Field<Date>("Release Date");
+      public static readonly Field<DateTime> RELEASE_DATE = new Field<DateTime>("Release Date");
       public static readonly Field<string> GENRE = new Field<string>("Genre");
       public static readonly Field<string> ENCODER_NAME = new Field<string>("Encoder Name");
       public static readonly Field<string> ENCODER_TOOL = new Field<string>("Encoder Tool");
@@ -54,7 +50,7 @@ namespace MultiWaveDecoder
       public static readonly Field<string> COPYRIGHT = new Field<string>("Copyright");
       public static readonly Field<string> PUBLISHER = new Field<string>("Publisher");
       public static readonly Field<bool> COMPILATION = new Field<bool>("Part of compilation");
-      //public static Field<List<Artwork>> COVER_ARTWORKS = new Field<List<Artwork>>("Cover Artworks");
+      public static readonly Field<List<Artwork>> COVER_ARTWORKS = new Field<List<Artwork>>("Cover Artworks");
       public static readonly Field<string> GROUPING = new Field<string>("Grouping");
       public static readonly Field<string> LOCATION = new Field<string>("Location");
       public static readonly Field<string> LYRICS = new Field<string>("Lyrics");
@@ -216,6 +212,7 @@ namespace MultiWaveDecoder
 		  "dance hall"
 	  };
     #endregion
+
     /// <summary>
     /// moov.udta:
     /// -3gpp boxes
@@ -290,8 +287,7 @@ namespace MultiWaveDecoder
           case BoxType.TEMPO_BOX: put(Fields.TEMPO, data.getInteger()); break;
           case BoxType.RELEASE_DATE_BOX:
           {
-            throw new NotImplementedException();
-            // put(Fields.RELEASE_DATE, data.getDate());
+            put(Fields.RELEASE_DATE, data.getDate());
           } break;
           case BoxType.GENRE_BOX:
           case BoxType.CUSTOM_GENRE_BOX:
@@ -311,15 +307,15 @@ namespace MultiWaveDecoder
           case BoxType.COMPILATION_PART_BOX: put(Fields.COMPILATION, data.getBoolean()); break;
           case BoxType.COVER_BOX:
           {
-            throw new NotImplementedException();
-            //Artwork aw = new Artwork(Artwork.Type.forDataType(data.getDataType()), data.getData());
-            //if (contents.containsKey(Field.COVER_ARTWORKS)) get(Field.COVER_ARTWORKS).add(aw);
-            //else
-            //{
-            //  List<Artwork> list = new ArrayList<Artwork>();
-            //  list.add(aw);
-            //  put(Field.COVER_ARTWORKS, list);
-            //}
+            var aw = new Artwork(Artwork.forDataType(data.getDataType()), data.getData());
+            if (contents.ContainsKey(Fields.COVER_ARTWORKS.name))
+            {
+              ((List<Artwork>)contents[Fields.COVER_ARTWORKS.name]).Add(aw);
+            }
+            else
+            {
+              put(Fields.COVER_ARTWORKS, new List<Artwork> { aw });
+            }
           } break;
           case BoxType.GROUPING_BOX: put(Fields.GROUPING, data.getText()); break;
           case BoxType.LYRICS_BOX: put(Fields.LYRICS, data.getText()); break;
@@ -406,7 +402,27 @@ namespace MultiWaveDecoder
 
     void put<T>(Field<T> field, T value)
     {
-      contents.Add(field.getName(), value);
+      contents.Add(field.name, value);
+    }
+
+    public bool containsMetaData()
+    {
+      return contents.Count > 0;
+    }
+
+    public bool contains<T>(Field<T> field)
+    {
+      return contents.ContainsKey(field.name);
+    }
+
+    public T get<T>(Field<T> field)
+    {
+      return (T)contents[field.name];
+    }
+
+    public KeyValuePair<string, object>[] getAll()
+    {
+      return contents.ToArray();
     }
   }
 }

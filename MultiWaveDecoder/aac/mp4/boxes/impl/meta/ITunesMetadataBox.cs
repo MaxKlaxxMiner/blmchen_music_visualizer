@@ -120,19 +120,21 @@ namespace MultiWaveDecoder
       return getNumber() != 0;
     }
 
-    // todo
-    //public DateTime getDate()
-    //{
-    //  //timestamp lengths: 4,7,9
-    //  int i = (int)Math.Floor(data.length / 3) - 1;
-    //  Date date;
-    //  if (i >= 0 && i < TIMESTAMPS.length)
-    //  {
-    //    SimpleDateFormat sdf = new SimpleDateFormat(TIMESTAMPS[i]);
-    //    date = sdf.parse(new string(data), new ParsePosition(0));
-    //  }
-    //  else date = null;
-    //  return date;
-    //}
+    public DateTime getDate()
+    {
+      // timestamp lengths: 4,7,9
+      int i = data.Length / 3 - 1;
+      DateTime date;
+      if (i >= 0 && i < TIMESTAMPS.Length)
+      {
+        var timestamp = TIMESTAMPS[i];
+        throw new NotImplementedException();
+        //SimpleDateFormat sdf = new SimpleDateFormat(timestamp);
+        //date = sdf.parse(new string(data), new ParsePosition(0));
+      }
+      else date = DateTime.Parse(getText());
+
+      return date;
+    }
   }
 }
