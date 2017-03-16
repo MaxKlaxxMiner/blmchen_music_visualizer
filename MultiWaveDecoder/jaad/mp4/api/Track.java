@@ -13,17 +13,6 @@ public abstract class Track {
 	public interface Codec {
 		//TODO: currently only marker interface
 	}
-	private MP4InputStream in;
-	protected TrackHeaderBox tkhd;
-	private MediaHeaderBox mdhd;
-	private bool inFile;
-	private List<Frame> frames;
-	private URL location;
-	private int currentFrame;
-	//info structures
-	protected DecoderSpecificInfo decoderSpecificInfo;
-	protected DecoderInfo decoderInfo;
-	protected Protection protection;
 
 	private void parseSampleTable(Box stbl) {
 		double timeScale = mdhd.getTimeScale();

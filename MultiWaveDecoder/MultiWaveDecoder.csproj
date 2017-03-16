@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="aac\Main.cs" />
     <Compile Include="aac\mp4\api\AudioTrack.cs" />
+    <Compile Include="aac\mp4\api\FrameType.cs" />
+    <Compile Include="aac\mp4\api\Frame.cs" />
     <Compile Include="aac\mp4\api\Track.cs" />
     <Compile Include="aac\mp4\api\Movie.cs" />
     <Compile Include="aac\mp4\api\VideoTrack.cs" />
@@ -202,14 +204,12 @@
     <Content Include="jaad\mp4\api\codec\SMVDecoderInfo.java" />
     <Content Include="jaad\mp4\api\DecoderInfo.java" />
     <Content Include="jaad\mp4\api\drm\ITunesProtection.java" />
-    <Content Include="jaad\mp4\api\Frame.java" />
     <Content Include="jaad\mp4\api\ID3Frame.java" />
     <Content Include="jaad\mp4\api\ID3Tag.java" />
     <Content Include="jaad\mp4\api\MetaData.java" />
     <Content Include="jaad\mp4\api\Movie.java" />
     <Content Include="jaad\mp4\api\Protection.java" />
     <Content Include="jaad\mp4\api\Track.java" />
-    <Content Include="jaad\mp4\api\Type.java" />
     <Content Include="jaad\mp4\api\Utils.java" />
     <Content Include="jaad\mp4\api\VideoTrack.java" />
     <Content Include="jaad\mp4\boxes\BoxFactory.java" />
