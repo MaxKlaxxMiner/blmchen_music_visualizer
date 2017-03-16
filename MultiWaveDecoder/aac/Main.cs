@@ -27,6 +27,8 @@ namespace MultiWaveDecoder
       using (var inFileStream = File.OpenRead(inFile))
       {
         var cont = new MP4Container(inFileStream);
+
+        // --- read cover-picture if exists ---
         var jpeg = cont.GetBoxFromPath("moov.udta.meta.ilst.covr.data") as ITunesMetadataBox;
         if (jpeg != null)
         {
@@ -39,9 +41,7 @@ namespace MultiWaveDecoder
           }
         }
 
-        //throw new NotImplementedException();
-
-        //Movie movie = cont.getMovie();
+        Movie movie = cont.getMovie();
         //  List<Track> tracks = movie.getTracks(AudioTrack.AudioCodec.AAC);
         //  if (tracks.isEmpty()) throw new Exception("movie does not contain any AAC track");
         //  AudioTrack track = (AudioTrack)tracks.get(0);

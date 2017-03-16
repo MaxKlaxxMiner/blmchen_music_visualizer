@@ -41,7 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="aac\Main.cs" />
+    <Compile Include="aac\mp4\api\AudioTrack.cs" />
+    <Compile Include="aac\mp4\api\Track.cs" />
     <Compile Include="aac\mp4\api\Movie.cs" />
+    <Compile Include="aac\mp4\api\VideoTrack.cs" />
     <Compile Include="aac\mp4\boxes\BoxUtils.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\CompositionTimeToSampleBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\ObjectDescriptorBox.cs" />
@@ -281,7 +284,6 @@
     <Content Include="jaad\mp4\boxes\impl\TrackSelectionBox.java" />
     <Content Include="jaad\mp4\boxes\impl\XMLBox.java" />
     <Content Include="jaad\mp4\MP4Container.java" />
-    <Content Include="jaad\mp4\MP4InputStream.java" />
     <Content Include="jaad\Play.java" />
     <Content Include="jaad\Radio.java" />
     <Content Include="jaad\spi\javasound\AACAudioFileReader.java" />

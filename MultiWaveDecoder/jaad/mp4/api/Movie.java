@@ -1,59 +1,5 @@
 public class Movie {
 
-	private MP4InputStream in;
-	private MovieHeaderBox mvhd;
-	private List<Track> tracks;
-	private MetaData metaData;
-	private List<Protection> protections;
-
-	public Movie(Box moov, MP4InputStream in) {
-		this.in = in;
-
-		//create tracks
-		mvhd = (MovieHeaderBox) moov.getChild(BoxType.MOVIE_HEADER_BOX);
-		List<Box> trackBoxes = moov.getChildren(BoxType.TRACK_BOX);
-		tracks = new ArrayList<Track>(trackBoxes.size());
-		Track track;
-		for(int i = 0; i<trackBoxes.size(); i++) {
-			track = createTrack(trackBoxes.get(i));
-			if(track!=null) tracks.add(track);
-		}
-
-		//read metadata: moov.meta/moov.udta.meta
-		metaData = new MetaData();
-		if(moov.hasChild(BoxType.META_BOX)) metaData.parse(null, moov.getChild(BoxType.META_BOX));
-		else if(moov.hasChild(BoxType.USER_DATA_BOX)) {
-			Box udta = moov.getChild(BoxType.USER_DATA_BOX);
-			if(udta.hasChild(BoxType.META_BOX)) metaData.parse(udta, udta.getChild(BoxType.META_BOX));
-		}
-
-		//detect DRM
-		protections = new ArrayList<Protection>();
-		if(moov.hasChild(BoxType.ITEM_PROTECTION_BOX)) {
-			Box ipro = moov.getChild(BoxType.ITEM_PROTECTION_BOX);
-			for(Box sinf : ipro.getChildren(BoxType.PROTECTION_SCHEME_INFORMATION_BOX)) {
-				protections.add(Protection.parse(sinf));
-			}
-		}
-	}
-
-	//TODO: support hint and meta
-	private Track createTrack(Box trak) {
-		HandlerBox hdlr = (HandlerBox) trak.getChild(BoxType.MEDIA_BOX).getChild(BoxType.HANDLER_BOX);
-		Track track;
-		switch((int) hdlr.getHandlerType()) {
-			case HandlerBox.TYPE_VIDEO:
-				track = new VideoTrack(trak, in);
-				break;
-			case HandlerBox.TYPE_SOUND:
-				track = new AudioTrack(trak, in);
-				break;
-			default:
-				track = null;
-		}
-		return track;
-	}
-
 	/**
 	 * Returns an unmodifiable list of all tracks in this movie. The tracks are
 	 * ordered as they appeare in the file/stream.
