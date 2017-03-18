@@ -171,7 +171,6 @@
     <Content Include="jaad\aac\sbr\SynthesisFilterbank.java" />
     <Content Include="jaad\aac\sbr\TFGrid.java" />
     <Content Include="jaad\aac\syntax\CCE.java" />
-    <Content Include="jaad\aac\syntax\Constants.java" />
     <Content Include="jaad\aac\syntax\CPE.java" />
     <Content Include="jaad\aac\syntax\DSE.java" />
     <Content Include="jaad\aac\syntax\Element.java" />

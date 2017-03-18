@@ -81,7 +81,7 @@ namespace MultiWaveDecoder
     public readonly ProfileType type;
     public readonly bool supported;
 
-    public Profile(int code)
+    public Profile(int code = 1)
     {
       type = code > 0 && code < ALL.Length ? ALL[code] : ProfileType.UNKNOWN;
       switch (type)
