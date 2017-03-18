@@ -40,6 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="aac\aac\AACException.cs" />
+    <Compile Include="aac\aac\DecoderConfig.cs" />
+    <Compile Include="aac\aac\Decoder.cs" />
+    <Compile Include="aac\aac\sbr\Constants.cs" />
+    <Compile Include="aac\aac\syntax\BitStream.cs" />
     <Compile Include="aac\Main.cs" />
     <Compile Include="aac\mp4\api\Artwork.cs" />
     <Compile Include="aac\mp4\api\AudioTrack.cs" />
@@ -122,10 +127,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="jaad\aac\AACException.java" />
     <Content Include="jaad\aac\ChannelConfiguration.java" />
-    <Content Include="jaad\aac\Decoder.java" />
-    <Content Include="jaad\aac\DecoderConfig.java" />
     <Content Include="jaad\aac\error\BitsBuffer.java" />
     <Content Include="jaad\aac\error\HCR.java" />
     <Content Include="jaad\aac\error\RVLC.java" />
@@ -157,7 +159,6 @@
     <Content Include="jaad\aac\SampleBuffer.java" />
     <Content Include="jaad\aac\SampleFrequency.java" />
     <Content Include="jaad\aac\sbr\AnalysisFilterbank.java" />
-    <Content Include="jaad\aac\sbr\Constants.java" />
     <Content Include="jaad\aac\sbr\DCT.java" />
     <Content Include="jaad\aac\sbr\FBT.java" />
     <Content Include="jaad\aac\sbr\FilterbankTable.java" />
@@ -169,7 +170,6 @@
     <Content Include="jaad\aac\sbr\SBR.java" />
     <Content Include="jaad\aac\sbr\SynthesisFilterbank.java" />
     <Content Include="jaad\aac\sbr\TFGrid.java" />
-    <Content Include="jaad\aac\syntax\BitStream.java" />
     <Content Include="jaad\aac\syntax\CCE.java" />
     <Content Include="jaad\aac\syntax\Constants.java" />
     <Content Include="jaad\aac\syntax\CPE.java" />

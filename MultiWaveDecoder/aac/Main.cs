@@ -14,7 +14,7 @@ namespace MultiWaveDecoder
   /// 
   /// Info: Source-Fixes in JAAD-lib named "JFIX"
   /// </summary>
-  public class Main
+  public static class Main
   {
     const string USAGE = "usage:\ndecoder.exe [-mp4] <infile> <outfile>\n\n\t-mp4\tinput file is in MP4 container format";
 
@@ -49,7 +49,7 @@ namespace MultiWaveDecoder
 
         using (var wav = new WaveFileWriter(File.Create(outFile), track.getSampleRate(), track.getChannelCount(), track.getSampleSize()))
         {
-          //var dec = new Decoder(track.getDecoderSpecificInfo());
+          var dec = new Decoder(track.getDecoderSpecificInfo());
 
           //var buf = new SampleBuffer();
           //while (track.hasMoreFrames())
