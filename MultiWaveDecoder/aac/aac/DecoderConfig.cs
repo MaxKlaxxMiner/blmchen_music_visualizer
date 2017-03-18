@@ -10,7 +10,7 @@ namespace MultiWaveDecoder
   public sealed class DecoderConfig : Constants
   {
     Profile profile, extProfile;
-    //private SampleFrequency sampleFrequency;
+    SampleFrequency sampleFrequency;
     //private ChannelConfiguration channelConfiguration;
     //private bool frameLengthFlag;
     //private bool dependsOnCoreCoder;
@@ -144,8 +144,7 @@ namespace MultiWaveDecoder
         config.profile = readProfile(inStream);
 
         int sf = inStream.readBits(4);
-        //if(sf==0xF) config.sampleFrequency = SampleFrequency.forFrequency(inStream.readBits(24));
-        //else config.sampleFrequency = SampleFrequency.forInt(sf);
+        config.sampleFrequency = sf == 0xf ? SampleFrequency.forFrequency(inStream.readBits(24)) : SampleFrequency.forInt(sf);
         //config.channelConfiguration = ChannelConfiguration.forInt(inStream.readBits(4));
 
         throw new NotImplementedException();
