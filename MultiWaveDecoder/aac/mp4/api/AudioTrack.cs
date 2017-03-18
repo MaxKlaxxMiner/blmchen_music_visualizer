@@ -1,6 +1,7 @@
 ﻿using System;
 // ReSharper disable InconsistentNaming
 // ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable UnusedMember.Global
 
 namespace MultiWaveDecoder
 {
@@ -52,9 +53,9 @@ namespace MultiWaveDecoder
       }
     }
 
-    private SoundMediaHeaderBox smhd;
-    private AudioSampleEntry sampleEntry;
-    private Codec codec;
+    readonly SoundMediaHeaderBox smhd;
+    readonly AudioSampleEntry sampleEntry;
+    readonly Codec codec;
 
     public AudioTrack(IBox trak, MP4InputStream inStream)
       : base(trak, inStream)
@@ -105,6 +106,47 @@ namespace MultiWaveDecoder
     public override Codec getCodec()
     {
       return codec;
+    }
+
+    /// <summary>
+    /// The balance is a floating-point number that places mono audio tracks in a stereo space: 0 is centre (the normal value), full left is -1.0 and full right is 1.0.
+    /// </summary>
+    /// <returns>the stereo balance for a this track</returns>
+    public double getBalance()
+    {
+      return smhd.getBalance();
+    }
+
+    /// <summary>
+    /// Returns the number of channels in this audio track.
+    /// </summary>
+    /// <returns>the number of channels</returns>
+    public int getChannelCount()
+    {
+      return sampleEntry.getChannelCount();
+    }
+
+    /// <summary>
+    /// Returns the sample rate of this audio track.
+    /// </summary>
+    /// <returns>the sample rate</returns>
+    public int getSampleRate()
+    {
+      return sampleEntry.getSampleRate();
+    }
+
+    /// <summary>
+    /// Returns the sample size in bits for this track.
+    /// </summary>
+    /// <returns>the sample size</returns>
+    public int getSampleSize()
+    {
+      return sampleEntry.getSampleSize();
+    }
+
+    public double getVolume()
+    {
+      return tkhd.getVolume();
     }
   }
 }

@@ -14,7 +14,7 @@ namespace MultiWaveDecoder
   /// 
   /// Info: Source-Fixes in JAAD-lib named "JFIX"
   /// </summary>
-  public class Main
+  public static class Main
   {
     const string USAGE = "usage:\ndecoder.exe [-mp4] <infile> <outfile>\n\n\t-mp4\tinput file is in MP4 container format";
 
@@ -43,22 +43,21 @@ namespace MultiWaveDecoder
         }
 
 
-        //  List<Track> tracks = movie.getTracks(AudioTrack.AudioCodec.AAC);
-        //  if (tracks.isEmpty()) throw new Exception("movie does not contain any AAC track");
-        //  AudioTrack track = (AudioTrack)tracks.get(0);
+        var tracks = movie.getTracks(AudioTrack.AudioCodec.CodecType.AAC);
+        if (tracks.Length == 0) throw new Exception("movie does not contain any AAC track");
+        var track = (AudioTrack)tracks[0];
 
-        //using (var wav = new WaveFileWriter(File.Create(outFile), track.getSampleRate(), track.getChannelCount(), track.getSampleSize()))
+        using (var wav = new WaveFileWriter(File.Create(outFile), track.getSampleRate(), track.getChannelCount(), track.getSampleSize()))
         {
-          //  Decoder dec = new Decoder(track.getDecoderSpecificInfo());
+          var dec = new Decoder(track.getDecoderSpecificInfo());
 
-          //  Frame frame;
-          //  SampleBuffer buf = new SampleBuffer();
-          //  while (track.hasMoreFrames())
-          //  {
-          //    frame = track.readNextFrame();
-          //    dec.decodeFrame(frame.getData(), buf);
-          //    wav.write(buf.getData());
-          //  }
+          //var buf = new SampleBuffer();
+          //while (track.hasMoreFrames())
+          //{
+          //  var frame = track.readNextFrame();
+          //  dec.decodeFrame(frame.getData(), buf);
+          //  wav.write(buf.getData());
+          //}
         }
       }
     }

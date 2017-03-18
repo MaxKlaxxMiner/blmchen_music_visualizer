@@ -1,12 +1,13 @@
 ﻿using System;
 // ReSharper disable InconsistentNaming
 // ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable UnusedMember.Local
 
 namespace MultiWaveDecoder
 {
   public sealed class VideoTrack : Track
   {
-    public class VideoCodec : Codec
+    public sealed class VideoCodec : Codec
     {
       public enum CodecType
       {
@@ -28,7 +29,12 @@ namespace MultiWaveDecoder
           default: ac = CodecType.UNKNOWN_VIDEO_CODEC; break;
         }
 
-        return new VideoCodec { code = (int)ac };
+        return new VideoCodec(ac);
+      }
+
+      public VideoCodec(CodecType codec)
+      {
+        code = (int)codec;
       }
 
       public override string ToString()
@@ -36,9 +42,9 @@ namespace MultiWaveDecoder
         return "VideoCodec." + ((CodecType)code);
       }
     }
-    private VideoMediaHeaderBox vmhd;
-    private VideoSampleEntry sampleEntry;
-    private Codec codec;
+    VideoMediaHeaderBox vmhd;
+    VideoSampleEntry sampleEntry;
+    Codec codec;
 
     public VideoTrack(IBox trak, MP4InputStream inStream)
       : base(trak, inStream)
