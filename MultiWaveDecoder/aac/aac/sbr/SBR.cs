@@ -1,8 +1,6 @@
 ﻿// ReSharper disable InconsistentNaming
 // ReSharper disable NotAccessedField.Local
 // ReSharper disable UnusedMember.Local
-
-using System.Linq;
 // ReSharper disable FieldCanBeMadeReadOnly.Local
 #pragma warning disable 414
 
@@ -11,10 +9,6 @@ namespace MultiWaveDecoder
 {
   public sealed class SBR : HuffmanTables
   {
-    static T[][] Fill<T>(int x1, int x2) { return Enumerable.Range(0, x1).Select(c => new T[x2]).ToArray(); }
-    static T[][][] Fill<T>(int x1, int x2, int x3) { return Enumerable.Range(0, x1).Select(c => Enumerable.Range(0, x2).Select(z => new T[x3]).ToArray()).ToArray(); }
-    static T[][][][] Fill<T>(int x1, int x2, int x3, int x4) { return Enumerable.Range(0, x1).Select(c => Enumerable.Range(0, x2).Select(z => Enumerable.Range(0, x3).Select(r => new T[x4]).ToArray()).ToArray()).ToArray(); }
-
     bool downSampledSBR;
     SampleFrequency sample_rate;
     int maxAACLine;

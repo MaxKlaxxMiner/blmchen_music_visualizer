@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="aac\aac\AACException.cs" />
     <Compile Include="aac\aac\ChannelConfiguration.cs" />
+    <Compile Include="aac\aac\filterbank\FilterBank.cs" />
     <Compile Include="aac\aac\ps\PS.cs" />
     <Compile Include="aac\aac\ps\HuffmanTables.cs" />
     <Compile Include="aac\aac\SampleFrequency.cs" />
@@ -52,7 +53,7 @@
     <Compile Include="aac\aac\sbr\SynthesisFilterbank.cs" />
     <Compile Include="aac\aac\sbr\FilterbankTable.cs" />
     <Compile Include="aac\aac\sbr\SBR.cs" />
-    <Compile Include="aac\aac\sbr\Constants.cs" />
+    <Compile Include="aac\aac\Constants.cs" />
     <Compile Include="aac\aac\syntax\BitStream.cs" />
     <Compile Include="aac\aac\syntax\CCE.cs" />
     <Compile Include="aac\aac\syntax\FIL.cs" />
@@ -148,11 +149,9 @@
     <Content Include="jaad\aac\error\RVLCTables.java" />
     <Content Include="jaad\aac\filterbank\FFT.java" />
     <Content Include="jaad\aac\filterbank\FFTTables.java" />
-    <Content Include="jaad\aac\filterbank\FilterBank.java" />
     <Content Include="jaad\aac\filterbank\KBDWindows.java" />
     <Content Include="jaad\aac\filterbank\MDCT.java" />
     <Content Include="jaad\aac\filterbank\MDCTTables.java" />
-    <Content Include="jaad\aac\filterbank\SineWindows.java" />
     <Content Include="jaad\aac\gain\FFT.java" />
     <Content Include="jaad\aac\gain\GainControl.java" />
     <Content Include="jaad\aac\gain\GCConstants.java" />

@@ -1,10 +1,18 @@
 ﻿// ReSharper disable InconsistentNaming
 // ReSharper disable UnusedMember.Global
 // ReSharper disable MemberCanBePrivate.Global
+
+using System;
+using System.Linq;
+
 namespace MultiWaveDecoder
 {
   public abstract class Constants
   {
+    protected static T[][] Fill<T>(int x1, int x2) { return Enumerable.Range(0, x1).Select(c => new T[x2]).ToArray(); }
+    protected static T[][][] Fill<T>(int x1, int x2, int x3) { return Enumerable.Range(0, x1).Select(c => Enumerable.Range(0, x2).Select(z => new T[x3]).ToArray()).ToArray(); }
+    protected static T[][][][] Fill<T>(int x1, int x2, int x3, int x4) { return Enumerable.Range(0, x1).Select(c => Enumerable.Range(0, x2).Select(z => Enumerable.Range(0, x3).Select(r => new T[x4]).ToArray()).ToArray()).ToArray(); }
+
     protected static int[] startMinTable = { 7, 7, 10, 11, 12, 16, 16, 17, 24, 32, 35, 48 };
     protected static int[] offsetIndexTable = { 5, 5, 4, 4, 4, 3, 2, 1, 0, 6, 6, 6 };
     protected static int[][] OFFSET =
@@ -67,5 +75,20 @@ namespace MultiWaveDecoder
     protected const int MAX_SECTIONS = 120;
     protected const int MAX_MS_MASK = 128;
     protected const float SQRT2 = 1.414213562f;
+
+    // --- SineWindow ---
+
+    static float[] CreateSine(int steps)
+    {
+      return Enumerable.Range(0, steps).Select(i => (float)Math.Sin(Math.PI / 2.0 / steps * (i + 0.5))).ToArray();
+    }
+
+    protected static float[] SINE_120 = CreateSine(120);
+
+    protected static float[] SINE_128 = CreateSine(128);
+
+    protected static float[] SINE_960 = CreateSine(960);
+
+    protected static float[] SINE_1024 = CreateSine(1024);
   }
 }

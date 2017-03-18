@@ -12,9 +12,9 @@ namespace MultiWaveDecoder
   {
     readonly DecoderConfig config;
     SyntacticElements syntacticElements;
-    //private FilterBank filterBank;
-    //private BitStream in;
-    //private ADIFHeader adifHeader;
+    FilterBank filterBank;
+    // BitStream inStream;
+    // ADIFHeader adifHeader;
 
     /// <summary>
     /// The methods returns true, if a profile is supported by the decoder.
@@ -41,7 +41,7 @@ namespace MultiWaveDecoder
       if (!canDecode(config.getProfile())) throw new AACException("unsupported profile: " + config.getProfile());
 
       syntacticElements = new SyntacticElements(config);
-      //filterBank = new FilterBank(config.isSmallFrameUsed(), config.getChannelConfiguration().getChannelCount());
+      filterBank = new FilterBank(config.isSmallFrameUsed(), (int)config.getChannelConfiguration());
 
       //in = new BitStream();
 
