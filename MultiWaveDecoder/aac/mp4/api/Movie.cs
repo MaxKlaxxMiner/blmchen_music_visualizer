@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 // ReSharper disable InconsistentNaming
+// ReSharper disable UnusedMember.Global
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace MultiWaveDecoder
 {
@@ -182,6 +184,16 @@ namespace MultiWaveDecoder
       }
 
       return (track == null) ? null : track.readNextFrame();
+    }
+
+    public Track[] getTracks(AudioTrack.AudioCodec.CodecType codecType)
+    {
+      return getTracks(new AudioTrack.AudioCodec(codecType));
+    }
+
+    public Track[] getTracks(VideoTrack.VideoCodec.CodecType codecType)
+    {
+      return getTracks(new VideoTrack.VideoCodec(codecType));
     }
   }
 }

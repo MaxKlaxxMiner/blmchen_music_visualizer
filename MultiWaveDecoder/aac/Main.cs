@@ -43,9 +43,9 @@ namespace MultiWaveDecoder
         }
 
 
-        //  List<Track> tracks = movie.getTracks(AudioTrack.AudioCodec.AAC);
-        //  if (tracks.isEmpty()) throw new Exception("movie does not contain any AAC track");
-        //  AudioTrack track = (AudioTrack)tracks.get(0);
+        var tracks = movie.getTracks(AudioTrack.AudioCodec.CodecType.AAC);
+        if (tracks.Length == 0) throw new Exception("movie does not contain any AAC track");
+        var track = (AudioTrack)tracks[0];
 
         //using (var wav = new WaveFileWriter(File.Create(outFile), track.getSampleRate(), track.getChannelCount(), track.getSampleSize()))
         {
