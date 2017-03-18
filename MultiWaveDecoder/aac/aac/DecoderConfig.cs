@@ -1,6 +1,7 @@
-﻿// ReSharper disable InconsistentNaming
-
-using System;
+﻿using System;
+// ReSharper disable InconsistentNaming
+// ReSharper disable NotAccessedField.Local
+#pragma warning disable 169
 
 namespace MultiWaveDecoder
 {
@@ -11,15 +12,15 @@ namespace MultiWaveDecoder
   {
     Profile profile, extProfile;
     SampleFrequency sampleFrequency;
-    //private ChannelConfiguration channelConfiguration;
-    //private bool frameLengthFlag;
-    //private bool dependsOnCoreCoder;
-    //private int coreCoderDelay;
-    //private bool extensionFlag;
-    ////extension: SBR
-    //private bool sbrPresent, downSampledSBR, sbrEnabled;
-    ////extension: error resilience
-    //private bool sectionDataResilience, scalefactorResilience, spectralDataResilience;
+    ChannelConfiguration channelConfiguration;
+    bool frameLengthFlag;
+    bool dependsOnCoreCoder;
+    int coreCoderDelay;
+    bool extensionFlag;
+    // extension: SBR
+    bool sbrPresent, downSampledSBR, sbrEnabled;
+    // extension: error resilience
+    bool sectionDataResilience, scalefactorResilience, spectralDataResilience;
 
     //private DecoderConfig() {
     //profile = Profile.AAC_MAIN;
@@ -145,62 +146,68 @@ namespace MultiWaveDecoder
 
         int sf = inStream.readBits(4);
         config.sampleFrequency = sf == 0xf ? SampleFrequency.forFrequency(inStream.readBits(24)) : SampleFrequency.forInt(sf);
-        //config.channelConfiguration = ChannelConfiguration.forInt(inStream.readBits(4));
+        config.channelConfiguration = (ChannelConfiguration)inStream.readBits(4);
 
-        throw new NotImplementedException();
-        //switch(config.profile) {
-        //case AAC_SBR:
-        //config.extProfile = config.profile;
-        //config.sbrPresent = true;
-        //sf = inStream.readBits(4);
-        ////TODO: 24 bits already read; read again?
-        ////if(sf==0xF) config.sampleFrequency = SampleFrequency.forFrequency(inStream.readBits(24));
-        ////if sample frequencies are the same: downsample SBR
-        //config.downSampledSBR = config.sampleFrequency.getIndex()==sf;
-        //config.sampleFrequency = SampleFrequency.forInt(sf);
-        //config.profile = readProfile(inStream);
-        //break;
-        //case AAC_MAIN:
-        //case AAC_LC:
-        //case AAC_SSR:
-        //case AAC_LTP:
-        //case ER_AAC_LC:
-        //case ER_AAC_LTP:
-        //case ER_AAC_LD:
-        ////ga-specific info:
-        //config.frameLengthFlag = inStream.readBool();
-        //if(config.frameLengthFlag) throw new AACException("config uses 960-sample frames, not yet supported"); //TODO: are 960-frames working yet?
-        //config.dependsOnCoreCoder = inStream.readBool();
-        //if(config.dependsOnCoreCoder) config.coreCoderDelay = inStream.readBits(14);
-        //else config.coreCoderDelay = 0;
-        //config.extensionFlag = inStream.readBool();
+        switch (config.profile.type)
+        {
+          case Profile.ProfileType.AAC_SBR:
+          {
+            throw new NotImplementedException();
+            //config.extProfile = config.profile;
+            //config.sbrPresent = true;
+            //sf = inStream.readBits(4);
+            ////TODO: 24 bits already read; read again?
+            ////if(sf==0xF) config.sampleFrequency = SampleFrequency.forFrequency(inStream.readBits(24));
+            ////if sample frequencies are the same: downsample SBR
+            //config.downSampledSBR = config.sampleFrequency.getIndex()==sf;
+            //config.sampleFrequency = SampleFrequency.forInt(sf);
+            //config.profile = readProfile(inStream);
+          }
+          case Profile.ProfileType.AAC_MAIN:
+          case Profile.ProfileType.AAC_LC:
+          case Profile.ProfileType.AAC_SSR:
+          case Profile.ProfileType.AAC_LTP:
+          case Profile.ProfileType.ER_AAC_LC:
+          case Profile.ProfileType.ER_AAC_LTP:
+          case Profile.ProfileType.ER_AAC_LD:
+          {
+            // ga-specific info:
+            config.frameLengthFlag = inStream.readBool();
+            if (config.frameLengthFlag) throw new AACException("config uses 960-sample frames, not yet supported"); //TODO: are 960-frames working yet?
+            config.dependsOnCoreCoder = inStream.readBool();
+            config.coreCoderDelay = config.dependsOnCoreCoder ? inStream.readBits(14) : 0;
+            config.extensionFlag = inStream.readBool();
 
-        //if(config.extensionFlag) {
-        //if(config.profile.isErrorResilientProfile()) {
-        //config.sectionDataResilience = inStream.readBool();
-        //config.scalefactorResilience = inStream.readBool();
-        //config.spectralDataResilience = inStream.readBool();
-        //}
-        ////extensionFlag3
-        //inStream.skipBit();
-        //}
+            if (config.extensionFlag)
+            {
+              if (config.profile.isErrorResilientProfile())
+              {
+                config.sectionDataResilience = inStream.readBool();
+                config.scalefactorResilience = inStream.readBool();
+                config.spectralDataResilience = inStream.readBool();
+              }
+              // extensionFlag3
+              inStream.skipBit();
+            }
 
-        //if(config.channelConfiguration==ChannelConfiguration.CHANNEL_CONFIG_NONE) {
-        ////TODO: is this working correct? -> ISO 14496-3 part 1: 1.A.4.3
-        //inStream.skipBits(3); //PCE
-        //PCE pce = new PCE();
-        //pce.decode(inStream);
-        //config.profile = pce.getProfile();
-        //config.sampleFrequency = pce.getSampleFrequency();
-        //config.channelConfiguration = ChannelConfiguration.forInt(pce.getChannelCount());
-        //}
+            if (config.channelConfiguration == ChannelConfiguration.CHANNEL_CONFIG_NONE || !config.channelConfiguration.ToString().StartsWith("CHANNEL_", StringComparison.Ordinal))
+            {
+              // TODO: is this working correct? -> ISO 14496-3 part 1: 1.A.4.3
+              inStream.skipBits(3); //PCE
 
-        //if(inStream.getBitsLeft()>10) readSyncExtension(inStream, config);
-        //break;
-        //default:
-        //throw new AACException("profile not supported: "+config.profile.getIndex());
-        //}
-        //return config;
+              throw new NotImplementedException();
+              //PCE pce = new PCE();
+              //pce.decode(inStream);
+              //config.profile = pce.getProfile();
+              //config.sampleFrequency = pce.getSampleFrequency();
+              //config.channelConfiguration = ChannelConfiguration.forInt(pce.getChannelCount());
+            }
+
+            if (inStream.getBitsLeft() > 10) readSyncExtension(inStream, config);
+          } break;
+          default: throw new AACException("profile not supported: " + config.profile.type);
+        }
+        return config;
       }
       finally
       {
@@ -215,29 +222,39 @@ namespace MultiWaveDecoder
       return new Profile(i);
     }
 
-    //private static void readSyncExtension(BitStream in, DecoderConfig config) throws AACException {
-    //int type = in.readBits(11);
-    //switch(type) {
-    //case 0x2B7:
-    //Profile profile = Profile.forInt(in.readBits(5));
+    static void readSyncExtension(BitStream inStream, DecoderConfig config)
+    {
+      int type = inStream.readBits(11);
+      switch (type)
+      {
+        case 0x2B7:
+        {
+          var profile = new Profile(inStream.readBits(5));
 
-    //if(profile.equals(Profile.AAC_SBR)) {
-    //config.sbrPresent = in.readBool();
-    //if(config.sbrPresent) {
-    //config.profile = profile;
+          if (profile.type == Profile.ProfileType.AAC_SBR)
+          {
+            config.sbrPresent = inStream.readBool();
+            if (config.sbrPresent)
+            {
+              config.profile = profile;
 
-    //int tmp = in.readBits(4);
+              int tmp = inStream.readBits(4);
 
-    //if(tmp==config.sampleFrequency.getIndex()) config.downSampledSBR = true;
-    //if(tmp==15) {
-    //throw new AACException("sample rate specified explicitly, not supported yet!");
-    ////tmp = in.readBits(24);
-    //}
-    //}
-    //}
-    //break;
-    //}
-    //}
-    //}
+              if (tmp == config.sampleFrequency.getIndex()) config.downSampledSBR = true;
+              if (tmp == 15)
+              {
+                throw new AACException("sample rate specified explicitly, not supported yet!");
+                // tmp = inStream.readBits(24);
+              }
+            }
+          }
+        } break;
+      }
+    }
+
+    public override string ToString()
+    {
+      return (new{ profile, extProfile, sampleFrequency = sampleFrequency.getFrequency(), channelConfiguration }).ToString();
+    }
   }
 }

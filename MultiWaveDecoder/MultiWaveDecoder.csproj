@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="aac\aac\AACException.cs" />
+    <Compile Include="aac\aac\ChannelConfiguration.cs" />
     <Compile Include="aac\aac\SampleFrequency.cs" />
     <Compile Include="aac\aac\DecoderConfig.cs" />
     <Compile Include="aac\aac\Decoder.cs" />
@@ -129,7 +130,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="jaad\aac\ChannelConfiguration.java" />
     <Content Include="jaad\aac\error\BitsBuffer.java" />
     <Content Include="jaad\aac\error\HCR.java" />
     <Content Include="jaad\aac\error\RVLC.java" />
