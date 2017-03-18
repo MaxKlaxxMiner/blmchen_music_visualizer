@@ -1,4 +1,7 @@
 ﻿using System;
+// ReSharper disable InconsistentNaming
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable PrivateFieldCanBeConvertedToLocalVariable
 
 namespace MultiWaveDecoder
 {
@@ -7,21 +10,21 @@ namespace MultiWaveDecoder
   /// </summary>
   public sealed class Decoder : Constants
   {
-    DecoderConfig config;
-    //private SyntacticElements syntacticElements;
+    readonly DecoderConfig config;
+    SyntacticElements syntacticElements;
     //private FilterBank filterBank;
     //private BitStream in;
     //private ADIFHeader adifHeader;
 
-    ////*
+    /// <summary>
     /// The methods returns true, if a profile is supported by the decoder.
-    /// @param profile an AAC profile
-    /// @return true if the specified profile can be decoded
-    /// @see Profile#isDecodingSupported()
-    ////
-    //public static bool canDecode(Profile profile) {
-    //return profile.isDecodingSupported();
-    //}
+    /// </summary>
+    /// <param name="profile">profile an AAC profile</param>
+    /// <returns>true if the specified profile can be decoded</returns>
+    public static bool canDecode(Profile profile)
+    {
+      return profile.supported;
+    }
 
     /// <summary>
     /// Initializes the decoder with a MP4 decoder specific info.
@@ -35,9 +38,9 @@ namespace MultiWaveDecoder
       config = DecoderConfig.parseMP4DecoderSpecificInfo(decoderSpecificInfo);
       if (config == null) throw new ArgumentException("illegal MP4 decoder specific info");
 
-      //if(!canDecode(config.getProfile())) throw new AACException("unsupported profile: "+config.getProfile().getDescription());
+      if (!canDecode(config.getProfile())) throw new AACException("unsupported profile: " + config.getProfile());
 
-      //syntacticElements = new SyntacticElements(config);
+      syntacticElements = new SyntacticElements(config);
       //filterBank = new FilterBank(config.isSmallFrameUsed(), config.getChannelConfiguration().getChannelCount());
 
       //in = new BitStream();
