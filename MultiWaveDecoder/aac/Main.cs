@@ -49,16 +49,15 @@ namespace MultiWaveDecoder
 
         using (var wav = new WaveFileWriter(File.Create(outFile), track.getSampleRate(), track.getChannelCount(), track.getSampleSize()))
         {
-          //  Decoder dec = new Decoder(track.getDecoderSpecificInfo());
+          //var dec = new Decoder(track.getDecoderSpecificInfo());
 
-          //  Frame frame;
-          //  SampleBuffer buf = new SampleBuffer();
-          //  while (track.hasMoreFrames())
-          //  {
-          //    frame = track.readNextFrame();
-          //    dec.decodeFrame(frame.getData(), buf);
-          //    wav.write(buf.getData());
-          //  }
+          //var buf = new SampleBuffer();
+          //while (track.hasMoreFrames())
+          //{
+          //  var frame = track.readNextFrame();
+          //  dec.decodeFrame(frame.getData(), buf);
+          //  wav.write(buf.getData());
+          //}
         }
       }
     }

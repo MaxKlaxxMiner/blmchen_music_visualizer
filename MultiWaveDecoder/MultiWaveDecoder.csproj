@@ -43,6 +43,7 @@
     <Compile Include="aac\Main.cs" />
     <Compile Include="aac\mp4\api\Artwork.cs" />
     <Compile Include="aac\mp4\api\AudioTrack.cs" />
+    <Compile Include="aac\mp4\api\DecoderInfo.cs" />
     <Compile Include="aac\mp4\api\drm\ITunesProtection.cs" />
     <Compile Include="aac\mp4\api\MetaData.cs" />
     <Compile Include="aac\mp4\api\Protection.cs" />
@@ -204,7 +205,6 @@
     <Content Include="jaad\mp4\api\codec\H263DecoderInfo.java" />
     <Content Include="jaad\mp4\api\codec\QCELPDecoderInfo.java" />
     <Content Include="jaad\mp4\api\codec\SMVDecoderInfo.java" />
-    <Content Include="jaad\mp4\api\DecoderInfo.java" />
     <Content Include="jaad\mp4\api\ID3Frame.java" />
     <Content Include="jaad\mp4\api\ID3Tag.java" />
     <Content Include="jaad\mp4\api\MetaData.java" />

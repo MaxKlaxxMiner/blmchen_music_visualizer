@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+// ReSharper disable UnusedMember.Global
 
 // ReSharper disable InconsistentNaming
 
@@ -19,11 +20,11 @@ namespace MultiWaveDecoder
     protected readonly TrackHeaderBox tkhd;
     readonly MediaHeaderBox mdhd;
     readonly List<Frame> frames = new List<Frame>();
-    int currentFrame = 0;
+    int currentFrame;
 
     // --- info structures ---
     protected DecoderSpecificInfo decoderSpecificInfo;
-    //protected DecoderInfo decoderInfo;
+    protected DecoderInfo decoderInfo;
     protected Protection protection;
 
     public abstract class Codec
@@ -155,113 +156,77 @@ namespace MultiWaveDecoder
     //}
     //}
 
-    ////tkhd
-    ////*
-    /// Returns true if the track is enabled. A disabled track is treated as if
-    /// it were not present.
-    /// @return true if the track is enabled
-    ////
-    //public bool isEnabled() {
-    //return tkhd.isTrackEnabled();
-    //}
+    /// <summary>
+    /// Returns true if the track is enabled. A disabled track is treated as if it were not present.
+    /// </summary>
+    /// <returns>true if the track is enabled</returns>
+    public bool isEnabled()
+    {
+      return tkhd.isTrackEnabled();
+    }
 
-    ////*
+    /// <summary>
     /// Returns true if the track is used in the presentation.
-    /// @return true if the track is used
-    ////
-    //public bool isUsed() {
-    //return tkhd.isTrackInMovie();
-    //}
+    /// </summary>
+    /// <returns>true if the track is used</returns>
+    public bool isUsed()
+    {
+      return tkhd.isTrackInMovie();
+    }
 
-    ////*
+    /// <summary>
     /// Returns true if the track is used in previews.
-    /// @return true if the track is used in previews
-    ////
-    //public bool isUsedForPreview() {
-    //return tkhd.isTrackInPreview();
-    //}
+    /// </summary>
+    /// <returns>true if the track is used in previews</returns>
+    public bool isUsedForPreview()
+    {
+      return tkhd.isTrackInPreview();
+    }
 
-    ////*
+    /// <summary>
     /// Returns the time this track was created.
-    /// @return the creation time
-    ////
-    //public Date getCreationTime() {
-    //return Utils.getDate(tkhd.getCreationTime());
-    //}
+    /// </summary>
+    /// <returns>the creation time</returns>
+    public DateTime getCreationTime()
+    {
+      return BoxUtils.getDate(tkhd.getCreationTime());
+    }
 
-    ////*
+    /// <summary>
     /// Returns the last time this track was modified.
-    /// @return the modification time
-    ////
-    //public Date getModificationTime() {
-    //return Utils.getDate(tkhd.getModificationTime());
-    //}
+    /// </summary>
+    /// <returns>the modification time</returns>
+    public DateTime getModificationTime()
+    {
+      return BoxUtils.getDate(tkhd.getModificationTime());
+    }
 
-    ////mdhd
-    ////*
-    /// Returns the language for this media.
-    /// @return the language
-    ////
-    //public Locale getLanguage() {
-    //return new Locale(mdhd.getLanguage());
-    //}
+    /// <summary>
+    /// Returns the decoder specific info, if present. It contains configuration data for the decoder. If the decoder specific info is not present, the track contains a <code>DecoderInfo</code>.
+    /// </summary>
+    /// <returns>the decoder specific info</returns>
+    public byte[] getDecoderSpecificInfo()
+    {
+      return decoderSpecificInfo.getData();
+    }
 
-    ////*
-    /// Returns true if the data for this track is present in this file (stream).
-    /// If not, <code>getLocation()</code> returns the URL where the data can be
-    /// found.
-    /// @return true if the data is in this file (stream), false otherwise
-    ////
-    //public bool isInFile() {
-    //return inFile;
-    //}
+    /// <summary>
+    /// Returns the <code>DecoderInfo</code>, if present. It contains configuration information for the decoder. If the structure is not present, the track contains a decoder specific info.
+    /// </summary>
+    /// <returns>the codec specific structure</returns>
+    public DecoderInfo getDecoderInfo()
+    {
+      return decoderInfo;
+    }
 
-    ////*
-    /// If the data for this track is not present in this file (if
-    /// <code>isInFile</code> returns false), this method returns the data's
-    /// location. Else null is returned.
-    /// @return the data's location or null if the data is in this file
-    ////
-    //public URL getLocation() {
-    //return location;
-    //}
-
-    ////info structures
-    ////*
-    /// Returns the decoder specific info, if present. It contains configuration
-    /// data for the decoder. If the decoder specific info is not present, the
-    /// track contains a <code>DecoderInfo</code>.
-    ///
-    /// @see #getDecoderInfo() 
-    /// @return the decoder specific info
-    ////
-    //public byte[] getDecoderSpecificInfo() {
-    //return decoderSpecificInfo.getData();
-    //}
-
-    ////*
-    /// Returns the <code>DecoderInfo</code>, if present. It contains 
-    /// configuration information for the decoder. If the structure is not
-    /// present, the track contains a decoder specific info.
-    ///
-    /// @see #getDecoderSpecificInfo()
-    /// @return the codec specific structure
-    ////
-    //public DecoderInfo getDecoderInfo() {
-    //return decoderInfo;
-    //}
-
-    ////*
-    /// Returns the <code>ProtectionInformation</code> object that contains 
-    /// details about the DRM system used. If no protection is present this 
-    /// method returns null.
-    /// 
-    /// @return a <code>ProtectionInformation</code> object or null if no 
-    /// protection is used
-    ////
-    //public Protection getProtection() {
-    //return protection;
-    //}
+    /// <summary>
+    /// Returns the <code>ProtectionInformation</code> object that contains details about the DRM system used. If no protection is present this method returns null.
+    /// </summary>
+    /// <returns>a <code>ProtectionInformation</code> object or null if no protection is used</returns>
+    public Protection getProtection()
+    {
+      return protection;
+    }
 
     /// <summary>
     /// Indicates if there are more frames to be read in this track.
@@ -272,13 +237,10 @@ namespace MultiWaveDecoder
       return currentFrame < frames.Count;
     }
 
-    ////*
-    /// Reads the next frame from this track. If it contains no more frames to
-    /// read, null is returned.
-    /// 
-    /// @return the next frame or null if there are no more frames to read
-    /// @throws IOException if reading fails
-    ////
+    /// <summary>
+    /// Reads the next frame from this track. If it contains no more frames to read, null is returned.
+    /// </summary>
+    /// <returns>the next frame or null if there are no more frames to read</returns>
     public Frame readNextFrame()
     {
       Frame frame = null;
@@ -320,26 +282,26 @@ namespace MultiWaveDecoder
       return frame;
     }
 
-    ////*
-    /// This method tries to seek to the frame that is nearest to the given
-    /// timestamp. It returns the timestamp of the frame it seeked to or -1 if
-    /// none was found.
-    /// 
-    /// @param timestamp a timestamp to seek to
-    /// @return the frame's timestamp that the method seeked to
-    ////
-    //public double seek(double timestamp) {
-    ////find first frame > timestamp
-    //Frame frame = null;
-    //for(int i = 0; i<frames.size(); i++) {
-    //frame = frames.get(i++);
-    //if(frame.getTime()>timestamp) {
-    //currentFrame = i;
-    //break;
-    //}
-    //}
-    //return (frame==null) ? -1 : frame.getTime();
-    //}
+    /// <summary>
+    /// This method tries to seek to the frame that is nearest to the given timestamp. It returns the timestamp of the frame it seeked to or -1 if none was found.
+    /// </summary>
+    /// <param name="timestamp">a timestamp to seek to</param>
+    /// <returns>the frame's timestamp that the method seeked to</returns>
+    public double seek(double timestamp)
+    {
+      // find first frame > timestamp
+      Frame frame = null;
+      for (int i = 0; i < frames.Count; i++)
+      {
+        frame = frames[i++];
+        if (frame.getTime() > timestamp)
+        {
+          currentFrame = i;
+          break;
+        }
+      }
+      return (frame == null) ? -1 : frame.getTime();
+    }
 
     /// <summary>
     /// Returns the timestamp of the next frame to be read. This is needed to read frames from a movie that contains multiple tracks.
