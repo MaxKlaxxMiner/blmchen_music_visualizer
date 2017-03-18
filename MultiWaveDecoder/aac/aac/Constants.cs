@@ -76,19 +76,51 @@ namespace MultiWaveDecoder
     protected const int MAX_MS_MASK = 128;
     protected const float SQRT2 = 1.414213562f;
 
-    // --- SineWindow ---
+    // --- Sine Window ---
 
-    static float[] CreateSine(int steps)
+    static float[] CreateSine(int len)
     {
-      return Enumerable.Range(0, steps).Select(i => (float)Math.Sin(Math.PI / 2.0 / steps * (i + 0.5))).ToArray();
+      return Enumerable.Range(0, len).Select(i => (float)Math.Sin(Math.PI / 2.0 / len * (i + 0.5))).ToArray();
     }
 
-    protected static float[] SINE_120 = CreateSine(120);
+    protected static readonly float[] SINE_120 = CreateSine(120);
 
-    protected static float[] SINE_128 = CreateSine(128);
+    protected static readonly float[] SINE_128 = CreateSine(128);
 
-    protected static float[] SINE_960 = CreateSine(960);
+    protected static readonly float[] SINE_960 = CreateSine(960);
 
-    protected static float[] SINE_1024 = CreateSine(1024);
+    protected static readonly float[] SINE_1024 = CreateSine(1024);
+
+    // --- KBD Window ---
+
+    static float[] CreateKbd(int alpha, int len)
+    {
+      var f = new double[len];
+
+      double sum = 0;
+      double alpha2 = (Math.PI / len * alpha) * (Math.PI / len * alpha);
+
+      for (int i = 0; i < len; i++)
+      {
+        double tmp = i * (len - i) * alpha2;
+        double bessel = 1.0;
+
+        for (int j = 50; j > 0; j--) bessel = bessel * tmp / (j * j) + 1.0;
+
+        sum += bessel;
+        f[i] = sum;
+      }
+
+      sum++;
+      return f.Select(x => (float)Math.Sqrt(x / sum)).ToArray();
+    }
+
+    protected static readonly float[] KBD_120 = CreateKbd(6, 120);
+
+    protected static readonly float[] KBD_128 = CreateKbd(6, 128);
+
+    protected static readonly float[] KBD_960 = CreateKbd(4, 960);
+
+    protected static readonly float[] KBD_1024 = CreateKbd(4, 1024);
   }
 }

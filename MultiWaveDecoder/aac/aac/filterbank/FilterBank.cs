@@ -1,4 +1,6 @@
 ﻿using System;
+// ReSharper disable InconsistentNaming
+// ReSharper disable NotAccessedField.Local
 
 namespace MultiWaveDecoder
 {
@@ -6,36 +8,37 @@ namespace MultiWaveDecoder
   {
     //public class FilterBank implements Constants, SineWindows, KBDWindows {
 
-    //private float[][] LONG_WINDOWS;// = {SINE_LONG, KBD_LONG};
-    //private float[][] SHORT_WINDOWS;// = {SINE_SHORT, KBD_SHORT};
-    //private int length, shortLen, mid, trans;
-    //private MDCT mdctShort, mdctLong;
-    //private float[] buf;
-    //private float[][] overlaps;
+    float[][] LONG_WINDOWS; // = {SINE_LONG, KBD_LONG};
+    float[][] SHORT_WINDOWS; // = {SINE_SHORT, KBD_SHORT};
+    int length, shortLen, mid, trans;
+    MDCT mdctShort, mdctLong;
+    float[] buf;
+    float[][] overlaps;
 
     public FilterBank(bool smallFrames, int channels)
     {
-      throw new NotImplementedException();
-      //if(smallFrames) {
-      //length = WINDOW_SMALL_LEN_LONG;
-      //shortLen = WINDOW_SMALL_LEN_SHORT;
-      //LONG_WINDOWS = new float[][]{SINE_960, KBD_960};
-      //SHORT_WINDOWS = new float[][]{SINE_120, KBD_120};
-      //}
-      //else {
-      //length = WINDOW_LEN_LONG;
-      //shortLen = WINDOW_LEN_SHORT;
-      //LONG_WINDOWS = new float[][]{SINE_1024, KBD_1024};
-      //SHORT_WINDOWS = new float[][]{SINE_128, KBD_128};
-      //}
-      //mid = (length-shortLen)/2;
-      //trans = shortLen/2;
+      if (smallFrames)
+      {
+        length = WINDOW_SMALL_LEN_LONG;
+        shortLen = WINDOW_SMALL_LEN_SHORT;
+        LONG_WINDOWS = new[] { SINE_960, KBD_960 };
+        SHORT_WINDOWS = new[] { SINE_120, KBD_120 };
+      }
+      else
+      {
+        length = WINDOW_LEN_LONG;
+        shortLen = WINDOW_LEN_SHORT;
+        LONG_WINDOWS = new[] { SINE_1024, KBD_1024 };
+        SHORT_WINDOWS = new[] { SINE_128, KBD_128 };
+      }
+      mid = (length - shortLen) / 2;
+      trans = shortLen / 2;
 
-      //mdctShort = new MDCT(shortLen*2);
-      //mdctLong = new MDCT(length*2);
+      mdctShort = new MDCT(shortLen * 2);
+      mdctLong = new MDCT(length * 2);
 
-      //overlaps = new float[channels][length];
-      //buf = new float[2*length];
+      overlaps = Fill<float>(channels, length);
+      buf = new float[2 * length];
     }
 
     //public void process(WindowSequence windowSequence, int windowShape, int windowShapePrev, float[] in, float[] out, int channel) {
