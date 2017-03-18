@@ -195,7 +195,6 @@
     <Content Include="jaad\adts\ADTSDemultiplexer.java" />
     <Content Include="jaad\adts\ADTSFrame.java" />
     <Content Include="jaad\MP4Info.java" />
-    <Content Include="jaad\mp4\api\AudioTrack.java" />
     <Content Include="jaad\mp4\api\Brand.java" />
     <Content Include="jaad\mp4\api\codec\AC3DecoderInfo.java" />
     <Content Include="jaad\mp4\api\codec\AMRDecoderInfo.java" />

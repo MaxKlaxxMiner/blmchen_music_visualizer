@@ -16,7 +16,7 @@ namespace MultiWaveDecoder
   public abstract class Track
   {
     readonly MP4InputStream inStream;
-    readonly TrackHeaderBox tkhd;
+    protected readonly TrackHeaderBox tkhd;
     readonly MediaHeaderBox mdhd;
     readonly List<Frame> frames = new List<Frame>();
     int currentFrame = 0;
