@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="aac\aac\AACException.cs" />
     <Compile Include="aac\aac\ChannelConfiguration.cs" />
+    <Compile Include="aac\aac\filterbank\FFT.cs" />
     <Compile Include="aac\aac\filterbank\MDCT.cs" />
     <Compile Include="aac\aac\filterbank\FilterBank.cs" />
     <Compile Include="aac\aac\ps\PS.cs" />
@@ -148,8 +149,6 @@
     <Content Include="jaad\aac\error\HCR.java" />
     <Content Include="jaad\aac\error\RVLC.java" />
     <Content Include="jaad\aac\error\RVLCTables.java" />
-    <Content Include="jaad\aac\filterbank\FFT.java" />
-    <Content Include="jaad\aac\filterbank\FFTTables.java" />
     <Content Include="jaad\aac\filterbank\MDCTTables.java" />
     <Content Include="jaad\aac\gain\FFT.java" />
     <Content Include="jaad\aac\gain\GainControl.java" />

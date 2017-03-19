@@ -122,5 +122,112 @@ namespace MultiWaveDecoder
     protected static readonly float[] KBD_960 = CreateKbd(4, 960);
 
     protected static readonly float[] KBD_1024 = CreateKbd(4, 1024);
+
+    // --- FFT Tables ---
+
+    protected static readonly Float2D[] FFT_TABLE_60 = generateFFTTableShort(60);
+
+    protected static readonly Float2D[] FFT_TABLE_64 = generateFFTTableShort(64);
+
+    protected static readonly Float3D[] FFT_TABLE_480 = generateFFTTableLong(480);
+
+    protected static readonly Float3D[] FFT_TABLE_512 = generateFFTTableLong(512);
+
+    public struct Float2D
+    {
+      public readonly float x;
+      public readonly float y;
+      public Float2D(float x, float y)
+      {
+        this.x = x;
+        this.y = y;
+      }
+      public Float2D(Double2D d)
+      {
+        x = (float)d.x;
+        y = (float)d.y;
+      }
+      public override string ToString()
+      {
+        return "[" + x.ToString("N7") + ", " + y.ToString("N7") + "]";
+      }
+    }
+    public struct Double2D
+    {
+      public double x;
+      public double y;
+      public override string ToString()
+      {
+        return "[" + x.ToString("N14") + ", " + y.ToString("N14") + "]";
+      }
+    }
+    public struct Float3D
+    {
+      public readonly float x;
+      public readonly float y;
+      public readonly float z;
+      public Float3D(Double3D d)
+      {
+        x = (float)d.x;
+        y = (float)d.y;
+        z = (float)d.z;
+      }
+      public override string ToString()
+      {
+        return "[" + x.ToString("N7") + ", " + y.ToString("N7") + ", " + z.ToString("N7") + "]";
+      }
+    }
+    public struct Double3D
+    {
+      public double x;
+      public double y;
+      public double z;
+      public override string ToString()
+      {
+        return "[" + x.ToString("N14") + ", " + y.ToString("N14") + ", " + z.ToString("N14") + "]";
+      }
+    }
+
+    static Float2D[] generateFFTTableShort(int len)
+    {
+      double t = 2.0 * Math.PI / len;
+      double cosT = Math.Cos(t);
+      double sinT = Math.Sin(t);
+      var f = new Double2D[len];
+
+      f[0].x = 1;
+      f[0].y = 0;
+      double lastImag = 0.0;
+
+      for (int i = 1; i < len; i++)
+      {
+        f[i].x = f[i - 1].x * cosT + lastImag * sinT;
+        lastImag = lastImag * cosT - f[i - 1].x * sinT;
+        f[i].y = -lastImag;
+      }
+
+      return f.Select(x => new Float2D(x)).ToArray();
+    }
+
+    static Float3D[] generateFFTTableLong(int len)
+    {
+      double t = 2.0 * Math.PI / len;
+      double cosT = Math.Cos(t);
+      double sinT = Math.Sin(t);
+      var f = new Double3D[len];
+
+      f[0].x = 1;
+      f[0].y = 0;
+      f[0].z = 0;
+
+      for (var i = 1; i < len; i++)
+      {
+        f[i].x = f[i - 1].x * cosT + f[i - 1].z * sinT;
+        f[i].z = f[i - 1].z * cosT - f[i - 1].x * sinT;
+        f[i].y = -f[i].z;
+      }
+
+      return f.Select(x => new Float3D(x)).ToArray();
+    }
   }
 }
