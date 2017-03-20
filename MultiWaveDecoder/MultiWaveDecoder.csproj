@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="aac\aac\AACException.cs" />
     <Compile Include="aac\aac\ChannelConfiguration.cs" />
+    <Compile Include="aac\aac\error\RVLC.cs" />
+    <Compile Include="aac\aac\gain\GainControl.cs" />
     <Compile Include="aac\aac\SampleBuffer.cs" />
     <Compile Include="aac\aac\filterbank\FFT.cs" />
     <Compile Include="aac\aac\filterbank\MDCT.cs" />
@@ -59,11 +61,16 @@
     <Compile Include="aac\aac\Constants.cs" />
     <Compile Include="aac\aac\syntax\BitStream.cs" />
     <Compile Include="aac\aac\syntax\CCE.cs" />
+    <Compile Include="aac\aac\syntax\TNS.cs" />
+    <Compile Include="aac\aac\syntax\ICSInfo.cs" />
+    <Compile Include="aac\aac\syntax\ICStream.cs" />
+    <Compile Include="aac\aac\syntax\CPE.cs" />
     <Compile Include="aac\aac\syntax\FIL.cs" />
     <Compile Include="aac\aac\syntax\DSE.cs" />
     <Compile Include="aac\aac\syntax\Element.cs" />
     <Compile Include="aac\aac\syntax\PCE.cs" />
     <Compile Include="aac\aac\syntax\SyntacticElements.cs" />
+    <Compile Include="aac\aac\tools\MSMask.cs" />
     <Compile Include="aac\aac\transport\ADIFHeader.cs" />
     <Compile Include="aac\Main.cs" />
     <Compile Include="aac\mp4\api\Artwork.cs" />
@@ -149,10 +156,8 @@
   <ItemGroup>
     <Content Include="jaad\aac\error\BitsBuffer.java" />
     <Content Include="jaad\aac\error\HCR.java" />
-    <Content Include="jaad\aac\error\RVLC.java" />
     <Content Include="jaad\aac\error\RVLCTables.java" />
     <Content Include="jaad\aac\gain\FFT.java" />
-    <Content Include="jaad\aac\gain\GainControl.java" />
     <Content Include="jaad\aac\gain\GCConstants.java" />
     <Content Include="jaad\aac\gain\IMDCT.java" />
     <Content Include="jaad\aac\gain\IMDCTTables.java" />
@@ -173,9 +178,6 @@
     <Content Include="jaad\aac\sbr\NoiseEnvelope.java" />
     <Content Include="jaad\aac\sbr\NoiseTable.java" />
     <Content Include="jaad\aac\sbr\TFGrid.java" />
-    <Content Include="jaad\aac\syntax\CPE.java" />
-    <Content Include="jaad\aac\syntax\ICSInfo.java" />
-    <Content Include="jaad\aac\syntax\ICStream.java" />
     <Content Include="jaad\aac\syntax\IQTable.java" />
     <Content Include="jaad\aac\syntax\ScaleFactorBands.java" />
     <Content Include="jaad\aac\syntax\ScaleFactorTable.java" />
@@ -185,7 +187,6 @@
     <Content Include="jaad\aac\tools\ISScaleTable.java" />
     <Content Include="jaad\aac\tools\LTPrediction.java" />
     <Content Include="jaad\aac\tools\MS.java" />
-    <Content Include="jaad\aac\tools\MSMask.java" />
     <Content Include="jaad\aac\tools\TNS.java" />
     <Content Include="jaad\aac\tools\TNSTables.java" />
     <Content Include="jaad\adts\ADTSDemultiplexer.java" />

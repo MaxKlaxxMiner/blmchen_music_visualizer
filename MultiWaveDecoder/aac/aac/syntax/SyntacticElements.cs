@@ -1,6 +1,9 @@
 ﻿// ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable InconsistentNaming
 // ReSharper disable NotAccessedField.Local
+
+using System;
+
 #pragma warning disable 169
 #pragma warning disable 414
 namespace MultiWaveDecoder
@@ -44,94 +47,85 @@ namespace MultiWaveDecoder
       bitsRead = 0;
     }
 
-    //public void decode(BitStream in) throws AACException {
-    //int start = in.getPosition(); //should be 0
+    public void decode(BitStream inStream)
+    {
+      int start = inStream.getPosition(); // should be 0
 
-    //int type;
-    //Element prev = null;
-    //bool content = true;
-    //if(!config.getProfile().isErrorResilientProfile()) {
-    //while(content&&(type = in.readBits(3))!=ELEMENT_END) {
-    //switch(type) {
-    //case ELEMENT_SCE:
-    //case ELEMENT_LFE:
-    //LOGGER.finest("SCE");
-    //prev = decodeSCE_LFE(in);
-    //break;
-    //case ELEMENT_CPE:
-    //LOGGER.finest("CPE");
-    //prev = decodeCPE(in);
-    //break;
-    //case ELEMENT_CCE:
-    //LOGGER.finest("CCE");
-    //decodeCCE(in);
-    //prev = null;
-    //break;
-    //case ELEMENT_DSE:
-    //LOGGER.finest("DSE");
-    //decodeDSE(in);
-    //prev = null;
-    //break;
-    //case ELEMENT_PCE:
-    //LOGGER.finest("PCE");
-    //decodePCE(in);
-    //prev = null;
-    //break;
-    //case ELEMENT_FIL:
-    //LOGGER.finest("FIL");
-    //decodeFIL(in, prev);
-    //prev = null;
-    //break;
-    //}
-    //}
-    //LOGGER.finest("END");
-    //content = false;
-    //prev = null;
-    //}
-    //else {
-    ////error resilient raw data block
-    //switch(config.getChannelConfiguration()) {
-    //case CHANNEL_CONFIG_MONO:
-    //decodeSCE_LFE(in);
-    //break;
-    //case CHANNEL_CONFIG_STEREO:
-    //decodeCPE(in);
-    //break;
-    //case CHANNEL_CONFIG_STEREO_PLUS_CENTER:
-    //decodeSCE_LFE(in);
-    //decodeCPE(in);
-    //break;
-    //case CHANNEL_CONFIG_STEREO_PLUS_CENTER_PLUS_REAR_MONO:
-    //decodeSCE_LFE(in);
-    //decodeCPE(in);
-    //decodeSCE_LFE(in);
-    //break;
-    //case CHANNEL_CONFIG_FIVE:
-    //decodeSCE_LFE(in);
-    //decodeCPE(in);
-    //decodeCPE(in);
-    //break;
-    //case CHANNEL_CONFIG_FIVE_PLUS_ONE:
-    //decodeSCE_LFE(in);
-    //decodeCPE(in);
-    //decodeCPE(in);
-    //decodeSCE_LFE(in);
-    //break;
-    //case CHANNEL_CONFIG_SEVEN_PLUS_ONE:
-    //decodeSCE_LFE(in);
-    //decodeCPE(in);
-    //decodeCPE(in);
-    //decodeCPE(in);
-    //decodeSCE_LFE(in);
-    //break;
-    //default:
-    //throw new AACException("unsupported channel configuration for error resilience: "+config.getChannelConfiguration());
-    //}
-    //}
-    //in.byteAlign();
+      bool content = true;
+      if (!config.getProfile().isErrorResilientProfile())
+      {
+        Element prev = null;
+        int type;
+        while (content && (type = inStream.readBits(3)) != ELEMENT_END)
+        {
+          switch (type)
+          {
+            case ELEMENT_SCE:
+            case ELEMENT_LFE:
+            {
+              Logger.LogInfo("SCE");
+              throw new NotImplementedException();
+              //prev = decodeSCE_LFE(inStream);
+            } break;
+            case ELEMENT_CPE:
+            {
+              Logger.LogInfo("CPE");
+              prev = decodeCPE(inStream);
+            } break;
+            case ELEMENT_CCE:
+            {
+              Logger.LogInfo("CCE");
+              throw new NotImplementedException();
+              //decodeCCE(inStream);
+              prev = null;
+            } break;
+            case ELEMENT_DSE:
+            {
+              Logger.LogInfo("DSE");
+              throw new NotImplementedException();
+              //decodeDSE(inStream);
+              prev = null;
+            } break;
+            case ELEMENT_PCE:
+            {
+              Logger.LogInfo("PCE");
+              throw new NotImplementedException();
+              //decodePCE(inStream);
+              prev = null;
+            } break;
+            case ELEMENT_FIL:
+            {
+              Logger.LogInfo("FIL");
+              throw new NotImplementedException();
+              //decodeFIL(inStream, prev);
+              prev = null;
+            } break;
+          }
+        }
+        Logger.LogInfo("END");
+        content = false;
+        prev = null;
+      }
+      else
+      {
+        // error resilient raw data block
+        throw new NotImplementedException();
+        //switch (config.getChannelConfiguration())
+        //{
+        //  case CHANNEL_CONFIG_MONO: decodeSCE_LFE(inStream); break;
+        //  case CHANNEL_CONFIG_STEREO: decodeCPE(inStream); break;
+        //  case CHANNEL_CONFIG_STEREO_PLUS_CENTER: decodeSCE_LFE(inStream); decodeCPE(inStream); break;
+        //  case CHANNEL_CONFIG_STEREO_PLUS_CENTER_PLUS_REAR_MONO: decodeSCE_LFE(inStream); decodeCPE(inStream); decodeSCE_LFE(inStream); break;
+        //  case CHANNEL_CONFIG_FIVE: decodeSCE_LFE(inStream); decodeCPE(inStream); decodeCPE(inStream); break;
+        //  case CHANNEL_CONFIG_FIVE_PLUS_ONE: decodeSCE_LFE(inStream); decodeCPE(inStream); decodeCPE(inStream); decodeSCE_LFE(inStream); break;
+        //  case CHANNEL_CONFIG_SEVEN_PLUS_ONE: decodeSCE_LFE(inStream); decodeCPE(inStream); decodeCPE(inStream); decodeCPE(inStream); decodeSCE_LFE(inStream); break;
+        //  default: throw new AACException("unsupported channel configuration for error resilience: " + config.getChannelConfiguration());
+        //}
+      }
+      inStream.byteAlign();
 
-    //bitsRead = in.getPosition()-start;
-    //}
+      bitsRead = inStream.getPosition() - start;
+    }
 
     //private Element decodeSCE_LFE(BitStream in) throws AACException {
     //if(elements[curElem]==null) elements[curElem] = new SCE_LFE(config.getFrameLength());
@@ -140,12 +134,13 @@ namespace MultiWaveDecoder
     //return elements[curElem-1];
     //}
 
-    //private Element decodeCPE(BitStream in) throws AACException {
-    //if(elements[curElem]==null) elements[curElem] = new CPE(config.getFrameLength());
-    //((CPE) elements[curElem]).decode(in, config);
-    //curElem++;
-    //return elements[curElem-1];
-    //}
+    Element decodeCPE(BitStream inStream)
+    {
+      if (elements[curElem] == null) elements[curElem] = new CPE(config.getFrameLength());
+      ((CPE)elements[curElem]).decode(inStream, config);
+      curElem++;
+      return elements[curElem - 1];
+    }
 
     //private void decodeCCE(BitStream in) throws AACException {
     //if(curCCE==MAX_ELEMENTS) throw new AACException("too much CCE elements");

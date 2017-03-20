@@ -13,10 +13,10 @@ namespace MultiWaveDecoder
   public sealed class Decoder : Constants
   {
     readonly DecoderConfig config;
-    SyntacticElements syntacticElements;
-    FilterBank filterBank;
+    readonly SyntacticElements syntacticElements;
+    readonly FilterBank filterBank;
     readonly BitStream inStream = new BitStream();
-    // ADIFHeader adifHeader;
+    ADIFHeader adifHeader;
 
     /// <summary>
     /// The methods returns true, if a profile is supported by the decoder.
@@ -63,42 +63,42 @@ namespace MultiWaveDecoder
     public void decodeFrame(byte[] frame, SampleBuffer buffer)
     {
       if (frame != null) inStream.setData(frame);
-      try
+//      try
       {
         decode(buffer);
       }
-      catch (AACException e)
-      {
-        Logger.LogServe("unexpected end of frame: " + e);
-      }
+      //catch (AACException e)
+      //{
+      //  Logger.LogServe("unexpected end of frame: " + e);
+      //}
+      // throw new NotImplementedException();
     }
 
     void decode(SampleBuffer buffer)
     {
-      throw new NotImplementedException();
+      if (ADIFHeader.isPresent(inStream))
+      {
+        adifHeader = ADIFHeader.readHeader(inStream);
+        PCE pce = adifHeader.getFirstPCE();
+        config.setProfile(pce.getProfile());
+        config.setSampleFrequency(pce.getSampleFrequency());
+        config.setChannelConfiguration((ChannelConfiguration)pce.getChannelCount());
+      }
 
-      //if (ADIFHeader.isPresent(inStream))
-      //{
-      //  adifHeader = ADIFHeader.readHeader(inStream);
-      //  PCE pce = adifHeader.getFirstPCE();
-      //  config.setProfile(pce.getProfile());
-      //  config.setSampleFrequency(pce.getSampleFrequency());
-      //  config.setChannelConfiguration(ChannelConfiguration.forInt(pce.getChannelCount()));
-      //}
+      if (!canDecode(config.getProfile())) throw new AACException("unsupported profile: " + config.getProfile());
 
-      //if (!canDecode(config.getProfile())) throw new AACException("unsupported profile: " + config.getProfile().getDescription());
-
-      //syntacticElements.startNewFrame();
+      syntacticElements.startNewFrame();
 
       //try
-      //{
-      //  //1: bitstream parsing and noiseless coding
-      //  syntacticElements.decode(inStream);
-      //  //2: spectral processing
-      //  syntacticElements.process(filterBank);
-      //  //3: send to output buffer
-      //  syntacticElements.sendToOutput(buffer);
-      //}
+      {
+        // 1: bitstream parsing and noiseless coding
+        syntacticElements.decode(inStream);
+        // 2: spectral processing
+        throw new NotImplementedException();
+        //syntacticElements.process(filterBank);
+        // 3: send to output buffer
+        //syntacticElements.sendToOutput(buffer);
+      }
       //catch (AACException e)
       //{
       //  buffer.setData(new byte[0], 0, 0, 0, 0);
@@ -109,6 +109,7 @@ namespace MultiWaveDecoder
       //  buffer.setData(new byte[0], 0, 0, 0, 0);
       //  throw new AACException(e);
       //}
+      // throw new NotImplementedException();
     }
   }
 }

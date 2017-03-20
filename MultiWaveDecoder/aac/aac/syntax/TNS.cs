@@ -1,0 +1,61 @@
+﻿// ReSharper disable InconsistentNaming
+// ReSharper disable ClassNeverInstantiated.Global
+namespace MultiWaveDecoder
+{
+  /// <summary>
+  /// Temporal Noise Shaping
+  /// </summary>
+  public class TNS : Constants
+  {
+    //public class TNS implements Constants, TNSTables {
+
+    //  private static int TNS_MAX_ORDER = 20;
+    //  private static int[] SHORT_BITS = {1, 4, 3}, LONG_BITS = {2, 6, 5};
+    //  //bitstream
+    //  private int[] nFilt;
+    //  private int[,] length, order;
+    //  private bool[,] direction;
+    //  private float[,,] coef;
+
+    //  public TNS() {
+    //    nFilt = new int[8];
+    //    length = new int[8,4];
+    //    direction = new bool[8,4];
+    //    order = new int[8,4];
+    //    coef = new float[8,4,TNS_MAX_ORDER];
+    //  }
+
+    //  public void decode(BitStream in, ICSInfo info) throws AACException {
+    //    int windowCount = info.getWindowCount();
+    //    int[] bits = info.isEightShortFrame() ? SHORT_BITS : LONG_BITS;
+
+    //    int w, i, filt, coefLen, coefRes, coefCompress, tmp;
+    //    for(w = 0; w<windowCount; w++) {
+    //      if((nFilt[w] = in.readBits(bits[0]))!=0) {
+    //        coefRes = in.readBit();
+
+    //        for(filt = 0; filt<nFilt[w]; filt++) {
+    //          length[w,filt] = in.readBits(bits[1]);
+
+    //          if((order[w,filt] = in.readBits(bits[2]))>20) throw new AACException("TNS filter out of range: "+order[w,filt]);
+    //          else if(order[w,filt]!=0) {
+    //            direction[w,filt] = in.readBool();
+    //            coefCompress = in.readBit();
+    //            coefLen = coefRes+3-coefCompress;
+    //            tmp = 2*coefCompress+coefRes;
+
+    //            for(i = 0; i<order[w,filt]; i++) {
+    //              coef[w,filt,i] = TNS_TABLES[tmp,in.readBits(coefLen)];
+    //            }
+    //          }
+    //        }
+    //      }
+    //    }
+    //  }
+
+    //  public void process(ICStream ics, float[] spec, SampleFrequency sf, bool decode) {
+    //    //TODO...
+    //  }
+    //}
+  }
+}
