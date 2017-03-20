@@ -21,27 +21,27 @@ namespace MultiWaveDecoder
     //}
 
     //void sbr_qmf_analysis_32(SBR sbr, float[] input,
-    //float[][][] X, int offset, int kx) {
+    //float[,,] X, int offset, int kx) {
     //float[] u = new float[64];
     //float[] in_real = new float[32], in_imag = new float[32];
     //float[] out_real = new float[32], out_imag = new float[32];
     //int in = 0;
     //int l;
 
-    ///* qmf subsample l */
+    // qmf subsample l */
     //for(l = 0; l<sbr.numTimeSlotsRate; l++) {
     //int n;
 
-    ///* shift input buffer x */
-    ///* input buffer is not shifted anymore, x is implemented as double ringbuffer */
+    // shift input buffer x */
+    // input buffer is not shifted anymore, x is implemented as double ringbuffer */
     ////memmove(qmfa.x + 32, qmfa.x, (320-32)*sizeof(real_t));
 
-    ///* add new samples to input buffer x */
+    // add new samples to input buffer x */
     //for(n = 32-1; n>=0; n--) {
     //this.x[this.x_index+n] = this.x[this.x_index+n+320] = input[in++];
     //}
 
-    ///* window and summation to create array u */
+    // window and summation to create array u */
     //for(n = 0; n<64; n++) {
     //u[n] = (this.x[this.x_index+n]*qmf_c[2*n])
     //+(this.x[this.x_index+n+64]*qmf_c[2*(n+64)])
@@ -50,12 +50,12 @@ namespace MultiWaveDecoder
     //+(this.x[this.x_index+n+256]*qmf_c[2*(n+256)]);
     //}
 
-    ///* update ringbuffer index */
+    // update ringbuffer index */
     //this.x_index -= 32;
     //if(this.x_index<0)
     //this.x_index = (320-32);
 
-    ///* calculate 32 subband samples by introducing X */
+    // calculate 32 subband samples by introducing X */
     //// Reordering of data moved from DCT_IV to here
     //in_imag[31] = u[1];
     //in_real[0] = u[0];
@@ -72,22 +72,22 @@ namespace MultiWaveDecoder
     //// Reordering of data moved from DCT_IV to here
     //for(n = 0; n<16; n++) {
     //if(2*n+1<kx) {
-    //X[l+offset][2*n][0] = 2.0f*out_real[n];
-    //X[l+offset][2*n][1] = 2.0f*out_imag[n];
-    //X[l+offset][2*n+1][0] = -2.0f*out_imag[31-n];
-    //X[l+offset][2*n+1][1] = -2.0f*out_real[31-n];
+    //X[l+offset,2*n,0] = 2.0f*out_real[n];
+    //X[l+offset,2*n,1] = 2.0f*out_imag[n];
+    //X[l+offset,2*n+1,0] = -2.0f*out_imag[31-n];
+    //X[l+offset,2*n+1,1] = -2.0f*out_real[31-n];
     //}
     //else {
     //if(2*n<kx) {
-    //X[l+offset][2*n][0] = 2.0f*out_real[n];
-    //X[l+offset][2*n][1] = 2.0f*out_imag[n];
+    //X[l+offset,2*n,0] = 2.0f*out_real[n];
+    //X[l+offset,2*n,1] = 2.0f*out_imag[n];
     //}
     //else {
-    //X[l+offset][2*n][0] = 0;
-    //X[l+offset][2*n][1] = 0;
+    //X[l+offset,2*n,0] = 0;
+    //X[l+offset,2*n,1] = 0;
     //}
-    //X[l+offset][2*n+1][0] = 0;
-    //X[l+offset][2*n+1][1] = 0;
+    //X[l+offset,2*n+1,0] = 0;
+    //X[l+offset,2*n+1,1] = 0;
     //}
     //}
     //}

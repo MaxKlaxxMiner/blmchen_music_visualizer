@@ -9,21 +9,17 @@ namespace MultiWaveDecoder
 {
   public abstract class Constants
   {
-    protected static T[][] Fill<T>(int x1, int x2) { return Enumerable.Range(0, x1).Select(c => new T[x2]).ToArray(); }
-    protected static T[][][] Fill<T>(int x1, int x2, int x3) { return Enumerable.Range(0, x1).Select(c => Enumerable.Range(0, x2).Select(z => new T[x3]).ToArray()).ToArray(); }
-    protected static T[][][][] Fill<T>(int x1, int x2, int x3, int x4) { return Enumerable.Range(0, x1).Select(c => Enumerable.Range(0, x2).Select(z => Enumerable.Range(0, x3).Select(r => new T[x4]).ToArray()).ToArray()).ToArray(); }
-
     protected static int[] startMinTable = { 7, 7, 10, 11, 12, 16, 16, 17, 24, 32, 35, 48 };
     protected static int[] offsetIndexTable = { 5, 5, 4, 4, 4, 3, 2, 1, 0, 6, 6, 6 };
-    protected static int[][] OFFSET =
+    protected static int[,] OFFSET =
     {
-		  new [] {-8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7}, // 16000
-		  new [] {-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13},  // 22050
-		  new [] {-5, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13, 16},  // 24000
-		  new [] {-6, -4, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13, 16},  // 32000
-		  new [] {-4, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13, 16, 20},  // 44100-64000
-		  new [] {-2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13, 16, 20, 24},  // >64000
-		  new [] {0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13, 16, 20, 24, 28, 33}
+		  {-8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7}, // 16000
+		  {-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13},  // 22050
+		  {-5, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13, 16},  // 24000
+		  {-6, -4, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13, 16},  // 32000
+		  {-4, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13, 16, 20},  // 44100-64000
+		  {-2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13, 16, 20, 24},  // >64000
+		  {0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13, 16, 20, 24, 28, 33}
 	  };
     protected const int EXTENSION_ID_PS = 2;
     protected const int MAX_NTSRHFG = 40; // maximum of number_time_slots * rate + HFGen. 16*2+8
@@ -125,109 +121,71 @@ namespace MultiWaveDecoder
 
     // --- FFT Tables ---
 
-    protected static readonly Float2D[] FFT_TABLE_60 = generateFFTTableShort(60);
+    protected static readonly float[,] FFT_TABLE_60 = GenerateFFTTableShort(60);
 
-    protected static readonly Float2D[] FFT_TABLE_64 = generateFFTTableShort(64);
+    protected static readonly float[,] FFT_TABLE_64 = GenerateFFTTableShort(64);
 
-    protected static readonly Float3D[] FFT_TABLE_480 = generateFFTTableLong(480);
+    protected static readonly float[,] FFT_TABLE_480 = GenerateFFTTableLong(480);
 
-    protected static readonly Float3D[] FFT_TABLE_512 = generateFFTTableLong(512);
+    protected static readonly float[,] FFT_TABLE_512 = GenerateFFTTableLong(512);
 
-    public struct Float2D
+    static float[,] ConvertDoubleToFloat(double[,] data)
     {
-      public readonly float x;
-      public readonly float y;
-      public Float2D(float x, float y)
+      int xs = data.GetLength(0);
+      int ys = data.GetLength(1);
+      var result = new float[xs, ys];
+
+      for (int x = 0; x < xs; x++)
       {
-        this.x = x;
-        this.y = y;
+        for (int y = 0; y < ys; y++)
+        {
+          result[x, y] = (float)data[x, y];
+        }
       }
-      public Float2D(Double2D d)
-      {
-        x = (float)d.x;
-        y = (float)d.y;
-      }
-      public override string ToString()
-      {
-        return "[" + x.ToString("N7") + ", " + y.ToString("N7") + "]";
-      }
-    }
-    public struct Double2D
-    {
-      public double x;
-      public double y;
-      public override string ToString()
-      {
-        return "[" + x.ToString("N14") + ", " + y.ToString("N14") + "]";
-      }
-    }
-    public struct Float3D
-    {
-      public readonly float x;
-      public readonly float y;
-      public readonly float z;
-      public Float3D(Double3D d)
-      {
-        x = (float)d.x;
-        y = (float)d.y;
-        z = (float)d.z;
-      }
-      public override string ToString()
-      {
-        return "[" + x.ToString("N7") + ", " + y.ToString("N7") + ", " + z.ToString("N7") + "]";
-      }
-    }
-    public struct Double3D
-    {
-      public double x;
-      public double y;
-      public double z;
-      public override string ToString()
-      {
-        return "[" + x.ToString("N14") + ", " + y.ToString("N14") + ", " + z.ToString("N14") + "]";
-      }
+
+      return result;
     }
 
-    static Float2D[] generateFFTTableShort(int len)
+    static float[,] GenerateFFTTableShort(int len)
     {
       double t = 2.0 * Math.PI / len;
       double cosT = Math.Cos(t);
       double sinT = Math.Sin(t);
-      var f = new Double2D[len];
+      var f = new double[len, 2];
 
-      f[0].x = 1;
-      f[0].y = 0;
+      f[0, 0] = 1;
+      f[0, 1] = 0;
       double lastImag = 0.0;
 
       for (int i = 1; i < len; i++)
       {
-        f[i].x = f[i - 1].x * cosT + lastImag * sinT;
-        lastImag = lastImag * cosT - f[i - 1].x * sinT;
-        f[i].y = -lastImag;
+        f[i, 0] = f[i - 1, 0] * cosT + lastImag * sinT;
+        lastImag = lastImag * cosT - f[i - 1, 0] * sinT;
+        f[i, 1] = -lastImag;
       }
 
-      return f.Select(x => new Float2D(x)).ToArray();
+      return ConvertDoubleToFloat(f);
     }
 
-    static Float3D[] generateFFTTableLong(int len)
+    static float[,] GenerateFFTTableLong(int len)
     {
       double t = 2.0 * Math.PI / len;
       double cosT = Math.Cos(t);
       double sinT = Math.Sin(t);
-      var f = new Double3D[len];
+      var f = new double[len, 3];
 
-      f[0].x = 1;
-      f[0].y = 0;
-      f[0].z = 0;
+      f[0, 0] = 1;
+      f[0, 1] = 0;
+      f[0, 2] = 0;
 
       for (var i = 1; i < len; i++)
       {
-        f[i].x = f[i - 1].x * cosT + f[i - 1].z * sinT;
-        f[i].z = f[i - 1].z * cosT - f[i - 1].x * sinT;
-        f[i].y = -f[i].z;
+        f[i, 0] = f[i - 1, 0] * cosT + f[i - 1, 2] * sinT;
+        f[i, 2] = f[i - 1, 2] * cosT - f[i - 1, 0] * sinT;
+        f[i, 1] = -f[i, 2];
       }
 
-      return f.Select(x => new Float3D(x)).ToArray();
+      return ConvertDoubleToFloat(f);
     }
   }
 }

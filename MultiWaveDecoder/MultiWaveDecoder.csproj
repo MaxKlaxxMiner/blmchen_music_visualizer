@@ -149,7 +149,6 @@
     <Content Include="jaad\aac\error\HCR.java" />
     <Content Include="jaad\aac\error\RVLC.java" />
     <Content Include="jaad\aac\error\RVLCTables.java" />
-    <Content Include="jaad\aac\filterbank\MDCTTables.java" />
     <Content Include="jaad\aac\gain\FFT.java" />
     <Content Include="jaad\aac\gain\GainControl.java" />
     <Content Include="jaad\aac\gain\GCConstants.java" />

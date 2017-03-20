@@ -98,11 +98,11 @@ public class HCR implements Constants {
 		int swbOffsetMax = info.getSWBOffsetMax();
 		//TODO:
 		//SectionData sectData = ics.getSectionData();
-		int[][] sectStart = null; //sectData.getSectStart();
-		int[][] sectEnd = null; //sectData.getSectEnd();
+		int[,] sectStart = null; //sectData.getSectStart();
+		int[,] sectEnd = null; //sectData.getSectEnd();
 		int[] numSec = null; //sectData.getNumSec();
-		int[][] sectCB = null; //sectData.getSectCB();
-		int[][] sectSFBOffsets = null; //info.getSectSFBOffsets();
+		int[,] sectCB = null; //sectData.getSectCB();
+		int[,] sectSFBOffsets = null; //info.getSectSFBOffsets();
 
 		//check parameter
 		int spDataLen = ics.getReorderedSpectralDataLength();
@@ -149,20 +149,20 @@ public class HCR implements Constants {
 				for(w_idx = 0; 4*w_idx<(Math.min(swbOffsets[sfb+1], swbOffsetMax)-swbOffsets[sfb]); w_idx++) {
 					for(g = 0; g<windowGroupCount; g++) {
 						for(i = 0; i<numSec[g]; i++) {
-							if((sectStart[g][i]<=sfb)&&(sectEnd[g][i]>sfb)) {
+							if((sectStart[g,i]<=sfb)&&(sectEnd[g,i]>sfb)) {
 								/* check whether codebook used here is the one we want to process */
-								thisSectCB = sectCB[g][i];
+								thisSectCB = sectCB[g,i];
 
 								if(isGoodCB(thisCB, thisSectCB)) {
 									//precalculation
-									int sect_sfb_size = sectSFBOffsets[g][sfb+1]-sectSFBOffsets[g][sfb];
+									int sect_sfb_size = sectSFBOffsets[g,sfb+1]-sectSFBOffsets[g,sfb];
 									int inc = (thisSectCB<HCB.FIRST_PAIR_HCB) ? 4 : 2;
 									int group_cws_count = (4*info.getWindowGroupLength(g))/inc;
 									int segwidth = Math.min(MAX_CW_LEN[thisSectCB], longestLen);
 
 									//read codewords until end of sfb or end of window group
 									for(cws = 0; (cws<group_cws_count)&&((cws+w_idx*group_cws_count)<sect_sfb_size); cws++) {
-										int sp = spOffsets[g]+sectSFBOffsets[g][sfb]+inc*(cws+w_idx*group_cws_count);
+										int sp = spOffsets[g]+sectSFBOffsets[g,sfb]+inc*(cws+w_idx*group_cws_count);
 
 										//read and decode PCW
 										if(PCWs_done==0) {

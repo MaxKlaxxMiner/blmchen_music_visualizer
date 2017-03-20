@@ -3,7 +3,7 @@ package net.sourceforge.jaad.aac.error;
 interface RVLCTables {
 
 	//index,length,codeword
-	int[][] RVLC_BOOK = {
+	int[,] RVLC_BOOK = {
 		{0, 1, 0}, /*         0 */
 		{-1, 3, 5}, /*       101 */
 		{1, 3, 7}, /*       111 */
@@ -29,7 +29,7 @@ interface RVLCTables {
 		{6, 9, 427}, /* 110101011 */
 		{99, 10, 0}
 	};
-	int[][] ESCAPE_BOOK = {
+	int[,] ESCAPE_BOOK = {
 		{1, 2, 0},
 		{0, 2, 2},
 		{3, 3, 2},

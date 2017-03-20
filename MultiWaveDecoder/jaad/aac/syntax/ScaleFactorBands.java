@@ -53,7 +53,7 @@ interface ScaleFactorBands {
 		476, 508, 544, 580, 620, 664, 712, 764, 820, 880, 944, 1024,
 		-1
 	};
-	int[][] SWB_OFFSET_LONG_WINDOW = {
+	int[,] SWB_OFFSET_LONG_WINDOW = {
 		SWB_OFFSET_1024_96,
 		SWB_OFFSET_1024_96,
 		SWB_OFFSET_1024_64,
@@ -94,7 +94,7 @@ interface ScaleFactorBands {
 		0, 4, 8, 12, 16, 20, 24, 28, 36, 44, 52, 60, 72, 88, 108, 128,
 		-1
 	};
-	int[][] SWB_OFFSET_SHORT_WINDOW = {
+	int[,] SWB_OFFSET_SHORT_WINDOW = {
 		SWB_OFFSET_128_96,
 		SWB_OFFSET_128_96,
 		SWB_OFFSET_128_64,

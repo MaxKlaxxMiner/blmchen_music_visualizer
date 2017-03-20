@@ -19,10 +19,10 @@ namespace MultiWaveDecoder
     //private bool[] channelPair;
     //private int[] idSelect;
     //private int[] chSelect;
-    ///*[0] shared list of gains; [1] list of gains for right channel;
+    //[0] shared list of gains; [1] list of gains for right channel;
     //*[2] list of gains for left channel; [3] lists of gains for both channels
     //*/
-    //private float[][] gain;
+    //private float[,] gain;
 
     //CCE(int frameLength) {
     //super();
@@ -30,7 +30,7 @@ namespace MultiWaveDecoder
     //channelPair = new bool[8];
     //idSelect = new int[8];
     //chSelect = new int[8];
-    //gain = new float[16][120];
+    //gain = new float[16,120];
     //}
 
     //int getCouplingPoint() {
@@ -79,7 +79,7 @@ namespace MultiWaveDecoder
     //int windowGroupCount = info.getWindowGroupCount();
     //int maxSFB = info.getMaxSFB();
     ////TODO:
-    //int[][] sfbCB = null;//ics.getSectionData().getSfbCB();
+    //int[,] sfbCB = null;//ics.getSectionData().getSfbCB();
 
     //for(i = 0; i<gainCount; i++) {
     //int idx = 0;
@@ -91,12 +91,12 @@ namespace MultiWaveDecoder
     //xg = cge==0 ? 0 : Huffman.decodeScaleFactor(in)-60;
     //gainCache = (float) Math.pow(scale, -xg);
     //}
-    //if(couplingPoint==2) gain[i][0] = gainCache;
+    //if(couplingPoint==2) gain[i,0] = gainCache;
     //else {
     //int sfb;
     //for(int g = 0; g<windowGroupCount; g++) {
     //for(sfb = 0; sfb<maxSFB; sfb++, idx++) {
-    //if(sfbCB[g][sfb]!=HCB.ZERO_HCB) {
+    //if(sfbCB[g,sfb]!=HCB.ZERO_HCB) {
     //if(cge==0) {
     //int t = Huffman.decodeScaleFactor(in)-60;
     //if(t!=0) {
@@ -109,7 +109,7 @@ namespace MultiWaveDecoder
     //gainCache = (float) (Math.pow(scale, -t)*s);
     //}
     //}
-    //gain[i][idx] = gainCache;
+    //gain[i,idx] = gainCache;
     //}
     //}
     //}
@@ -122,7 +122,7 @@ namespace MultiWaveDecoder
     //}
 
     //void applyIndependentCoupling(int index, float[] data) {
-    //double g = gain[index][0];
+    //double g = gain[index,0];
     //for(int i = 0; i<data.length; i++) {
     //data[i] += g*iqData[i];
     //}
@@ -134,7 +134,7 @@ namespace MultiWaveDecoder
     //int windowGroupCount = info.getWindowGroupCount();
     //int maxSFB = info.getMaxSFB();
     ////TODO:
-    //int[][] sfbCB = null; //ics.getSectionData().getSfbCB();
+    //int[,] sfbCB = null; //ics.getSectionData().getSfbCB();
 
     //int srcOff = 0;
     //int dstOff = 0;
@@ -144,8 +144,8 @@ namespace MultiWaveDecoder
     //for(int g = 0; g<windowGroupCount; g++) {
     //len = info.getWindowGroupLength(g);
     //for(sfb = 0; sfb<maxSFB; sfb++, idx++) {
-    //if(sfbCB[g][sfb]!=HCB.ZERO_HCB) {
-    //x = gain[index][idx];
+    //if(sfbCB[g,sfb]!=HCB.ZERO_HCB) {
+    //x = gain[index,idx];
     //for(group = 0; group<len; group++) {
     //for(k = swbOffsets[sfb]; k<swbOffsets[sfb+1]; k++) {
     //data[dstOff+group*128+k] += x*iqData[srcOff+group*128+k];

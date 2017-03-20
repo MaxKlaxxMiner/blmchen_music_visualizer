@@ -3,7 +3,7 @@ package net.sourceforge.jaad.aac.gain;
 //complex FFT of length 128/16, inplace
 class FFT {
 
-	private static float[][] FFT_TABLE_128 = {
+	private static float[,] FFT_TABLE_128 = {
 		{1.0f, -0.0f},
 		{0.99879545f, -0.049067676f},
 		{0.9951847f, -0.09801714f},
@@ -69,7 +69,7 @@ class FFT {
 		{-0.9951847f, -0.09801714f},
 		{-0.99879545f, -0.049067676f}
 	};
-	private static float[][] FFT_TABLE_16 = {
+	private static float[,] FFT_TABLE_16 = {
 		{1.0f, -0.0f},
 		{0.9238795f, -0.38268343f},
 		{0.70710677f, -0.70710677f},
@@ -80,16 +80,16 @@ class FFT {
 		{-0.9238795f, -0.38268343f}
 	};
 
-	static void process(float[][] in, int n) {
+	static void process(float[,] in, int n) {
 		int ln = (int) Math.round(Math.log(n)/Math.log(2));
-		float[][] table = (n==128) ? FFT_TABLE_128 : FFT_TABLE_16;
+		float[,] table = (n==128) ? FFT_TABLE_128 : FFT_TABLE_16;
 
 		//bit-reversal
-		float[][] rev = new float[n][2];
+		float[,] rev = new float[n,2];
 		int i, ii = 0;
 		for(i = 0; i<n; i++) {
-			rev[i][0] = in[ii][0];
-			rev[i][1] = in[ii][1];
+			rev[i,0] = in[ii,0];
+			rev[i,1] = in[ii,1];
 			int k = n>>1;
 			while(ii>=k&&k>0) {
 				ii -= k;
@@ -98,8 +98,8 @@ class FFT {
 			ii += k;
 		}
 		for(i = 0; i<n; i++) {
-			in[i][0] = rev[i][0];
-			in[i][1] = rev[i][1];
+			in[i,0] = rev[i,0];
+			in[i,1] = rev[i,1];
 		}
 
 		//calculation
@@ -114,12 +114,12 @@ class FFT {
 			for(j = 0; j<blocks; ++j) {
 				l = 0;
 				for(k = 0; k<size2; ++k) {
-					a[0] = in[k1][0]*table[l][0]-in[k1][1]*table[l][1];
-					a[1] = in[k1][0]*table[l][1]+in[k1][1]*table[l][0];
-					in[k1][0] = in[k0][0]-a[0];
-					in[k1][1] = in[k0][1]-a[1];
-					in[k0][0] += a[0];
-					in[k0][1] += a[1];
+					a[0] = in[k1,0]*table[l,0]-in[k1,1]*table[l,1];
+					a[1] = in[k1,0]*table[l,1]+in[k1,1]*table[l,0];
+					in[k1,0] = in[k0,0]-a[0];
+					in[k1,1] = in[k0,1]-a[1];
+					in[k0,0] += a[0];
+					in[k0,1] += a[1];
 					l += blocks;
 					k0++;
 					k1++;

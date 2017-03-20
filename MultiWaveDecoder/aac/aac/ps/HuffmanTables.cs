@@ -3,7 +3,7 @@
   public abstract class HuffmanTables : Constants
   {
     //  /* binary lookup huffman tables */
-    //  int[][] f_huff_iid_def = {
+    //  int[,] f_huff_iid_def = {
     //    { /*0*/-31, 1}, /* index 0: 1 bits: x */
     //    {2, 3}, /* index 1: 2 bits: 1x */
     //    { /*1*/-30, /*-1*/ -32}, /* index 2: 3 bits: 10x */
@@ -33,7 +33,7 @@
     //    { /*12*/-19, 27}, /* index 26: 17 bits: 1111111111111111x */
     //    { /*13*/-18, /*14*/ -17} /* index 27: 18 bits: 11111111111111111x */};
 
-    //  int[][] t_huff_iid_def = {
+    //  int[,] t_huff_iid_def = {
     //    { /*0*/-31, 1}, /* index 0: 1 bits: x */
     //    { /*-1*/-32, 2}, /* index 1: 2 bits: 1x */
     //    { /*1*/-30, 3}, /* index 2: 3 bits: 11x */
@@ -63,7 +63,7 @@
     //    { /*11*/-20, /*12*/ -19}, /* index 26: 20 bits: 1111111111111111110x */
     //    { /*13*/-18, /*14*/ -17} /* index 27: 20 bits: 1111111111111111111x */};
 
-    //  int[][] f_huff_iid_fine = {
+    //  int[,] f_huff_iid_fine = {
     //    {1, /*0*/ -31}, /* index 0: 1 bits: x */
     //    {2, 3}, /* index 1: 2 bits: 0x */
     //    {4, /*-1*/ -32}, /* index 2: 3 bits: 00x */
@@ -125,7 +125,7 @@
     //    { /*-30*/-61, /*-29*/ -60}, /* index 58: 18 bits: 01111111101011010x */
     //    { /*-20*/-51, /*20*/ -11} /* index 59: 18 bits: 01111111101011011x */};
 
-    //  int[][] t_huff_iid_fine = {
+    //  int[,] t_huff_iid_fine = {
     //    {1, /*0*/ -31}, /* index 0: 1 bits: x */
     //    { /*1*/-30, 2}, /* index 1: 2 bits: 0x */
     //    {3, /*-1*/ -32}, /* index 2: 3 bits: 01x */
@@ -187,7 +187,7 @@
     //    { /*-22*/-53, /*22*/ -9}, /* index 58: 16 bits: 010011110110000x */
     //    { /*20*/-11, /*21*/ -10} /* index 59: 16 bits: 010011110110011x */};
 
-    //  int[][] f_huff_icc = {
+    //  int[,] f_huff_icc = {
     //    { /*0*/-31, 1}, /* index 0: 1 bits: x */
     //    { /*1*/-30, 2}, /* index 1: 2 bits: 1x */
     //    { /*-1*/-32, 3}, /* index 2: 3 bits: 11x */
@@ -203,7 +203,7 @@
     //    { /*7*/-24, 13}, /* index 12: 13 bits: 111111111111x */
     //    { /*-6*/-37, /*-7*/ -38} /* index 13: 14 bits: 1111111111111x */};
 
-    //  int[][] t_huff_icc = {
+    //  int[,] t_huff_icc = {
     //    { /*0*/-31, 1}, /* index 0: 1 bits: x */
     //    { /*1*/-30, 2}, /* index 1: 2 bits: 1x */
     //    { /*-1*/-32, 3}, /* index 2: 3 bits: 11x */
@@ -219,7 +219,7 @@
     //    { /*-6*/-37, 13}, /* index 12: 13 bits: 111111111111x */
     //    { /*-7*/-38, /*7*/ -24} /* index 13: 14 bits: 1111111111111x */};
 
-    //  int[][] f_huff_ipd = {
+    //  int[,] f_huff_ipd = {
     //    {1, /*0*/ -31}, /* index 0: 1 bits: x */
     //    {2, 3}, /* index 1: 2 bits: 0x */
     //    { /*1*/-30, 4}, /* index 2: 3 bits: 00x */
@@ -228,7 +228,7 @@
     //    { /*3*/-28, /*6*/ -25}, /* index 5: 4 bits: 010x */
     //    { /*2*/-29, /*7*/ -24} /* index 6: 4 bits: 011x */};
 
-    //  int[][] t_huff_ipd = {
+    //  int[,] t_huff_ipd = {
     //    {1, /*0*/ -31}, /* index 0: 1 bits: x */
     //    {2, 3}, /* index 1: 2 bits: 0x */
     //    {4, 5}, /* index 2: 3 bits: 00x */
@@ -237,7 +237,7 @@
     //    { /*2*/-29, /*6*/ -25}, /* index 5: 4 bits: 001x */
     //    { /*4*/-27, /*3*/ -28} /* index 6: 5 bits: 0001x */};
 
-    //  int[][] f_huff_opd = {
+    //  int[,] f_huff_opd = {
     //    {1, /*0*/ -31}, /* index 0: 1 bits: x */
     //    {2, 3}, /* index 1: 2 bits: 0x */
     //    { /*7*/-24, /*1*/ -30}, /* index 2: 3 bits: 00x */
@@ -246,7 +246,7 @@
     //    { /*2*/-29, 6}, /* index 5: 4 bits: 011x */
     //    { /*5*/-26, /*4*/ -27} /* index 6: 5 bits: 0111x */};
 
-    //  int[][] t_huff_opd = {
+    //  int[,] t_huff_opd = {
     //    {1, /*0*/ -31}, /* index 0: 1 bits: x */
     //    {2, 3}, /* index 1: 2 bits: 0x */
     //    {4, 5}, /* index 2: 3 bits: 00x */

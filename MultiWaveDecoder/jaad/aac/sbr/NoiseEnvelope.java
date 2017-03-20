@@ -32,7 +32,7 @@ class NoiseEnvelope implements Constants {
 		2.38419E-007f, 1.19209E-007f,
 		5.96046E-008f};
 
-	private static float[][] Q_div2_tab_left = {
+	private static float[,] Q_div2_tab_left = {
 		{0.0302959f, 0.111015f, 0.332468f, 0.663212f, 0.882759f, 0.962406f, 0.984615f, 0.990329f, 0.991768f, 0.992128f, 0.992218f, 0.992241f, 0.992246f},
 		{0.0153809f, 0.0587695f, 0.199377f, 0.496124f, 0.790123f, 0.927536f, 0.969697f, 0.980843f, 0.98367f, 0.984379f, 0.984556f, 0.984601f, 0.984612f},
 		{0.00775006f, 0.0302744f, 0.110727f, 0.329897f, 0.653061f, 0.864865f, 0.941176f, 0.962406f, 0.967864f, 0.969238f, 0.969582f, 0.969668f, 0.96969f},
@@ -66,7 +66,7 @@ class NoiseEnvelope implements Constants {
 		{2.90967E-011f, 1.16302E-010f, 4.63849E-010f, 1.83399E-009f, 7.01231E-009f, 2.38419E-008f, 5.96046E-008f, 9.53674E-008f, 1.12197E-007f, 1.17375E-007f, 1.18745E-007f, 1.19093E-007f, 1.1918E-007f}
 	};
 
-	private static float[][] Q_div2_tab_right = {
+	private static float[,] Q_div2_tab_right = {
 		{0.992246f, 0.992241f, 0.992218f, 0.992128f, 0.991768f, 0.990329f, 0.984615f, 0.962406f, 0.882759f, 0.663212f, 0.332468f, 0.111015f, 0.0302959f},
 		{0.984612f, 0.984601f, 0.984556f, 0.984379f, 0.98367f, 0.980843f, 0.969697f, 0.927536f, 0.790123f, 0.496124f, 0.199377f, 0.0587695f, 0.0153809f},
 		{0.96969f, 0.969668f, 0.969582f, 0.969238f, 0.967864f, 0.962406f, 0.941176f, 0.864865f, 0.653061f, 0.329897f, 0.110727f, 0.0302744f, 0.00775006f},
@@ -119,7 +119,7 @@ class NoiseEnvelope implements Constants {
 		1f
 	};
 
-	private static float[][] Q_div_tab_left = {
+	private static float[,] Q_div_tab_left = {
 		{0.969704f, 0.888985f, 0.667532f, 0.336788f, 0.117241f, 0.037594f, 0.0153846f, 0.00967118f, 0.00823245f, 0.00787211f, 0.00778198f, 0.00775945f, 0.00775382f},
 		{0.984619f, 0.94123f, 0.800623f, 0.503876f, 0.209877f, 0.0724638f, 0.030303f, 0.0191571f, 0.0163305f, 0.0156212f, 0.0154438f, 0.0153994f, 0.0153883f},
 		{0.99225f, 0.969726f, 0.889273f, 0.670103f, 0.346939f, 0.135135f, 0.0588235f, 0.037594f, 0.0321361f, 0.0307619f, 0.0304178f, 0.0303317f, 0.0303102f},
@@ -153,7 +153,7 @@ class NoiseEnvelope implements Constants {
 		{1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f}
 	};
 
-	private static float[][] Q_div_tab_right = {
+	private static float[,] Q_div_tab_right = {
 		{0.00775382f, 0.00775945f, 0.00778198f, 0.00787211f, 0.00823245f, 0.00967118f, 0.0153846f, 0.037594f, 0.117241f, 0.336788f, 0.667532f, 0.888985f, 0.969704f},
 		{0.0153883f, 0.0153994f, 0.0154438f, 0.0156212f, 0.0163305f, 0.0191571f, 0.030303f, 0.0724638f, 0.209877f, 0.503876f, 0.800623f, 0.94123f, 0.984619f},
 		{0.0303102f, 0.0303317f, 0.0304178f, 0.0307619f, 0.0321361f, 0.037594f, 0.0588235f, 0.135135f, 0.346939f, 0.670103f, 0.889273f, 0.969726f, 0.99225f},
@@ -191,60 +191,60 @@ class NoiseEnvelope implements Constants {
 		int l, k;
 
 		for(l = 0; l<sbr.L_E[ch]; l++) {
-			if(sbr.bs_df_env[ch][l]==0) {
-				for(k = 1; k<sbr.n[sbr.f[ch][l]]; k++) {
-					sbr.E[ch][k][l] = sbr.E[ch][k-1][l]+sbr.E[ch][k][l];
-					if(sbr.E[ch][k][l]<0)
-						sbr.E[ch][k][l] = 0;
+			if(sbr.bs_df_env[ch,l]==0) {
+				for(k = 1; k<sbr.n[sbr.f[ch,l]]; k++) {
+					sbr.E[ch,k,l] = sbr.E[ch,k-1,l]+sbr.E[ch,k,l];
+					if(sbr.E[ch,k,l]<0)
+						sbr.E[ch,k,l] = 0;
 				}
 
 			}
 			else { /* bs_df_env == 1 */
 
-				int g = (l==0) ? sbr.f_prev[ch] : sbr.f[ch][l-1];
+				int g = (l==0) ? sbr.f_prev[ch] : sbr.f[ch,l-1];
 				int E_prev;
 
-				if(sbr.f[ch][l]==g) {
-					for(k = 0; k<sbr.n[sbr.f[ch][l]]; k++) {
+				if(sbr.f[ch,l]==g) {
+					for(k = 0; k<sbr.n[sbr.f[ch,l]]; k++) {
 						if(l==0)
-							E_prev = sbr.E_prev[ch][k];
+							E_prev = sbr.E_prev[ch,k];
 						else
-							E_prev = sbr.E[ch][k][l-1];
+							E_prev = sbr.E[ch,k,l-1];
 
-						sbr.E[ch][k][l] = E_prev+sbr.E[ch][k][l];
+						sbr.E[ch,k,l] = E_prev+sbr.E[ch,k,l];
 					}
 
 				}
-				else if((g==1)&&(sbr.f[ch][l]==0)) {
+				else if((g==1)&&(sbr.f[ch,l]==0)) {
 					int i;
 
-					for(k = 0; k<sbr.n[sbr.f[ch][l]]; k++) {
+					for(k = 0; k<sbr.n[sbr.f[ch,l]]; k++) {
 						for(i = 0; i<sbr.N_high; i++) {
-							if(sbr.f_table_res[HI_RES][i]==sbr.f_table_res[LO_RES][k]) {
+							if(sbr.f_table_res[HI_RES,i]==sbr.f_table_res[LO_RES,k]) {
 								if(l==0)
-									E_prev = sbr.E_prev[ch][i];
+									E_prev = sbr.E_prev[ch,i];
 								else
-									E_prev = sbr.E[ch][i][l-1];
+									E_prev = sbr.E[ch,i,l-1];
 
-								sbr.E[ch][k][l] = E_prev+sbr.E[ch][k][l];
+								sbr.E[ch,k,l] = E_prev+sbr.E[ch,k,l];
 							}
 						}
 					}
 
 				}
-				else if((g==0)&&(sbr.f[ch][l]==1)) {
+				else if((g==0)&&(sbr.f[ch,l]==1)) {
 					int i;
 
-					for(k = 0; k<sbr.n[sbr.f[ch][l]]; k++) {
+					for(k = 0; k<sbr.n[sbr.f[ch,l]]; k++) {
 						for(i = 0; i<sbr.N_low; i++) {
-							if((sbr.f_table_res[LO_RES][i]<=sbr.f_table_res[HI_RES][k])
-								&&(sbr.f_table_res[HI_RES][k]<sbr.f_table_res[LO_RES][i+1])) {
+							if((sbr.f_table_res[LO_RES,i]<=sbr.f_table_res[HI_RES,k])
+								&&(sbr.f_table_res[HI_RES,k]<sbr.f_table_res[LO_RES,i+1])) {
 								if(l==0)
-									E_prev = sbr.E_prev[ch][i];
+									E_prev = sbr.E_prev[ch,i];
 								else
-									E_prev = sbr.E[ch][i][l-1];
+									E_prev = sbr.E[ch,i,l-1];
 
-								sbr.E[ch][k][l] = E_prev+sbr.E[ch][k][l];
+								sbr.E[ch,k,l] = E_prev+sbr.E[ch,k,l];
 							}
 						}
 					}
@@ -257,20 +257,20 @@ class NoiseEnvelope implements Constants {
 		int l, k;
 
 		for(l = 0; l<sbr.L_Q[ch]; l++) {
-			if(sbr.bs_df_noise[ch][l]==0) {
+			if(sbr.bs_df_noise[ch,l]==0) {
 				for(k = 1; k<sbr.N_Q; k++) {
-					sbr.Q[ch][k][l] = sbr.Q[ch][k][l]+sbr.Q[ch][k-1][l];
+					sbr.Q[ch,k,l] = sbr.Q[ch,k,l]+sbr.Q[ch,k-1,l];
 				}
 			}
 			else {
 				if(l==0) {
 					for(k = 0; k<sbr.N_Q; k++) {
-						sbr.Q[ch][k][l] = sbr.Q_prev[ch][k]+sbr.Q[ch][k][0];
+						sbr.Q[ch,k,l] = sbr.Q_prev[ch,k]+sbr.Q[ch,k,0];
 					}
 				}
 				else {
 					for(k = 0; k<sbr.N_Q; k++) {
-						sbr.Q[ch][k][l] = sbr.Q[ch][k][l-1]+sbr.Q[ch][k][l];
+						sbr.Q[ch,k,l] = sbr.Q[ch,k,l-1]+sbr.Q[ch,k,l];
 					}
 				}
 			}
@@ -282,27 +282,27 @@ class NoiseEnvelope implements Constants {
 	public static float calc_Q_div(SBR sbr, int ch, int m, int l) {
 		if(sbr.bs_coupling) {
 			/* left channel */
-			if((sbr.Q[0][m][l]<0||sbr.Q[0][m][l]>30)
-				||(sbr.Q[1][m][l]<0||sbr.Q[1][m][l]>24 /* 2*panOffset(1) */)) {
+			if((sbr.Q[0,m,l]<0||sbr.Q[0,m,l]>30)
+				||(sbr.Q[1,m,l]<0||sbr.Q[1,m,l]>24 /* 2*panOffset(1) */)) {
 				return 0;
 			}
 			else {
 				/* the pan parameter is always even */
 				if(ch==0) {
-					return Q_div_tab_left[sbr.Q[0][m][l]][sbr.Q[1][m][l]>>1];
+					return Q_div_tab_left[sbr.Q[0,m,l],sbr.Q[1,m,l]>>1];
 				}
 				else {
-					return Q_div_tab_right[sbr.Q[0][m][l]][sbr.Q[1][m][l]>>1];
+					return Q_div_tab_right[sbr.Q[0,m,l],sbr.Q[1,m,l]>>1];
 				}
 			}
 		}
 		else {
 			/* no coupling */
-			if(sbr.Q[ch][m][l]<0||sbr.Q[ch][m][l]>30) {
+			if(sbr.Q[ch,m,l]<0||sbr.Q[ch,m,l]>30) {
 				return 0;
 			}
 			else {
-				return Q_div_tab[sbr.Q[ch][m][l]];
+				return Q_div_tab[sbr.Q[ch,m,l]];
 			}
 		}
 	}
@@ -311,27 +311,27 @@ class NoiseEnvelope implements Constants {
 	/* [0..1] */
 	public static float calc_Q_div2(SBR sbr, int ch, int m, int l) {
 		if(sbr.bs_coupling) {
-			if((sbr.Q[0][m][l]<0||sbr.Q[0][m][l]>30)
-				||(sbr.Q[1][m][l]<0||sbr.Q[1][m][l]>24 /* 2*panOffset(1) */)) {
+			if((sbr.Q[0,m,l]<0||sbr.Q[0,m,l]>30)
+				||(sbr.Q[1,m,l]<0||sbr.Q[1,m,l]>24 /* 2*panOffset(1) */)) {
 				return 0;
 			}
 			else {
 				/* the pan parameter is always even */
 				if(ch==0) {
-					return Q_div2_tab_left[sbr.Q[0][m][l]][sbr.Q[1][m][l]>>1];
+					return Q_div2_tab_left[sbr.Q[0,m,l],sbr.Q[1,m,l]>>1];
 				}
 				else {
-					return Q_div2_tab_right[sbr.Q[0][m][l]][sbr.Q[1][m][l]>>1];
+					return Q_div2_tab_right[sbr.Q[0,m,l],sbr.Q[1,m,l]>>1];
 				}
 			}
 		}
 		else {
 			/* no coupling */
-			if(sbr.Q[ch][m][l]<0||sbr.Q[ch][m][l]>30) {
+			if(sbr.Q[ch,m,l]<0||sbr.Q[ch,m,l]>30) {
 				return 0;
 			}
 			else {
-				return Q_div2_tab[sbr.Q[ch][m][l]];
+				return Q_div2_tab[sbr.Q[ch,m,l]];
 			}
 		}
 	}
@@ -343,22 +343,22 @@ class NoiseEnvelope implements Constants {
 			int amp = (sbr.amp_res[ch]) ? 0 : 1;
 
 			for(l = 0; l<sbr.L_E[ch]; l++) {
-				for(k = 0; k<sbr.n[sbr.f[ch][l]]; k++) {
+				for(k = 0; k<sbr.n[sbr.f[ch,l]]; k++) {
 					/* +6 for the *64 and -10 for the /32 in the synthesis QMF (fixed)
 					 * since this is a energy value: (x/32)^2 = (x^2)/1024
 					 */
-					/* exp = (sbr.E[ch][k][l] >> amp) + 6; */
-					exp = (sbr.E[ch][k][l]>>amp);
+					/* exp = (sbr.E[ch,k,l] >> amp) + 6; */
+					exp = (sbr.E[ch,k,l]>>amp);
 
 					if((exp<0)||(exp>=64)) {
-						sbr.E_orig[ch][k][l] = 0;
+						sbr.E_orig[ch,k,l] = 0;
 					}
 					else {
-						sbr.E_orig[ch][k][l] = E_deq_tab[exp];
+						sbr.E_orig[ch,k,l] = E_deq_tab[exp];
 
 						/* save half the table size at the cost of 1 multiply */
-						if(amp!=0&&(sbr.E[ch][k][l]&1)!=0) {
-							sbr.E_orig[ch][k][l] = (sbr.E_orig[ch][k][l]*1.414213562f);
+						if(amp!=0&&(sbr.E[ch,k,l]&1)!=0) {
+							sbr.E_orig[ch,k,l] = (sbr.E_orig[ch,k,l]*1.414213562f);
 						}
 					}
 				}
@@ -366,8 +366,8 @@ class NoiseEnvelope implements Constants {
 
 			for(l = 0; l<sbr.L_Q[ch]; l++) {
 				for(k = 0; k<sbr.N_Q; k++) {
-					sbr.Q_div[ch][k][l] = calc_Q_div(sbr, ch, k, l);
-					sbr.Q_div2[ch][k][l] = calc_Q_div2(sbr, ch, k, l);
+					sbr.Q_div[ch,k,l] = calc_Q_div(sbr, ch, k, l);
+					sbr.Q_div2[ch,k,l] = calc_Q_div2(sbr, ch, k, l);
 				}
 			}
 		}
@@ -397,41 +397,41 @@ class NoiseEnvelope implements Constants {
 		int amp1 = (sbr.amp_res[1]) ? 0 : 1;
 
 		for(l = 0; l<sbr.L_E[0]; l++) {
-			for(k = 0; k<sbr.n[sbr.f[0][l]]; k++) {
+			for(k = 0; k<sbr.n[sbr.f[0,l]]; k++) {
 				/* +6: * 64 ; +1: * 2 ; */
-				exp0 = (sbr.E[0][k][l]>>amp0)+1;
+				exp0 = (sbr.E[0,k,l]>>amp0)+1;
 
 				/* UN_MAP removed: (x / 4096) same as (x >> 12) */
 				/* E[1] is always even so no need for compensating the divide by 2 with
 				 * an extra multiplication
 				 */
-				/* exp1 = (sbr.E[1][k][l] >> amp1) - 12; */
-				exp1 = (sbr.E[1][k][l]>>amp1);
+				/* exp1 = (sbr.E[1,k,l] >> amp1) - 12; */
+				exp1 = (sbr.E[1,k,l]>>amp1);
 
 				if((exp0<0)||(exp0>=64)
 					||(exp1<0)||(exp1>24)) {
-					sbr.E_orig[1][k][l] = 0;
-					sbr.E_orig[0][k][l] = 0;
+					sbr.E_orig[1,k,l] = 0;
+					sbr.E_orig[0,k,l] = 0;
 				}
 				else {
 					tmp = E_deq_tab[exp0];
-					if(amp0!=0&&(sbr.E[0][k][l]&1)!=0) {
+					if(amp0!=0&&(sbr.E[0,k,l]&1)!=0) {
 						tmp *= 1.414213562;
 					}
 
 					/* panning */
-					sbr.E_orig[0][k][l] = (tmp*E_pan_tab[exp1]);
-					sbr.E_orig[1][k][l] = (tmp*E_pan_tab[24-exp1]);
+					sbr.E_orig[0,k,l] = (tmp*E_pan_tab[exp1]);
+					sbr.E_orig[1,k,l] = (tmp*E_pan_tab[24-exp1]);
 				}
 			}
 		}
 
 		for(l = 0; l<sbr.L_Q[0]; l++) {
 			for(k = 0; k<sbr.N_Q; k++) {
-				sbr.Q_div[0][k][l] = calc_Q_div(sbr, 0, k, l);
-				sbr.Q_div[1][k][l] = calc_Q_div(sbr, 1, k, l);
-				sbr.Q_div2[0][k][l] = calc_Q_div2(sbr, 0, k, l);
-				sbr.Q_div2[1][k][l] = calc_Q_div2(sbr, 1, k, l);
+				sbr.Q_div[0,k,l] = calc_Q_div(sbr, 0, k, l);
+				sbr.Q_div[1,k,l] = calc_Q_div(sbr, 1, k, l);
+				sbr.Q_div2[0,k,l] = calc_Q_div2(sbr, 0, k, l);
+				sbr.Q_div2[1,k,l] = calc_Q_div2(sbr, 1, k, l);
 			}
 		}
 	}

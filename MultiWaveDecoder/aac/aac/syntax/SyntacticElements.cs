@@ -18,7 +18,7 @@ namespace MultiWaveDecoder
     DSE[] dses;
     FIL[] fils;
     int curElem, curCCE, curDSE, curFIL;
-    float[][] data;
+    float[,] data;
 
     public SyntacticElements(DecoderConfig config)
     {
@@ -189,7 +189,7 @@ namespace MultiWaveDecoder
     //if(chs==1&&psPresent) chs++;
     //int mult = sbrPresent ? 2 : 1;
     ////only reallocate if needed
-    //if(data==null||chs!=data.length||(mult*config.getFrameLength())!=data[0].length) data = new float[chs][mult*config.getFrameLength()];
+    //if(data==null||chs!=data.length||(mult*config.getFrameLength())!=data[0].length) data = new float[chs,mult*config.getFrameLength()];
 
     //int channel = 0;
     //Element e;

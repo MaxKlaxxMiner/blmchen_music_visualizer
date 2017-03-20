@@ -55,7 +55,7 @@ namespace MultiWaveDecoder
     //return config;
     //}
 
-    ////*
+    ///
     /// Decodes one frame of AAC data in frame mode and returns the raw PCM
     /// data.
     /// @param frame the AAC frame

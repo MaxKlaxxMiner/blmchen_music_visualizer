@@ -14,16 +14,16 @@ class FBT implements Constants {
 		int offsetIndex = offsetIndexTable[sample_rate.getIndex()];
 
 		if(bs_samplerate_mode!=0) {
-			return startMin+OFFSET[offsetIndex][bs_start_freq];
+			return startMin+OFFSET[offsetIndex,bs_start_freq];
 
 		}
 		else {
-			return startMin+OFFSET[6][bs_start_freq];
+			return startMin+OFFSET[6,bs_start_freq];
 		}
 	}
 	private static int[] stopMinTable = {13, 15, 20, 21, 23,
 		32, 32, 35, 48, 64, 70, 96};
-	private static int[][] STOP_OFFSET_TABLE = {
+	private static int[,] STOP_OFFSET_TABLE = {
 		{0, 2, 4, 6, 8, 11, 14, 18, 22, 26, 31, 37, 44, 51},
 		{0, 2, 4, 6, 8, 11, 14, 18, 22, 26, 31, 36, 42, 49},
 		{0, 2, 4, 6, 8, 11, 14, 17, 21, 25, 29, 34, 39, 44},
@@ -53,7 +53,7 @@ class FBT implements Constants {
 			int stopMin = stopMinTable[sample_rate.getIndex()];
 
 			/* bs_stop_freq <= 13 */
-			return Math.min(64, stopMin+STOP_OFFSET_TABLE[sample_rate.getIndex()][Math.min(bs_stop_freq, 13)]);
+			return Math.min(64, stopMin+STOP_OFFSET_TABLE[sample_rate.getIndex(),Math.min(bs_stop_freq, 13)]);
 		}
 	}
 
@@ -263,11 +263,11 @@ class FBT implements Constants {
 		sbr.n[1] = sbr.N_high;
 
 		for(k = 0; k<=sbr.N_high; k++) {
-			sbr.f_table_res[HI_RES][k] = sbr.f_master[k+bs_xover_band];
+			sbr.f_table_res[HI_RES,k] = sbr.f_master[k+bs_xover_band];
 		}
 
-		sbr.M = sbr.f_table_res[HI_RES][sbr.N_high]-sbr.f_table_res[HI_RES][0];
-		sbr.kx = sbr.f_table_res[HI_RES][0];
+		sbr.M = sbr.f_table_res[HI_RES,sbr.N_high]-sbr.f_table_res[HI_RES,0];
+		sbr.kx = sbr.f_table_res[HI_RES,0];
 		if(sbr.kx>32)
 			return 1;
 		if(sbr.kx+sbr.M>64)
@@ -280,7 +280,7 @@ class FBT implements Constants {
 				i = 0;
 			else
 				i = (2*k-minus);
-			sbr.f_table_res[LO_RES][k] = sbr.f_table_res[HI_RES][i];
+			sbr.f_table_res[LO_RES,k] = sbr.f_table_res[HI_RES,i];
 		}
 
 		sbr.N_Q = 0;
@@ -300,7 +300,7 @@ class FBT implements Constants {
 				/* i = i + (int32_t)((sbr.N_low - i)/(sbr.N_Q + 1 - k)); */
 				i += (sbr.N_low-i)/(sbr.N_Q+1-k);
 			}
-			sbr.f_table_noise[k] = sbr.f_table_res[LO_RES][i];
+			sbr.f_table_noise[k] = sbr.f_table_res[LO_RES,i];
 		}
 
 		/* build table for mapping k to g in hf patching */
@@ -330,8 +330,8 @@ class FBT implements Constants {
 		int k, s;
 		int nrLim;
 
-		sbr.f_table_lim[0][0] = sbr.f_table_res[LO_RES][0]-sbr.kx;
-		sbr.f_table_lim[0][1] = sbr.f_table_res[LO_RES][sbr.N_low]-sbr.kx;
+		sbr.f_table_lim[0,0] = sbr.f_table_res[LO_RES,0]-sbr.kx;
+		sbr.f_table_lim[0,1] = sbr.f_table_res[LO_RES,sbr.N_low]-sbr.kx;
 		sbr.N_L[0] = 1;
 
 		for(s = 1; s<4; s++) {
@@ -344,7 +344,7 @@ class FBT implements Constants {
 			}
 
 			for(k = 0; k<=sbr.N_low; k++) {
-				limTable[k] = sbr.f_table_res[LO_RES][k];
+				limTable[k] = sbr.f_table_res[LO_RES,k];
 			}
 			for(k = 1; k<sbr.noPatches; k++) {
 				limTable[k+sbr.N_low] = patchBorders[k];
@@ -388,7 +388,7 @@ class FBT implements Constants {
 							}
 							else {
 								/* remove (k-1)th element */
-								limTable[k-1] = sbr.f_table_res[LO_RES][sbr.N_low];
+								limTable[k-1] = sbr.f_table_res[LO_RES,sbr.N_low];
 								//qsort(limTable, sbr.noPatches+sbr.N_low, sizeof(limTable[0]), longcmp);
 								Arrays.sort(limTable, 0, sbr.noPatches+sbr.N_low);
 								nrLim--;
@@ -397,7 +397,7 @@ class FBT implements Constants {
 						}
 					}
 					/* remove kth element */
-					limTable[k] = sbr.f_table_res[LO_RES][sbr.N_low];
+					limTable[k] = sbr.f_table_res[LO_RES,sbr.N_low];
 					//qsort(limTable, nrLim, sizeof(limTable[0]), longcmp);
 					Arrays.sort(limTable, 0, nrLim);
 					nrLim--;
@@ -411,7 +411,7 @@ class FBT implements Constants {
 
 			sbr.N_L[s] = nrLim;
 			for(k = 0; k<=nrLim; k++) {
-				sbr.f_table_lim[s][k] = limTable[k]-sbr.kx;
+				sbr.f_table_lim[s,k] = limTable[k]-sbr.kx;
 			}
 
 		}

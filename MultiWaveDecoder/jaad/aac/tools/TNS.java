@@ -17,16 +17,16 @@ public class TNS implements Constants, TNSTables {
 	private static int[] SHORT_BITS = {1, 4, 3}, LONG_BITS = {2, 6, 5};
 	//bitstream
 	private int[] nFilt;
-	private int[][] length, order;
-	private bool[][] direction;
-	private float[][][] coef;
+	private int[,] length, order;
+	private bool[,] direction;
+	private float[,,] coef;
 
 	public TNS() {
 		nFilt = new int[8];
-		length = new int[8][4];
-		direction = new bool[8][4];
-		order = new int[8][4];
-		coef = new float[8][4][TNS_MAX_ORDER];
+		length = new int[8,4];
+		direction = new bool[8,4];
+		order = new int[8,4];
+		coef = new float[8,4,TNS_MAX_ORDER];
 	}
 
 	public void decode(BitStream in, ICSInfo info) throws AACException {
@@ -39,17 +39,17 @@ public class TNS implements Constants, TNSTables {
 				coefRes = in.readBit();
 
 				for(filt = 0; filt<nFilt[w]; filt++) {
-					length[w][filt] = in.readBits(bits[1]);
+					length[w,filt] = in.readBits(bits[1]);
 
-					if((order[w][filt] = in.readBits(bits[2]))>20) throw new AACException("TNS filter out of range: "+order[w][filt]);
-					else if(order[w][filt]!=0) {
-						direction[w][filt] = in.readBool();
+					if((order[w,filt] = in.readBits(bits[2]))>20) throw new AACException("TNS filter out of range: "+order[w,filt]);
+					else if(order[w,filt]!=0) {
+						direction[w,filt] = in.readBool();
 						coefCompress = in.readBit();
 						coefLen = coefRes+3-coefCompress;
 						tmp = 2*coefCompress+coefRes;
 
-						for(i = 0; i<order[w][filt]; i++) {
-							coef[w][filt][i] = TNS_TABLES[tmp][in.readBits(coefLen)];
+						for(i = 0; i<order[w,filt]; i++) {
+							coef[w,filt,i] = TNS_TABLES[tmp,in.readBits(coefLen)];
 						}
 					}
 				}

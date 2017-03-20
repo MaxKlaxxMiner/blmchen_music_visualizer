@@ -5,7 +5,7 @@ namespace MultiWaveDecoder
 {
   public sealed class SynthesisFilterbank : FilterbankTable
   {
-    //  private static float[][] qmf32_pre_twiddle = {
+    //  private static float[,] qmf32_pre_twiddle = {
     //    {0.999924701839145f, -0.012271538285720f},
     //    {0.999322384588350f, -0.036807222941359f},
     //    {0.998118112900149f, -0.061320736302209f},
@@ -55,7 +55,7 @@ namespace MultiWaveDecoder
     //    Arrays.fill(v, 0);
     //  }
 
-    //  void sbr_qmf_synthesis_32(SBR sbr, float[][][] X,
+    //  void sbr_qmf_synthesis_32(SBR sbr, float[,,] X,
     //    float[] output) {
     //    float[] x1 = new float[32], x2 = new float[32];
     //    float scale = 1.f/64.f;
@@ -72,8 +72,8 @@ namespace MultiWaveDecoder
     //      /* calculate 64 samples */
     //      /* complex pre-twiddle */
     //      for(k = 0; k<32; k++) {
-    //        x1[k] = (X[l][k][0]*qmf32_pre_twiddle[k][0])-(X[l][k][1]*qmf32_pre_twiddle[k][1]);
-    //        x2[k] = (X[l][k][1]*qmf32_pre_twiddle[k][0])+(X[l][k][0]*qmf32_pre_twiddle[k][1]);
+    //        x1[k] = (X[l,k,0]*qmf32_pre_twiddle[k,0])-(X[l,k,1]*qmf32_pre_twiddle[k,1]);
+    //        x2[k] = (X[l,k,1]*qmf32_pre_twiddle[k,0])+(X[l,k,0]*qmf32_pre_twiddle[k,1]);
 
     //        x1[k] *= scale;
     //        x2[k] *= scale;
@@ -109,11 +109,11 @@ namespace MultiWaveDecoder
     //    }
     //  }
 
-    //  void sbr_qmf_synthesis_64(SBR sbr, float[][][] X,
+    //  void sbr_qmf_synthesis_64(SBR sbr, float[,,] X,
     //    float[] output) {
     //    float[] in_real1 = new float[32], in_imag1 = new float[32], out_real1 = new float[32], out_imag1 = new float[32];
     //    float[] in_real2 = new float[32], in_imag2 = new float[32], out_real2 = new float[32], out_imag2 = new float[32];
-    //    float[][] pX;
+    //    float[,] pX;
     //    float scale = 1.f/64.f;
     //    int n, k, out = 0;
     //    int l;
@@ -128,20 +128,20 @@ namespace MultiWaveDecoder
     //      /* calculate 128 samples */
     //      pX = X[l];
 
-    //      in_imag1[31] = scale*pX[1][0];
-    //      in_real1[0] = scale*pX[0][0];
-    //      in_imag2[31] = scale*pX[63-1][1];
-    //      in_real2[0] = scale*pX[63-0][1];
+    //      in_imag1[31] = scale*pX[1,0];
+    //      in_real1[0] = scale*pX[0,0];
+    //      in_imag2[31] = scale*pX[63-1,1];
+    //      in_real2[0] = scale*pX[63-0,1];
     //      for(k = 1; k<31; k++) {
-    //        in_imag1[31-k] = scale*pX[2*k+1][0];
-    //        in_real1[     k] = scale*pX[2*k][0];
-    //        in_imag2[31-k] = scale*pX[63-(2*k+1)][1];
-    //        in_real2[     k] = scale*pX[63-(2*k)][1];
+    //        in_imag1[31-k] = scale*pX[2*k+1,0];
+    //        in_real1[     k] = scale*pX[2*k,0];
+    //        in_imag2[31-k] = scale*pX[63-(2*k+1),1];
+    //        in_real2[     k] = scale*pX[63-(2*k),1];
     //      }
-    //      in_imag1[0] = scale*pX[63][0];
-    //      in_real1[31] = scale*pX[62][0];
-    //      in_imag2[0] = scale*pX[63-63][1];
-    //      in_real2[31] = scale*pX[63-62][1];
+    //      in_imag1[0] = scale*pX[63,0];
+    //      in_real1[31] = scale*pX[62,0];
+    //      in_imag2[0] = scale*pX[63-63,1];
+    //      in_real2[31] = scale*pX[63-62,1];
 
     //      // dct4_kernel is DCT_IV without reordering which is done before and after FFT
     //      DCT.dct4_kernel(in_real1, in_imag1, out_real1, out_imag1);

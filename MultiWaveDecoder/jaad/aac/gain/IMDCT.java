@@ -6,8 +6,8 @@ import net.sourceforge.jaad.aac.syntax.ICSInfo.WindowSequence;
 //inverse modified discrete cosine transform
 class IMDCT implements GCConstants, IMDCTTables, Windows {
 
-	private static float[][] LONG_WINDOWS = {SINE_256, KBD_256};
-	private static float[][] SHORT_WINDOWS = {SINE_32, KBD_32};
+	private static float[,] LONG_WINDOWS = {SINE_256, KBD_256};
+	private static float[,] SHORT_WINDOWS = {SINE_32, KBD_32};
 	private int frameLen, shortFrameLen, lbLong, lbShort, lbMid;
 
 	IMDCT(int frameLen) {
@@ -58,28 +58,28 @@ class IMDCT implements GCConstants, IMDCTTables, Windows {
 		switch(winSeq) {
 			case ONLY_LONG_SEQUENCE:
 				for(i = 0; i<lbLong; i++) {
-					window[i] = LONG_WINDOWS[winShapePrev][i];
-					window[lbLong*2-1-i] = LONG_WINDOWS[winShape][i];
+					window[i] = LONG_WINDOWS[winShapePrev,i];
+					window[lbLong*2-1-i] = LONG_WINDOWS[winShape,i];
 				}
 				break;
 			case EIGHT_SHORT_SEQUENCE:
 				for(i = 0; i<lbShort; i++) {
-					window1[i] = SHORT_WINDOWS[winShapePrev][i];
-					window1[lbShort*2-1-i] = SHORT_WINDOWS[winShape][i];
-					window2[i] = SHORT_WINDOWS[winShape][i];
-					window2[lbShort*2-1-i] = SHORT_WINDOWS[winShape][i];
+					window1[i] = SHORT_WINDOWS[winShapePrev,i];
+					window1[lbShort*2-1-i] = SHORT_WINDOWS[winShape,i];
+					window2[i] = SHORT_WINDOWS[winShape,i];
+					window2[lbShort*2-1-i] = SHORT_WINDOWS[winShape,i];
 				}
 				break;
 			case LONG_START_SEQUENCE:
 				for(i = 0; i<lbLong; i++) {
-					window[i] = LONG_WINDOWS[winShapePrev][i];
+					window[i] = LONG_WINDOWS[winShapePrev,i];
 				}
 				for(i = 0; i<lbMid; i++) {
 					window[i+lbLong] = 1.0f;
 				}
 
 				for(i = 0; i<lbShort; i++) {
-					window[i+lbMid+lbLong] = SHORT_WINDOWS[winShape][lbShort-1-i];
+					window[i+lbMid+lbLong] = SHORT_WINDOWS[winShape,lbShort-1-i];
 				}
 				for(i = 0; i<lbMid; i++) {
 					window[i+lbMid+lbLong+lbShort] = 0.0f;
@@ -90,13 +90,13 @@ class IMDCT implements GCConstants, IMDCTTables, Windows {
 					window[i] = 0.0f;
 				}
 				for(i = 0; i<lbShort; i++) {
-					window[i+lbMid] = SHORT_WINDOWS[winShapePrev][i];
+					window[i+lbMid] = SHORT_WINDOWS[winShapePrev,i];
 				}
 				for(i = 0; i<lbMid; i++) {
 					window[i+lbMid+lbShort] = 1.0f;
 				}
 				for(i = 0; i<lbLong; i++) {
-					window[i+lbMid+lbShort+lbMid] = LONG_WINDOWS[winShape][lbLong-1-i];
+					window[i+lbMid+lbShort+lbMid] = LONG_WINDOWS[winShape,lbLong-1-i];
 				}
 				break;
 		}
@@ -129,7 +129,7 @@ class IMDCT implements GCConstants, IMDCTTables, Windows {
 
 	private void imdct(float[] in, float[] out, float[] window, int n) throws AACException {
 		int n2 = n/2;
-		float[][] table, table2;
+		float[,] table, table2;
 		if(n==256) {
 			table = IMDCT_TABLE_256;
 			table2 = IMDCT_POST_TABLE_256;
@@ -150,10 +150,10 @@ class IMDCT implements GCConstants, IMDCTTables, Windows {
 		}
 
 		//pre-twiddle
-		float[][] buf = new float[n2][2];
+		float[,] buf = new float[n2,2];
 		for(i = 0; i<n2; i++) {
-			buf[i][0] = (table[i][0]*tmp[2*i])-(table[i][1]*tmp[2*i+1]);
-			buf[i][1] = (table[i][0]*tmp[2*i+1])+(table[i][1]*tmp[2*i]);
+			buf[i,0] = (table[i,0]*tmp[2*i])-(table[i,1]*tmp[2*i+1]);
+			buf[i,1] = (table[i,0]*tmp[2*i+1])+(table[i,1]*tmp[2*i]);
 		}
 
 		//fft
@@ -161,10 +161,10 @@ class IMDCT implements GCConstants, IMDCTTables, Windows {
 
 		//post-twiddle and reordering
 		for(i = 0; i<n2; i++) {
-			tmp[i] = table2[i][0]*buf[i][0]+table2[i][1]*buf[n2-1-i][0]
-					+table2[i][2]*buf[i][1]+table2[i][3]*buf[n2-1-i][1];
-			tmp[n-1-i] = table2[i][2]*buf[i][0]-table2[i][3]*buf[n2-1-i][0]
-					-table2[i][0]*buf[i][1]+table2[i][1]*buf[n2-1-i][1];
+			tmp[i] = table2[i,0]*buf[i,0]+table2[i,1]*buf[n2-1-i,0]
+					+table2[i,2]*buf[i,1]+table2[i,3]*buf[n2-1-i,1];
+			tmp[n-1-i] = table2[i,2]*buf[i,0]-table2[i,3]*buf[n2-1-i,0]
+					-table2[i,0]*buf[i,1]+table2[i,1]*buf[n2-1-i,1];
 		}
 
 		//copy to output and apply window

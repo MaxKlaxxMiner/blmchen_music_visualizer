@@ -30,9 +30,9 @@ namespace MultiWaveDecoder
     int[] n = new int[2];
 
     int[] f_master = new int[64];
-    int[][] f_table_res = Fill<int>(2, 64);
+    int[,] f_table_res = new int[2, 64];
     int[] f_table_noise = new int[64];
-    int[][] f_table_lim = Fill<int>(4, 64);
+    int[,] f_table_lim = new int [4, 64];
 
     int[] table_map_k_to_g = new int[64];
 
@@ -45,38 +45,38 @@ namespace MultiWaveDecoder
     int[] L_E_prev = new int[2];
     int[] L_Q = new int[2];
 
-    int[][] t_E = Fill<int>(2, MAX_L_E + 1);
-    int[][] t_Q = Fill<int>(2, 3);
-    int[][] f = Fill<int>(2, MAX_L_E + 1);
+    int[,] t_E = new int [2, MAX_L_E + 1];
+    int[,] t_Q = new int [2, 3];
+    int[,] f = new int [2, MAX_L_E + 1];
     int[] f_prev = new int[2];
 
-    float[][][] G_temp_prev = Fill<float>(2, 5, 64);
-    float[][][] Q_temp_prev = Fill<float>(2, 5, 64);
+    float[,,] G_temp_prev = new float [2, 5, 64];
+    float[,,] Q_temp_prev = new float [2, 5, 64];
     int[] GQ_ringbuf_index = new int[2];
 
-    int[][][] E = Fill<int>(2, 64, MAX_L_E);
-    int[][] E_prev = Fill<int>(2, 64);
-    float[][][] E_orig = Fill<float>(2, 64, MAX_L_E);
-    float[][][] E_curr = Fill<float>(2, 64, MAX_L_E);
-    int[][][] Q = Fill<int>(2, 64, 2);
-    float[][][] Q_div = Fill<float>(2, 64, 2);
-    float[][][] Q_div2 = Fill<float>(2, 64, 2);
-    int[][] Q_prev = Fill<int>(2, 64);
+    int[,,] E = new int [2, 64, MAX_L_E];
+    int[,] E_prev = new int [2, 64];
+    float[,,] E_orig = new float [2, 64, MAX_L_E];
+    float[,,] E_curr = new float [2, 64, MAX_L_E];
+    int[,,] Q = new int [2, 64, 2];
+    float[,,] Q_div = new float [2, 64, 2];
+    float[,,] Q_div2 = new float [2, 64, 2];
+    int[,] Q_prev = new int [2, 64];
 
     int[] l_A = new int[2];
     int[] l_A_prev = new int[2];
 
-    int[][] bs_invf_mode = Fill<int>(2, MAX_L_E);
-    int[][] bs_invf_mode_prev = Fill<int>(2, MAX_L_E);
-    float[][] bwArray = Fill<float>(2, 64);
-    float[][] bwArray_prev = Fill<float>(2, 64);
+    int[,] bs_invf_mode = new int [2, MAX_L_E];
+    int[,] bs_invf_mode_prev = new int [2, MAX_L_E];
+    float[,] bwArray = new float [2, 64];
+    float[,] bwArray_prev = new float [2, 64];
 
     int noPatches;
     int[] patchNoSubbands = new int[64];
     int[] patchStartSubband = new int[64];
 
-    int[][] bs_add_harmonic = Fill<int>(2, 64);
-    int[][] bs_add_harmonic_prev = Fill<int>(2, 64);
+    int[,] bs_add_harmonic = new int [2, 64];
+    int[,] bs_add_harmonic_prev = new int [2, 64];
 
     int[] index_noise_prev = new int[2];
     int[] psi_is_prev = new int[2];
@@ -103,7 +103,7 @@ namespace MultiWaveDecoder
     AnalysisFilterbank[] qmfa = new AnalysisFilterbank[2];
     SynthesisFilterbank[] qmfs = new SynthesisFilterbank[2];
 
-    float[][][][] Xsbr = Fill<float>(2, MAX_NTSRHFG, 64, 2);
+    float[,,,] Xsbr = new float [2, MAX_NTSRHFG, 64, 2];
 
     int numTimeSlotsRate;
     int numTimeSlots;
@@ -139,16 +139,16 @@ namespace MultiWaveDecoder
     int bs_extension_data;
     bool bs_coupling;
     int[] bs_frame_class = new int[2];
-    int[][] bs_rel_bord = Fill<int>(2, 9);
-    int[][] bs_rel_bord_0 = Fill<int>(2, 9);
-    int[][] bs_rel_bord_1 = Fill<int>(2, 9);
+    int[,] bs_rel_bord = new int [2, 9];
+    int[,] bs_rel_bord_0 = new int [2, 9];
+    int[,] bs_rel_bord_1 = new int [2, 9];
     int[] bs_pointer = new int[2];
     int[] bs_abs_bord_0 = new int[2];
     int[] bs_abs_bord_1 = new int[2];
     int[] bs_num_rel_0 = new int[2];
     int[] bs_num_rel_1 = new int[2];
-    int[][] bs_df_env = Fill<int>(2, 9);
-    int[][] bs_df_noise = Fill<int>(2, 3);
+    int[,] bs_df_env = new int [2, 9];
+    int[,] bs_df_noise = new int [2, 3];
 
     public SBR(bool smallFrames, bool stereo, SampleFrequency sample_rate, bool downSampledSBR)
     {
@@ -220,18 +220,18 @@ namespace MultiWaveDecoder
     //if(this.qmfs[1]!=null) qmfs[1].reset();
 
     //for(j = 0; j<5; j++) {
-    //if(this.G_temp_prev[0][j]!=null) Arrays.fill(G_temp_prev[0][j], 0);
-    //if(this.G_temp_prev[1][j]!=null) Arrays.fill(G_temp_prev[1][j], 0);
-    //if(this.Q_temp_prev[0][j]!=null) Arrays.fill(Q_temp_prev[0][j], 0);
-    //if(this.Q_temp_prev[1][j]!=null) Arrays.fill(Q_temp_prev[1][j], 0);
+    //if(this.G_temp_prev[0,j]!=null) Arrays.fill(G_temp_prev[0,j], 0);
+    //if(this.G_temp_prev[1,j]!=null) Arrays.fill(G_temp_prev[1,j], 0);
+    //if(this.Q_temp_prev[0,j]!=null) Arrays.fill(Q_temp_prev[0,j], 0);
+    //if(this.Q_temp_prev[1,j]!=null) Arrays.fill(Q_temp_prev[1,j], 0);
     //}
 
     //for(int i = 0; i<40; i++) {
     //for(int k = 0; k<64; k++) {
-    //Xsbr[0][i][j][0] = 0;
-    //Xsbr[0][i][j][1] = 0;
-    //Xsbr[1][i][j][0] = 0;
-    //Xsbr[1][i][j][1] = 0;
+    //Xsbr[0,i,j,0] = 0;
+    //Xsbr[0,i,j,1] = 0;
+    //Xsbr[1,i,j,0] = 0;
+    //Xsbr[1,i,j,1] = 0;
     //}
     //}
 
@@ -262,12 +262,12 @@ namespace MultiWaveDecoder
     //this.f_prev[0] = 0;
     //this.f_prev[1] = 0;
     //for(j = 0; j<MAX_M; j++) {
-    //this.E_prev[0][j] = 0;
-    //this.Q_prev[0][j] = 0;
-    //this.E_prev[1][j] = 0;
-    //this.Q_prev[1][j] = 0;
-    //this.bs_add_harmonic_prev[0][j] = 0;
-    //this.bs_add_harmonic_prev[1][j] = 0;
+    //this.E_prev[0,j] = 0;
+    //this.Q_prev[0,j] = 0;
+    //this.E_prev[1,j] = 0;
+    //this.Q_prev[1,j] = 0;
+    //this.bs_add_harmonic_prev[0,j] = 0;
+    //this.bs_add_harmonic_prev[1,j] = 0;
     //}
     //this.bs_add_harmonic_flag_prev[0] = false;
     //this.bs_add_harmonic_flag_prev[1] = false;
@@ -275,7 +275,7 @@ namespace MultiWaveDecoder
 
     //void sbr_reset() {
 
-    ///* if these are different from the previous frame: Reset = 1 */
+    // if these are different from the previous frame: Reset = 1 */
     //if((this.bs_start_freq!=this.bs_start_freq_prev)
     //||(this.bs_stop_freq!=this.bs_stop_freq_prev)
     //||(this.bs_freq_scale!=this.bs_freq_scale_prev)
@@ -302,11 +302,11 @@ namespace MultiWaveDecoder
     //int result = 0;
     //int k2;
 
-    ///* calculate the Master Frequency Table */
+    // calculate the Master Frequency Table */
     //this.k0 = FBT.qmf_start_channel(start_freq, samplerate_mode, this.sample_rate);
     //k2 = FBT.qmf_stop_channel(stop_freq, this.sample_rate, this.k0);
 
-    ///* check k0 and k2 */
+    // check k0 and k2 */
     //if(this.sample_rate.getFrequency()>=48000) {
     //if((k2-this.k0)>32)
     //result += 1;
@@ -334,7 +334,7 @@ namespace MultiWaveDecoder
     //return result;
     //}
 
-    ///* table 2 */
+    // table 2 */
     //public int decode(BitStream ld, int cnt) throws AACException {
     //int result = 0;
     //int num_align_bits = 0;
@@ -352,7 +352,7 @@ namespace MultiWaveDecoder
     //this.bs_sbr_crc_bits = ld.readBits(10);
     //}
 
-    ///* save old header values, in case the new ones are corrupted */
+    // save old header values, in case the new ones are corrupted */
     //saved_start_freq = this.bs_start_freq;
     //saved_samplerate_mode = this.bs_samplerate_mode;
     //saved_stop_freq = this.bs_stop_freq;
@@ -365,10 +365,10 @@ namespace MultiWaveDecoder
     //if(this.bs_header_flag)
     //sbr_header(ld);
 
-    ///* Reset? */
+    // Reset? */
     //sbr_reset();
 
-    ///* first frame should have a header */
+    // first frame should have a header */
     ////if (!(sbr.frame == 0 && sbr.bs_header_flag == 0))
     //if(this.header_count!=0) {
     //if(this.Reset||(this.bs_header_flag&&this.just_seeked)) {
@@ -376,7 +376,7 @@ namespace MultiWaveDecoder
     //this.bs_samplerate_mode, this.bs_freq_scale,
     //this.bs_alter_scale, this.bs_xover_band);
 
-    ///* if an error occured with the new header values revert to the old ones */
+    // if an error occured with the new header values revert to the old ones */
     //if(rt>0) {
     //calc_sbr_tables(saved_start_freq, saved_stop_freq,
     //  saved_samplerate_mode, saved_freq_scale,
@@ -387,12 +387,12 @@ namespace MultiWaveDecoder
     //if(result==0) {
     //result = sbr_data(ld);
 
-    ///* sbr_data() returning an error means that there was an error in
+    // sbr_data() returning an error means that there was an error in
     //envelope_time_border_vector().
     //In this case the old time border vector is saved and all the previous
     //data normally read after sbr_grid() is saved.
     //*/
-    ///* to be on the safe side, calculate old sbr tables in case of error */
+    // to be on the safe side, calculate old sbr tables in case of error */
     //if((result>0)
     //&&(this.Reset||(this.bs_header_flag&&this.just_seeked))) {
     //calc_sbr_tables(saved_start_freq, saved_stop_freq,
@@ -400,8 +400,8 @@ namespace MultiWaveDecoder
     //  saved_alter_scale, saved_xover_band);
     //}
 
-    ///* we should be able to safely set result to 0 now, */
-    ///* but practise indicates this doesn't work well */
+    // we should be able to safely set result to 0 now, */
+    // but practise indicates this doesn't work well */
     //}
     //}
     //else {
@@ -410,22 +410,22 @@ namespace MultiWaveDecoder
 
     //num_sbr_bits2 = (int) (ld.getPosition()-num_sbr_bits1);
 
-    ///* check if we read more bits then were available for sbr */
+    // check if we read more bits then were available for sbr */
     //if(8*cnt<num_sbr_bits2) {
     //throw new AACException("frame overread");
     ////faad_resetbits(ld, num_sbr_bits1+8*cnt);
     ////num_sbr_bits2 = 8*cnt;
 
-    ///* turn off PS for the unfortunate case that we randomly read some
+    // turn off PS for the unfortunate case that we randomly read some
     //* PS data that looks correct */
     ////this.ps_used = 0;
 
-    ///* Make sure it doesn't decode SBR in this frame, or we'll get glitches */
+    // Make sure it doesn't decode SBR in this frame, or we'll get glitches */
     ////return 1;
     //}
 
     //{
-    ///* -4 does not apply, bs_extension_type is re-read in this function */
+    // -4 does not apply, bs_extension_type is re-read in this function */
     //num_align_bits = 8*cnt /*- 4*/-num_sbr_bits2;
 
     //while(num_align_bits>7) {
@@ -438,7 +438,7 @@ namespace MultiWaveDecoder
     //return result;
     //}
 
-    ///* table 3 */
+    // table 3 */
     //private void sbr_header(BitStream ld) throws AACException {
     //bool bs_header_extra_1, bs_header_extra_2;
 
@@ -446,7 +446,7 @@ namespace MultiWaveDecoder
 
     //this.bs_amp_res = ld.readBool();
 
-    ///* bs_start_freq and bs_stop_freq must define a fequency band that does
+    // bs_start_freq and bs_stop_freq must define a fequency band that does
     //not exceed 48 channels */
     //this.bs_start_freq = ld.readBits(4);
     //this.bs_stop_freq = ld.readBits(4);
@@ -461,7 +461,7 @@ namespace MultiWaveDecoder
     //this.bs_noise_bands = ld.readBits(2);
     //}
     //else {
-    ///* Default values */
+    // Default values */
     //this.bs_freq_scale = 2;
     //this.bs_alter_scale = true;
     //this.bs_noise_bands = 2;
@@ -474,7 +474,7 @@ namespace MultiWaveDecoder
     //this.bs_smoothing_mode = ld.readBool();
     //}
     //else {
-    ///* Default values */
+    // Default values */
     //this.bs_limiter_bands = 2;
     //this.bs_limiter_gains = 2;
     //this.bs_interpol_freq = true;
@@ -483,7 +483,7 @@ namespace MultiWaveDecoder
 
     //}
 
-    ///* table 4 */
+    // table 4 */
     //private int sbr_data(BitStream ld) throws AACException {
     //int result;
 
@@ -501,7 +501,7 @@ namespace MultiWaveDecoder
     //return 0;
     //}
 
-    ///* table 5 */
+    // table 5 */
     //private int sbr_single_channel_element(BitStream ld) throws AACException {
     //int result;
 
@@ -543,7 +543,7 @@ namespace MultiWaveDecoder
     //this.bs_extension_id = ld.readBits(2);
     //tmp_nr_bits += 2;
 
-    ///* allow only 1 PS extension element per extension data */
+    // allow only 1 PS extension element per extension data */
     //if(this.bs_extension_id==EXTENSION_ID_PS) {
     //if(ps_ext_read==0) {
     //  ps_ext_read = 1;
@@ -557,14 +557,14 @@ namespace MultiWaveDecoder
 
     //tmp_nr_bits += sbr_extension(ld, this.bs_extension_id, nr_bits_left);
 
-    ///* check if the data read is bigger than the number of available bits */
+    // check if the data read is bigger than the number of available bits */
     //if(tmp_nr_bits>nr_bits_left)
     //return 1;
 
     //nr_bits_left -= tmp_nr_bits;
     //}
 
-    ///* Corrigendum */
+    // Corrigendum */
     //if(nr_bits_left>0) {
     //ld.readBits(nr_bits_left);
     //}
@@ -573,7 +573,7 @@ namespace MultiWaveDecoder
     //return 0;
     //}
 
-    ///* table 6 */
+    // table 6 */
     //private int sbr_channel_pair_element(BitStream ld) throws AACException {
     //int n, result;
 
@@ -589,27 +589,27 @@ namespace MultiWaveDecoder
     //if((result = sbr_grid(ld, 0))>0)
     //return result;
 
-    ///* need to copy some data from left to right */
+    // need to copy some data from left to right */
     //this.bs_frame_class[1] = this.bs_frame_class[0];
     //this.L_E[1] = this.L_E[0];
     //this.L_Q[1] = this.L_Q[0];
     //this.bs_pointer[1] = this.bs_pointer[0];
 
     //for(n = 0; n<=this.L_E[0]; n++) {
-    //this.t_E[1][n] = this.t_E[0][n];
-    //this.f[1][n] = this.f[0][n];
+    //this.t_E[1,n] = this.t_E[0,n];
+    //this.f[1,n] = this.f[0,n];
     //}
     //for(n = 0; n<=this.L_Q[0]; n++) {
-    //this.t_Q[1][n] = this.t_Q[0][n];
+    //this.t_Q[1,n] = this.t_Q[0,n];
     //}
 
     //sbr_dtdf(ld, 0);
     //sbr_dtdf(ld, 1);
     //invf_mode(ld, 0);
 
-    ///* more copying */
+    // more copying */
     //for(n = 0; n<this.N_Q; n++) {
-    //this.bs_invf_mode[1][n] = this.bs_invf_mode[0][n];
+    //this.bs_invf_mode[1,n] = this.bs_invf_mode[0,n];
     //}
 
     //sbr_envelope(ld, 0);
@@ -635,24 +635,24 @@ namespace MultiWaveDecoder
     //int saved_frame_class = this.bs_frame_class[0];
 
     //for(n = 0; n<saved_L_E; n++) {
-    //saved_t_E[n] = this.t_E[0][n];
+    //saved_t_E[n] = this.t_E[0,n];
     //}
     //for(n = 0; n<saved_L_Q; n++) {
-    //saved_t_Q[n] = this.t_Q[0][n];
+    //saved_t_Q[n] = this.t_Q[0,n];
     //}
 
     //if((result = sbr_grid(ld, 0))>0)
     //return result;
     //if((result = sbr_grid(ld, 1))>0) {
-    ///* restore first channel data as well */
+    // restore first channel data as well */
     //this.bs_frame_class[0] = saved_frame_class;
     //this.L_E[0] = saved_L_E;
     //this.L_Q[0] = saved_L_Q;
     //for(n = 0; n<6; n++) {
-    //this.t_E[0][n] = saved_t_E[n];
+    //this.t_E[0,n] = saved_t_E[n];
     //}
     //for(n = 0; n<3; n++) {
-    //this.t_Q[0][n] = saved_t_Q[n];
+    //this.t_Q[0,n] = saved_t_Q[n];
     //}
 
     //return result;
@@ -699,14 +699,14 @@ namespace MultiWaveDecoder
     //tmp_nr_bits += 2;
     //tmp_nr_bits += sbr_extension(ld, this.bs_extension_id, nr_bits_left);
 
-    ///* check if the data read is bigger than the number of available bits */
+    // check if the data read is bigger than the number of available bits */
     //if(tmp_nr_bits>nr_bits_left)
     //return 1;
 
     //nr_bits_left -= tmp_nr_bits;
     //}
 
-    ///* Corrigendum */
+    // Corrigendum */
     //if(nr_bits_left>0) {
     //ld.readBits(nr_bits_left);
     //}
@@ -715,7 +715,7 @@ namespace MultiWaveDecoder
     //return 0;
     //}
 
-    ///* integer log[2](x): input range [0,10) */
+    // integer log[2](x): input range [0,10) */
     //private int sbr_log2(int val) {
     //int log2tab[] = {0, 0, 1, 2, 2, 3, 3, 3, 3, 4};
     //if(val<10&&val>=0)
@@ -725,7 +725,7 @@ namespace MultiWaveDecoder
     //}
 
 
-    ///* table 7 */
+    // table 7 */
     //private int sbr_grid(BitStream ld, int ch) throws AACException {
     //int i, env, rel, result;
     //int bs_abs_bord, bs_abs_bord_1;
@@ -744,7 +744,7 @@ namespace MultiWaveDecoder
 
     //i = ld.readBit();
     //for(env = 0; env<bs_num_env; env++) {
-    //this.f[ch][env] = i;
+    //this.f[ch,env] = i;
     //}
 
     //this.abs_bord_lead[ch] = 0;
@@ -758,13 +758,13 @@ namespace MultiWaveDecoder
     //bs_num_env = ld.readBits(2)+1;
 
     //for(rel = 0; rel<bs_num_env-1; rel++) {
-    //this.bs_rel_bord[ch][rel] = 2*ld.readBits(2)+2;
+    //this.bs_rel_bord[ch,rel] = 2*ld.readBits(2)+2;
     //}
     //i = sbr_log2(bs_num_env+1);
     //this.bs_pointer[ch] = ld.readBits(i);
 
     //for(env = 0; env<bs_num_env; env++) {
-    //this.f[ch][bs_num_env-env-1] = ld.readBit();
+    //this.f[ch,bs_num_env-env-1] = ld.readBit();
     //}
 
     //this.abs_bord_lead[ch] = 0;
@@ -778,13 +778,13 @@ namespace MultiWaveDecoder
     //bs_num_env = ld.readBits(2)+1;
 
     //for(rel = 0; rel<bs_num_env-1; rel++) {
-    //this.bs_rel_bord[ch][rel] = 2*ld.readBits(2)+2;
+    //this.bs_rel_bord[ch,rel] = 2*ld.readBits(2)+2;
     //}
     //i = sbr_log2(bs_num_env+1);
     //this.bs_pointer[ch] = ld.readBits(i);
 
     //for(env = 0; env<bs_num_env; env++) {
-    //this.f[ch][env] = ld.readBit();
+    //this.f[ch,env] = ld.readBit();
     //}
 
     //this.abs_bord_lead[ch] = bs_abs_bord;
@@ -802,16 +802,16 @@ namespace MultiWaveDecoder
     //bs_num_env = Math.min(5, this.bs_num_rel_0[ch]+this.bs_num_rel_1[ch]+1);
 
     //for(rel = 0; rel<this.bs_num_rel_0[ch]; rel++) {
-    //this.bs_rel_bord_0[ch][rel] = 2*ld.readBits(2)+2;
+    //this.bs_rel_bord_0[ch,rel] = 2*ld.readBits(2)+2;
     //}
     //for(rel = 0; rel<this.bs_num_rel_1[ch]; rel++) {
-    //this.bs_rel_bord_1[ch][rel] = 2*ld.readBits(2)+2;
+    //this.bs_rel_bord_1[ch,rel] = 2*ld.readBits(2)+2;
     //}
     //i = sbr_log2(this.bs_num_rel_0[ch]+this.bs_num_rel_1[ch]+2);
     //this.bs_pointer[ch] = ld.readBits(i);
 
     //for(env = 0; env<bs_num_env; env++) {
-    //this.f[ch][env] = ld.readBit();
+    //this.f[ch,env] = ld.readBit();
     //}
 
     //this.abs_bord_lead[ch] = bs_abs_bord;
@@ -834,7 +834,7 @@ namespace MultiWaveDecoder
     //else
     //this.L_Q[ch] = 1;
 
-    ///* TODO: this code can probably be integrated into the code above! */
+    // TODO: this code can probably be integrated into the code above! */
     //if((result = TFGrid.envelope_time_border_vector(this, ch))>0) {
     //this.bs_frame_class[ch] = saved_frame_class;
     //this.L_E[ch] = saved_L_E;
@@ -846,25 +846,25 @@ namespace MultiWaveDecoder
     //return 0;
     //}
 
-    ///* table 8 */
+    // table 8 */
     //private void sbr_dtdf(BitStream ld, int ch) throws AACException {
     //int i;
 
     //for(i = 0; i<this.L_E[ch]; i++) {
-    //this.bs_df_env[ch][i] = ld.readBit();
+    //this.bs_df_env[ch,i] = ld.readBit();
     //}
 
     //for(i = 0; i<this.L_Q[ch]; i++) {
-    //this.bs_df_noise[ch][i] = ld.readBit();
+    //this.bs_df_noise[ch,i] = ld.readBit();
     //}
     //}
 
-    ///* table 9 */
+    // table 9 */
     //private void invf_mode(BitStream ld, int ch) throws AACException {
     //int n;
 
     //for(n = 0; n<this.N_Q; n++) {
-    //this.bs_invf_mode[ch][n] = ld.readBits(2);
+    //this.bs_invf_mode[ch,n] = ld.readBits(2);
     //}
     //}
 
@@ -881,7 +881,7 @@ namespace MultiWaveDecoder
     //}
     //ret = ps.decode(ld);
 
-    ///* enable PS if and only if: a header has been decoded */
+    // enable PS if and only if: a header has been decoded */
     //if(!ps_used&&ps.header_read) {
     //this.ps_used = true;
     //}
@@ -897,20 +897,20 @@ namespace MultiWaveDecoder
     //}
     //}
 
-    ///* table 12 */
+    // table 12 */
     //private void sinusoidal_coding(BitStream ld, int ch) throws AACException {
     //int n;
 
     //for(n = 0; n<this.N_high; n++) {
-    //this.bs_add_harmonic[ch][n] = ld.readBit();
+    //this.bs_add_harmonic[ch,n] = ld.readBit();
     //}
     //}
-    ///* table 10 */
+    // table 10 */
 
     //private void sbr_envelope(BitStream ld, int ch) throws AACException {
     //int env, band;
     //int delta = 0;
-    //int[][] t_huff, f_huff;
+    //int[,] t_huff, f_huff;
 
     //if((this.L_E[ch]==1)&&(this.bs_frame_class[ch]==FIXFIX))
     //this.amp_res[ch] = false;
@@ -941,32 +941,32 @@ namespace MultiWaveDecoder
     //}
 
     //for(env = 0; env<this.L_E[ch]; env++) {
-    //if(this.bs_df_env[ch][env]==0) {
+    //if(this.bs_df_env[ch,env]==0) {
     //if(this.bs_coupling&&(ch==1)) {
     //if(this.amp_res[ch]) {
-    //  this.E[ch][0][env] = ld.readBits(5)<<delta;
+    //  this.E[ch,0,env] = ld.readBits(5)<<delta;
     //}
     //else {
-    //  this.E[ch][0][env] = ld.readBits(6)<<delta;
+    //  this.E[ch,0,env] = ld.readBits(6)<<delta;
     //}
     //}
     //else {
     //if(this.amp_res[ch]) {
-    //  this.E[ch][0][env] = ld.readBits(6)<<delta;
+    //  this.E[ch,0,env] = ld.readBits(6)<<delta;
     //}
     //else {
-    //  this.E[ch][0][env] = ld.readBits(7)<<delta;
+    //  this.E[ch,0,env] = ld.readBits(7)<<delta;
     //}
     //}
 
-    //for(band = 1; band<this.n[this.f[ch][env]]; band++) {
-    //this.E[ch][band][env] = (decodeHuffman(ld, f_huff)<<delta);
+    //for(band = 1; band<this.n[this.f[ch,env]]; band++) {
+    //this.E[ch,band,env] = (decodeHuffman(ld, f_huff)<<delta);
     //}
 
     //}
     //else {
-    //for(band = 0; band<this.n[this.f[ch][env]]; band++) {
-    //this.E[ch][band][env] = (decodeHuffman(ld, t_huff)<<delta);
+    //for(band = 0; band<this.n[this.f[ch,env]]; band++) {
+    //this.E[ch,band,env] = (decodeHuffman(ld, t_huff)<<delta);
     //}
     //}
     //}
@@ -974,11 +974,11 @@ namespace MultiWaveDecoder
     //NoiseEnvelope.extract_envelope_data(this, ch);
     //}
 
-    ///* table 11 */
+    // table 11 */
     //private void sbr_noise(BitStream ld, int ch) throws AACException {
     //int noise, band;
     //int delta = 0;
-    //int[][] t_huff, f_huff;
+    //int[,] t_huff, f_huff;
 
     //if(this.bs_coupling&&(ch==1)) {
     //delta = 1;
@@ -992,20 +992,20 @@ namespace MultiWaveDecoder
     //}
 
     //for(noise = 0; noise<this.L_Q[ch]; noise++) {
-    //if(this.bs_df_noise[ch][noise]==0) {
+    //if(this.bs_df_noise[ch,noise]==0) {
     //if(this.bs_coupling&&(ch==1)) {
-    //this.Q[ch][0][noise] = ld.readBits(5)<<delta;
+    //this.Q[ch,0,noise] = ld.readBits(5)<<delta;
     //}
     //else {
-    //this.Q[ch][0][noise] = ld.readBits(5)<<delta;
+    //this.Q[ch,0,noise] = ld.readBits(5)<<delta;
     //}
     //for(band = 1; band<this.N_Q; band++) {
-    //this.Q[ch][band][noise] = (decodeHuffman(ld, f_huff)<<delta);
+    //this.Q[ch,band,noise] = (decodeHuffman(ld, f_huff)<<delta);
     //}
     //}
     //else {
     //for(band = 0; band<this.N_Q; band++) {
-    //this.Q[ch][band][noise] = (decodeHuffman(ld, t_huff)<<delta);
+    //this.Q[ch,band,noise] = (decodeHuffman(ld, t_huff)<<delta);
     //}
     //}
     //}
@@ -1013,13 +1013,13 @@ namespace MultiWaveDecoder
     //NoiseEnvelope.extract_noise_floor_data(this, ch);
     //}
 
-    //private int decodeHuffman(BitStream ld, int[][] t_huff) throws AACException {
+    //private int decodeHuffman(BitStream ld, int[,] t_huff) throws AACException {
     //int bit;
     //int index = 0;
 
     //while(index>=0) {
     //bit = ld.readBit();
-    //index = t_huff[index][bit];
+    //index = t_huff[index,bit];
     //}
 
     //return index+64;
@@ -1028,25 +1028,25 @@ namespace MultiWaveDecoder
     //private int sbr_save_prev_data(int ch) {
     //int i;
 
-    ///* save data for next frame */
+    // save data for next frame */
     //this.kx_prev = this.kx;
     //this.M_prev = this.M;
     //this.bsco_prev = this.bsco;
 
     //this.L_E_prev[ch] = this.L_E[ch];
 
-    ///* sbr.L_E[ch] can become 0 on files with bit errors */
+    // sbr.L_E[ch] can become 0 on files with bit errors */
     //if(this.L_E[ch]<=0)
     //return 19;
 
-    //this.f_prev[ch] = this.f[ch][this.L_E[ch]-1];
+    //this.f_prev[ch] = this.f[ch,this.L_E[ch]-1];
     //for(i = 0; i<MAX_M; i++) {
-    //this.E_prev[ch][i] = this.E[ch][i][this.L_E[ch]-1];
-    //this.Q_prev[ch][i] = this.Q[ch][i][this.L_Q[ch]-1];
+    //this.E_prev[ch,i] = this.E[ch,i,this.L_E[ch]-1];
+    //this.Q_prev[ch,i] = this.Q[ch,i,this.L_Q[ch]-1];
     //}
 
     //for(i = 0; i<MAX_M; i++) {
-    //this.bs_add_harmonic_prev[ch][i] = this.bs_add_harmonic[ch][i];
+    //this.bs_add_harmonic_prev[ch,i] = this.bs_add_harmonic[ch,i];
     //}
     //this.bs_add_harmonic_flag_prev[ch] = this.bs_add_harmonic_flag[ch];
 
@@ -1063,38 +1063,38 @@ namespace MultiWaveDecoder
 
     //for(i = 0; i<this.tHFGen; i++) {
     //for(int j = 0; j<64; j++) {
-    //Xsbr[ch][i][j][0] = Xsbr[ch][i+numTimeSlotsRate][j][0];
-    //Xsbr[ch][i][j][1] = Xsbr[ch][i+numTimeSlotsRate][j][1];
+    //Xsbr[ch,i,j,0] = Xsbr[ch,i+numTimeSlotsRate,j,0];
+    //Xsbr[ch,i,j,1] = Xsbr[ch,i+numTimeSlotsRate,j,1];
     //}
     //}
     //for(i = this.tHFGen; i<MAX_NTSRHFG; i++) {
     //for(int j = 0; j<64; j++) {
-    //Xsbr[ch][i][j][0] = 0;
-    //Xsbr[ch][i][j][1] = 0;
+    //Xsbr[ch,i,j,0] = 0;
+    //Xsbr[ch,i,j,1] = 0;
     //}
     //}
     //}
 
-    //private int sbr_process_channel(float[] channel_buf, float[][][] X,
+    //private int sbr_process_channel(float[] channel_buf, float[,,] X,
     //int ch, bool dont_process) {
     //int k, l;
     //int ret = 0;
 
     //this.bsco = 0;
 
-    ///* subband analysis */
+    // subband analysis */
     //if(dont_process)
     //qmfa[ch].sbr_qmf_analysis_32(this, channel_buf, this.Xsbr[ch], this.tHFGen, 32);
     //else
     //qmfa[ch].sbr_qmf_analysis_32(this, channel_buf, this.Xsbr[ch], this.tHFGen, this.kx);
 
     //if(!dont_process) {
-    ///* insert high frequencies here */
-    ///* hf generation using patching */
+    // insert high frequencies here */
+    // hf generation using patching */
     //HFGeneration.hf_generation(this, this.Xsbr[ch], this.Xsbr[ch], ch);
 
 
-    ///* hf adjustment */
+    // hf adjustment */
     //ret = HFAdjustment.hf_adjustment(this, this.Xsbr[ch], ch);
     //if(ret>0) {
     //dont_process = true;
@@ -1104,12 +1104,12 @@ namespace MultiWaveDecoder
     //if(this.just_seeked||dont_process) {
     //for(l = 0; l<this.numTimeSlotsRate; l++) {
     //for(k = 0; k<32; k++) {
-    //X[l][k][0] = this.Xsbr[ch][l+this.tHFAdj][k][0];
-    //X[l][k][1] = this.Xsbr[ch][l+this.tHFAdj][k][1];
+    //X[l,k,0] = this.Xsbr[ch,l+this.tHFAdj,k,0];
+    //X[l,k,1] = this.Xsbr[ch,l+this.tHFAdj,k,1];
     //}
     //for(k = 32; k<64; k++) {
-    //X[l][k][0] = 0;
-    //X[l][k][1] = 0;
+    //X[l,k,0] = 0;
+    //X[l,k,1] = 0;
     //}
     //}
     //}
@@ -1117,7 +1117,7 @@ namespace MultiWaveDecoder
     //for(l = 0; l<this.numTimeSlotsRate; l++) {
     //int kx_band, M_band, bsco_band;
 
-    //if(l<this.t_E[ch][0]) {
+    //if(l<this.t_E[ch,0]) {
     //kx_band = this.kx_prev;
     //M_band = this.M_prev;
     //bsco_band = this.bsco_prev;
@@ -1129,16 +1129,16 @@ namespace MultiWaveDecoder
     //}
 
     //for(k = 0; k<kx_band+bsco_band; k++) {
-    //X[l][k][0] = this.Xsbr[ch][l+this.tHFAdj][k][0];
-    //X[l][k][1] = this.Xsbr[ch][l+this.tHFAdj][k][1];
+    //X[l,k,0] = this.Xsbr[ch,l+this.tHFAdj,k,0];
+    //X[l,k,1] = this.Xsbr[ch,l+this.tHFAdj,k,1];
     //}
     //for(k = kx_band+bsco_band; k<kx_band+M_band; k++) {
-    //X[l][k][0] = this.Xsbr[ch][l+this.tHFAdj][k][0];
-    //X[l][k][1] = this.Xsbr[ch][l+this.tHFAdj][k][1];
+    //X[l,k,0] = this.Xsbr[ch,l+this.tHFAdj,k,0];
+    //X[l,k,1] = this.Xsbr[ch,l+this.tHFAdj,k,1];
     //}
     //for(k = Math.max(kx_band+bsco_band, kx_band+M_band); k<64; k++) {
-    //X[l][k][0] = 0;
-    //X[l][k][1] = 0;
+    //X[l,k,0] = 0;
+    //X[l,k,1] = 0;
     //}
     //}
     //}
@@ -1150,16 +1150,16 @@ namespace MultiWaveDecoder
     //bool just_seeked) {
     //bool dont_process = false;
     //int ret = 0;
-    //float[][][] X = new float[MAX_NTSR][64][2];
+    //float[,,] X = new float[MAX_NTSR,64,2];
 
-    ///* case can occur due to bit errors */
+    // case can occur due to bit errors */
     //if(!stereo) return 21;
 
     //if(this.ret!=0||(this.header_count==0)) {
-    ///* don't process just upsample */
+    // don't process just upsample */
     //dont_process = true;
 
-    ///* Re-activate reset for next frame */
+    // Re-activate reset for next frame */
     //if(this.ret!=0&&this.Reset)
     //this.bs_start_freq_prev = -1;
     //}
@@ -1172,7 +1172,7 @@ namespace MultiWaveDecoder
     //}
 
     //this.ret += sbr_process_channel(left_chan, X, 0, dont_process);
-    ///* subband synthesis */
+    // subband synthesis */
     //if(downSampledSBR) {
     //qmfs[0].sbr_qmf_synthesis_32(this, X, left_chan);
     //}
@@ -1181,7 +1181,7 @@ namespace MultiWaveDecoder
     //}
 
     //this.ret += sbr_process_channel(right_chan, X, 1, dont_process);
-    ///* subband synthesis */
+    // subband synthesis */
     //if(downSampledSBR) {
     //qmfs[1].sbr_qmf_synthesis_32(this, X, right_chan);
     //}
@@ -1211,16 +1211,16 @@ namespace MultiWaveDecoder
     //bool just_seeked) {
     //bool dont_process = false;
     //int ret = 0;
-    //float[][][] X = new float[MAX_NTSR][64][2];
+    //float[,,] X = new float[MAX_NTSR,64,2];
 
-    ///* case can occur due to bit errors */
+    // case can occur due to bit errors */
     //if(stereo) return 21;
 
     //if(this.ret!=0||(this.header_count==0)) {
-    ///* don't process just upsample */
+    // don't process just upsample */
     //dont_process = true;
 
-    ///* Re-activate reset for next frame */
+    // Re-activate reset for next frame */
     //if(this.ret!=0&&this.Reset)
     //this.bs_start_freq_prev = -1;
     //}
@@ -1233,7 +1233,7 @@ namespace MultiWaveDecoder
     //}
 
     //this.ret += sbr_process_channel(channel, X, 0, dont_process);
-    ///* subband synthesis */
+    // subband synthesis */
     //if(downSampledSBR) {
     //qmfs[0].sbr_qmf_synthesis_32(this, X, channel);
     //}
@@ -1261,17 +1261,17 @@ namespace MultiWaveDecoder
     //int l, k;
     //bool dont_process = false;
     //int ret = 0;
-    //float[][][] X_left = new float[38][64][2];
-    //float[][][] X_right = new float[38][64][2];
+    //float[,,] X_left = new float[38,64,2];
+    //float[,,] X_right = new float[38,64,2];
 
-    ///* case can occur due to bit errors */
+    // case can occur due to bit errors */
     //if(stereo) return 21;
 
     //if(this.ret!=0||(this.header_count==0)) {
-    ///* don't process just upsample */
+    // don't process just upsample */
     //dont_process = true;
 
-    ///* Re-activate reset for next frame */
+    // Re-activate reset for next frame */
     //if(this.ret!=0&&this.Reset)
     //this.bs_start_freq_prev = -1;
     //}
@@ -1289,18 +1289,18 @@ namespace MultiWaveDecoder
 
     //this.ret += sbr_process_channel(left_channel, X_left, 0, dont_process);
 
-    ///* copy some extra data for PS */
+    // copy some extra data for PS */
     //for(l = this.numTimeSlotsRate; l<this.numTimeSlotsRate+6; l++) {
     //for(k = 0; k<5; k++) {
-    //X_left[l][k][0] = this.Xsbr[0][this.tHFAdj+l][k][0];
-    //X_left[l][k][1] = this.Xsbr[0][this.tHFAdj+l][k][1];
+    //X_left[l,k,0] = this.Xsbr[0,this.tHFAdj+l,k,0];
+    //X_left[l,k,1] = this.Xsbr[0,this.tHFAdj+l,k,1];
     //}
     //}
 
-    ///* perform parametric stereo */
+    // perform parametric stereo */
     //ps.process(X_left, X_right);
 
-    ///* subband synthesis */
+    // subband synthesis */
     //if(downSampledSBR) {
     //qmfs[0].sbr_qmf_synthesis_32(this, X_left, left_channel);
     //qmfs[1].sbr_qmf_synthesis_32(this, X_right, right_channel);

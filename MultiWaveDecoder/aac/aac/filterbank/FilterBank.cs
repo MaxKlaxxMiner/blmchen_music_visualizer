@@ -1,6 +1,6 @@
-﻿using System;
-// ReSharper disable InconsistentNaming
+﻿// ReSharper disable InconsistentNaming
 // ReSharper disable NotAccessedField.Local
+// ReSharper disable PrivateFieldCanBeConvertedToLocalVariable
 
 namespace MultiWaveDecoder
 {
@@ -10,10 +10,12 @@ namespace MultiWaveDecoder
 
     float[][] LONG_WINDOWS; // = {SINE_LONG, KBD_LONG};
     float[][] SHORT_WINDOWS; // = {SINE_SHORT, KBD_SHORT};
-    int length, shortLen, mid, trans;
+    readonly int length;
+    readonly int shortLen;
+    int mid, trans;
     MDCT mdctShort, mdctLong;
     float[] buf;
-    float[][] overlaps;
+    float[,] overlaps;
 
     public FilterBank(bool smallFrames, int channels)
     {
@@ -37,7 +39,7 @@ namespace MultiWaveDecoder
       mdctShort = new MDCT(shortLen * 2);
       mdctLong = new MDCT(length * 2);
 
-      overlaps = Fill<float>(channels, length);
+      overlaps = new float[channels, length];
       buf = new float[2 * length];
     }
 
@@ -49,19 +51,19 @@ namespace MultiWaveDecoder
     //mdctLong.process(in, 0, buf, 0);
     ////add second half output of previous frame to windowed output of current frame
     //for(i = 0; i<length; i++) {
-    //out[i] = overlap[i]+(buf[i]*LONG_WINDOWS[windowShapePrev][i]);
+    //out[i] = overlap[i]+(buf[i]*LONG_WINDOWS[windowShapePrev,i]);
     //}
 
     ////window the second half and save as overlap for next frame
     //for(i = 0; i<length; i++) {
-    //overlap[i] = buf[length+i]*LONG_WINDOWS[windowShape][length-1-i];
+    //overlap[i] = buf[length+i]*LONG_WINDOWS[windowShape,length-1-i];
     //}
     //break;
     //case LONG_START_SEQUENCE:
     //mdctLong.process(in, 0, buf, 0);
     ////add second half output of previous frame to windowed output of current frame
     //for(i = 0; i<length; i++) {
-    //out[i] = overlap[i]+(buf[i]*LONG_WINDOWS[windowShapePrev][i]);
+    //out[i] = overlap[i]+(buf[i]*LONG_WINDOWS[windowShapePrev,i]);
     //}
 
     ////window the second half and save as overlap for next frame
@@ -69,7 +71,7 @@ namespace MultiWaveDecoder
     //overlap[i] = buf[length+i];
     //}
     //for(i = 0; i<shortLen; i++) {
-    //overlap[mid+i] = buf[length+mid+i]*SHORT_WINDOWS[windowShape][shortLen-i-1];
+    //overlap[mid+i] = buf[length+mid+i]*SHORT_WINDOWS[windowShape,shortLen-i-1];
     //}
     //for(i = 0; i<mid; i++) {
     //overlap[mid+shortLen+i] = 0;
@@ -85,20 +87,20 @@ namespace MultiWaveDecoder
     //out[i] = overlap[i];
     //}
     //for(i = 0; i<shortLen; i++) {
-    //out[mid+i] = overlap[mid+i]+(buf[i]*SHORT_WINDOWS[windowShapePrev][i]);
-    //out[mid+1*shortLen+i] = overlap[mid+shortLen*1+i]+(buf[shortLen*1+i]*SHORT_WINDOWS[windowShape][shortLen-1-i])+(buf[shortLen*2+i]*SHORT_WINDOWS[windowShape][i]);
-    //out[mid+2*shortLen+i] = overlap[mid+shortLen*2+i]+(buf[shortLen*3+i]*SHORT_WINDOWS[windowShape][shortLen-1-i])+(buf[shortLen*4+i]*SHORT_WINDOWS[windowShape][i]);
-    //out[mid+3*shortLen+i] = overlap[mid+shortLen*3+i]+(buf[shortLen*5+i]*SHORT_WINDOWS[windowShape][shortLen-1-i])+(buf[shortLen*6+i]*SHORT_WINDOWS[windowShape][i]);
-    //if(i<trans) out[mid+4*shortLen+i] = overlap[mid+shortLen*4+i]+(buf[shortLen*7+i]*SHORT_WINDOWS[windowShape][shortLen-1-i])+(buf[shortLen*8+i]*SHORT_WINDOWS[windowShape][i]);
+    //out[mid+i] = overlap[mid+i]+(buf[i]*SHORT_WINDOWS[windowShapePrev,i]);
+    //out[mid+1*shortLen+i] = overlap[mid+shortLen*1+i]+(buf[shortLen*1+i]*SHORT_WINDOWS[windowShape,shortLen-1-i])+(buf[shortLen*2+i]*SHORT_WINDOWS[windowShape,i]);
+    //out[mid+2*shortLen+i] = overlap[mid+shortLen*2+i]+(buf[shortLen*3+i]*SHORT_WINDOWS[windowShape,shortLen-1-i])+(buf[shortLen*4+i]*SHORT_WINDOWS[windowShape,i]);
+    //out[mid+3*shortLen+i] = overlap[mid+shortLen*3+i]+(buf[shortLen*5+i]*SHORT_WINDOWS[windowShape,shortLen-1-i])+(buf[shortLen*6+i]*SHORT_WINDOWS[windowShape,i]);
+    //if(i<trans) out[mid+4*shortLen+i] = overlap[mid+shortLen*4+i]+(buf[shortLen*7+i]*SHORT_WINDOWS[windowShape,shortLen-1-i])+(buf[shortLen*8+i]*SHORT_WINDOWS[windowShape,i]);
     //}
 
     ////window the second half and save as overlap for next frame
     //for(i = 0; i<shortLen; i++) {
-    //if(i>=trans) overlap[mid+4*shortLen+i-length] = (buf[shortLen*7+i]*SHORT_WINDOWS[windowShape][shortLen-1-i])+(buf[shortLen*8+i]*SHORT_WINDOWS[windowShape][i]);
-    //overlap[mid+5*shortLen+i-length] = (buf[shortLen*9+i]*SHORT_WINDOWS[windowShape][shortLen-1-i])+(buf[shortLen*10+i]*SHORT_WINDOWS[windowShape][i]);
-    //overlap[mid+6*shortLen+i-length] = (buf[shortLen*11+i]*SHORT_WINDOWS[windowShape][shortLen-1-i])+(buf[shortLen*12+i]*SHORT_WINDOWS[windowShape][i]);
-    //overlap[mid+7*shortLen+i-length] = (buf[shortLen*13+i]*SHORT_WINDOWS[windowShape][shortLen-1-i])+(buf[shortLen*14+i]*SHORT_WINDOWS[windowShape][i]);
-    //overlap[mid+8*shortLen+i-length] = (buf[shortLen*15+i]*SHORT_WINDOWS[windowShape][shortLen-1-i]);
+    //if(i>=trans) overlap[mid+4*shortLen+i-length] = (buf[shortLen*7+i]*SHORT_WINDOWS[windowShape,shortLen-1-i])+(buf[shortLen*8+i]*SHORT_WINDOWS[windowShape,i]);
+    //overlap[mid+5*shortLen+i-length] = (buf[shortLen*9+i]*SHORT_WINDOWS[windowShape,shortLen-1-i])+(buf[shortLen*10+i]*SHORT_WINDOWS[windowShape,i]);
+    //overlap[mid+6*shortLen+i-length] = (buf[shortLen*11+i]*SHORT_WINDOWS[windowShape,shortLen-1-i])+(buf[shortLen*12+i]*SHORT_WINDOWS[windowShape,i]);
+    //overlap[mid+7*shortLen+i-length] = (buf[shortLen*13+i]*SHORT_WINDOWS[windowShape,shortLen-1-i])+(buf[shortLen*14+i]*SHORT_WINDOWS[windowShape,i]);
+    //overlap[mid+8*shortLen+i-length] = (buf[shortLen*15+i]*SHORT_WINDOWS[windowShape,shortLen-1-i]);
     //}
     //for(i = 0; i<mid; i++) {
     //overlap[mid+shortLen+i] = 0;
@@ -112,14 +114,14 @@ namespace MultiWaveDecoder
     //out[i] = overlap[i];
     //}
     //for(i = 0; i<shortLen; i++) {
-    //out[mid+i] = overlap[mid+i]+(buf[mid+i]*SHORT_WINDOWS[windowShapePrev][i]);
+    //out[mid+i] = overlap[mid+i]+(buf[mid+i]*SHORT_WINDOWS[windowShapePrev,i]);
     //}
     //for(i = 0; i<mid; i++) {
     //out[mid+shortLen+i] = overlap[mid+shortLen+i]+buf[mid+shortLen+i];
     //}
     ////window the second half and save as overlap for next frame
     //for(i = 0; i<length; i++) {
-    //overlap[i] = buf[length+i]*LONG_WINDOWS[windowShape][length-1-i];
+    //overlap[i] = buf[length+i]*LONG_WINDOWS[windowShape,length-1-i];
     //}
     //break;
     //}
@@ -132,20 +134,20 @@ namespace MultiWaveDecoder
     //switch(windowSequence) {
     //case ONLY_LONG_SEQUENCE:
     //for(i = length-1; i>=0; i--) {
-    //buf[i] = in[i]*LONG_WINDOWS[windowShapePrev][i];
-    //buf[i+length] = in[i+length]*LONG_WINDOWS[windowShape][length-1-i];
+    //buf[i] = in[i]*LONG_WINDOWS[windowShapePrev,i];
+    //buf[i+length] = in[i+length]*LONG_WINDOWS[windowShape,length-1-i];
     //}
     //break;
 
     //case LONG_START_SEQUENCE:
     //for(i = 0; i<length; i++) {
-    //buf[i] = in[i]*LONG_WINDOWS[windowShapePrev][i];
+    //buf[i] = in[i]*LONG_WINDOWS[windowShapePrev,i];
     //}
     //for(i = 0; i<mid; i++) {
     //buf[i+length] = in[i+length];
     //}
     //for(i = 0; i<shortLen; i++) {
-    //buf[i+length+mid] = in[i+length+mid]*SHORT_WINDOWS[windowShape][shortLen-1-i];
+    //buf[i+length+mid] = in[i+length+mid]*SHORT_WINDOWS[windowShape,shortLen-1-i];
     //}
     //for(i = 0; i<mid; i++) {
     //buf[i+length+mid+shortLen] = 0;
@@ -157,13 +159,13 @@ namespace MultiWaveDecoder
     //buf[i] = 0;
     //}
     //for(i = 0; i<shortLen; i++) {
-    //buf[i+mid] = in[i+mid]*SHORT_WINDOWS[windowShapePrev][i];
+    //buf[i+mid] = in[i+mid]*SHORT_WINDOWS[windowShapePrev,i];
     //}
     //for(i = 0; i<mid; i++) {
     //buf[i+mid+shortLen] = in[i+mid+shortLen];
     //}
     //for(i = 0; i<length; i++) {
-    //buf[i+length] = in[i+length]*LONG_WINDOWS[windowShape][length-1-i];
+    //buf[i+length] = in[i+length]*LONG_WINDOWS[windowShape,length-1-i];
     //}
     //break;
     //}
