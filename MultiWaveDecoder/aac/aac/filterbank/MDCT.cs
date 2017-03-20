@@ -1166,8 +1166,6 @@ namespace MultiWaveDecoder
       fft = new FFT(N4);
       buf = new float[N4, 2];
       tmp = new float[2];
-
-      throw new NotImplementedException();
     }
 
 

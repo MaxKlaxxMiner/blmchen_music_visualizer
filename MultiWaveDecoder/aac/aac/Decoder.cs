@@ -13,7 +13,7 @@ namespace MultiWaveDecoder
     readonly DecoderConfig config;
     SyntacticElements syntacticElements;
     FilterBank filterBank;
-    // BitStream inStream;
+    readonly BitStream inStream = new BitStream();
     // ADIFHeader adifHeader;
 
     /// <summary>
@@ -43,12 +43,9 @@ namespace MultiWaveDecoder
       syntacticElements = new SyntacticElements(config);
       filterBank = new FilterBank(config.isSmallFrameUsed(), (int)config.getChannelConfiguration());
 
-      //in = new BitStream();
-
-      //LOGGER.log(Level.FINE, "profile: {0}", config.getProfile());
-      //LOGGER.log(Level.FINE, "sf: {0}", config.getSampleFrequency().getFrequency());
-      //LOGGER.log(Level.FINE, "channels: {0}", config.getChannelConfiguration().getDescription());
-      throw new NotImplementedException();
+      Logger.LogInfo(string.Format("profile: {0}", config.getProfile()));
+      Logger.LogInfo(string.Format("sf: {0}", config.getSampleFrequency().getFrequency()));
+      Logger.LogInfo(string.Format("channels: {0}", config.getChannelConfiguration()));
     }
 
     //public DecoderConfig getConfig() {

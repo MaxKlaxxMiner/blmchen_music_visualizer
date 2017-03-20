@@ -31,6 +31,10 @@ namespace MultiWaveDecoder
     /// </summary>
     protected int position;
 
+    public BitStream()
+    {
+    }
+
     public BitStream(byte[] data)
     {
       setData(data);
