@@ -64,6 +64,7 @@
     <Compile Include="aac\aac\syntax\Element.cs" />
     <Compile Include="aac\aac\syntax\PCE.cs" />
     <Compile Include="aac\aac\syntax\SyntacticElements.cs" />
+    <Compile Include="aac\aac\transport\ADIFHeader.cs" />
     <Compile Include="aac\Main.cs" />
     <Compile Include="aac\mp4\api\Artwork.cs" />
     <Compile Include="aac\mp4\api\AudioTrack.cs" />
@@ -187,7 +188,6 @@
     <Content Include="jaad\aac\tools\MSMask.java" />
     <Content Include="jaad\aac\tools\TNS.java" />
     <Content Include="jaad\aac\tools\TNSTables.java" />
-    <Content Include="jaad\aac\transport\ADIFHeader.java" />
     <Content Include="jaad\adts\ADTSDemultiplexer.java" />
     <Content Include="jaad\adts\ADTSFrame.java" />
     <Content Include="jaad\MP4Info.java" />
