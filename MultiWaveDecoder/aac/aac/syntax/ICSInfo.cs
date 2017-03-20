@@ -1,6 +1,7 @@
 ﻿// ReSharper disable InconsistentNaming
 
 using System;
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace MultiWaveDecoder
 {
@@ -8,102 +9,90 @@ namespace MultiWaveDecoder
   {
     //public class ICSInfo implements Constants, ScaleFactorBands {
 
-    //  public static int WINDOW_SHAPE_SINE = 0;
-    //  public static int WINDOW_SHAPE_KAISER = 1;
-    //  public static int PREVIOUS = 0;
-    //  public static int CURRENT = 1;
+    public static int WINDOW_SHAPE_SINE = 0;
+    public static int WINDOW_SHAPE_KAISER = 1;
+    public static int PREVIOUS = 0;
+    public static int CURRENT = 1;
 
-    //  public static enum WindowSequence {
+    public enum WindowSequence
+    {
+      ONLY_LONG_SEQUENCE = 0,
+      LONG_START_SEQUENCE = 1,
+      EIGHT_SHORT_SEQUENCE = 2,
+      LONG_STOP_SEQUENCE = 3
+    }
 
-    //    ONLY_LONG_SEQUENCE,
-    //    LONG_START_SEQUENCE,
-    //    EIGHT_SHORT_SEQUENCE,
-    //    LONG_STOP_SEQUENCE;
+    int frameLength;
+    WindowSequence windowSequence;
+    int[] windowShape;
+    int maxSFB;
 
-    //    public static WindowSequence forInt(int i) throws AACException {
-    //      WindowSequence w;
-    //      switch(i) {
-    //        case 0:
-    //          w = ONLY_LONG_SEQUENCE;
-    //          break;
-    //        case 1:
-    //          w = LONG_START_SEQUENCE;
-    //          break;
-    //        case 2:
-    //          w = EIGHT_SHORT_SEQUENCE;
-    //          break;
-    //        case 3:
-    //          w = LONG_STOP_SEQUENCE;
-    //          break;
-    //        default:
-    //          throw new AACException("unknown window sequence type");
-    //      }
-    //      return w;
-    //    }
-    //  }
-    //  private int frameLength;
-    //  private WindowSequence windowSequence;
-    //  private int[] windowShape;
-    //  private int maxSFB;
-    //  //prediction
-    //  private bool predictionDataPresent;
-    //  private ICPrediction icPredict;
-    //  bool ltpData1Present, ltpData2Present;
-    //  private LTPrediction ltPredict1, ltPredict2;
-    //  //windows/sfbs
-    //  private int windowCount;
-    //  private int windowGroupCount;
-    //  private int[] windowGroupLength;
-    //  private int swbCount;
-    //  private int[] swbOffsets;
+    // prediction
+    bool predictionDataPresent;
+    //ICPrediction icPredict;
+    bool ltpData1Present, ltpData2Present;
+    //LTPrediction ltPredict1, ltPredict2;
+
+    // windows/sfbs
+    int windowCount;
+    int windowGroupCount;
+    int[] windowGroupLength;
+    int swbCount;
+    int[] swbOffsets;
 
     public ICSInfo(int frameLength)
     {
-      throw new NotImplementedException();
-      //this.frameLength = frameLength;
-      //windowShape = new int[2];
-      //windowSequence = WindowSequence.ONLY_LONG_SEQUENCE;
-      //windowGroupLength = new int[MAX_WINDOW_GROUP_COUNT];
-      //ltpData1Present = false;
-      //ltpData2Present = false;
+      this.frameLength = frameLength;
+      windowShape = new int[2];
+      windowSequence = WindowSequence.ONLY_LONG_SEQUENCE;
+      windowGroupLength = new int[MAX_WINDOW_GROUP_COUNT];
+      ltpData1Present = false;
+      ltpData2Present = false;
     }
 
-    //  /* ========== decoding ========== */
-    //  public void decode(BitStream in, DecoderConfig conf, bool commonWindow) throws AACException {
-    //    SampleFrequency sf = conf.getSampleFrequency();
-    //    if(sf.equals(SampleFrequency.SAMPLE_FREQUENCY_NONE)) throw new AACException("invalid sample frequency");
+    // --- ========== decoding ========== ---
+    public void decode(BitStream inStream, DecoderConfig conf, bool commonWindow)
+    {
+      var sf = conf.getSampleFrequency();
+      if (sf.getIndex() == -1) throw new AACException("invalid sample frequency");
 
-    //    in.skipBit(); //reserved
-    //    windowSequence = WindowSequence.forInt(in.readBits(2));
-    //    windowShape[PREVIOUS] = windowShape[CURRENT];
-    //    windowShape[CURRENT] = in.readBit();
+      inStream.skipBit(); //reserved
+      windowSequence = (WindowSequence)inStream.readBits(2);
+      windowShape[PREVIOUS] = windowShape[CURRENT];
+      windowShape[CURRENT] = inStream.readBit();
 
-    //    windowGroupCount = 1;
-    //    windowGroupLength[0] = 1;
-    //    if(windowSequence.equals(WindowSequence.EIGHT_SHORT_SEQUENCE)) {
-    //      maxSFB = in.readBits(4);
-    //      int i;
-    //      for(i = 0; i<7; i++) {
-    //        if(in.readBool()) windowGroupLength[windowGroupCount-1]++;
-    //        else {
-    //          windowGroupCount++;
-    //          windowGroupLength[windowGroupCount-1] = 1;
-    //        }
-    //      }
-    //      windowCount = 8;
-    //      swbOffsets = SWB_OFFSET_SHORT_WINDOW[sf.getIndex()];
-    //      swbCount = SWB_SHORT_WINDOW_COUNT[sf.getIndex()];
-    //      predictionDataPresent = false;
-    //    }
-    //    else {
-    //      maxSFB = in.readBits(6);
-    //      windowCount = 1;
-    //      swbOffsets = SWB_OFFSET_LONG_WINDOW[sf.getIndex()];
-    //      swbCount = SWB_LONG_WINDOW_COUNT[sf.getIndex()];
-    //      predictionDataPresent = in.readBool();
-    //      if(predictionDataPresent) readPredictionData(in, conf.getProfile(), sf, commonWindow);
-    //    }
-    //  }
+      windowGroupCount = 1;
+      windowGroupLength[0] = 1;
+      if (windowSequence == WindowSequence.EIGHT_SHORT_SEQUENCE)
+      {
+        maxSFB = inStream.readBits(4);
+        int i;
+        for (i = 0; i < 7; i++)
+        {
+          if (inStream.readBool()) windowGroupLength[windowGroupCount - 1]++;
+          else
+          {
+            windowGroupCount++;
+            windowGroupLength[windowGroupCount - 1] = 1;
+          }
+        }
+        windowCount = 8;
+        throw new NotImplementedException();
+        //swbOffsets = SWB_OFFSET_SHORT_WINDOW[sf.getIndex()];
+        //swbCount = SWB_SHORT_WINDOW_COUNT[sf.getIndex()];
+        predictionDataPresent = false;
+      }
+      else
+      {
+        maxSFB = inStream.readBits(6);
+        windowCount = 1;
+        throw new NotImplementedException();
+        //swbOffsets = SWB_OFFSET_LONG_WINDOW[sf.getIndex()];
+        //swbCount = SWB_LONG_WINDOW_COUNT[sf.getIndex()];
+        //predictionDataPresent = inStream.readBool();
+        //if (predictionDataPresent) readPredictionData(inStream, conf.getProfile(), sf, commonWindow);
+      }
+    }
 
     //  private void readPredictionData(BitStream in, Profile profile, SampleFrequency sf, bool commonWindow) throws AACException {
     //    switch(profile) {

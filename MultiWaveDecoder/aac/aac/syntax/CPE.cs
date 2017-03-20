@@ -27,33 +27,34 @@ namespace MultiWaveDecoder
 
       commonWindow = inStream.readBool();
 
-      throw new NotImplementedException();
-      //ICSInfo info = icsL.getInfo();
-      //if (commonWindow)
-      //{
-      //  info.decode(inStream, conf, commonWindow);
-      //  icsR.getInfo().setData(info);
+      var info = icsL.getInfo();
+      if (commonWindow)
+      {
+        info.decode(inStream, conf, commonWindow);
+        throw new NotImplementedException();
+        //icsR.getInfo().setData(info);
 
-      //  msMask = MSMask.forInt(inStream.readBits(2));
-      //  if (msMask.equals(MSMask.TYPE_USED))
-      //  {
-      //    int maxSFB = info.getMaxSFB();
-      //    int windowGroupCount = info.getWindowGroupCount();
+        //msMask = MSMask.forInt(inStream.readBits(2));
+        //if (msMask.equals(MSMask.TYPE_USED))
+        //{
+        //  int maxSFB = info.getMaxSFB();
+        //  int windowGroupCount = info.getWindowGroupCount();
 
-      //    for (int idx = 0; idx < windowGroupCount * maxSFB; idx++)
-      //    {
-      //      msUsed[idx] = inStream.readBool();
-      //    }
-      //  }
-      //  else if (msMask.equals(MSMask.TYPE_ALL_1)) Arrays.fill(msUsed, true);
-      //  else if (msMask.equals(MSMask.TYPE_ALL_0)) Arrays.fill(msUsed, false);
-      //  else throw new AACException("reserved MS mask type used");
-      //}
-      //else
-      //{
-      //  msMask = MSMask.TYPE_ALL_0;
-      //  Arrays.fill(msUsed, false);
-      //}
+        //  for (int idx = 0; idx < windowGroupCount * maxSFB; idx++)
+        //  {
+        //    msUsed[idx] = inStream.readBool();
+        //  }
+        //}
+        //else if (msMask.equals(MSMask.TYPE_ALL_1)) Arrays.fill(msUsed, true);
+        //else if (msMask.equals(MSMask.TYPE_ALL_0)) Arrays.fill(msUsed, false);
+        //else throw new AACException("reserved MS mask type used");
+      }
+      else
+      {
+        throw new NotImplementedException();
+        //  msMask = MSMask.TYPE_ALL_0;
+        //  Arrays.fill(msUsed, false);
+      }
 
       //if (profile.isErrorResilientProfile() && (info.isLTPrediction1Present()))
       //{
