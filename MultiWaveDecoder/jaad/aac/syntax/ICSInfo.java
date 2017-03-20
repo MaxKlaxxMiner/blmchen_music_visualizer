@@ -221,8 +221,8 @@ public class ICSInfo implements Constants, ScaleFactorBands {
 		}
 		windowCount = info.windowCount;
 		windowGroupCount = info.windowGroupCount;
-		windowGroupLength = Arrays.copyOf(info.windowGroupLength, info.windowGroupLength.length);
+		windowGroupLength = Arrays.copyOf(info.windowGroupLength, info.windowGroupLength.Length);
 		swbCount = info.swbCount;
-		swbOffsets = Arrays.copyOf(info.swbOffsets, info.swbOffsets.length);
+		swbOffsets = Arrays.copyOf(info.swbOffsets, info.swbOffsets.Length);
 	}
 }

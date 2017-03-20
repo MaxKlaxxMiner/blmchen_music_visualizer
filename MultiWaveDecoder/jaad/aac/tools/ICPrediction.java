@@ -90,14 +90,14 @@ public class ICPrediction {
 
 	private void resetAllPredictors() {
 		int i;
-		for(i = 0; i<states.length; i++) {
+		for(i = 0; i<states.Length; i++) {
 			resetPredictState(i);
 		}
 	}
 
 	private void resetPredictorGroup(int group) {
 		int i;
-		for(i = group-1; i<states.length; i += 30) {
+		for(i = group-1; i<states.Length; i += 30) {
 			resetPredictState(i);
 		}
 	}

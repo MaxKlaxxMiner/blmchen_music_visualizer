@@ -189,13 +189,13 @@ namespace MultiWaveDecoder
     //if(chs==1&&psPresent) chs++;
     //int mult = sbrPresent ? 2 : 1;
     ////only reallocate if needed
-    //if(data==null||chs!=data.length||(mult*config.getFrameLength())!=data[0].length) data = new float[chs,mult*config.getFrameLength()];
+    //if(data==null||chs!=data.Length||(mult*config.getFrameLength())!=data[0].Length) data = new float[chs,mult*config.getFrameLength()];
 
     //int channel = 0;
     //Element e;
     //SCE_LFE scelfe;
     //CPE cpe;
-    //for(int i = 0; i<elements.length&&channel<chs; i++) {
+    //for(int i = 0; i<elements.Length&&channel<chs; i++) {
     //e = elements[i];
     //if(e==null) continue;
     //if(e instanceof SCE_LFE) {
@@ -251,7 +251,7 @@ namespace MultiWaveDecoder
     ////SBR
     //int chs = 1;
     //if(sbrPresent&&config.isSBREnabled()) {
-    //if(data[channel].length==config.getFrameLength()) LOGGER.log(Level.WARNING, "SBR data present, but buffer has normal size!");
+    //if(data[channel].Length==config.getFrameLength()) LOGGER.log(Level.WARNING, "SBR data present, but buffer has normal size!");
     //SBR sbr = scelfe.getSBR();
     //if(sbr.isPSUsed()) {
     //chs = 2;
@@ -320,7 +320,7 @@ namespace MultiWaveDecoder
 
     ////SBR
     //if(sbrPresent&&config.isSBREnabled()) {
-    //if(data[channel].length==config.getFrameLength()) LOGGER.log(Level.WARNING, "SBR data present, but buffer has normal size!");
+    //if(data[channel].Length==config.getFrameLength()) LOGGER.log(Level.WARNING, "SBR data present, but buffer has normal size!");
     //cpe.getSBR().process(data[channel], data[channel+1], false);
     //}
     //}
@@ -328,7 +328,7 @@ namespace MultiWaveDecoder
     //private void processIndependentCoupling(bool channelPair, int elementID, float[] data1, float[] data2) {
     //int index, c, chSelect;
     //CCE cce;
-    //for(int i = 0; i<cces.length; i++) {
+    //for(int i = 0; i<cces.Length; i++) {
     //cce = cces[i];
     //index = 0;
     //if(cce!=null&&cce.getCouplingPoint()==CCE.AFTER_IMDCT) {
@@ -353,7 +353,7 @@ namespace MultiWaveDecoder
     //private void processDependentCoupling(bool channelPair, int elementID, int couplingPoint, float[] data1, float[] data2) {
     //int index, c, chSelect;
     //CCE cce;
-    //for(int i = 0; i<cces.length; i++) {
+    //for(int i = 0; i<cces.Length; i++) {
     //cce = cces[i];
     //index = 0;
     //if(cce!=null&&cce.getCouplingPoint()==couplingPoint) {
@@ -378,13 +378,13 @@ namespace MultiWaveDecoder
     //public void sendToOutput(SampleBuffer buffer) {
     //bool be = buffer.isBigEndian();
 
-    //int chs = data.length;
+    //int chs = data.Length;
     //int mult = (sbrPresent&&config.isSBREnabled()) ? 2 : 1;
     //int length = mult*config.getFrameLength();
     //int freq = mult*config.getSampleFrequency().getFrequency();
 
     //byte[] b = buffer.getData();
-    //if(b.length!=chs*length*2) b = new byte[chs*length*2];
+    //if(b.Length!=chs*length*2) b = new byte[chs*length*2];
 
     //float[] cur;
     //int i, j, off;

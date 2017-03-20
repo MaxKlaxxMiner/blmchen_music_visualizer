@@ -16,11 +16,11 @@ public class MP4Info {
 
 	public static void main(string[] args) {
 		try {
-			if(args.length<1) printUsage();
+			if(args.Length<1) printUsage();
 			else {
 				bool boxes = false;
 				string file;
-				if(args.length>1) {
+				if(args.Length>1) {
 					if(args[0].equals("-b")) boxes = true;
 					else printUsage();
 					file = args[1];

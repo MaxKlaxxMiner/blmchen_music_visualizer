@@ -46,7 +46,7 @@ class CircularBuffer {
 	}
 
 	public int read(byte[] b) {
-		return read(b, 0, b.length);
+		return read(b, 0, b.Length);
 	}
 
 	public int read(byte[] b, int off, int len) {
@@ -85,7 +85,7 @@ class CircularBuffer {
 	}
 
 	public int write(byte[] b) {
-		return write(b, 0, b.length);
+		return write(b, 0, b.Length);
 	}
 
 	public int write(byte[] b, int off, int len) {

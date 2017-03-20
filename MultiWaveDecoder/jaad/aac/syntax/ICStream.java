@@ -129,7 +129,7 @@ public class ICStream implements Constants, HCB, ScaleFactorTable, IQTable {
 		pulseStartSWB = in.readBits(6);
 		if(pulseStartSWB>=info.getSWBCount()) throw new AACException("pulse SWB out of range: "+pulseStartSWB+" > "+info.getSWBCount());
 
-		if(pulseOffset==null||pulseCount!=pulseOffset.length) {
+		if(pulseOffset==null||pulseCount!=pulseOffset.Length) {
 			//only reallocate if needed
 			pulseOffset = new int[pulseCount];
 			pulseAmp = new int[pulseCount];

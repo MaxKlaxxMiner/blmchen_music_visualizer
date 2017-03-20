@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="aac\aac\AACException.cs" />
     <Compile Include="aac\aac\ChannelConfiguration.cs" />
+    <Compile Include="aac\aac\SampleBuffer.cs" />
     <Compile Include="aac\aac\filterbank\FFT.cs" />
     <Compile Include="aac\aac\filterbank\MDCT.cs" />
     <Compile Include="aac\aac\filterbank\FilterBank.cs" />
@@ -163,7 +164,6 @@
     <Content Include="jaad\aac\ps\Filterbank.java" />
     <Content Include="jaad\aac\ps\PSConstants.java" />
     <Content Include="jaad\aac\ps\PSTables.java" />
-    <Content Include="jaad\aac\SampleBuffer.java" />
     <Content Include="jaad\aac\sbr\DCT.java" />
     <Content Include="jaad\aac\sbr\FBT.java" />
     <Content Include="jaad\aac\sbr\HFAdjustment.java" />

@@ -157,7 +157,7 @@ class ID3Frame {
 
 		//charsets 0,3 end with '0'; 1,2 end with '00'
 		int t = -1;
-		for(int i = 1; i<data.length&&t<0; i++) {
+		for(int i = 1; i<data.Length&&t<0; i++) {
 			if(data[i]==0&&(enc==0||enc==3||data[i+1]==0)) t = i;
 		}
 		return new string(data, 1, t-1, Charset.forName(TEXT_ENCODINGS[enc]));
@@ -179,9 +179,9 @@ class ID3Frame {
 
 	public Date getDate() {
 		//timestamp lengths: 4,7,10,13,16,19
-		int i = (int) Math.floor(data.length/3)-1;
+		int i = (int) Math.floor(data.Length/3)-1;
 		Date date;
-		if(i>=0&&i<VALID_TIMESTAMPS.length) {
+		if(i>=0&&i<VALID_TIMESTAMPS.Length) {
 			SimpleDateFormat sdf = new SimpleDateFormat(VALID_TIMESTAMPS[i]);
 			date = sdf.parse(new string(data), new ParsePosition(0));
 		}
