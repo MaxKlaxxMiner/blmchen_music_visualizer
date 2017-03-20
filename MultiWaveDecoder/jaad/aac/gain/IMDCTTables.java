@@ -3,7 +3,7 @@ package net.sourceforge.jaad.aac.gain;
 interface IMDCTTables {
 
 	//pre-twiddling tables
-	float[][] IMDCT_TABLE_256 = {
+	float[,] IMDCT_TABLE_256 = {
 		{1.0f, -0.0f},
 		{0.9996988f, -0.024541229f},
 		{0.99879545f, -0.049067676f},
@@ -133,7 +133,7 @@ interface IMDCTTables {
 		{-0.99879545f, -0.049067486f},
 		{-0.9996988f, -0.02454121f}
 	};
-	float[][] IMDCT_TABLE_32 = {
+	float[,] IMDCT_TABLE_32 = {
 		{1.0f, -0.0f},
 		{0.98078525f, -0.19509032f},
 		{0.9238795f, -0.38268346f},
@@ -152,7 +152,7 @@ interface IMDCTTables {
 		{-0.9807853f, -0.19509031f}
 	};
 	//post-twiddling tables
-	float[][] IMDCT_POST_TABLE_256 = {
+	float[,] IMDCT_POST_TABLE_256 = {
 		{0.49232805f, 0.50766724f, 0.50147516f, 0.49840719f},
 		{0.47697723f, 0.5229804f, 0.50407255f, 0.4948688f},
 		{0.46162924f, 0.5382531f, 0.50619966f, 0.49086043f},
@@ -282,7 +282,7 @@ interface IMDCTTables {
 		{0.693707f, 0.01987794f, -0.019159257f, -0.71972805f},
 		{0.70272505f, 0.006547779f, -0.0064679384f, -0.711402f}
 	};
-	float[][] IMDCT_POST_TABLE_32 = {
+	float[,] IMDCT_POST_TABLE_32 = {
 		{0.43864408f, 0.56105477f, 0.5085104f, 0.48396915f},
 		{0.3186977f, 0.67859274f, 0.5032787f, 0.4297141f},
 		{0.20833567f, 0.7841439f, 0.46999773f, 0.34758708f},

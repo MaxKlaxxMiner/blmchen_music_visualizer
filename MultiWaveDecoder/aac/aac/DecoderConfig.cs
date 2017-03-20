@@ -1,6 +1,7 @@
 ﻿using System;
 // ReSharper disable InconsistentNaming
 // ReSharper disable NotAccessedField.Local
+// ReSharper disable UnusedMember.Global
 #pragma warning disable 169
 
 namespace MultiWaveDecoder
@@ -10,122 +11,135 @@ namespace MultiWaveDecoder
   /// </summary>
   public sealed class DecoderConfig : Constants
   {
-    Profile profile, extProfile;
-    SampleFrequency sampleFrequency;
-    ChannelConfiguration channelConfiguration;
+    Profile profile = new Profile();
+    Profile extProfile = new Profile(0);
+    SampleFrequency sampleFrequency = SampleFrequency.forInt(-1);
+    ChannelConfiguration channelConfiguration = ChannelConfiguration.CHANNEL_CONFIG_UNSUPPORTED;
     bool frameLengthFlag;
     bool dependsOnCoreCoder;
     int coreCoderDelay;
     bool extensionFlag;
     // extension: SBR
-    bool sbrPresent, downSampledSBR, sbrEnabled;
+    bool sbrPresent, downSampledSBR;
+    bool sbrEnabled = true;
     // extension: error resilience
     bool sectionDataResilience, scalefactorResilience, spectralDataResilience;
 
-    //private DecoderConfig() {
-    //profile = Profile.AAC_MAIN;
-    //extProfile = Profile.UNKNOWN;
-    //sampleFrequency = SampleFrequency.SAMPLE_FREQUENCY_NONE;
-    //channelConfiguration = ChannelConfiguration.CHANNEL_CONFIG_UNSUPPORTED;
-    //frameLengthFlag = false;
-    //sbrPresent = false;
-    //downSampledSBR = false;
-    //sbrEnabled = true;
-    //sectionDataResilience = false;
-    //scalefactorResilience = false;
-    //spectralDataResilience = false;
-    //}
+    // --- ========== gets/sets ========== ---
 
-    ///* ========== gets/sets ========== */
-    //public ChannelConfiguration getChannelConfiguration() {
-    //return channelConfiguration;
-    //}
+    public ChannelConfiguration getChannelConfiguration()
+    {
+      return channelConfiguration;
+    }
 
-    //public void setChannelConfiguration(ChannelConfiguration channelConfiguration) {
-    //this.channelConfiguration = channelConfiguration;
-    //}
+    public void setChannelConfiguration(ChannelConfiguration channelConfiguration)
+    {
+      this.channelConfiguration = channelConfiguration;
+    }
 
-    //public int getCoreCoderDelay() {
-    //return coreCoderDelay;
-    //}
+    public int getCoreCoderDelay()
+    {
+      return coreCoderDelay;
+    }
 
-    //public void setCoreCoderDelay(int coreCoderDelay) {
-    //this.coreCoderDelay = coreCoderDelay;
-    //}
+    public void setCoreCoderDelay(int coreCoderDelay)
+    {
+      this.coreCoderDelay = coreCoderDelay;
+    }
 
-    //public bool isDependsOnCoreCoder() {
-    //return dependsOnCoreCoder;
-    //}
+    public bool isDependsOnCoreCoder()
+    {
+      return dependsOnCoreCoder;
+    }
 
-    //public void setDependsOnCoreCoder(bool dependsOnCoreCoder) {
-    //this.dependsOnCoreCoder = dependsOnCoreCoder;
-    //}
+    public void setDependsOnCoreCoder(bool dependsOnCoreCoder)
+    {
+      this.dependsOnCoreCoder = dependsOnCoreCoder;
+    }
 
-    //public Profile getExtObjectType() {
-    //return extProfile;
-    //}
+    public Profile getExtObjectType()
+    {
+      return extProfile;
+    }
 
-    //public void setExtObjectType(Profile extObjectType) {
-    //this.extProfile = extObjectType;
-    //}
+    public void setExtObjectType(Profile extObjectType)
+    {
+      extProfile = extObjectType;
+    }
 
-    //public int getFrameLength() {
-    //return frameLengthFlag ? WINDOW_SMALL_LEN_LONG : WINDOW_LEN_LONG;
-    //}
+    public int getFrameLength()
+    {
+      return frameLengthFlag ? WINDOW_SMALL_LEN_LONG : WINDOW_LEN_LONG;
+    }
 
-    //public bool isSmallFrameUsed() {
-    //return frameLengthFlag;
-    //}
+    public bool isSmallFrameUsed()
+    {
+      return frameLengthFlag;
+    }
 
-    //public void setSmallFrameUsed(bool shortFrame) {
-    //this.frameLengthFlag = shortFrame;
-    //}
+    public void setSmallFrameUsed(bool shortFrame)
+    {
+      frameLengthFlag = shortFrame;
+    }
 
-    //public Profile getProfile() {
-    //return profile;
-    //}
+    public Profile getProfile()
+    {
+      return profile;
+    }
 
-    //public void setProfile(Profile profile) {
-    //this.profile = profile;
-    //}
+    public void setProfile(Profile profile)
+    {
+      this.profile = profile;
+    }
 
-    //public SampleFrequency getSampleFrequency() {
-    //return sampleFrequency;
-    //}
+    public SampleFrequency getSampleFrequency()
+    {
+      return sampleFrequency;
+    }
 
-    //public void setSampleFrequency(SampleFrequency sampleFrequency) {
-    //this.sampleFrequency = sampleFrequency;
-    //}
+    public void setSampleFrequency(SampleFrequency sampleFrequency)
+    {
+      this.sampleFrequency = sampleFrequency;
+    }
 
-    ////=========== SBR =============
-    //public bool isSBRPresent() {
-    //return sbrPresent;
-    //}
+    // --- =========== SBR ============= ---
 
-    //public bool isSBRDownSampled() {
-    //return downSampledSBR;
-    //}
+    public bool isSBRPresent()
+    {
+      return sbrPresent;
+    }
 
-    //public bool isSBREnabled() {
-    //return sbrEnabled;
-    //}
+    public bool isSBRDownSampled()
+    {
+      return downSampledSBR;
+    }
 
-    //public void setSBREnabled(bool enabled) {
-    //sbrEnabled = enabled;
-    //}
+    public bool isSBREnabled()
+    {
+      return sbrEnabled;
+    }
 
-    ////=========== ER =============
-    //public bool isScalefactorResilienceUsed() {
-    //return scalefactorResilience;
-    //}
+    public void setSBREnabled(bool enabled)
+    {
+      sbrEnabled = enabled;
+    }
 
-    //public bool isSectionDataResilienceUsed() {
-    //return sectionDataResilience;
-    //}
+    // --- =========== ER ============= ---
 
-    //public bool isSpectralDataResilienceUsed() {
-    //return spectralDataResilience;
-    //}
+    public bool isScalefactorResilienceUsed()
+    {
+      return scalefactorResilience;
+    }
+
+    public bool isSectionDataResilienceUsed()
+    {
+      return sectionDataResilience;
+    }
+
+    public bool isSpectralDataResilienceUsed()
+    {
+      return spectralDataResilience;
+    }
 
     // --- ======== static builder ========= ---
 
@@ -152,17 +166,16 @@ namespace MultiWaveDecoder
         {
           case Profile.ProfileType.AAC_SBR:
           {
-            throw new NotImplementedException();
-            //config.extProfile = config.profile;
-            //config.sbrPresent = true;
-            //sf = inStream.readBits(4);
-            ////TODO: 24 bits already read; read again?
-            ////if(sf==0xF) config.sampleFrequency = SampleFrequency.forFrequency(inStream.readBits(24));
-            ////if sample frequencies are the same: downsample SBR
-            //config.downSampledSBR = config.sampleFrequency.getIndex()==sf;
-            //config.sampleFrequency = SampleFrequency.forInt(sf);
-            //config.profile = readProfile(inStream);
-          }
+            config.extProfile = config.profile;
+            config.sbrPresent = true;
+            sf = inStream.readBits(4);
+            // TODO: 24 bits already read; read again?
+            //if(sf==0xF) config.sampleFrequency = SampleFrequency.forFrequency(inStream.readBits(24));
+            // if sample frequencies are the same: downsample SBR
+            config.downSampledSBR = config.sampleFrequency.getIndex() == sf;
+            config.sampleFrequency = SampleFrequency.forInt(sf);
+            config.profile = readProfile(inStream);
+          } break;
           case Profile.ProfileType.AAC_MAIN:
           case Profile.ProfileType.AAC_LC:
           case Profile.ProfileType.AAC_SSR:

@@ -14,14 +14,14 @@ class HFGeneration {
 		float det;
 	}
 
-	public static void hf_generation(SBR sbr, float[][][] Xlow,
-		float[][][] Xhigh, int ch) {
+	public static void hf_generation(SBR sbr, float[,,] Xlow,
+		float[,,] Xhigh, int ch) {
 		int l, i, x;
-		float[][] alpha_0 = new float[64][2], alpha_1 = new float[64][2];
+		float[,] alpha_0 = new float[64,2], alpha_1 = new float[64,2];
 
 		int offset = sbr.tHFAdj;
-		int first = sbr.t_E[ch][0];
-		int last = sbr.t_E[ch][sbr.L_E[ch]];
+		int first = sbr.t_E[ch,0];
+		int last = sbr.t_E[ch,sbr.L_E[ch]];
 
 		calc_chirp_factors(sbr, ch);
 
@@ -46,7 +46,7 @@ class HFGeneration {
 
 				g = sbr.table_map_k_to_g[k];
 
-				bw = sbr.bwArray[ch][g];
+				bw = sbr.bwArray[ch,g];
 				bw2 = bw*bw;
 
 				/* do the patching */
@@ -56,30 +56,30 @@ class HFGeneration {
 					float temp1_i, temp2_i, temp3_i;
 					calc_prediction_coef(sbr, Xlow, alpha_0, alpha_1, p);
 
-					a0_r = (alpha_0[p][0]*bw);
-					a1_r = (alpha_1[p][0]*bw2);
-					a0_i = (alpha_0[p][1]*bw);
-					a1_i = (alpha_1[p][1]*bw2);
+					a0_r = (alpha_0[p,0]*bw);
+					a1_r = (alpha_1[p,0]*bw2);
+					a0_i = (alpha_0[p,1]*bw);
+					a1_i = (alpha_1[p,1]*bw2);
 
-					temp2_r = (Xlow[first-2+offset][p][0]);
-					temp3_r = (Xlow[first-1+offset][p][0]);
-					temp2_i = (Xlow[first-2+offset][p][1]);
-					temp3_i = (Xlow[first-1+offset][p][1]);
+					temp2_r = (Xlow[first-2+offset,p,0]);
+					temp3_r = (Xlow[first-1+offset,p,0]);
+					temp2_i = (Xlow[first-2+offset,p,1]);
+					temp3_i = (Xlow[first-1+offset,p,1]);
 					for(l = first; l<last; l++) {
 						temp1_r = temp2_r;
 						temp2_r = temp3_r;
-						temp3_r = (Xlow[l+offset][p][0]);
+						temp3_r = (Xlow[l+offset,p,0]);
 						temp1_i = temp2_i;
 						temp2_i = temp3_i;
-						temp3_i = (Xlow[l+offset][p][1]);
+						temp3_i = (Xlow[l+offset,p,1]);
 
-						Xhigh[l+offset][k][0]
+						Xhigh[l+offset,k,0]
 							= temp3_r
 							+((a0_r*temp2_r)
 							-(a0_i*temp2_i)
 							+(a1_r*temp1_r)
 							-(a1_i*temp1_i));
-						Xhigh[l+offset][k][1]
+						Xhigh[l+offset,k,1]
 							= temp3_i
 							+((a0_i*temp2_r)
 							+(a0_r*temp2_i)
@@ -89,8 +89,8 @@ class HFGeneration {
 				}
 				else {
 					for(l = first; l<last; l++) {
-						Xhigh[l+offset][k][0] = Xlow[l+offset][p][0];
-						Xhigh[l+offset][k][1] = Xlow[l+offset][p][1];
+						Xhigh[l+offset,k,0] = Xlow[l+offset,p,0];
+						Xhigh[l+offset,k,1] = Xlow[l+offset,p,1];
 					}
 				}
 			}
@@ -101,7 +101,7 @@ class HFGeneration {
 		}
 	}
 
-	private static void auto_correlation(SBR sbr, acorr_coef ac, float[][][] buffer,
+	private static void auto_correlation(SBR sbr, acorr_coef ac, float[,,] buffer,
 		int bd, int len) {
 		float r01r = 0, r01i = 0, r02r = 0, r02i = 0, r11r = 0;
 		float temp1_r, temp1_i, temp2_r, temp2_i, temp3_r, temp3_i, temp4_r, temp4_i, temp5_r, temp5_i;
@@ -109,10 +109,10 @@ class HFGeneration {
 		int j;
 		int offset = sbr.tHFAdj;
 
-		temp2_r = buffer[offset-2][bd][0];
-		temp2_i = buffer[offset-2][bd][1];
-		temp3_r = buffer[offset-1][bd][0];
-		temp3_i = buffer[offset-1][bd][1];
+		temp2_r = buffer[offset-2,bd,0];
+		temp2_i = buffer[offset-2,bd,1];
+		temp3_r = buffer[offset-1,bd,0];
+		temp3_i = buffer[offset-1,bd,1];
 		// Save these because they are needed after loop
 		temp4_r = temp2_r;
 		temp4_i = temp2_i;
@@ -120,12 +120,12 @@ class HFGeneration {
 		temp5_i = temp3_i;
 
 		for(j = offset; j<len+offset; j++) {
-			temp1_r = temp2_r; // temp1_r = QMF_RE(buffer[j-2][bd];
-			temp1_i = temp2_i; // temp1_i = QMF_IM(buffer[j-2][bd];
-			temp2_r = temp3_r; // temp2_r = QMF_RE(buffer[j-1][bd];
-			temp2_i = temp3_i; // temp2_i = QMF_IM(buffer[j-1][bd];
-			temp3_r = buffer[j][bd][0];
-			temp3_i = buffer[j][bd][1];
+			temp1_r = temp2_r; // temp1_r = QMF_RE(buffer[j-2,bd];
+			temp1_i = temp2_i; // temp1_i = QMF_IM(buffer[j-2,bd];
+			temp2_r = temp3_r; // temp2_r = QMF_RE(buffer[j-1,bd];
+			temp2_i = temp3_i; // temp2_i = QMF_IM(buffer[j-1,bd];
+			temp3_r = buffer[j,bd,0];
+			temp3_i = buffer[j,bd,1];
 			r01r += temp3_r*temp2_r+temp3_i*temp2_i;
 			r01i += temp3_i*temp2_r-temp3_r*temp2_i;
 			r02r += temp3_r*temp1_r+temp3_i*temp1_i;
@@ -134,16 +134,16 @@ class HFGeneration {
 		}
 
 		// These are actual values in temporary variable at this point
-		// temp1_r = QMF_RE(buffer[len+offset-1-2][bd];
-		// temp1_i = QMF_IM(buffer[len+offset-1-2][bd];
-		// temp2_r = QMF_RE(buffer[len+offset-1-1][bd];
-		// temp2_i = QMF_IM(buffer[len+offset-1-1][bd];
-		// temp3_r = QMF_RE(buffer[len+offset-1][bd]);
-		// temp3_i = QMF_IM(buffer[len+offset-1][bd]);
-		// temp4_r = QMF_RE(buffer[offset-2][bd]);
-		// temp4_i = QMF_IM(buffer[offset-2][bd]);
-		// temp5_r = QMF_RE(buffer[offset-1][bd]);
-		// temp5_i = QMF_IM(buffer[offset-1][bd]);
+		// temp1_r = QMF_RE(buffer[len+offset-1-2,bd];
+		// temp1_i = QMF_IM(buffer[len+offset-1-2,bd];
+		// temp2_r = QMF_RE(buffer[len+offset-1-1,bd];
+		// temp2_i = QMF_IM(buffer[len+offset-1-1,bd];
+		// temp3_r = QMF_RE(buffer[len+offset-1,bd]);
+		// temp3_i = QMF_IM(buffer[len+offset-1,bd]);
+		// temp4_r = QMF_RE(buffer[offset-2,bd]);
+		// temp4_i = QMF_IM(buffer[offset-2,bd]);
+		// temp5_r = QMF_RE(buffer[offset-1,bd]);
+		// temp5_i = QMF_IM(buffer[offset-1,bd]);
 		ac.r12[0] = r01r
 			-(temp3_r*temp2_r+temp3_i*temp2_i)
 			+(temp5_r*temp4_r+temp5_i*temp4_i);
@@ -164,39 +164,39 @@ class HFGeneration {
 	}
 
 	/* calculate linear prediction coefficients using the covariance method */
-	private static void calc_prediction_coef(SBR sbr, float[][][] Xlow,
-		float[][] alpha_0, float[][] alpha_1, int k) {
+	private static void calc_prediction_coef(SBR sbr, float[,,] Xlow,
+		float[,] alpha_0, float[,] alpha_1, int k) {
 		float tmp;
 		acorr_coef ac = new acorr_coef();
 
 		auto_correlation(sbr, ac, Xlow, k, sbr.numTimeSlotsRate+6);
 
 		if(ac.det==0) {
-			alpha_1[k][0] = 0;
-			alpha_1[k][1] = 0;
+			alpha_1[k,0] = 0;
+			alpha_1[k,1] = 0;
 		}
 		else {
 			tmp = 1.0f/ac.det;
-			alpha_1[k][0] = ((ac.r01[0]*ac.r12[0])-(ac.r01[1]*ac.r12[1])-(ac.r02[0]*ac.r11[0]))*tmp;
-			alpha_1[k][1] = ((ac.r01[1]*ac.r12[0])+(ac.r01[0]*ac.r12[1])-(ac.r02[1]*ac.r11[0]))*tmp;
+			alpha_1[k,0] = ((ac.r01[0]*ac.r12[0])-(ac.r01[1]*ac.r12[1])-(ac.r02[0]*ac.r11[0]))*tmp;
+			alpha_1[k,1] = ((ac.r01[1]*ac.r12[0])+(ac.r01[0]*ac.r12[1])-(ac.r02[1]*ac.r11[0]))*tmp;
 		}
 
 		if(ac.r11[0]==0) {
-			alpha_0[k][0] = 0;
-			alpha_0[k][1] = 0;
+			alpha_0[k,0] = 0;
+			alpha_0[k,1] = 0;
 		}
 		else {
 			tmp = 1.0f/ac.r11[0];
-			alpha_0[k][0] = -(ac.r01[0]+(alpha_1[k][0]*ac.r12[0])+(alpha_1[k][1]*ac.r12[1]))*tmp;
-			alpha_0[k][1] = -(ac.r01[1]+(alpha_1[k][1]*ac.r12[0])-(alpha_1[k][0]*ac.r12[1]))*tmp;
+			alpha_0[k,0] = -(ac.r01[0]+(alpha_1[k,0]*ac.r12[0])+(alpha_1[k,1]*ac.r12[1]))*tmp;
+			alpha_0[k,1] = -(ac.r01[1]+(alpha_1[k,1]*ac.r12[0])-(alpha_1[k,0]*ac.r12[1]))*tmp;
 		}
 
-		if(((alpha_0[k][0]*alpha_0[k][0])+(alpha_0[k][1]*alpha_0[k][1])>=16.0f)
-			||((alpha_1[k][0]*alpha_1[k][0])+(alpha_1[k][1]*alpha_1[k][1])>=16.0f)) {
-			alpha_0[k][0] = 0;
-			alpha_0[k][1] = 0;
-			alpha_1[k][0] = 0;
-			alpha_1[k][1] = 0;
+		if(((alpha_0[k,0]*alpha_0[k,0])+(alpha_0[k,1]*alpha_0[k,1])>=16.0f)
+			||((alpha_1[k,0]*alpha_1[k,0])+(alpha_1[k,1]*alpha_1[k,1])>=16.0f)) {
+			alpha_0[k,0] = 0;
+			alpha_0[k,1] = 0;
+			alpha_1[k,0] = 0;
+			alpha_1[k,1] = 0;
 		}
 	}
 
@@ -232,21 +232,21 @@ class HFGeneration {
 		int i;
 
 		for(i = 0; i<sbr.N_Q; i++) {
-			sbr.bwArray[ch][i] = mapNewBw(sbr.bs_invf_mode[ch][i], sbr.bs_invf_mode_prev[ch][i]);
+			sbr.bwArray[ch,i] = mapNewBw(sbr.bs_invf_mode[ch,i], sbr.bs_invf_mode_prev[ch,i]);
 
-			if(sbr.bwArray[ch][i]<sbr.bwArray_prev[ch][i])
-				sbr.bwArray[ch][i] = (sbr.bwArray[ch][i]*0.75f)+(sbr.bwArray_prev[ch][i]*0.25f);
+			if(sbr.bwArray[ch,i]<sbr.bwArray_prev[ch,i])
+				sbr.bwArray[ch,i] = (sbr.bwArray[ch,i]*0.75f)+(sbr.bwArray_prev[ch,i]*0.25f);
 			else
-				sbr.bwArray[ch][i] = (sbr.bwArray[ch][i]*0.90625f)+(sbr.bwArray_prev[ch][i]*0.09375f);
+				sbr.bwArray[ch,i] = (sbr.bwArray[ch,i]*0.90625f)+(sbr.bwArray_prev[ch,i]*0.09375f);
 
-			if(sbr.bwArray[ch][i]<0.015625f)
-				sbr.bwArray[ch][i] = 0.0f;
+			if(sbr.bwArray[ch,i]<0.015625f)
+				sbr.bwArray[ch,i] = 0.0f;
 
-			if(sbr.bwArray[ch][i]>=0.99609375f)
-				sbr.bwArray[ch][i] = 0.99609375f;
+			if(sbr.bwArray[ch,i]>=0.99609375f)
+				sbr.bwArray[ch,i] = 0.99609375f;
 
-			sbr.bwArray_prev[ch][i] = sbr.bwArray[ch][i];
-			sbr.bs_invf_mode_prev[ch][i] = sbr.bs_invf_mode[ch][i];
+			sbr.bwArray_prev[ch,i] = sbr.bwArray[ch,i];
+			sbr.bs_invf_mode_prev[ch,i] = sbr.bs_invf_mode[ch,i];
 		}
 	}
 

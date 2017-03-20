@@ -35,10 +35,10 @@ class TFGrid implements Constants {
 					border = sbr.abs_bord_trail[ch];
 
 					for(l = 0; l<(sbr.L_E[ch]-1); l++) {
-						if(border<sbr.bs_rel_bord[ch][l])
+						if(border<sbr.bs_rel_bord[ch,l])
 							return 1;
 
-						border -= sbr.bs_rel_bord[ch][l];
+						border -= sbr.bs_rel_bord[ch,l];
 						t_E_temp[--i] = sbr.rate*border;
 					}
 				}
@@ -50,7 +50,7 @@ class TFGrid implements Constants {
 					border = sbr.abs_bord_lead[ch];
 
 					for(l = 0; l<(sbr.L_E[ch]-1); l++) {
-						border += sbr.bs_rel_bord[ch][l];
+						border += sbr.bs_rel_bord[ch,l];
 
 						if(sbr.rate*border+sbr.tHFAdj>sbr.numTimeSlotsRate+sbr.tHFGen)
 							return 1;
@@ -66,7 +66,7 @@ class TFGrid implements Constants {
 					border = sbr.abs_bord_lead[ch];
 
 					for(l = 0; l<sbr.bs_num_rel_0[ch]; l++) {
-						border += sbr.bs_rel_bord_0[ch][l];
+						border += sbr.bs_rel_bord_0[ch,l];
 
 						if(sbr.rate*border+sbr.tHFAdj>sbr.numTimeSlotsRate+sbr.tHFGen)
 							return 1;
@@ -80,10 +80,10 @@ class TFGrid implements Constants {
 					border = sbr.abs_bord_trail[ch];
 
 					for(l = 0; l<sbr.bs_num_rel_1[ch]; l++) {
-						if(border<sbr.bs_rel_bord_1[ch][l])
+						if(border<sbr.bs_rel_bord_1[ch,l])
 							return 1;
 
-						border -= sbr.bs_rel_bord_1[ch][l];
+						border -= sbr.bs_rel_bord_1[ch,l];
 						t_E_temp[--i] = sbr.rate*border;
 					}
 				}
@@ -92,23 +92,23 @@ class TFGrid implements Constants {
 
 		/* no error occured, we can safely use this t_E vector */
 		for(l = 0; l<6; l++) {
-			sbr.t_E[ch][l] = t_E_temp[l];
+			sbr.t_E[ch,l] = t_E_temp[l];
 		}
 
 		return 0;
 	}
 
 	public static void noise_floor_time_border_vector(SBR sbr, int ch) {
-		sbr.t_Q[ch][0] = sbr.t_E[ch][0];
+		sbr.t_Q[ch,0] = sbr.t_E[ch,0];
 
 		if(sbr.L_E[ch]==1) {
-			sbr.t_Q[ch][1] = sbr.t_E[ch][1];
-			sbr.t_Q[ch][2] = 0;
+			sbr.t_Q[ch,1] = sbr.t_E[ch,1];
+			sbr.t_Q[ch,2] = 0;
 		}
 		else {
 			int index = middleBorder(sbr, ch);
-			sbr.t_Q[ch][1] = sbr.t_E[ch][index];
-			sbr.t_Q[ch][2] = sbr.t_E[ch][sbr.L_E[ch]];
+			sbr.t_Q[ch,1] = sbr.t_E[ch,index];
+			sbr.t_Q[ch,2] = sbr.t_E[ch,sbr.L_E[ch]];
 		}
 	}
 

@@ -32,11 +32,11 @@ public class AVCDecoderInfo extends DecoderInfo {
 		return box.getLengthSize();
 	}
 
-	public byte[][] getSequenceParameterSetNALUnits() {
+	public byte[,] getSequenceParameterSetNALUnits() {
 		return box.getSequenceParameterSetNALUnits();
 	}
 
-	public byte[][] getPictureParameterSetNALUnits() {
+	public byte[,] getPictureParameterSetNALUnits() {
 		return box.getPictureParameterSetNALUnits();
 	}
 }

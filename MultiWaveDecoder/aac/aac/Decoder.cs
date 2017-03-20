@@ -1,4 +1,7 @@
 ﻿using System;
+// ReSharper disable InconsistentNaming
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable PrivateFieldCanBeConvertedToLocalVariable
 
 namespace MultiWaveDecoder
 {
@@ -7,21 +10,21 @@ namespace MultiWaveDecoder
   /// </summary>
   public sealed class Decoder : Constants
   {
-    DecoderConfig config;
-    //private SyntacticElements syntacticElements;
-    //private FilterBank filterBank;
-    //private BitStream in;
-    //private ADIFHeader adifHeader;
+    readonly DecoderConfig config;
+    SyntacticElements syntacticElements;
+    FilterBank filterBank;
+    readonly BitStream inStream = new BitStream();
+    // ADIFHeader adifHeader;
 
-    ////*
+    /// <summary>
     /// The methods returns true, if a profile is supported by the decoder.
-    /// @param profile an AAC profile
-    /// @return true if the specified profile can be decoded
-    /// @see Profile#isDecodingSupported()
-    ////
-    //public static bool canDecode(Profile profile) {
-    //return profile.isDecodingSupported();
-    //}
+    /// </summary>
+    /// <param name="profile">profile an AAC profile</param>
+    /// <returns>true if the specified profile can be decoded</returns>
+    public static bool canDecode(Profile profile)
+    {
+      return profile.supported;
+    }
 
     /// <summary>
     /// Initializes the decoder with a MP4 decoder specific info.
@@ -35,24 +38,21 @@ namespace MultiWaveDecoder
       config = DecoderConfig.parseMP4DecoderSpecificInfo(decoderSpecificInfo);
       if (config == null) throw new ArgumentException("illegal MP4 decoder specific info");
 
-      //if(!canDecode(config.getProfile())) throw new AACException("unsupported profile: "+config.getProfile().getDescription());
+      if (!canDecode(config.getProfile())) throw new AACException("unsupported profile: " + config.getProfile());
 
-      //syntacticElements = new SyntacticElements(config);
-      //filterBank = new FilterBank(config.isSmallFrameUsed(), config.getChannelConfiguration().getChannelCount());
+      syntacticElements = new SyntacticElements(config);
+      filterBank = new FilterBank(config.isSmallFrameUsed(), (int)config.getChannelConfiguration());
 
-      //in = new BitStream();
-
-      //LOGGER.log(Level.FINE, "profile: {0}", config.getProfile());
-      //LOGGER.log(Level.FINE, "sf: {0}", config.getSampleFrequency().getFrequency());
-      //LOGGER.log(Level.FINE, "channels: {0}", config.getChannelConfiguration().getDescription());
-      throw new NotImplementedException();
+      Logger.LogInfo(string.Format("profile: {0}", config.getProfile()));
+      Logger.LogInfo(string.Format("sf: {0}", config.getSampleFrequency().getFrequency()));
+      Logger.LogInfo(string.Format("channels: {0}", config.getChannelConfiguration()));
     }
 
     //public DecoderConfig getConfig() {
     //return config;
     //}
 
-    ////*
+    ///
     /// Decodes one frame of AAC data in frame mode and returns the raw PCM
     /// data.
     /// @param frame the AAC frame

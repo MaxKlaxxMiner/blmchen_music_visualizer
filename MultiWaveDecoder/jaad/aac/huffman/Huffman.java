@@ -12,15 +12,15 @@ public class Huffman implements Codebooks {
 	private Huffman() {
 	}
 
-	private static int findOffset(BitStream in, int[][] table) throws AACException {
+	private static int findOffset(BitStream in, int[,] table) throws AACException {
 		int off = 0;
-		int len = table[off][0];
+		int len = table[off,0];
 		int cw = in.readBits(len);
 		int j;
-		while(cw!=table[off][1]) {
+		while(cw!=table[off,1]) {
 			off++;
-			j = table[off][0]-len;
-			len = table[off][0];
+			j = table[off,0]-len;
+			len = table[off,0];
 			cw <<= j;
 			cw |= in.readBits(j);
 		}
@@ -49,21 +49,21 @@ public class Huffman implements Codebooks {
 
 	public static int decodeScaleFactor(BitStream in) throws AACException {
 		int offset = findOffset(in, HCB_SF);
-		return HCB_SF[offset][2];
+		return HCB_SF[offset,2];
 	}
 
 	public static void decodeSpectralData(BitStream in, int cb, int[] data, int off) throws AACException {
-		int[][] HCB = CODEBOOKS[cb-1];
+		int[,] HCB = CODEBOOKS[cb-1];
 
 		//find index
 		int offset = findOffset(in, HCB);
 
 		//copy data
-		data[off] = HCB[offset][2];
-		data[off+1] = HCB[offset][3];
+		data[off] = HCB[offset,2];
+		data[off+1] = HCB[offset,3];
 		if(cb<5) {
-			data[off+2] = HCB[offset][4];
-			data[off+3] = HCB[offset][5];
+			data[off+2] = HCB[offset,4];
+			data[off+3] = HCB[offset,5];
 		}
 
 		//sign & escape
