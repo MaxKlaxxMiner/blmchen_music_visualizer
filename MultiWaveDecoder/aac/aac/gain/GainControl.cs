@@ -1,4 +1,7 @@
 ﻿// ReSharper disable ClassNeverInstantiated.Global
+
+using System;
+
 namespace MultiWaveDecoder
 {
   public class GainControl
@@ -14,19 +17,21 @@ namespace MultiWaveDecoder
     //private int[,,] level, levelPrev;
     //private int[,,] location, locationPrev;
 
-    //public GainControl(int frameLen) {
-    //this.frameLen = frameLen;
-    //lbLong = frameLen/BANDS;
-    //lbShort = lbLong/8;
-    //imdct = new IMDCT(frameLen);
-    //ipqf = new IPQF();
-    //levelPrev = new int[0,,];
-    //locationPrev = new int[0,,];
-    //buffer1 = new float[frameLen/2];
-    //buffer2 = new float[BANDS,lbLong];
-    //function = new float[lbLong*2];
-    //overlap = new float[BANDS,lbLong*2];
-    //}
+    public GainControl(int frameLen)
+    {
+      throw new NotImplementedException();
+      //this.frameLen = frameLen;
+      //lbLong = frameLen/BANDS;
+      //lbShort = lbLong/8;
+      //imdct = new IMDCT(frameLen);
+      //ipqf = new IPQF();
+      //levelPrev = new int[0,,];
+      //locationPrev = new int[0,,];
+      //buffer1 = new float[frameLen/2];
+      //buffer2 = new float[BANDS,lbLong];
+      //function = new float[lbLong*2];
+      //overlap = new float[BANDS,lbLong*2];
+    }
 
     //public void decode(BitStream in, WindowSequence winSeq) throws AACException {
     //maxBand = in.readBits(2)+1;

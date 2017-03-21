@@ -64,8 +64,7 @@ namespace MultiWaveDecoder
             case ELEMENT_LFE:
             {
               Logger.LogInfo("SCE");
-              throw new NotImplementedException();
-              //prev = decodeSCE_LFE(inStream);
+              prev = decodeSCE_LFE(inStream);
             } break;
             case ELEMENT_CPE:
             {
@@ -127,12 +126,13 @@ namespace MultiWaveDecoder
       bitsRead = inStream.getPosition() - start;
     }
 
-    //private Element decodeSCE_LFE(BitStream in) throws AACException {
-    //if(elements[curElem]==null) elements[curElem] = new SCE_LFE(config.getFrameLength());
-    //((SCE_LFE) elements[curElem]).decode(in, config);
-    //curElem++;
-    //return elements[curElem-1];
-    //}
+    Element decodeSCE_LFE(BitStream inStream)
+    {
+      if (elements[curElem] == null) elements[curElem] = new SCE_LFE(config.getFrameLength());
+      ((SCE_LFE)elements[curElem]).decode(inStream, config);
+      curElem++;
+      return elements[curElem - 1];
+    }
 
     Element decodeCPE(BitStream inStream)
     {

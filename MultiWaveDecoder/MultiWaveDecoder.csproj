@@ -63,6 +63,7 @@
     <Compile Include="aac\aac\Constants.cs" />
     <Compile Include="aac\aac\syntax\BitStream.cs" />
     <Compile Include="aac\aac\syntax\CCE.cs" />
+    <Compile Include="aac\aac\syntax\SCE_LFE.cs" />
     <Compile Include="aac\aac\syntax\ScaleFactorBands.cs" />
     <Compile Include="aac\aac\syntax\TNS.cs" />
     <Compile Include="aac\aac\syntax\ICSInfo.cs" />
@@ -156,7 +157,9 @@
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="aac\aac\huffman\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="jaad\aac\error\BitsBuffer.java" />
     <Content Include="jaad\aac\error\HCR.java" />
@@ -169,7 +172,6 @@
     <Content Include="jaad\aac\gain\PQFTables.java" />
     <Content Include="jaad\aac\gain\Windows.java" />
     <Content Include="jaad\aac\huffman\Codebooks.java" />
-    <Content Include="jaad\aac\huffman\HCB.java" />
     <Content Include="jaad\aac\huffman\Huffman.java" />
     <Content Include="jaad\aac\ps\Filterbank.java" />
     <Content Include="jaad\aac\ps\PSConstants.java" />
@@ -184,7 +186,6 @@
     <Content Include="jaad\aac\sbr\TFGrid.java" />
     <Content Include="jaad\aac\syntax\IQTable.java" />
     <Content Include="jaad\aac\syntax\ScaleFactorTable.java" />
-    <Content Include="jaad\aac\syntax\SCE_LFE.java" />
     <Content Include="jaad\aac\tools\IS.java" />
     <Content Include="jaad\aac\tools\ISScaleTable.java" />
     <Content Include="jaad\aac\tools\LTPrediction.java" />

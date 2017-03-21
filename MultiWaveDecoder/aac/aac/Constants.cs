@@ -72,6 +72,14 @@ namespace MultiWaveDecoder
     protected const int MAX_MS_MASK = 128;
     protected const float SQRT2 = 1.414213562f;
 
+    // --- HCB ---
+    protected const int ZERO_HCB = 0;
+    protected const int ESCAPE_HCB = 11;
+    protected const int NOISE_HCB = 13;
+    protected const int INTENSITY_HCB2 = 14;
+    protected const int INTENSITY_HCB = 15;
+    protected const int FIRST_PAIR_HCB = 5;
+
     // --- Sine Window ---
 
     static float[] CreateSine(int len)
