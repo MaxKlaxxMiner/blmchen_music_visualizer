@@ -61,6 +61,7 @@
     <Compile Include="aac\aac\Constants.cs" />
     <Compile Include="aac\aac\syntax\BitStream.cs" />
     <Compile Include="aac\aac\syntax\CCE.cs" />
+    <Compile Include="aac\aac\syntax\ScaleFactorBands.cs" />
     <Compile Include="aac\aac\syntax\TNS.cs" />
     <Compile Include="aac\aac\syntax\ICSInfo.cs" />
     <Compile Include="aac\aac\syntax\ICStream.cs" />
@@ -179,7 +180,6 @@
     <Content Include="jaad\aac\sbr\NoiseTable.java" />
     <Content Include="jaad\aac\sbr\TFGrid.java" />
     <Content Include="jaad\aac\syntax\IQTable.java" />
-    <Content Include="jaad\aac\syntax\ScaleFactorBands.java" />
     <Content Include="jaad\aac\syntax\ScaleFactorTable.java" />
     <Content Include="jaad\aac\syntax\SCE_LFE.java" />
     <Content Include="jaad\aac\tools\ICPrediction.java" />
