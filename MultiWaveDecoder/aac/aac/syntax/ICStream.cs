@@ -97,8 +97,7 @@ namespace MultiWaveDecoder
       }
       else
       {
-        throw new NotImplementedException();
-        // decodeSpectralData(inStream);
+        decodeSpectralData(inStream);
       }
     }
 
@@ -225,73 +224,88 @@ namespace MultiWaveDecoder
       }
     }
 
-    //  private void decodeSpectralData(BitStream in) throws AACException {
-    //    Arrays.fill(data, 0);
-    //    int maxSFB = info.getMaxSFB();
-    //    int windowGroups = info.getWindowGroupCount();
-    //    int[] offsets = info.getSWBOffsets();
-    //    int[] buf = new int[4];
+    private void decodeSpectralData(BitStream inStream)
+    {
+      Array.Clear(data, 0, data.Length);
+      int maxSFB = info.getMaxSFB();
+      int windowGroups = info.getWindowGroupCount();
+      int[] offsets = info.getSWBOffsets();
+      int[] buf = new int[4];
 
-    //    int sfb, j, k, w, hcb, off, width, num;
-    //    int groupOff = 0, idx = 0;
-    //    for(int g = 0; g<windowGroups; g++) {
-    //      int groupLen = info.getWindowGroupLength(g);
+      int sfb, j, k, w, hcb, off, width, num;
+      int groupOff = 0, idx = 0;
+      for (int g = 0; g < windowGroups; g++)
+      {
+        int groupLen = info.getWindowGroupLength(g);
 
-    //      for(sfb = 0; sfb<maxSFB; sfb++, idx++) {
-    //        hcb = sfbCB[idx];
-    //        off = groupOff+offsets[sfb];
-    //        width = offsets[sfb+1]-offsets[sfb];
-    //        if(hcb==ZERO_HCB||hcb==INTENSITY_HCB||hcb==INTENSITY_HCB2) {
-    //          for(w = 0; w<groupLen; w++, off += 128) {
-    //            Arrays.fill(data, off, off+width, 0);
-    //          }
-    //        }
-    //        else if(hcb==NOISE_HCB) {
-    //          //apply PNS: fill with random values
-    //          for(w = 0; w<groupLen; w++, off += 128) {
-    //            float energy = 0;
+        for (sfb = 0; sfb < maxSFB; sfb++, idx++)
+        {
+          hcb = sfbCB[idx];
+          off = groupOff + offsets[sfb];
+          width = offsets[sfb + 1] - offsets[sfb];
+          if (hcb == ZERO_HCB || hcb == INTENSITY_HCB || hcb == INTENSITY_HCB2)
+          {
+            for (w = 0; w < groupLen; w++, off += 128)
+            {
+              Array.Clear(data, off, width);
+            }
+          }
+          else if (hcb == NOISE_HCB)
+          {
+            //apply PNS: fill with random values
+            for (w = 0; w < groupLen; w++, off += 128)
+            {
+              float energy = 0;
 
-    //            for(k = 0; k<width; k++) {
-    //              randomState *= 1664525+1013904223;
-    //              data[off+k] = randomState;
-    //              energy += data[off+k]*data[off+k];
-    //            }
+              for (k = 0; k < width; k++)
+              {
+                randomState *= 1664525 + 1013904223;
+                data[off + k] = randomState;
+                energy += data[off + k] * data[off + k];
+              }
 
-    //            float scale = (float) (scaleFactors[idx]/Math.sqrt(energy));
-    //            for(k = 0; k<width; k++) {
-    //              data[off+k] *= scale;
-    //            }
-    //          }
-    //        }
-    //        else {
-    //          for(w = 0; w<groupLen; w++, off += 128) {
-    //            num = (hcb>=FIRST_PAIR_HCB) ? 2 : 4;
-    //            for(k = 0; k<width; k += num) {
-    //              Huffman.decodeSpectralData(in, hcb, buf, 0);
+              float scale = (float)(scaleFactors[idx] / Math.Sqrt(energy));
+              for (k = 0; k < width; k++)
+              {
+                data[off + k] *= scale;
+              }
+            }
+          }
+          else
+          {
+            for (w = 0; w < groupLen; w++, off += 128)
+            {
+              num = (hcb >= FIRST_PAIR_HCB) ? 2 : 4;
+              for (k = 0; k < width; k += num)
+              {
+                throw new NotImplementedException();
 
-    //              //inverse quantization & scaling
-    //              for(j = 0; j<num; j++) {
-    //                data[off+k+j] = (buf[j]>0) ? IQ_TABLE[buf[j]] : -IQ_TABLE[-buf[j]];
-    //                data[off+k+j] *= scaleFactors[idx];
-    //              }
-    //            }
-    //          }
-    //        }
-    //      }
-    //      groupOff += groupLen<<7;
-    //    }
-    //  }
+                //Huffman.decodeSpectralData(inStream, hcb, buf, 0);
 
-    //  /* =========== gets ============ */
-    //  /**
-    //   * Does inverse quantization and applies the scale factors on the decoded
-    //   * data. After this the noiseless decoding is finished and the decoded data
-    //   * is returned.
-    //   * @return the inverse quantized and scaled data
-    //   */
-    //  public float[] getInvQuantData() throws AACException {
-    //    return data;
-    //  }
+                ////inverse quantization & scaling
+                //for (j = 0; j < num; j++)
+                //{
+                //  data[off + k + j] = (buf[j] > 0) ? IQ_TABLE[buf[j]] : -IQ_TABLE[-buf[j]];
+                //  data[off + k + j] *= scaleFactors[idx];
+                //}
+              }
+            }
+          }
+        }
+        groupOff += groupLen << 7;
+      }
+    }
+
+    // --- =========== gets ============ ---
+
+    /// <summary>
+    /// Does inverse quantization and applies the scale factors on the decoded data. After this the noiseless decoding is finished and the decoded data is returned.
+    /// </summary>
+    /// <returns>the inverse quantized and scaled data</returns>
+    public float[] getInvQuantData()
+    {
+      return data;
+    }
 
     public ICSInfo getInfo()
     {
