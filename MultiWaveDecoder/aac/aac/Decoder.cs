@@ -94,9 +94,9 @@ namespace MultiWaveDecoder
         // 1: bitstream parsing and noiseless coding
         syntacticElements.decode(inStream);
         // 2: spectral processing
-        throw new NotImplementedException();
-        //syntacticElements.process(filterBank);
+        syntacticElements.process(filterBank);
         // 3: send to output buffer
+        throw new NotImplementedException();
         //syntacticElements.sendToOutput(buffer);
       }
       //catch (AACException e)

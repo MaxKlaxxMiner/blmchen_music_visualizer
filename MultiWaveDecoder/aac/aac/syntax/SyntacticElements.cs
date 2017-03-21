@@ -3,6 +3,10 @@
 // ReSharper disable NotAccessedField.Local
 
 using System;
+using System.Linq;
+
+// ReSharper disable CanBeReplacedWithTryCastAndCheckForNull
+// ReSharper disable RedundantIfElseBlock
 
 #pragma warning disable 169
 #pragma warning disable 414
@@ -21,7 +25,7 @@ namespace MultiWaveDecoder
     DSE[] dses;
     FIL[] fils;
     int curElem, curCCE, curDSE, curFIL;
-    float[,] data;
+    float[][] data;
 
     public SyntacticElements(DecoderConfig config)
     {
@@ -175,40 +179,47 @@ namespace MultiWaveDecoder
     //}
     //}
 
-    //public void process(FilterBank filterBank) throws AACException {
-    //Profile profile = config.getProfile();
-    //SampleFrequency sf = config.getSampleFrequency();
-    ////ChannelConfiguration channels = config.getChannelConfiguration();
+    public void process(FilterBank filterBank)
+    {
+      Profile profile = config.getProfile();
+      SampleFrequency sf = config.getSampleFrequency();
+      //ChannelConfiguration channels = config.getChannelConfiguration();
 
-    //int chs = config.getChannelConfiguration().getChannelCount();
-    //if(chs==1&&psPresent) chs++;
-    //int mult = sbrPresent ? 2 : 1;
-    ////only reallocate if needed
-    //if(data==null||chs!=data.Length||(mult*config.getFrameLength())!=data[0].Length) data = new float[chs,mult*config.getFrameLength()];
+      int chs = (int)config.getChannelConfiguration();
+      if (chs == 1 && psPresent) chs++;
+      int mult = sbrPresent ? 2 : 1;
+      //only reallocate if needed
+      if (data == null || chs != data.Length || (mult * config.getFrameLength()) != data[0].Length) data = Enumerable.Range(0, chs).Select(x => new float[mult * config.getFrameLength()]).ToArray();
 
-    //int channel = 0;
-    //Element e;
-    //SCE_LFE scelfe;
-    //CPE cpe;
-    //for(int i = 0; i<elements.Length&&channel<chs; i++) {
-    //e = elements[i];
-    //if(e==null) continue;
-    //if(e instanceof SCE_LFE) {
-    //scelfe = (SCE_LFE) e;
-    //channel += processSingle(scelfe, filterBank, channel, profile, sf);
-    //}
-    //else if(e instanceof CPE) {
-    //cpe = (CPE) e;
-    //processPair(cpe, filterBank, channel, profile, sf);
-    //channel += 2;
-    //}
-    //else if(e instanceof CCE) {
-    ////applies invquant and save the result in the CCE
-    //((CCE) e).process();
-    //channel++;
-    //}
-    //}
-    //}
+      int channel = 0;
+      Element e;
+      SCE_LFE scelfe;
+      CPE cpe;
+      for (int i = 0; i < elements.Length && channel < chs; i++)
+      {
+        e = elements[i];
+        if (e == null) continue;
+        if (e is SCE_LFE)
+        {
+          scelfe = (SCE_LFE)e;
+          throw new NotImplementedException();
+          // channel += processSingle(scelfe, filterBank, channel, profile, sf);
+        }
+        else if (e is CPE)
+        {
+          cpe = (CPE)e;
+          processPair(cpe, filterBank, channel, profile, sf);
+          channel += 2;
+        }
+        else if (e is CCE)
+        {
+          //applies invquant and save the result in the CCE
+          throw new NotImplementedException();
+          // ((CCE)e).process();
+          channel++;
+        }
+      }
+    }
 
     //private int processSingle(SCE_LFE scelfe, FilterBank filterBank, int channel, Profile profile, SampleFrequency sf) throws AACException {
     //ICStream ics = scelfe.getICStream();
@@ -257,68 +268,86 @@ namespace MultiWaveDecoder
     //return chs;
     //}
 
-    //private void processPair(CPE cpe, FilterBank filterBank, int channel, Profile profile, SampleFrequency sf) throws AACException {
-    //ICStream ics1 = cpe.getLeftChannel();
-    //ICStream ics2 = cpe.getRightChannel();
-    //ICSInfo info1 = ics1.getInfo();
-    //ICSInfo info2 = ics2.getInfo();
-    //LTPrediction ltp1 = info1.getLTPrediction1();
-    //LTPrediction ltp2 = cpe.isCommonWindow() ? info1.getLTPrediction2() : info2.getLTPrediction1();
-    //int elementID = cpe.getElementInstanceTag();
+    void processPair(CPE cpe, FilterBank filterBank, int channel, Profile profile, SampleFrequency sf)
+    {
+      var ics1 = cpe.getLeftChannel();
+      var ics2 = cpe.getRightChannel();
+      var info1 = ics1.getInfo();
+      var info2 = ics2.getInfo();
+      var ltp1 = info1.getLTPrediction1();
+      var ltp2 = cpe.isCommonWindow() ? info1.getLTPrediction2() : info2.getLTPrediction1();
+      int elementID = cpe.getElementInstanceTag();
 
-    ////inverse quantization
-    //float[] iqData1 = ics1.getInvQuantData();
-    //float[] iqData2 = ics2.getInvQuantData();
+      // inverse quantization
+      var iqData1 = ics1.getInvQuantData();
+      var iqData2 = ics2.getInvQuantData();
 
-    ////MS
-    //if(cpe.isCommonWindow()&&cpe.isMSMaskPresent()) MS.process(cpe, iqData1, iqData2);
-    ////main prediction
-    //if(profile.equals(Profile.AAC_MAIN)) {
-    //if(info1.isICPredictionPresent()) info1.getICPrediction().process(ics1, iqData1, sf);
-    //if(info2.isICPredictionPresent()) info2.getICPrediction().process(ics2, iqData2, sf);
-    //}
-    ////IS
-    //IS.process(cpe, iqData1, iqData2);
+      // MS
+      if (cpe.isCommonWindow() && cpe.isMSMaskPresent())
+      {
+        throw new NotImplementedException();
+        // MS.process(cpe, iqData1, iqData2);
+      }
+      // main prediction
+      if (profile.type == Profile.ProfileType.AAC_MAIN)
+      {
+        if (info1.isICPredictionPresent())
+        {
+          throw new NotImplementedException();
+          // info1.getICPrediction().process(ics1, iqData1, sf);
+        }
+        if (info2.isICPredictionPresent())
+        {
+          throw new NotImplementedException();
+          // info2.getICPrediction().process(ics2, iqData2, sf);
+        }
+      }
+      // IS
+      IS.process(cpe, iqData1, iqData2);
 
-    ////LTP
-    //if(LTPrediction.isLTPProfile(profile)) {
-    //if(info1.isLTPrediction1Present()) ltp1.process(ics1, iqData1, filterBank, sf);
-    //if(cpe.isCommonWindow()&&info1.isLTPrediction2Present()) ltp2.process(ics2, iqData2, filterBank, sf);
-    //else if(info2.isLTPrediction1Present()) ltp2.process(ics2, iqData2, filterBank, sf);
-    //}
+      throw new NotImplementedException();
+      ////LTP
+      //if (LTPrediction.isLTPProfile(profile))
+      //{
+      //  if (info1.isLTPrediction1Present()) ltp1.process(ics1, iqData1, filterBank, sf);
+      //  if (cpe.isCommonWindow() && info1.isLTPrediction2Present()) ltp2.process(ics2, iqData2, filterBank, sf);
+      //  else if (info2.isLTPrediction1Present()) ltp2.process(ics2, iqData2, filterBank, sf);
+      //}
 
-    ////dependent coupling
-    //processDependentCoupling(true, elementID, CCE.BEFORE_TNS, iqData1, iqData2);
+      //// dependent coupling
+      //processDependentCoupling(true, elementID, CCE.BEFORE_TNS, iqData1, iqData2);
 
-    ////TNS
-    //if(ics1.isTNSDataPresent()) ics1.getTNS().process(ics1, iqData1, sf, false);
-    //if(ics2.isTNSDataPresent()) ics2.getTNS().process(ics2, iqData2, sf, false);
+      //// TNS
+      //if (ics1.isTNSDataPresent()) ics1.getTNS().process(ics1, iqData1, sf, false);
+      //if (ics2.isTNSDataPresent()) ics2.getTNS().process(ics2, iqData2, sf, false);
 
-    ////dependent coupling
-    //processDependentCoupling(true, elementID, CCE.AFTER_TNS, iqData1, iqData2);
+      //// dependent coupling
+      //processDependentCoupling(true, elementID, CCE.AFTER_TNS, iqData1, iqData2);
 
-    ////filterbank
-    //filterBank.process(info1.getWindowSequence(), info1.getWindowShape(ICSInfo.CURRENT), info1.getWindowShape(ICSInfo.PREVIOUS), iqData1, data[channel], channel);
-    //filterBank.process(info2.getWindowSequence(), info2.getWindowShape(ICSInfo.CURRENT), info2.getWindowShape(ICSInfo.PREVIOUS), iqData2, data[channel+1], channel+1);
+      //// filterbank
+      //filterBank.process(info1.getWindowSequence(), info1.getWindowShape(ICSInfo.CURRENT), info1.getWindowShape(ICSInfo.PREVIOUS), iqData1, data[channel], channel);
+      //filterBank.process(info2.getWindowSequence(), info2.getWindowShape(ICSInfo.CURRENT), info2.getWindowShape(ICSInfo.PREVIOUS), iqData2, data[channel + 1], channel + 1);
 
-    //if(LTPrediction.isLTPProfile(profile)) {
-    //ltp1.updateState(data[channel], filterBank.getOverlap(channel), profile);
-    //ltp2.updateState(data[channel+1], filterBank.getOverlap(channel+1), profile);
-    //}
+      //if (LTPrediction.isLTPProfile(profile))
+      //{
+      //  ltp1.updateState(data[channel], filterBank.getOverlap(channel), profile);
+      //  ltp2.updateState(data[channel + 1], filterBank.getOverlap(channel + 1), profile);
+      //}
 
-    ////independent coupling
-    //processIndependentCoupling(true, elementID, data[channel], data[channel+1]);
+      ////independent coupling
+      //processIndependentCoupling(true, elementID, data[channel], data[channel + 1]);
 
-    ////gain control
-    //if(ics1.isGainControlPresent()) ics1.getGainControl().process(iqData1, info1.getWindowShape(ICSInfo.CURRENT), info1.getWindowShape(ICSInfo.PREVIOUS), info1.getWindowSequence());
-    //if(ics2.isGainControlPresent()) ics2.getGainControl().process(iqData2, info2.getWindowShape(ICSInfo.CURRENT), info2.getWindowShape(ICSInfo.PREVIOUS), info2.getWindowSequence());
+      ////gain control
+      //if (ics1.isGainControlPresent()) ics1.getGainControl().process(iqData1, info1.getWindowShape(ICSInfo.CURRENT), info1.getWindowShape(ICSInfo.PREVIOUS), info1.getWindowSequence());
+      //if (ics2.isGainControlPresent()) ics2.getGainControl().process(iqData2, info2.getWindowShape(ICSInfo.CURRENT), info2.getWindowShape(ICSInfo.PREVIOUS), info2.getWindowSequence());
 
-    ////SBR
-    //if(sbrPresent&&config.isSBREnabled()) {
-    //if(data[channel].Length==config.getFrameLength()) LOGGER.log(Level.WARNING, "SBR data present, but buffer has normal size!");
-    //cpe.getSBR().process(data[channel], data[channel+1], false);
-    //}
-    //}
+      ////SBR
+      //if (sbrPresent && config.isSBREnabled())
+      //{
+      //  if (data[channel].Length == config.getFrameLength()) LOGGER.log(Level.WARNING, "SBR data present, but buffer has normal size!");
+      //  cpe.getSBR().process(data[channel], data[channel + 1], false);
+      //}
+    }
 
     //private void processIndependentCoupling(bool channelPair, int elementID, float[] data1, float[] data2) {
     //int index, c, chSelect;
