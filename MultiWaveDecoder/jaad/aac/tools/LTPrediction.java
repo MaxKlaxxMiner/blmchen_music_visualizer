@@ -131,14 +131,14 @@ public class LTPrediction implements Constants {
 	}
 
 	public void copy(LTPrediction ltp) {
-		System.arraycopy(ltp.states, 0, states, 0, states.length);
+		System.arraycopy(ltp.states, 0, states, 0, states.Length);
 		coef = ltp.coef;
 		lag = ltp.lag;
 		lastBand = ltp.lastBand;
 		lagUpdate = ltp.lagUpdate;
-		shortUsed = Arrays.copyOf(ltp.shortUsed, ltp.shortUsed.length);
-		shortLagPresent = Arrays.copyOf(ltp.shortLagPresent, ltp.shortLagPresent.length);
-		shortLag = Arrays.copyOf(ltp.shortLag, ltp.shortLag.length);
-		longUsed = Arrays.copyOf(ltp.longUsed, ltp.longUsed.length);
+		shortUsed = Arrays.copyOf(ltp.shortUsed, ltp.shortUsed.Length);
+		shortLagPresent = Arrays.copyOf(ltp.shortLagPresent, ltp.shortLagPresent.Length);
+		shortLag = Arrays.copyOf(ltp.shortLag, ltp.shortLag.Length);
+		longUsed = Arrays.copyOf(ltp.longUsed, ltp.longUsed.Length);
 	}
 }

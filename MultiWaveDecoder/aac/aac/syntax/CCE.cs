@@ -123,7 +123,7 @@ namespace MultiWaveDecoder
 
     //void applyIndependentCoupling(int index, float[] data) {
     //double g = gain[index,0];
-    //for(int i = 0; i<data.length; i++) {
+    //for(int i = 0; i<data.Length; i++) {
     //data[i] += g*iqData[i];
     //}
     //}

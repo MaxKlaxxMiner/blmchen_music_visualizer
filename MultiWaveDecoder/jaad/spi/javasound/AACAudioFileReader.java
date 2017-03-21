@@ -50,7 +50,7 @@ public class AACAudioFileReader extends AudioFileReader {
 		try {
 			in = new BufferedInputStream(new FileInputStream(file));
 			in.mark(1000);
-			AudioFileFormat aff = getAudioFileFormat(in, (int) file.length());
+			AudioFileFormat aff = getAudioFileFormat(in, (int) file.Length());
 			in.reset();
 			return aff;
 		}

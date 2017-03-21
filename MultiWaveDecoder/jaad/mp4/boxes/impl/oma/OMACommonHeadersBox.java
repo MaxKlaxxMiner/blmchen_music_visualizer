@@ -41,7 +41,7 @@ public class OMACommonHeadersBox extends FullBox {
 			value = new string(in.readTerminated((int) getLeft(in), 0));
 			textualHeaders.put(key, value);
 
-			textualHeadersLength -= key.length()+value.length()+2;
+			textualHeadersLength -= key.Length()+value.Length()+2;
 		}
 
 		readChildren(in);

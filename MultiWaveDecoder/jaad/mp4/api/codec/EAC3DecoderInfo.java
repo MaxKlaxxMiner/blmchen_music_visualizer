@@ -14,7 +14,7 @@ public class EAC3DecoderInfo extends DecoderInfo {
 	public EAC3DecoderInfo(CodecSpecificBox box) {
 		this.box = (EAC3SpecificBox) box;
 		is = new IndependentSubstream[this.box.getIndependentSubstreamCount()];
-		for(int i = 0; i<is.length; i++) {
+		for(int i = 0; i<is.Length; i++) {
 			is[i] = new IndependentSubstream(i);
 		}
 	}

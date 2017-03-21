@@ -27,7 +27,7 @@ abstract class AsynchronousAudioInputStream extends AudioInputStream implements 
 
 	@Override
 	public int read(byte[] b) throws IOException {
-		return buffer.read(b, 0, b.length);
+		return buffer.read(b, 0, b.Length);
 	}
 
 	@Override

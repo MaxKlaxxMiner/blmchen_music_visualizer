@@ -51,13 +51,13 @@ namespace MultiWaveDecoder
         {
           var dec = new Decoder(track.getDecoderSpecificInfo());
 
-          //var buf = new SampleBuffer();
-          //while (track.hasMoreFrames())
-          //{
-          //  var frame = track.readNextFrame();
-          //  dec.decodeFrame(frame.getData(), buf);
-          //  wav.write(buf.getData());
-          //}
+          var buf = new SampleBuffer();
+          while (track.hasMoreFrames())
+          {
+            var frame = track.readNextFrame();
+            dec.decodeFrame(frame.getData(), buf);
+            //wav.write(buf.getData());
+          }
         }
       }
     }

@@ -113,7 +113,7 @@ public class HCR implements Constants {
 
 		//create spOffsets
 		int[] spOffsets = new int[8];
-		int shortFrameLen = spectralData.length/8;
+		int shortFrameLen = spectralData.Length/8;
 		spOffsets[0] = 0;
 		int g;
 		for(g = 1; g<windowGroupCount; g++) {

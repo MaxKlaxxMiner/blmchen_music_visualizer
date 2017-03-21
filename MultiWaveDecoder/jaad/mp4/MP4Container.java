@@ -13,8 +13,8 @@ public class MP4Container {
 	public Brand[] getCompatibleBrands() {
 		if(compatible==null) {
 			string[] s = ftyp.getCompatibleBrands();
-			compatible = new Brand[s.length];
-			for(int i = 0; i<s.length; i++) {
+			compatible = new Brand[s.Length];
+			for(int i = 0; i<s.Length; i++) {
 				compatible[i] = Brand.forID(s[i]);
 			}
 		}

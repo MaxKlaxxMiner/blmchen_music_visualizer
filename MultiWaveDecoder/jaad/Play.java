@@ -23,9 +23,9 @@ public class Play {
 
 	public static void main(string[] args) {
 		try {
-			if(args.length<1) printUsage();
+			if(args.Length<1) printUsage();
 			if(args[0].equals("-mp4")) {
-				if(args.length<2) printUsage();
+				if(args.Length<2) printUsage();
 				else decodeMP4(args[1]);
 			}
 			else decodeAAC(args[0]);
@@ -70,7 +70,7 @@ public class Play {
 				try {
 					dec.decodeFrame(frame.getData(), buf);
 					b = buf.getData();
-					line.write(b, 0, b.length);
+					line.write(b, 0, b.Length);
 				}
 				catch(AACException e) {
 					e.printStackTrace();
@@ -104,7 +104,7 @@ public class Play {
 					line.start();
 				}
 				b = buf.getData();
-				line.write(b, 0, b.length);
+				line.write(b, 0, b.Length);
 			}
 		}
 		finally {

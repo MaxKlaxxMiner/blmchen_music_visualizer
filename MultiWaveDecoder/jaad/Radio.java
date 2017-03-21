@@ -23,7 +23,7 @@ public class Radio {
 
 	public static void main(string[] args) {
 		try {
-			if(args.length<1) printUsage();
+			if(args.Length<1) printUsage();
 			else decode(args[0]);
 		}
 		catch(Exception e) {
@@ -84,7 +84,7 @@ public class Radio {
 					line.start();
 				}
 				b = buf.getData();
-				line.write(b, 0, b.length);
+				line.write(b, 0, b.Length);
 			}
 		}
 		finally {

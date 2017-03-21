@@ -23,7 +23,7 @@ public class MetaData {
 					case ID3Frame.TRACK_NUMBER:
 						num = frame.getNumbers();
 						put(Field.TRACK_NUMBER, num[0]);
-						if(num.length>1) put(Field.TOTAL_TRACKS, num[1]);
+						if(num.Length>1) put(Field.TOTAL_TRACKS, num[1]);
 						break;
 					case ID3Frame.ARTIST:
 						put(Field.ARTIST, frame.getEncodedText());

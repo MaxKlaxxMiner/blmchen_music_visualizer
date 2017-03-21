@@ -1,27 +1,27 @@
 public class WaveFileWriter {
 
 	public void write(byte[] data) throws IOException {
-		write(data, 0, data.length);
+		write(data, 0, data.Length);
 	}
 
 	public void write(byte[] data, int off, int len) throws IOException {
 		//convert to little endian
 		byte tmp;
-		for(int i = off; i<off+data.length; i += 2) {
+		for(int i = off; i<off+data.Length; i += 2) {
 			tmp = data[i+1];
 			data[i+1] = data[i];
 			data[i] = tmp;
 		}
 		outStream.write(data, off, len);
-		bytesWritten += data.length;
+		bytesWritten += data.Length;
 	}
 
 	public void write(short[] data) throws IOException {
-		write(data, 0, data.length);
+		write(data, 0, data.Length);
 	}
 
 	public void write(short[] data, int off, int len) throws IOException {
-		for(int i = off; i<off+data.length; i++) {
+		for(int i = off; i<off+data.Length; i++) {
 			outStream.write(data[i]&BYTE_MASK);
 			outStream.write((data[i]>>8)&BYTE_MASK);
 			bytesWritten += 2;
