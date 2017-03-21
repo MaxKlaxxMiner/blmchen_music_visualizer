@@ -305,16 +305,16 @@ namespace MultiWaveDecoder
       // IS
       IS.process(cpe, iqData1, iqData2);
 
-      throw new NotImplementedException();
-      ////LTP
-      //if (LTPrediction.isLTPProfile(profile))
-      //{
-      //  if (info1.isLTPrediction1Present()) ltp1.process(ics1, iqData1, filterBank, sf);
-      //  if (cpe.isCommonWindow() && info1.isLTPrediction2Present()) ltp2.process(ics2, iqData2, filterBank, sf);
-      //  else if (info2.isLTPrediction1Present()) ltp2.process(ics2, iqData2, filterBank, sf);
-      //}
+      // LTP
+      if (LTPrediction.isLTPProfile(profile))
+      {
+        if (info1.isLTPrediction1Present()) ltp1.process(ics1, iqData1, filterBank, sf);
+        if (cpe.isCommonWindow() && info1.isLTPrediction2Present()) ltp2.process(ics2, iqData2, filterBank, sf);
+        else if (info2.isLTPrediction1Present()) ltp2.process(ics2, iqData2, filterBank, sf);
+      }
 
-      //// dependent coupling
+      // dependent coupling
+      throw new NotImplementedException();
       //processDependentCoupling(true, elementID, CCE.BEFORE_TNS, iqData1, iqData2);
 
       //// TNS
@@ -347,6 +347,7 @@ namespace MultiWaveDecoder
       //  if (data[channel].Length == config.getFrameLength()) LOGGER.log(Level.WARNING, "SBR data present, but buffer has normal size!");
       //  cpe.getSBR().process(data[channel], data[channel + 1], false);
       //}
+      throw new NotImplementedException();
     }
 
     //private void processIndependentCoupling(bool channelPair, int elementID, float[] data1, float[] data2) {

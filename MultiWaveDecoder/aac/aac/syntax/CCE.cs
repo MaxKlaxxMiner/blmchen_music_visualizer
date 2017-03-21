@@ -4,9 +4,9 @@ namespace MultiWaveDecoder
 {
   public class CCE : Element
   {
-    //public static int BEFORE_TNS = 0;
-    //public static int AFTER_TNS = 1;
-    //public static int AFTER_IMDCT = 2;
+    public const int BEFORE_TNS = 0;
+    public const int AFTER_TNS = 1;
+    public const int AFTER_IMDCT = 2;
     //private static float[] CCE_SCALE = {
     //1.09050773266525765921f,
     //1.18920711500272106672f,
