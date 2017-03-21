@@ -1,6 +1,7 @@
 ﻿// ReSharper disable InconsistentNaming
 
 using System;
+// ReSharper disable AssignmentInConditionalExpression
 
 namespace MultiWaveDecoder
 {
@@ -50,18 +51,17 @@ namespace MultiWaveDecoder
       }
       else
       {
-        throw new NotImplementedException();
-        //  msMask = MSMask.TYPE_ALL_0;
-        //  Arrays.fill(msUsed, false);
+        msMask = MSMask.TYPE_ALL_0;
+        for (int i = 0; i < msUsed.Length; i++) msUsed[i] = false;
       }
 
-      //if (profile.isErrorResilientProfile() && (info.isLTPrediction1Present()))
-      //{
-      //  if (info.ltpData2Present = inStream.readBool()) info.getLTPrediction2().decode(inStream, info, profile);
-      //}
+      if (profile.isErrorResilientProfile() && (info.isLTPrediction1Present()))
+      {
+        if (info.ltpData2Present = inStream.readBool()) info.getLTPrediction2().decode(inStream, info, profile);
+      }
 
-      //icsL.decode(inStream, commonWindow, conf);
-      //icsR.decode(inStream, commonWindow, conf);
+      icsL.decode(inStream, commonWindow, conf);
+      icsR.decode(inStream, commonWindow, conf);
     }
 
     public ICStream getLeftChannel()

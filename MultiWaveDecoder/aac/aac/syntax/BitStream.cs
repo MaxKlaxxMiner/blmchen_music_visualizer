@@ -221,5 +221,10 @@ namespace MultiWaveDecoder
     {
       return n == 32 ? -1 : (1 << n) - 1;
     }
+
+    public override string ToString()
+    {
+      return (new{ position, pos, bitsCached, cache }).ToString();
+    }
   }
 }

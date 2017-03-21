@@ -32,8 +32,9 @@ namespace MultiWaveDecoder
     // prediction
     bool predictionDataPresent;
     ICPrediction icPredict;
-    bool ltpData1Present, ltpData2Present;
-    //LTPrediction ltPredict1, ltPredict2;
+    bool ltpData1Present;
+    public bool ltpData2Present;
+    LTPrediction ltPredict1, ltPredict2;
 
     // windows/sfbs
     int windowCount;
@@ -205,20 +206,20 @@ namespace MultiWaveDecoder
       return ltpData1Present;
     }
 
-    //public LTPrediction getLTPrediction1()
-    //{
-    //  return ltPredict1;
-    //}
+    public LTPrediction getLTPrediction1()
+    {
+      return ltPredict1;
+    }
 
     public bool isLTPrediction2Present()
     {
       return ltpData2Present;
     }
 
-    //public LTPrediction getLTPrediction2()
-    //{
-    //  return ltPredict2;
-    //}
+    public LTPrediction getLTPrediction2()
+    {
+      return ltPredict2;
+    }
 
     public void unsetPredictionSFB(int sfb)
     {

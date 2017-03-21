@@ -79,7 +79,7 @@ namespace MultiWaveDecoder
       if (ADIFHeader.isPresent(inStream))
       {
         adifHeader = ADIFHeader.readHeader(inStream);
-        PCE pce = adifHeader.getFirstPCE();
+        var pce = adifHeader.getFirstPCE();
         config.setProfile(pce.getProfile());
         config.setSampleFrequency(pce.getSampleFrequency());
         config.setChannelConfiguration((ChannelConfiguration)pce.getChannelCount());
