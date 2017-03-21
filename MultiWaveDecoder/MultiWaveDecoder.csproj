@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -71,6 +73,7 @@
     <Compile Include="aac\aac\syntax\Element.cs" />
     <Compile Include="aac\aac\syntax\PCE.cs" />
     <Compile Include="aac\aac\syntax\SyntacticElements.cs" />
+    <Compile Include="aac\aac\tools\ICPrediction.cs" />
     <Compile Include="aac\aac\tools\MSMask.cs" />
     <Compile Include="aac\aac\transport\ADIFHeader.cs" />
     <Compile Include="aac\Main.cs" />
@@ -182,7 +185,6 @@
     <Content Include="jaad\aac\syntax\IQTable.java" />
     <Content Include="jaad\aac\syntax\ScaleFactorTable.java" />
     <Content Include="jaad\aac\syntax\SCE_LFE.java" />
-    <Content Include="jaad\aac\tools\ICPrediction.java" />
     <Content Include="jaad\aac\tools\IS.java" />
     <Content Include="jaad\aac\tools\ISScaleTable.java" />
     <Content Include="jaad\aac\tools\LTPrediction.java" />

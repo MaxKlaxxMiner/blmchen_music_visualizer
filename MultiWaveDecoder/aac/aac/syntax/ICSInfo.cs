@@ -1,16 +1,16 @@
-﻿// ReSharper disable InconsistentNaming
+﻿using System;
+using System.Linq;
 
-using System;
+// ReSharper disable InconsistentNaming
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable AssignmentInConditionalExpression
 // ReSharper disable MemberCanBeMadeStatic.Global
+// ReSharper disable MemberCanBeMadeStatic.Local
 
 namespace MultiWaveDecoder
 {
   public sealed class ICSInfo : ScaleFactorBands
   {
-    //public class ICSInfo implements Constants, ScaleFactorBands {
-
     public static int WINDOW_SHAPE_SINE = 0;
     public static int WINDOW_SHAPE_KAISER = 1;
     public static int PREVIOUS = 0;
@@ -31,7 +31,7 @@ namespace MultiWaveDecoder
 
     // prediction
     bool predictionDataPresent;
-    //ICPrediction icPredict;
+    ICPrediction icPredict;
     bool ltpData1Present, ltpData2Present;
     //LTPrediction ltPredict1, ltPredict2;
 
@@ -230,24 +230,24 @@ namespace MultiWaveDecoder
 
     public void setData(ICSInfo info)
     {
-      throw new NotImplementedException();
-      //windowSequence = WindowSequence.valueOf(info.windowSequence.name());
-      //windowShape[PREVIOUS] = windowShape[CURRENT];
-      //windowShape[CURRENT] = info.windowShape[CURRENT];
-      //maxSFB = info.maxSFB;
-      //predictionDataPresent = info.predictionDataPresent;
-      //if (predictionDataPresent) icPredict = info.icPredict;
-      //ltpData1Present = info.ltpData1Present;
-      //if (ltpData1Present)
-      //{
-      //  ltPredict1.copy(info.ltPredict1);
-      //  ltPredict2.copy(info.ltPredict2);
-      //}
-      //windowCount = info.windowCount;
-      //windowGroupCount = info.windowGroupCount;
-      //windowGroupLength = Arrays.copyOf(info.windowGroupLength, info.windowGroupLength.Length);
-      //swbCount = info.swbCount;
-      //swbOffsets = Arrays.copyOf(info.swbOffsets, info.swbOffsets.Length);
+      windowSequence = info.windowSequence;
+      windowShape[PREVIOUS] = windowShape[CURRENT];
+      windowShape[CURRENT] = info.windowShape[CURRENT];
+      maxSFB = info.maxSFB;
+      predictionDataPresent = info.predictionDataPresent;
+      if (predictionDataPresent) icPredict = info.icPredict;
+      ltpData1Present = info.ltpData1Present;
+      if (ltpData1Present)
+      {
+        throw new NotImplementedException();
+        //ltPredict1.copy(info.ltPredict1);
+        //ltPredict2.copy(info.ltPredict2);
+      }
+      windowCount = info.windowCount;
+      windowGroupCount = info.windowGroupCount;
+      windowGroupLength = info.windowGroupLength.ToArray();
+      swbCount = info.swbCount;
+      swbOffsets = info.swbOffsets.ToArray();
     }
   }
 }
