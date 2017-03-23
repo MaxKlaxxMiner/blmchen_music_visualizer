@@ -185,13 +185,12 @@ namespace MultiWaveDecoder
             case INTENSITY_HCB:
             case INTENSITY_HCB2:
             {
-              throw new NotImplementedException();
-              //for (; sfb < end; sfb++, idx++)
-              //{
-              //  offset[2] += Huffman.decodeScaleFactor(inStream) - SF_DELTA;
-              //  tmp = Math.min(Math.max(offset[2], -155), 100);
-              //  scaleFactors[idx] = SCALEFACTOR_TABLE[-tmp + SF_OFFSET];
-              //}
+              for (; sfb < end; sfb++, idx++)
+              {
+                offset[2] += Huffman.decodeScaleFactor(inStream) - SF_DELTA;
+                tmp = Math.Min(Math.Max(offset[2], -155), 100);
+                scaleFactors[idx] = SCALEFACTOR_TABLE[-tmp + SF_OFFSET];
+              }
             } break;
             case NOISE_HCB:
             {

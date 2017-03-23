@@ -54,9 +54,10 @@ namespace MultiWaveDecoder
           var buf = new SampleBuffer();
           while (track.hasMoreFrames())
           {
+            if (track.currentFrame % 10 == 0) Console.WriteLine(track.currentFrame.ToString("N0") + " / " + track.frames.Count.ToString("N0"));
             var frame = track.readNextFrame();
             dec.decodeFrame(frame.getData(), buf);
-            //wav.write(buf.getData());
+            wav.write(buf.getData());
           }
         }
       }

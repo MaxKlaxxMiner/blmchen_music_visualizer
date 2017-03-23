@@ -14,6 +14,11 @@ namespace MultiWaveDecoder
       Console.WriteLine("Info: " + message);
     }
 
+    public static void LogVerbose(string message)
+    {
+      // Console.WriteLine("Verb: " + message);
+    }
+
     public static void LogServe(string message)
     {
       Console.WriteLine("Serve: " + message);

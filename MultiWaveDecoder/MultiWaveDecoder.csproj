@@ -281,7 +281,6 @@
     <Content Include="jaad\spi\javasound\AsynchronousAudioInputStream.java" />
     <Content Include="jaad\spi\javasound\CircularBuffer.java" />
     <Content Include="jaad\spi\javasound\MP4AudioInputStream.java" />
-    <Content Include="jaad\util\wav\WaveFileWriter.java" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

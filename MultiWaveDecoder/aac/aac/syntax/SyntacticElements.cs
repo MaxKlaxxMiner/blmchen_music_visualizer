@@ -72,7 +72,7 @@ namespace MultiWaveDecoder
             } break;
             case ELEMENT_CPE:
             {
-              Logger.LogInfo("CPE");
+              Logger.LogVerbose("CPE");
               prev = decodeCPE(inStream);
             } break;
             case ELEMENT_CCE:
@@ -105,7 +105,7 @@ namespace MultiWaveDecoder
             } break;
           }
         }
-        Logger.LogInfo("END");
+        Logger.LogVerbose("END");
         content = false;
         prev = null;
       }

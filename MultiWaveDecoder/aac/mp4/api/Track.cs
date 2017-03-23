@@ -19,8 +19,8 @@ namespace MultiWaveDecoder
     readonly MP4InputStream inStream;
     protected readonly TrackHeaderBox tkhd;
     readonly MediaHeaderBox mdhd;
-    readonly List<Frame> frames = new List<Frame>();
-    int currentFrame;
+    public readonly List<Frame> frames = new List<Frame>();
+    public int currentFrame;
 
     // --- info structures ---
     protected DecoderSpecificInfo decoderSpecificInfo;
