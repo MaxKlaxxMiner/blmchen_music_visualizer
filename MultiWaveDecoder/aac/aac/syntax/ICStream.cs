@@ -5,7 +5,7 @@ using System;
 
 namespace MultiWaveDecoder
 {
-  public sealed class ICStream : Constants
+  public sealed class ICStream : ScaleFactorBands
   {
     ////TODO: apply pulse data
     //public class ICStream implements Constants, HCB, ScaleFactorTable, IQTable {
@@ -210,13 +210,12 @@ namespace MultiWaveDecoder
             } break;
             default:
             {
-              throw new NotImplementedException();
-              //for (; sfb < end; sfb++, idx++)
-              //{
-              //  offset[0] += Huffman.decodeScaleFactor(inStream) - SF_DELTA;
-              //  if (offset[0] > 255) throw new AACException("scalefactor out of range: " + offset[0]);
-              //  scaleFactors[idx] = SCALEFACTOR_TABLE[offset[0] - 100 + SF_OFFSET];
-              //}
+              for (; sfb < end; sfb++, idx++)
+              {
+                offset[0] += Huffman.decodeScaleFactor(inStream) - SF_DELTA;
+                if (offset[0] > 255) throw new AACException("scalefactor out of range: " + offset[0]);
+                scaleFactors[idx] = SCALEFACTOR_TABLE[offset[0] - 100 + SF_OFFSET];
+              }
             } break;
           }
         }
@@ -277,16 +276,14 @@ namespace MultiWaveDecoder
               num = (hcb >= FIRST_PAIR_HCB) ? 2 : 4;
               for (k = 0; k < width; k += num)
               {
-                throw new NotImplementedException();
+                Huffman.decodeSpectralData(inStream, hcb, buf, 0);
 
-                //Huffman.decodeSpectralData(inStream, hcb, buf, 0);
-
-                ////inverse quantization & scaling
-                //for (j = 0; j < num; j++)
-                //{
-                //  data[off + k + j] = (buf[j] > 0) ? IQ_TABLE[buf[j]] : -IQ_TABLE[-buf[j]];
-                //  data[off + k + j] *= scaleFactors[idx];
-                //}
+                //inverse quantization & scaling
+                for (j = 0; j < num; j++)
+                {
+                  data[off + k + j] = (buf[j] > 0) ? IQ_TABLE[buf[j]] : -IQ_TABLE[-buf[j]];
+                  data[off + k + j] *= scaleFactors[idx];
+                }
               }
             }
           }

@@ -184,8 +184,6 @@
     <Content Include="jaad\aac\sbr\NoiseEnvelope.java" />
     <Content Include="jaad\aac\sbr\NoiseTable.java" />
     <Content Include="jaad\aac\sbr\TFGrid.java" />
-    <Content Include="jaad\aac\syntax\IQTable.java" />
-    <Content Include="jaad\aac\syntax\ScaleFactorTable.java" />
     <Content Include="jaad\aac\tools\ISScaleTable.java" />
     <Content Include="jaad\adts\ADTSDemultiplexer.java" />
     <Content Include="jaad\adts\ADTSFrame.java" />

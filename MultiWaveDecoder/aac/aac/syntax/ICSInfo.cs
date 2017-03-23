@@ -80,9 +80,8 @@ namespace MultiWaveDecoder
           }
         }
         windowCount = 8;
-        throw new NotImplementedException();
-        //swbOffsets = SWB_OFFSET_SHORT_WINDOW[sf.getIndex()];
-        //swbCount = SWB_SHORT_WINDOW_COUNT[sf.getIndex()];
+        swbOffsets = SWB_OFFSET_SHORT_WINDOW[sf.getIndex()];
+        swbCount = SWB_SHORT_WINDOW_COUNT[sf.getIndex()];
         predictionDataPresent = false;
       }
       else
