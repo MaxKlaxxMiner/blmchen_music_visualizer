@@ -4,7 +4,7 @@ namespace MultiWaveDecoder
 {
   public abstract class FilterbankTable
   {
-    float[] qmf_c =
+    protected float[] qmf_c =
     {
     0f, -0.00055252865047f,
     -0.00056176925738f, -0.00049475180896f,

@@ -79,7 +79,7 @@ namespace MultiWaveDecoder
       if (ADIFHeader.isPresent(inStream))
       {
         adifHeader = ADIFHeader.readHeader(inStream);
-        PCE pce = adifHeader.getFirstPCE();
+        var pce = adifHeader.getFirstPCE();
         config.setProfile(pce.getProfile());
         config.setSampleFrequency(pce.getSampleFrequency());
         config.setChannelConfiguration((ChannelConfiguration)pce.getChannelCount());
@@ -94,10 +94,9 @@ namespace MultiWaveDecoder
         // 1: bitstream parsing and noiseless coding
         syntacticElements.decode(inStream);
         // 2: spectral processing
-        throw new NotImplementedException();
-        //syntacticElements.process(filterBank);
+        syntacticElements.process(filterBank);
         // 3: send to output buffer
-        //syntacticElements.sendToOutput(buffer);
+        syntacticElements.sendToOutput(buffer);
       }
       //catch (AACException e)
       //{

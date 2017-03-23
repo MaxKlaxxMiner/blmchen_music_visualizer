@@ -1,5 +1,8 @@
 ﻿// ReSharper disable NotAccessedField.Local
 // ReSharper disable InconsistentNaming
+
+using System;
+
 #pragma warning disable 414
 namespace MultiWaveDecoder
 {
@@ -55,134 +58,136 @@ namespace MultiWaveDecoder
     //    Arrays.fill(v, 0);
     //  }
 
-    //  void sbr_qmf_synthesis_32(SBR sbr, float[,,] X,
-    //    float[] output) {
-    //    float[] x1 = new float[32], x2 = new float[32];
-    //    float scale = 1.f/64.f;
-    //    int n, k, out = 0;
-    //    int l;
+    public void sbr_qmf_synthesis_32(SBR sbr, float[, ,] X, float[] output)
+    {
+      throw new NotImplementedException();
+      //float[] x1 = new float[32], x2 = new float[32];
+      //float scale = 1.f/64.f;
+      //int n, k, out = 0;
+      //int l;
 
 
-    //    /* qmf subsample l */
-    //    for(l = 0; l<sbr.numTimeSlotsRate; l++) {
-    //      /* shift buffer v */
-    //      /* buffer is not shifted, we are using a ringbuffer */
-    //      //memmove(qmfs.v + 64, qmfs.v, (640-64)*sizeof(real_t));
+      ///* qmf subsample l */
+      //for(l = 0; l<sbr.numTimeSlotsRate; l++) {
+      //  /* shift buffer v */
+      //  /* buffer is not shifted, we are using a ringbuffer */
+      //  //memmove(qmfs.v + 64, qmfs.v, (640-64)*sizeof(real_t));
 
-    //      /* calculate 64 samples */
-    //      /* complex pre-twiddle */
-    //      for(k = 0; k<32; k++) {
-    //        x1[k] = (X[l,k,0]*qmf32_pre_twiddle[k,0])-(X[l,k,1]*qmf32_pre_twiddle[k,1]);
-    //        x2[k] = (X[l,k,1]*qmf32_pre_twiddle[k,0])+(X[l,k,0]*qmf32_pre_twiddle[k,1]);
+      //  /* calculate 64 samples */
+      //  /* complex pre-twiddle */
+      //  for(k = 0; k<32; k++) {
+      //    x1[k] = (X[l,k,0]*qmf32_pre_twiddle[k,0])-(X[l,k,1]*qmf32_pre_twiddle[k,1]);
+      //    x2[k] = (X[l,k,1]*qmf32_pre_twiddle[k,0])+(X[l,k,0]*qmf32_pre_twiddle[k,1]);
 
-    //        x1[k] *= scale;
-    //        x2[k] *= scale;
-    //      }
+      //    x1[k] *= scale;
+      //    x2[k] *= scale;
+      //  }
 
-    //      /* transform */
-    //      DCT4_32(x1, x1);
-    //      DST4_32(x2, x2);
+      //  /* transform */
+      //  DCT4_32(x1, x1);
+      //  DST4_32(x2, x2);
 
-    //      for(n = 0; n<32; n++) {
-    //        this.v[this.v_index+n] = this.v[this.v_index+640+n] = -x1[n]+x2[n];
-    //        this.v[this.v_index+63-n] = this.v[this.v_index+640+63-n] = x1[n]+x2[n];
-    //      }
+      //  for(n = 0; n<32; n++) {
+      //    this.v[this.v_index+n] = this.v[this.v_index+640+n] = -x1[n]+x2[n];
+      //    this.v[this.v_index+63-n] = this.v[this.v_index+640+63-n] = x1[n]+x2[n];
+      //  }
 
-    //      /* calculate 32 output samples and window */
-    //      for(k = 0; k<32; k++) {
-    //        output[out++] = (this.v[this.v_index+k]*qmf_c[2*k])
-    //          +(this.v[this.v_index+96+k]*qmf_c[64+2*k])
-    //          +(this.v[this.v_index+128+k]*qmf_c[128+2*k])
-    //          +(this.v[this.v_index+224+k]*qmf_c[192+2*k])
-    //          +(this.v[this.v_index+256+k]*qmf_c[256+2*k])
-    //          +(this.v[this.v_index+352+k]*qmf_c[320+2*k])
-    //          +(this.v[this.v_index+384+k]*qmf_c[384+2*k])
-    //          +(this.v[this.v_index+480+k]*qmf_c[448+2*k])
-    //          +(this.v[this.v_index+512+k]*qmf_c[512+2*k])
-    //          +(this.v[this.v_index+608+k]*qmf_c[576+2*k]);
-    //      }
+      //  /* calculate 32 output samples and window */
+      //  for(k = 0; k<32; k++) {
+      //    output[out++] = (this.v[this.v_index+k]*qmf_c[2*k])
+      //      +(this.v[this.v_index+96+k]*qmf_c[64+2*k])
+      //      +(this.v[this.v_index+128+k]*qmf_c[128+2*k])
+      //      +(this.v[this.v_index+224+k]*qmf_c[192+2*k])
+      //      +(this.v[this.v_index+256+k]*qmf_c[256+2*k])
+      //      +(this.v[this.v_index+352+k]*qmf_c[320+2*k])
+      //      +(this.v[this.v_index+384+k]*qmf_c[384+2*k])
+      //      +(this.v[this.v_index+480+k]*qmf_c[448+2*k])
+      //      +(this.v[this.v_index+512+k]*qmf_c[512+2*k])
+      //      +(this.v[this.v_index+608+k]*qmf_c[576+2*k]);
+      //  }
 
-    //      /* update ringbuffer index */
-    //      this.v_index -= 64;
-    //      if(this.v_index<0)
-    //        this.v_index = (640-64);
-    //    }
-    //  }
+      //  /* update ringbuffer index */
+      //  this.v_index -= 64;
+      //  if(this.v_index<0)
+      //    this.v_index = (640-64);
+      //}
+    }
 
-    //  void sbr_qmf_synthesis_64(SBR sbr, float[,,] X,
-    //    float[] output) {
-    //    float[] in_real1 = new float[32], in_imag1 = new float[32], out_real1 = new float[32], out_imag1 = new float[32];
-    //    float[] in_real2 = new float[32], in_imag2 = new float[32], out_real2 = new float[32], out_imag2 = new float[32];
-    //    float[,] pX;
-    //    float scale = 1.f/64.f;
-    //    int n, k, out = 0;
-    //    int l;
+    public void sbr_qmf_synthesis_64(SBR sbr, float[, ,] X, float[] output)
+    {
+      throw new NotImplementedException();
+      //float[] in_real1 = new float[32], in_imag1 = new float[32], out_real1 = new float[32], out_imag1 = new float[32];
+      //float[] in_real2 = new float[32], in_imag2 = new float[32], out_real2 = new float[32], out_imag2 = new float[32];
+      //float[,] pX;
+      //float scale = 1.f/64.f;
+      //int n, k, out = 0;
+      //int l;
 
 
-    //    /* qmf subsample l */
-    //    for(l = 0; l<sbr.numTimeSlotsRate; l++) {
-    //      /* shift buffer v */
-    //      /* buffer is not shifted, we use double ringbuffer */
-    //      //memmove(qmfs.v + 128, qmfs.v, (1280-128)*sizeof(real_t));
+      ///* qmf subsample l */
+      //for(l = 0; l<sbr.numTimeSlotsRate; l++) {
+      //  /* shift buffer v */
+      //  /* buffer is not shifted, we use double ringbuffer */
+      //  //memmove(qmfs.v + 128, qmfs.v, (1280-128)*sizeof(real_t));
 
-    //      /* calculate 128 samples */
-    //      pX = X[l];
+      //  /* calculate 128 samples */
+      //  pX = X[l];
 
-    //      in_imag1[31] = scale*pX[1,0];
-    //      in_real1[0] = scale*pX[0,0];
-    //      in_imag2[31] = scale*pX[63-1,1];
-    //      in_real2[0] = scale*pX[63-0,1];
-    //      for(k = 1; k<31; k++) {
-    //        in_imag1[31-k] = scale*pX[2*k+1,0];
-    //        in_real1[     k] = scale*pX[2*k,0];
-    //        in_imag2[31-k] = scale*pX[63-(2*k+1),1];
-    //        in_real2[     k] = scale*pX[63-(2*k),1];
-    //      }
-    //      in_imag1[0] = scale*pX[63,0];
-    //      in_real1[31] = scale*pX[62,0];
-    //      in_imag2[0] = scale*pX[63-63,1];
-    //      in_real2[31] = scale*pX[63-62,1];
+      //  in_imag1[31] = scale*pX[1,0];
+      //  in_real1[0] = scale*pX[0,0];
+      //  in_imag2[31] = scale*pX[63-1,1];
+      //  in_real2[0] = scale*pX[63-0,1];
+      //  for(k = 1; k<31; k++) {
+      //    in_imag1[31-k] = scale*pX[2*k+1,0];
+      //    in_real1[     k] = scale*pX[2*k,0];
+      //    in_imag2[31-k] = scale*pX[63-(2*k+1),1];
+      //    in_real2[     k] = scale*pX[63-(2*k),1];
+      //  }
+      //  in_imag1[0] = scale*pX[63,0];
+      //  in_real1[31] = scale*pX[62,0];
+      //  in_imag2[0] = scale*pX[63-63,1];
+      //  in_real2[31] = scale*pX[63-62,1];
 
-    //      // dct4_kernel is DCT_IV without reordering which is done before and after FFT
-    //      DCT.dct4_kernel(in_real1, in_imag1, out_real1, out_imag1);
-    //      DCT.dct4_kernel(in_real2, in_imag2, out_real2, out_imag2);
+      //  // dct4_kernel is DCT_IV without reordering which is done before and after FFT
+      //  DCT.dct4_kernel(in_real1, in_imag1, out_real1, out_imag1);
+      //  DCT.dct4_kernel(in_real2, in_imag2, out_real2, out_imag2);
 
-    //      int pring_buffer_1 = v_index; //*v
-    //      int pring_buffer_3 = pring_buffer_1+1280;
-    //      //        ptemp_1 = x1;
-    //      //        ptemp_2 = x2;
+      //  int pring_buffer_1 = v_index; //*v
+      //  int pring_buffer_3 = pring_buffer_1+1280;
+      //  //        ptemp_1 = x1;
+      //  //        ptemp_2 = x2;
 
-    //      for(n = 0; n<32; n++) {
-    //        // pring_buffer_3 and pring_buffer_4 are needed only for double ring buffer
-    //        v[pring_buffer_1+2*n] = v[pring_buffer_3+2*n] = out_real2[n]-out_real1[n];
-    //        v[pring_buffer_1+127-2*n] = v[pring_buffer_3+127-2*n] = out_real2[n]+out_real1[n];
-    //        v[pring_buffer_1+2*n+1] = v[pring_buffer_3+2*n+1] = out_imag2[31-n]+out_imag1[31-n];
-    //        v[pring_buffer_1+127-(2*n+1)] = v[pring_buffer_3+127-(2*n+1)] = out_imag2[31-n]-out_imag1[31-n];
-    //      }
+      //  for(n = 0; n<32; n++) {
+      //    // pring_buffer_3 and pring_buffer_4 are needed only for double ring buffer
+      //    v[pring_buffer_1+2*n] = v[pring_buffer_3+2*n] = out_real2[n]-out_real1[n];
+      //    v[pring_buffer_1+127-2*n] = v[pring_buffer_3+127-2*n] = out_real2[n]+out_real1[n];
+      //    v[pring_buffer_1+2*n+1] = v[pring_buffer_3+2*n+1] = out_imag2[31-n]+out_imag1[31-n];
+      //    v[pring_buffer_1+127-(2*n+1)] = v[pring_buffer_3+127-(2*n+1)] = out_imag2[31-n]-out_imag1[31-n];
+      //  }
 
-    //      pring_buffer_1 = v_index; //*v
+      //  pring_buffer_1 = v_index; //*v
 
-    //      /* calculate 64 output samples and window */
-    //      for(k = 0; k<64; k++) {
-    //        output[out++]
-    //          = (v[pring_buffer_1+k+0]*qmf_c[k+0])
-    //          +(v[pring_buffer_1+k+192]*qmf_c[k+64])
-    //          +(v[pring_buffer_1+k+256]*qmf_c[k+128])
-    //          +(v[pring_buffer_1+k+(256+192)]*qmf_c[k+192])
-    //          +(v[pring_buffer_1+k+512]*qmf_c[k+256])
-    //          +(v[pring_buffer_1+k+(512+192)]*qmf_c[k+320])
-    //          +(v[pring_buffer_1+k+768]*qmf_c[k+384])
-    //          +(v[pring_buffer_1+k+(768+192)]*qmf_c[k+448])
-    //          +(v[pring_buffer_1+k+1024]*qmf_c[k+512])
-    //          +(v[pring_buffer_1+k+(1024+192)]*qmf_c[k+576]);
-    //      }
+      //  /* calculate 64 output samples and window */
+      //  for(k = 0; k<64; k++) {
+      //    output[out++]
+      //      = (v[pring_buffer_1+k+0]*qmf_c[k+0])
+      //      +(v[pring_buffer_1+k+192]*qmf_c[k+64])
+      //      +(v[pring_buffer_1+k+256]*qmf_c[k+128])
+      //      +(v[pring_buffer_1+k+(256+192)]*qmf_c[k+192])
+      //      +(v[pring_buffer_1+k+512]*qmf_c[k+256])
+      //      +(v[pring_buffer_1+k+(512+192)]*qmf_c[k+320])
+      //      +(v[pring_buffer_1+k+768]*qmf_c[k+384])
+      //      +(v[pring_buffer_1+k+(768+192)]*qmf_c[k+448])
+      //      +(v[pring_buffer_1+k+1024]*qmf_c[k+512])
+      //      +(v[pring_buffer_1+k+(1024+192)]*qmf_c[k+576]);
+      //  }
 
-    //      /* update ringbuffer index */
-    //      this.v_index -= 128;
-    //      if(this.v_index<0)
-    //        this.v_index = (1280-128);
-    //    }
-    //  }
+      //  /* update ringbuffer index */
+      //  this.v_index -= 128;
+      //  if(this.v_index<0)
+      //    this.v_index = (1280-128);
+      //}
+    }
 
     //  private void DCT4_32(float[] y, float[] x) {
     //    float f0, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10;

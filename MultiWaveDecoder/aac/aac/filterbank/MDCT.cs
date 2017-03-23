@@ -1168,54 +1168,55 @@ namespace MultiWaveDecoder
       tmp = new float[2];
     }
 
+    public void process(float[] inData, int inOff, float[] outData, int outOff)
+    {
+      // pre-IFFT complex multiplication
+      for (int k = 0; k < N4; k++)
+      {
+        buf[k, 1] = (inData[inOff + 2 * k] * sincos[k, 0]) + (inData[inOff + N2 - 1 - 2 * k] * sincos[k, 1]);
+        buf[k, 0] = (inData[inOff + N2 - 1 - 2 * k] * sincos[k, 0]) - (inData[inOff + 2 * k] * sincos[k, 1]);
+      }
 
-    //  void process(float[] in, int inOff, float[] out, int outOff) {
-    //    int k;
+      // complex IFFT, non-scaling
+      fft.process(buf, false);
 
-    //    //pre-IFFT complex multiplication
-    //    for(k = 0; k<N4; k++) {
-    //      buf[k,1] = (in[inOff+2*k]*sincos[k,0])+(in[inOff+N2-1-2*k]*sincos[k,1]);
-    //      buf[k,0] = (in[inOff+N2-1-2*k]*sincos[k,0])-(in[inOff+2*k]*sincos[k,1]);
-    //    }
+      // post-IFFT complex multiplication
+      for (int k = 0; k < N4; k++)
+      {
+        tmp[0] = buf[k, 0];
+        tmp[1] = buf[k, 1];
+        buf[k, 1] = (tmp[1] * sincos[k, 0]) + (tmp[0] * sincos[k, 1]);
+        buf[k, 0] = (tmp[0] * sincos[k, 0]) - (tmp[1] * sincos[k, 1]);
+      }
 
-    //    //complex IFFT, non-scaling
-    //    fft.process(buf, false);
+      // reordering
+      for (int k = 0; k < N8; k += 2)
+      {
+        outData[outOff + 2 * k] = buf[N8 + k, 1];
+        outData[outOff + 2 + 2 * k] = buf[N8 + 1 + k, 1];
 
-    //    //post-IFFT complex multiplication
-    //    for(k = 0; k<N4; k++) {
-    //      tmp[0] = buf[k,0];
-    //      tmp[1] = buf[k,1];
-    //      buf[k,1] = (tmp[1]*sincos[k,0])+(tmp[0]*sincos[k,1]);
-    //      buf[k,0] = (tmp[0]*sincos[k,0])-(tmp[1]*sincos[k,1]);
-    //    }
+        outData[outOff + 1 + 2 * k] = -buf[N8 - 1 - k, 0];
+        outData[outOff + 3 + 2 * k] = -buf[N8 - 2 - k, 0];
 
-    //    //reordering
-    //    for(k = 0; k<N8; k += 2) {
-    //      out[outOff+2*k] = buf[N8+k,1];
-    //      out[outOff+2+2*k] = buf[N8+1+k,1];
+        outData[outOff + N4 + 2 * k] = buf[k, 0];
+        outData[outOff + N4 + 2 + 2 * k] = buf[1 + k, 0];
 
-    //      out[outOff+1+2*k] = -buf[N8-1-k,0];
-    //      out[outOff+3+2*k] = -buf[N8-2-k,0];
+        outData[outOff + N4 + 1 + 2 * k] = -buf[N4 - 1 - k, 1];
+        outData[outOff + N4 + 3 + 2 * k] = -buf[N4 - 2 - k, 1];
 
-    //      out[outOff+N4+2*k] = buf[k,0];
-    //      out[outOff+N4+2+2*k] = buf[1+k,0];
+        outData[outOff + N2 + 2 * k] = buf[N8 + k, 0];
+        outData[outOff + N2 + 2 + 2 * k] = buf[N8 + 1 + k, 0];
 
-    //      out[outOff+N4+1+2*k] = -buf[N4-1-k,1];
-    //      out[outOff+N4+3+2*k] = -buf[N4-2-k,1];
+        outData[outOff + N2 + 1 + 2 * k] = -buf[N8 - 1 - k, 1];
+        outData[outOff + N2 + 3 + 2 * k] = -buf[N8 - 2 - k, 1];
 
-    //      out[outOff+N2+2*k] = buf[N8+k,0];
-    //      out[outOff+N2+2+2*k] = buf[N8+1+k,0];
+        outData[outOff + N2 + N4 + 2 * k] = -buf[k, 1];
+        outData[outOff + N2 + N4 + 2 + 2 * k] = -buf[1 + k, 1];
 
-    //      out[outOff+N2+1+2*k] = -buf[N8-1-k,1];
-    //      out[outOff+N2+3+2*k] = -buf[N8-2-k,1];
-
-    //      out[outOff+N2+N4+2*k] = -buf[k,1];
-    //      out[outOff+N2+N4+2+2*k] = -buf[1+k,1];
-
-    //      out[outOff+N2+N4+1+2*k] = buf[N4-1-k,0];
-    //      out[outOff+N2+N4+3+2*k] = buf[N4-2-k,0];
-    //    }
-    //  }
+        outData[outOff + N2 + N4 + 1 + 2 * k] = buf[N4 - 1 - k, 0];
+        outData[outOff + N2 + N4 + 3 + 2 * k] = buf[N4 - 2 - k, 0];
+      }
+    }
 
     //  void processForward(float[] in, float[] out) {
     //    int n, k;
