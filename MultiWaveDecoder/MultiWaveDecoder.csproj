@@ -188,8 +188,6 @@
     <Content Include="jaad\aac\syntax\ScaleFactorTable.java" />
     <Content Include="jaad\aac\tools\ISScaleTable.java" />
     <Content Include="jaad\aac\tools\MS.java" />
-    <Content Include="jaad\aac\tools\TNS.java" />
-    <Content Include="jaad\aac\tools\TNSTables.java" />
     <Content Include="jaad\adts\ADTSDemultiplexer.java" />
     <Content Include="jaad\adts\ADTSFrame.java" />
     <Content Include="jaad\MP4Info.java" />

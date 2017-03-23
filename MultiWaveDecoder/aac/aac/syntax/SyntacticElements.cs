@@ -316,16 +316,16 @@ namespace MultiWaveDecoder
       // dependent coupling
       processDependentCoupling(true, elementID, CCE.BEFORE_TNS, iqData1, iqData2);
 
-      //// TNS
-      //if (ics1.isTNSDataPresent()) ics1.getTNS().process(ics1, iqData1, sf, false);
-      //if (ics2.isTNSDataPresent()) ics2.getTNS().process(ics2, iqData2, sf, false);
+      // TNS
+      if (ics1.isTNSDataPresent()) ics1.getTNS().process(ics1, iqData1, sf, false);
+      if (ics2.isTNSDataPresent()) ics2.getTNS().process(ics2, iqData2, sf, false);
 
-      //// dependent coupling
-      //processDependentCoupling(true, elementID, CCE.AFTER_TNS, iqData1, iqData2);
+      // dependent coupling
+      processDependentCoupling(true, elementID, CCE.AFTER_TNS, iqData1, iqData2);
 
-      //// filterbank
-      //filterBank.process(info1.getWindowSequence(), info1.getWindowShape(ICSInfo.CURRENT), info1.getWindowShape(ICSInfo.PREVIOUS), iqData1, data[channel], channel);
-      //filterBank.process(info2.getWindowSequence(), info2.getWindowShape(ICSInfo.CURRENT), info2.getWindowShape(ICSInfo.PREVIOUS), iqData2, data[channel + 1], channel + 1);
+      // filterbank
+      filterBank.process(info1.getWindowSequence(), info1.getWindowShape(ICSInfo.CURRENT), info1.getWindowShape(ICSInfo.PREVIOUS), iqData1, data[channel], channel);
+      filterBank.process(info2.getWindowSequence(), info2.getWindowShape(ICSInfo.CURRENT), info2.getWindowShape(ICSInfo.PREVIOUS), iqData2, data[channel + 1], channel + 1);
 
       //if (LTPrediction.isLTPProfile(profile))
       //{

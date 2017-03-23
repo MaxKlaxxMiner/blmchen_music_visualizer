@@ -1,61 +1,77 @@
 ﻿// ReSharper disable InconsistentNaming
 // ReSharper disable ClassNeverInstantiated.Global
+// ReSharper disable UnusedMember.Global
+// ReSharper disable MemberCanBeMadeStatic.Global
+// ReSharper disable UnusedParameter.Global
 namespace MultiWaveDecoder
 {
   /// <summary>
   /// Temporal Noise Shaping
   /// </summary>
-  public class TNS : Constants
+  public sealed class TNS : Constants
   {
-    //public class TNS implements Constants, TNSTables {
+    const int TNS_MAX_ORDER = 20;
+    static readonly int[] SHORT_BITS = { 1, 4, 3 };
+    static readonly int[] LONG_BITS = { 2, 6, 5 };
+    // bitstream
+    readonly int[] nFilt;
+    readonly int[,] length;
+    readonly int[,] order;
+    readonly bool[,] direction;
+    readonly float[, ,] coef;
 
-    //  private static int TNS_MAX_ORDER = 20;
-    //  private static int[] SHORT_BITS = {1, 4, 3}, LONG_BITS = {2, 6, 5};
-    //  //bitstream
-    //  private int[] nFilt;
-    //  private int[,] length, order;
-    //  private bool[,] direction;
-    //  private float[,,] coef;
+    public TNS()
+    {
+      nFilt = new int[8];
+      length = new int[8, 4];
+      direction = new bool[8, 4];
+      order = new int[8, 4];
+      coef = new float[8, 4, TNS_MAX_ORDER];
+    }
 
-    //  public TNS() {
-    //    nFilt = new int[8];
-    //    length = new int[8,4];
-    //    direction = new bool[8,4];
-    //    order = new int[8,4];
-    //    coef = new float[8,4,TNS_MAX_ORDER];
-    //  }
+    static readonly float[] TNS_COEF_1_3 = { 0.00000000f, -0.43388373f, 0.64278758f, 0.34202015f };
+    static readonly float[] TNS_COEF_0_3 = { 0.00000000f, -0.43388373f, -0.78183150f, -0.97492790f, 0.98480773f, 0.86602539f, 0.64278758f, 0.34202015f };
+    static readonly float[] TNS_COEF_1_4 = { 0.00000000f, -0.20791170f, -0.40673664f, -0.58778524f, 0.67369562f, 0.52643216f, 0.36124167f, 0.18374951f };
+    static readonly float[] TNS_COEF_0_4 = { 0.00000000f, -0.20791170f, -0.40673664f, -0.58778524f, -0.74314481f, -0.86602539f, -0.95105654f, -0.99452192f, 0.99573416f, 0.96182561f, 0.89516330f, 0.79801720f, 0.67369562f, 0.52643216f, 0.36124167f, 0.18374951f };
+    static readonly float[][] TNS_TABLES = { TNS_COEF_0_3, TNS_COEF_0_4, TNS_COEF_1_3, TNS_COEF_1_4 };
 
-    //  public void decode(BitStream in, ICSInfo info) throws AACException {
-    //    int windowCount = info.getWindowCount();
-    //    int[] bits = info.isEightShortFrame() ? SHORT_BITS : LONG_BITS;
+    public void decode(BitStream inStream, ICSInfo info)
+    {
+      int windowCount = info.getWindowCount();
+      var bits = info.isEightShortFrame() ? SHORT_BITS : LONG_BITS;
 
-    //    int w, i, filt, coefLen, coefRes, coefCompress, tmp;
-    //    for(w = 0; w<windowCount; w++) {
-    //      if((nFilt[w] = in.readBits(bits[0]))!=0) {
-    //        coefRes = in.readBit();
+      int w;
+      for (w = 0; w < windowCount; w++)
+      {
+        if ((nFilt[w] = inStream.readBits(bits[0])) != 0)
+        {
+          int coefRes = inStream.readBit();
 
-    //        for(filt = 0; filt<nFilt[w]; filt++) {
-    //          length[w,filt] = in.readBits(bits[1]);
+          for (int filt = 0; filt < nFilt[w]; filt++)
+          {
+            length[w, filt] = inStream.readBits(bits[1]);
 
-    //          if((order[w,filt] = in.readBits(bits[2]))>20) throw new AACException("TNS filter out of range: "+order[w,filt]);
-    //          else if(order[w,filt]!=0) {
-    //            direction[w,filt] = in.readBool();
-    //            coefCompress = in.readBit();
-    //            coefLen = coefRes+3-coefCompress;
-    //            tmp = 2*coefCompress+coefRes;
+            if ((order[w, filt] = inStream.readBits(bits[2])) > 20) throw new AACException("TNS filter out of range: " + order[w, filt]);
+            if (order[w, filt] != 0)
+            {
+              direction[w, filt] = inStream.readBool();
+              int coefCompress = inStream.readBit();
+              int coefLen = coefRes + 3 - coefCompress;
+              int tmp = 2 * coefCompress + coefRes;
 
-    //            for(i = 0; i<order[w,filt]; i++) {
-    //              coef[w,filt,i] = TNS_TABLES[tmp,in.readBits(coefLen)];
-    //            }
-    //          }
-    //        }
-    //      }
-    //    }
-    //  }
+              for (int i = 0; i < order[w, filt]; i++)
+              {
+                coef[w, filt, i] = TNS_TABLES[tmp][inStream.readBits(coefLen)];
+              }
+            }
+          }
+        }
+      }
+    }
 
-    //  public void process(ICStream ics, float[] spec, SampleFrequency sf, bool decode) {
-    //    //TODO...
-    //  }
-    //}
+    public void process(ICStream ics, float[] spec, SampleFrequency sf, bool decode)
+    {
+      //TODO...
+    }
   }
 }
