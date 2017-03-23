@@ -15,13 +15,13 @@ namespace MultiWaveDecoder
   public sealed class SyntacticElements : Constants
   {
     // global properties
-    DecoderConfig config;
+    readonly DecoderConfig config;
     bool sbrPresent, psPresent;
     int bitsRead;
     // elements
     PCE pce;
-    Element[] elements; //SCE, LFE and CPE
-    CCE[] cces;
+    readonly Element[] elements; //SCE, LFE and CPE
+    readonly CCE[] cces;
     DSE[] dses;
     FIL[] fils;
     int curElem, curCCE, curDSE, curFIL;
@@ -314,8 +314,7 @@ namespace MultiWaveDecoder
       }
 
       // dependent coupling
-      throw new NotImplementedException();
-      //processDependentCoupling(true, elementID, CCE.BEFORE_TNS, iqData1, iqData2);
+      processDependentCoupling(true, elementID, CCE.BEFORE_TNS, iqData1, iqData2);
 
       //// TNS
       //if (ics1.isTNSDataPresent()) ics1.getTNS().process(ics1, iqData1, sf, false);
@@ -375,30 +374,37 @@ namespace MultiWaveDecoder
     //}
     //}
 
-    //private void processDependentCoupling(bool channelPair, int elementID, int couplingPoint, float[] data1, float[] data2) {
-    //int index, c, chSelect;
-    //CCE cce;
-    //for(int i = 0; i<cces.Length; i++) {
-    //cce = cces[i];
-    //index = 0;
-    //if(cce!=null&&cce.getCouplingPoint()==couplingPoint) {
-    //for(c = 0; c<=cce.getCoupledCount(); c++) {
-    //chSelect = cce.getCHSelect(c);
-    //if(cce.isChannelPair(c)==channelPair&&cce.getIDSelect(c)==elementID) {
-    //if(chSelect!=1) {
-    //cce.applyDependentCoupling(index, data1);
-    //if(chSelect!=0) index++;
-    //}
-    //if(chSelect!=2) {
-    //cce.applyDependentCoupling(index, data2);
-    //index++;
-    //}
-    //}
-    //else index += 1+((chSelect==3) ? 1 : 0);
-    //}
-    //}
-    //}
-    //}
+    void processDependentCoupling(bool channelPair, int elementID, int couplingPoint, float[] data1, float[] data2)
+    {
+      int index, c, chSelect;
+      CCE cce;
+      for (int i = 0; i < cces.Length; i++)
+      {
+        cce = cces[i];
+        index = 0;
+        if (cce != null && cce.getCouplingPoint() == couplingPoint)
+        {
+          for (c = 0; c <= cce.getCoupledCount(); c++)
+          {
+            chSelect = cce.getCHSelect(c);
+            if (cce.isChannelPair(c) == channelPair && cce.getIDSelect(c) == elementID)
+            {
+              if (chSelect != 1)
+              {
+                cce.applyDependentCoupling(index, data1);
+                if (chSelect != 0) index++;
+              }
+              if (chSelect != 2)
+              {
+                cce.applyDependentCoupling(index, data2);
+                index++;
+              }
+            }
+            else index += 1 + ((chSelect == 3) ? 1 : 0);
+          }
+        }
+      }
+    }
 
     //public void sendToOutput(SampleBuffer buffer) {
     //bool be = buffer.isBigEndian();
