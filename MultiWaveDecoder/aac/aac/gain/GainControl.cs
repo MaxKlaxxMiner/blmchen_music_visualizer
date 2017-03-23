@@ -1,36 +1,35 @@
 ﻿// ReSharper disable ClassNeverInstantiated.Global
 
 using System;
+// ReSharper disable InconsistentNaming
+// ReSharper disable UnusedMember.Local
 
 namespace MultiWaveDecoder
 {
-  public class GainControl
+  public sealed class GainControl : Constants
   {
-    //public class GainControl implements GCConstants {
-
-    //private int frameLen, lbLong, lbShort;
-    //private IMDCT imdct;
-    //private IPQF ipqf;
-    //private float[] buffer1, function;
-    //private float[,] buffer2, overlap;
-    //private int maxBand;
-    //private int[,,] level, levelPrev;
-    //private int[,,] location, locationPrev;
+    int frameLen, lbLong, lbShort;
+    IMDCT imdct;
+    IPQF ipqf;
+    float[] buffer1, function;
+    float[,] buffer2, overlap;
+    int maxBand;
+    int[, ,] level, levelPrev;
+    int[, ,] location, locationPrev;
 
     public GainControl(int frameLen)
     {
-      throw new NotImplementedException();
-      //this.frameLen = frameLen;
-      //lbLong = frameLen/BANDS;
-      //lbShort = lbLong/8;
-      //imdct = new IMDCT(frameLen);
-      //ipqf = new IPQF();
-      //levelPrev = new int[0,,];
-      //locationPrev = new int[0,,];
-      //buffer1 = new float[frameLen/2];
-      //buffer2 = new float[BANDS,lbLong];
-      //function = new float[lbLong*2];
-      //overlap = new float[BANDS,lbLong*2];
+      this.frameLen = frameLen;
+      lbLong = frameLen / BANDS;
+      lbShort = lbLong / 8;
+      imdct = new IMDCT(frameLen);
+      ipqf = new IPQF();
+      levelPrev = new int[0, 0, 0];
+      locationPrev = new int[0, 0, 0];
+      buffer1 = new float[frameLen / 2];
+      buffer2 = new float[BANDS, lbLong];
+      function = new float[lbLong * 2];
+      overlap = new float[BANDS, lbLong * 2];
     }
 
     //public void decode(BitStream in, WindowSequence winSeq) throws AACException {
@@ -79,15 +78,19 @@ namespace MultiWaveDecoder
     //}
     //}
 
-    //public void process(float[] data, int winShape, int winShapePrev, WindowSequence winSeq) throws AACException {
-    //imdct.process(data, buffer1, winShape, winShapePrev, winSeq);
+    public void process(float[] data, int winShape, int winShapePrev, ICSInfo.WindowSequence winSeq)
+    {
+      imdct.process(data, buffer1, winShape, winShapePrev, winSeq);
 
-    //for(int i = 0; i<BANDS; i++) {
-    //compensate(buffer1, buffer2, winSeq, i);
-    //}
+      throw new NotImplementedException();
 
-    //ipqf.process(buffer2, frameLen, maxBand, data);
-    //}
+      //for (int i = 0; i < BANDS; i++)
+      //{
+      //  compensate(buffer1, buffer2, winSeq, i);
+      //}
+
+      //ipqf.process(buffer2, frameLen, maxBand, data);
+    }
 
     ///**
     //* gain compensation and overlap-add:

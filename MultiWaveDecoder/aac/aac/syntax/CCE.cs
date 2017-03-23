@@ -145,7 +145,7 @@ namespace MultiWaveDecoder
       iqData = ics.getInvQuantData();
     }
 
-    void applyIndependentCoupling(int index, float[] data)
+    public void applyIndependentCoupling(int index, float[] data)
     {
       double g = gain[index, 0];
       for (int i = 0; i < data.Length; i++)

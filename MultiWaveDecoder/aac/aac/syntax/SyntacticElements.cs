@@ -327,18 +327,18 @@ namespace MultiWaveDecoder
       filterBank.process(info1.getWindowSequence(), info1.getWindowShape(ICSInfo.CURRENT), info1.getWindowShape(ICSInfo.PREVIOUS), iqData1, data[channel], channel);
       filterBank.process(info2.getWindowSequence(), info2.getWindowShape(ICSInfo.CURRENT), info2.getWindowShape(ICSInfo.PREVIOUS), iqData2, data[channel + 1], channel + 1);
 
-      //if (LTPrediction.isLTPProfile(profile))
-      //{
-      //  ltp1.updateState(data[channel], filterBank.getOverlap(channel), profile);
-      //  ltp2.updateState(data[channel + 1], filterBank.getOverlap(channel + 1), profile);
-      //}
+      if (LTPrediction.isLTPProfile(profile))
+      {
+        ltp1.updateState(data[channel], filterBank.getOverlap(channel), profile);
+        ltp2.updateState(data[channel + 1], filterBank.getOverlap(channel + 1), profile);
+      }
 
-      ////independent coupling
-      //processIndependentCoupling(true, elementID, data[channel], data[channel + 1]);
+      // independent coupling
+      processIndependentCoupling(true, elementID, data[channel], data[channel + 1]);
 
-      ////gain control
-      //if (ics1.isGainControlPresent()) ics1.getGainControl().process(iqData1, info1.getWindowShape(ICSInfo.CURRENT), info1.getWindowShape(ICSInfo.PREVIOUS), info1.getWindowSequence());
-      //if (ics2.isGainControlPresent()) ics2.getGainControl().process(iqData2, info2.getWindowShape(ICSInfo.CURRENT), info2.getWindowShape(ICSInfo.PREVIOUS), info2.getWindowSequence());
+      // gain control
+      if (ics1.isGainControlPresent()) ics1.getGainControl().process(iqData1, info1.getWindowShape(ICSInfo.CURRENT), info1.getWindowShape(ICSInfo.PREVIOUS), info1.getWindowSequence());
+      if (ics2.isGainControlPresent()) ics2.getGainControl().process(iqData2, info2.getWindowShape(ICSInfo.CURRENT), info2.getWindowShape(ICSInfo.PREVIOUS), info2.getWindowSequence());
 
       ////SBR
       //if (sbrPresent && config.isSBREnabled())
@@ -349,44 +349,47 @@ namespace MultiWaveDecoder
       throw new NotImplementedException();
     }
 
-    //private void processIndependentCoupling(bool channelPair, int elementID, float[] data1, float[] data2) {
-    //int index, c, chSelect;
-    //CCE cce;
-    //for(int i = 0; i<cces.Length; i++) {
-    //cce = cces[i];
-    //index = 0;
-    //if(cce!=null&&cce.getCouplingPoint()==CCE.AFTER_IMDCT) {
-    //for(c = 0; c<=cce.getCoupledCount(); c++) {
-    //chSelect = cce.getCHSelect(c);
-    //if(cce.isChannelPair(c)==channelPair&&cce.getIDSelect(c)==elementID) {
-    //if(chSelect!=1) {
-    //cce.applyIndependentCoupling(index, data1);
-    //if(chSelect!=0) index++;
-    //}
-    //if(chSelect!=2) {
-    //cce.applyIndependentCoupling(index, data2);
-    //index++;
-    //}
-    //}
-    //else index += 1+((chSelect==3) ? 1 : 0);
-    //}
-    //}
-    //}
-    //}
+    void processIndependentCoupling(bool channelPair, int elementID, float[] data1, float[] data2)
+    {
+      for (int i = 0; i < cces.Length; i++)
+      {
+        var cce = cces[i];
+        int index = 0;
+        if (cce != null && cce.getCouplingPoint() == CCE.AFTER_IMDCT)
+        {
+          for (int c = 0; c <= cce.getCoupledCount(); c++)
+          {
+            int chSelect = cce.getCHSelect(c);
+            if (cce.isChannelPair(c) == channelPair && cce.getIDSelect(c) == elementID)
+            {
+              if (chSelect != 1)
+              {
+                cce.applyIndependentCoupling(index, data1);
+                if (chSelect != 0) index++;
+              }
+              if (chSelect != 2)
+              {
+                cce.applyIndependentCoupling(index, data2);
+                index++;
+              }
+            }
+            else index += 1 + ((chSelect == 3) ? 1 : 0);
+          }
+        }
+      }
+    }
 
     void processDependentCoupling(bool channelPair, int elementID, int couplingPoint, float[] data1, float[] data2)
     {
-      int index, c, chSelect;
-      CCE cce;
       for (int i = 0; i < cces.Length; i++)
       {
-        cce = cces[i];
-        index = 0;
+        var cce = cces[i];
+        int index = 0;
         if (cce != null && cce.getCouplingPoint() == couplingPoint)
         {
-          for (c = 0; c <= cce.getCoupledCount(); c++)
+          for (int c = 0; c <= cce.getCoupledCount(); c++)
           {
-            chSelect = cce.getCHSelect(c);
+            int chSelect = cce.getCHSelect(c);
             if (cce.isChannelPair(c) == channelPair && cce.getIDSelect(c) == elementID)
             {
               if (chSelect != 1)
@@ -406,38 +409,42 @@ namespace MultiWaveDecoder
       }
     }
 
-    //public void sendToOutput(SampleBuffer buffer) {
-    //bool be = buffer.isBigEndian();
+    //public void sendToOutput(SampleBuffer buffer)
+    //{
+    //  bool be = buffer.isBigEndian();
 
-    //int chs = data.Length;
-    //int mult = (sbrPresent&&config.isSBREnabled()) ? 2 : 1;
-    //int length = mult*config.getFrameLength();
-    //int freq = mult*config.getSampleFrequency().getFrequency();
+    //  int chs = data.Length;
+    //  int mult = (sbrPresent && config.isSBREnabled()) ? 2 : 1;
+    //  int length = mult * config.getFrameLength();
+    //  int freq = mult * config.getSampleFrequency().getFrequency();
 
-    //byte[] b = buffer.getData();
-    //if(b.Length!=chs*length*2) b = new byte[chs*length*2];
+    //  byte[] b = buffer.getData();
+    //  if (b.Length != chs * length * 2) b = new byte[chs * length * 2];
 
-    //float[] cur;
-    //int i, j, off;
-    //short s;
-    //for(i = 0; i<chs; i++) {
-    //cur = data[i];
-    //for(j = 0; j<length; j++) {
-    //s = (short) Math.max(Math.min(Math.round(cur[j]), Short.MAX_VALUE), Short.MIN_VALUE);
-    //off = (j*chs+i)*2;
-    //if(be) {
-    //b[off] = (byte) ((s>>8)&BYTE_MASK);
-    //b[off+1] = (byte) (s&BYTE_MASK);
-    //}
-    //else {
-    //b[off+1] = (byte) ((s>>8)&BYTE_MASK);
-    //b[off] = (byte) (s&BYTE_MASK);
-    //}
-    //}
-    //}
+    //  float[] cur;
+    //  int i, j, off;
+    //  short s;
+    //  for (i = 0; i < chs; i++)
+    //  {
+    //    cur = data[i];
+    //    for (j = 0; j < length; j++)
+    //    {
+    //      s = (short)Math.max(Math.min(Math.round(cur[j]), Short.MAX_VALUE), Short.MIN_VALUE);
+    //      off = (j * chs + i) * 2;
+    //      if (be)
+    //      {
+    //        b[off] = (byte)((s >> 8) & BYTE_MASK);
+    //        b[off + 1] = (byte)(s & BYTE_MASK);
+    //      }
+    //      else
+    //      {
+    //        b[off + 1] = (byte)((s >> 8) & BYTE_MASK);
+    //        b[off] = (byte)(s & BYTE_MASK);
+    //      }
+    //    }
+    //  }
 
-    //buffer.setData(b, freq, chs, 16, bitsRead);
-    //}
+    //  buffer.setData(b, freq, chs, 16, bitsRead);
     //}
   }
 }

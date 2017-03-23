@@ -92,21 +92,19 @@ namespace MultiWaveDecoder
       }
 
       //iterations from bottom to top
-      int shift, m, km;
-      float rootRe, rootIm, zRe, zIm;
       for (int i = 4; i < length; i <<= 1)
       {
-        shift = i << 1;
-        m = length / shift;
+        int shift = i << 1;
+        int m = length / shift;
         for (int j = 0; j < length; j += shift)
         {
           for (int k = 0; k < i; k++)
           {
-            km = k * m;
-            rootRe = roots[km, 0];
-            rootIm = roots[km, imOff];
-            zRe = inData[i + j + k, 0] * rootRe - inData[i + j + k, 1] * rootIm;
-            zIm = inData[i + j + k, 0] * rootIm + inData[i + j + k, 1] * rootRe;
+            int km = k * m;
+            float rootRe = roots[km, 0];
+            float rootIm = roots[km, imOff];
+            float zRe = inData[i + j + k, 0] * rootRe - inData[i + j + k, 1] * rootIm;
+            float zIm = inData[i + j + k, 0] * rootIm + inData[i + j + k, 1] * rootRe;
 
             inData[i + j + k, 0] = (inData[j + k, 0] - zRe) * scale;
             inData[i + j + k, 1] = (inData[j + k, 1] - zIm) * scale;

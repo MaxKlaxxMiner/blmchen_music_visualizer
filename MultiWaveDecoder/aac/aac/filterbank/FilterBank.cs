@@ -192,9 +192,9 @@ namespace MultiWaveDecoder
     //mdctLong.processForward(buf, out);
     //}
 
-    //public float[] getOverlap(int channel) {
-    //return overlaps[channel];
-    //}
-    //}
+    public float[] getOverlap(int channel)
+    {
+      return overlaps[channel];
+    }
   }
 }

@@ -87,12 +87,11 @@ namespace MultiWaveDecoder
       return Enumerable.Range(0, len).Select(i => (float)Math.Sin(Math.PI / 2.0 / len * (i + 0.5))).ToArray();
     }
 
+    protected static readonly float[] SINE_32 = CreateSine(32);
     protected static readonly float[] SINE_120 = CreateSine(120);
-
     protected static readonly float[] SINE_128 = CreateSine(128);
-
+    protected static readonly float[] SINE_256 = CreateSine(256);
     protected static readonly float[] SINE_960 = CreateSine(960);
-
     protected static readonly float[] SINE_1024 = CreateSine(1024);
 
     // --- KBD Window ---
@@ -119,22 +118,18 @@ namespace MultiWaveDecoder
       return f.Select(x => (float)Math.Sqrt(x / sum)).ToArray();
     }
 
+    protected static readonly float[] KBD_32 = CreateKbd(8, 32);
     protected static readonly float[] KBD_120 = CreateKbd(6, 120);
-
     protected static readonly float[] KBD_128 = CreateKbd(6, 128);
-
+    protected static readonly float[] KBD_256 = CreateKbd(5, 256);
     protected static readonly float[] KBD_960 = CreateKbd(4, 960);
-
     protected static readonly float[] KBD_1024 = CreateKbd(4, 1024);
 
     // --- FFT Tables ---
 
     protected static readonly float[,] FFT_TABLE_60 = GenerateFFTTableShort(60);
-
     protected static readonly float[,] FFT_TABLE_64 = GenerateFFTTableShort(64);
-
     protected static readonly float[,] FFT_TABLE_480 = GenerateFFTTableLong(480);
-
     protected static readonly float[,] FFT_TABLE_512 = GenerateFFTTableLong(512);
 
     static float[,] ConvertDoubleToFloat(double[,] data)
@@ -195,5 +190,14 @@ namespace MultiWaveDecoder
 
       return ConvertDoubleToFloat(f);
     }
+
+    // --- Gain ---
+
+    protected const int BANDS = 4;
+    protected const int MAX_CHANNELS = 5;
+    protected const int NPQFTAPS = 96;
+    protected const int NPEPARTS = 64;	//number of pre-echo inhibition parts
+    protected const int ID_GAIN = 16;
+    protected static readonly int[] LN_GAIN = { -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
   }
 }
