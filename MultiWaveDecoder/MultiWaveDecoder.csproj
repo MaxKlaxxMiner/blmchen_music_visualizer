@@ -45,7 +45,7 @@
     <Compile Include="aac\aac\AACException.cs" />
     <Compile Include="aac\aac\ChannelConfiguration.cs" />
     <Compile Include="aac\aac\error\RVLC.cs" />
-    <Compile Include="aac\aac\gain\Class1.cs" />
+    <Compile Include="aac\aac\gain\IPQF.cs" />
     <Compile Include="aac\aac\gain\IMDCT.cs" />
     <Compile Include="aac\aac\gain\GainControl.cs" />
     <Compile Include="aac\aac\huffman\Codebooks.cs" />
@@ -78,6 +78,7 @@
     <Compile Include="aac\aac\syntax\Element.cs" />
     <Compile Include="aac\aac\syntax\PCE.cs" />
     <Compile Include="aac\aac\syntax\SyntacticElements.cs" />
+    <Compile Include="aac\aac\tools\MS.cs" />
     <Compile Include="aac\aac\tools\IS.cs" />
     <Compile Include="aac\aac\tools\LTPrediction.cs" />
     <Compile Include="aac\aac\tools\ICPrediction.cs" />
@@ -186,7 +187,6 @@
     <Content Include="jaad\aac\syntax\IQTable.java" />
     <Content Include="jaad\aac\syntax\ScaleFactorTable.java" />
     <Content Include="jaad\aac\tools\ISScaleTable.java" />
-    <Content Include="jaad\aac\tools\MS.java" />
     <Content Include="jaad\adts\ADTSDemultiplexer.java" />
     <Content Include="jaad\adts\ADTSFrame.java" />
     <Content Include="jaad\MP4Info.java" />

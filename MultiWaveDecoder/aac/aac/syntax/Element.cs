@@ -32,7 +32,7 @@ namespace MultiWaveDecoder
       return sbr != null;
     }
 
-    SBR getSBR()
+    public SBR getSBR()
     {
       return sbr;
     }

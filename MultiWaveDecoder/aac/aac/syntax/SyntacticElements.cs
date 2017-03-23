@@ -285,8 +285,7 @@ namespace MultiWaveDecoder
       // MS
       if (cpe.isCommonWindow() && cpe.isMSMaskPresent())
       {
-        throw new NotImplementedException();
-        // MS.process(cpe, iqData1, iqData2);
+        MS.process(cpe, iqData1, iqData2);
       }
       // main prediction
       if (profile.type == Profile.ProfileType.AAC_MAIN)
@@ -340,13 +339,12 @@ namespace MultiWaveDecoder
       if (ics1.isGainControlPresent()) ics1.getGainControl().process(iqData1, info1.getWindowShape(ICSInfo.CURRENT), info1.getWindowShape(ICSInfo.PREVIOUS), info1.getWindowSequence());
       if (ics2.isGainControlPresent()) ics2.getGainControl().process(iqData2, info2.getWindowShape(ICSInfo.CURRENT), info2.getWindowShape(ICSInfo.PREVIOUS), info2.getWindowSequence());
 
-      ////SBR
-      //if (sbrPresent && config.isSBREnabled())
-      //{
-      //  if (data[channel].Length == config.getFrameLength()) LOGGER.log(Level.WARNING, "SBR data present, but buffer has normal size!");
-      //  cpe.getSBR().process(data[channel], data[channel + 1], false);
-      //}
-      throw new NotImplementedException();
+      //SBR
+      if (sbrPresent && config.isSBREnabled())
+      {
+        if (data[channel].Length == config.getFrameLength()) Logger.LogServe("SBR data present, but buffer has normal size!");
+        cpe.getSBR().process(data[channel], data[channel + 1], false);
+      }
     }
 
     void processIndependentCoupling(bool channelPair, int elementID, float[] data1, float[] data2)
@@ -409,42 +407,42 @@ namespace MultiWaveDecoder
       }
     }
 
-    //public void sendToOutput(SampleBuffer buffer)
-    //{
-    //  bool be = buffer.isBigEndian();
+    public void sendToOutput(SampleBuffer buffer)
+    {
+      bool be = buffer.isBigEndian();
 
-    //  int chs = data.Length;
-    //  int mult = (sbrPresent && config.isSBREnabled()) ? 2 : 1;
-    //  int length = mult * config.getFrameLength();
-    //  int freq = mult * config.getSampleFrequency().getFrequency();
+      int chs = data.Length;
+      int mult = (sbrPresent && config.isSBREnabled()) ? 2 : 1;
+      int length = mult * config.getFrameLength();
+      int freq = mult * config.getSampleFrequency().getFrequency();
 
-    //  byte[] b = buffer.getData();
-    //  if (b.Length != chs * length * 2) b = new byte[chs * length * 2];
+      byte[] b = buffer.getData();
+      if (b.Length != chs * length * 2) b = new byte[chs * length * 2];
 
-    //  float[] cur;
-    //  int i, j, off;
-    //  short s;
-    //  for (i = 0; i < chs; i++)
-    //  {
-    //    cur = data[i];
-    //    for (j = 0; j < length; j++)
-    //    {
-    //      s = (short)Math.max(Math.min(Math.round(cur[j]), Short.MAX_VALUE), Short.MIN_VALUE);
-    //      off = (j * chs + i) * 2;
-    //      if (be)
-    //      {
-    //        b[off] = (byte)((s >> 8) & BYTE_MASK);
-    //        b[off + 1] = (byte)(s & BYTE_MASK);
-    //      }
-    //      else
-    //      {
-    //        b[off + 1] = (byte)((s >> 8) & BYTE_MASK);
-    //        b[off] = (byte)(s & BYTE_MASK);
-    //      }
-    //    }
-    //  }
+      float[] cur;
+      int i, j, off;
+      short s;
+      for (i = 0; i < chs; i++)
+      {
+        cur = data[i];
+        for (j = 0; j < length; j++)
+        {
+          s = (short)Math.Max(Math.Min(Math.Round(cur[j]), short.MaxValue), short.MinValue);
+          off = (j * chs + i) * 2;
+          if (be)
+          {
+            b[off] = (byte)((s >> 8) & BYTE_MASK);
+            b[off + 1] = (byte)(s & BYTE_MASK);
+          }
+          else
+          {
+            b[off + 1] = (byte)((s >> 8) & BYTE_MASK);
+            b[off] = (byte)(s & BYTE_MASK);
+          }
+        }
+      }
 
-    //  buffer.setData(b, freq, chs, 16, bitsRead);
-    //}
+      buffer.setData(b, freq, chs, 16, bitsRead);
+    }
   }
 }

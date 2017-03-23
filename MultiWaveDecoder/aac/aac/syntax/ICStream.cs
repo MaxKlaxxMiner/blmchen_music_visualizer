@@ -72,8 +72,7 @@ namespace MultiWaveDecoder
       if (tnsDataPresent && !er)
       {
         if (tns == null) tns = new TNS();
-        throw new NotImplementedException();
-        //tns.decode(inStream, info);
+        tns.decode(inStream, info);
       }
 
       gainControlPresent = inStream.readBool();

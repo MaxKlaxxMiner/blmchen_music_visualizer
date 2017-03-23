@@ -96,8 +96,7 @@ namespace MultiWaveDecoder
         // 2: spectral processing
         syntacticElements.process(filterBank);
         // 3: send to output buffer
-        throw new NotImplementedException();
-        //syntacticElements.sendToOutput(buffer);
+        syntacticElements.sendToOutput(buffer);
       }
       //catch (AACException e)
       //{

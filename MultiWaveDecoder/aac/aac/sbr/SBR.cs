@@ -2,6 +2,10 @@
 // ReSharper disable NotAccessedField.Local
 // ReSharper disable UnusedMember.Local
 // ReSharper disable FieldCanBeMadeReadOnly.Local
+
+using System;
+using System.Linq;
+
 #pragma warning disable 414
 
 #pragma warning disable 169
@@ -32,7 +36,7 @@ namespace MultiWaveDecoder
     int[] f_master = new int[64];
     int[,] f_table_res = new int[2, 64];
     int[] f_table_noise = new int[64];
-    int[,] f_table_lim = new int [4, 64];
+    int[,] f_table_lim = new int[4, 64];
 
     int[] table_map_k_to_g = new int[64];
 
@@ -45,38 +49,38 @@ namespace MultiWaveDecoder
     int[] L_E_prev = new int[2];
     int[] L_Q = new int[2];
 
-    int[,] t_E = new int [2, MAX_L_E + 1];
-    int[,] t_Q = new int [2, 3];
-    int[,] f = new int [2, MAX_L_E + 1];
+    int[,] t_E = new int[2, MAX_L_E + 1];
+    int[,] t_Q = new int[2, 3];
+    int[,] f = new int[2, MAX_L_E + 1];
     int[] f_prev = new int[2];
 
-    float[,,] G_temp_prev = new float [2, 5, 64];
-    float[,,] Q_temp_prev = new float [2, 5, 64];
+    float[, ,] G_temp_prev = new float[2, 5, 64];
+    float[, ,] Q_temp_prev = new float[2, 5, 64];
     int[] GQ_ringbuf_index = new int[2];
 
-    int[,,] E = new int [2, 64, MAX_L_E];
-    int[,] E_prev = new int [2, 64];
-    float[,,] E_orig = new float [2, 64, MAX_L_E];
-    float[,,] E_curr = new float [2, 64, MAX_L_E];
-    int[,,] Q = new int [2, 64, 2];
-    float[,,] Q_div = new float [2, 64, 2];
-    float[,,] Q_div2 = new float [2, 64, 2];
-    int[,] Q_prev = new int [2, 64];
+    int[, ,] E = new int[2, 64, MAX_L_E];
+    int[,] E_prev = new int[2, 64];
+    float[, ,] E_orig = new float[2, 64, MAX_L_E];
+    float[, ,] E_curr = new float[2, 64, MAX_L_E];
+    int[, ,] Q = new int[2, 64, 2];
+    float[, ,] Q_div = new float[2, 64, 2];
+    float[, ,] Q_div2 = new float[2, 64, 2];
+    int[,] Q_prev = new int[2, 64];
 
     int[] l_A = new int[2];
     int[] l_A_prev = new int[2];
 
-    int[,] bs_invf_mode = new int [2, MAX_L_E];
-    int[,] bs_invf_mode_prev = new int [2, MAX_L_E];
-    float[,] bwArray = new float [2, 64];
-    float[,] bwArray_prev = new float [2, 64];
+    int[,] bs_invf_mode = new int[2, MAX_L_E];
+    int[,] bs_invf_mode_prev = new int[2, MAX_L_E];
+    float[,] bwArray = new float[2, 64];
+    float[,] bwArray_prev = new float[2, 64];
 
     int noPatches;
     int[] patchNoSubbands = new int[64];
     int[] patchStartSubband = new int[64];
 
-    int[,] bs_add_harmonic = new int [2, 64];
-    int[,] bs_add_harmonic_prev = new int [2, 64];
+    int[,] bs_add_harmonic = new int[2, 64];
+    int[,] bs_add_harmonic_prev = new int[2, 64];
 
     int[] index_noise_prev = new int[2];
     int[] psi_is_prev = new int[2];
@@ -103,9 +107,9 @@ namespace MultiWaveDecoder
     AnalysisFilterbank[] qmfa = new AnalysisFilterbank[2];
     SynthesisFilterbank[] qmfs = new SynthesisFilterbank[2];
 
-    float[,,,] Xsbr = new float [2, MAX_NTSRHFG, 64, 2];
+    float[][, ,] Xsbr = Enumerable.Range(0, 2).Select(x => new float[MAX_NTSRHFG, 64, 2]).ToArray();
 
-    int numTimeSlotsRate;
+    public int numTimeSlotsRate;
     int numTimeSlots;
     int tHFGen;
     int tHFAdj;
@@ -139,16 +143,16 @@ namespace MultiWaveDecoder
     int bs_extension_data;
     bool bs_coupling;
     int[] bs_frame_class = new int[2];
-    int[,] bs_rel_bord = new int [2, 9];
-    int[,] bs_rel_bord_0 = new int [2, 9];
-    int[,] bs_rel_bord_1 = new int [2, 9];
+    int[,] bs_rel_bord = new int[2, 9];
+    int[,] bs_rel_bord_0 = new int[2, 9];
+    int[,] bs_rel_bord_1 = new int[2, 9];
     int[] bs_pointer = new int[2];
     int[] bs_abs_bord_0 = new int[2];
     int[] bs_abs_bord_1 = new int[2];
     int[] bs_num_rel_0 = new int[2];
     int[] bs_num_rel_1 = new int[2];
-    int[,] bs_df_env = new int [2, 9];
-    int[,] bs_df_noise = new int [2, 3];
+    int[,] bs_df_env = new int[2, 9];
+    int[,] bs_df_noise = new int[2, 3];
 
     public SBR(bool smallFrames, bool stereo, SampleFrequency sample_rate, bool downSampledSBR)
     {
@@ -1025,187 +1029,214 @@ namespace MultiWaveDecoder
     //return index+64;
     //}
 
-    //private int sbr_save_prev_data(int ch) {
-    //int i;
+    private int sbr_save_prev_data(int ch)
+    {
+      int i;
 
-    // save data for next frame */
-    //this.kx_prev = this.kx;
-    //this.M_prev = this.M;
-    //this.bsco_prev = this.bsco;
+      // save data for next frame
+      this.kx_prev = this.kx;
+      this.M_prev = this.M;
+      this.bsco_prev = this.bsco;
 
-    //this.L_E_prev[ch] = this.L_E[ch];
+      this.L_E_prev[ch] = this.L_E[ch];
 
-    // sbr.L_E[ch] can become 0 on files with bit errors */
-    //if(this.L_E[ch]<=0)
-    //return 19;
+      // sbr.L_E[ch] can become 0 on files with bit errors
+      if (this.L_E[ch] <= 0)
+        return 19;
 
-    //this.f_prev[ch] = this.f[ch,this.L_E[ch]-1];
-    //for(i = 0; i<MAX_M; i++) {
-    //this.E_prev[ch,i] = this.E[ch,i,this.L_E[ch]-1];
-    //this.Q_prev[ch,i] = this.Q[ch,i,this.L_Q[ch]-1];
-    //}
+      this.f_prev[ch] = this.f[ch, this.L_E[ch] - 1];
+      for (i = 0; i < MAX_M; i++)
+      {
+        this.E_prev[ch, i] = this.E[ch, i, this.L_E[ch] - 1];
+        this.Q_prev[ch, i] = this.Q[ch, i, this.L_Q[ch] - 1];
+      }
 
-    //for(i = 0; i<MAX_M; i++) {
-    //this.bs_add_harmonic_prev[ch,i] = this.bs_add_harmonic[ch,i];
-    //}
-    //this.bs_add_harmonic_flag_prev[ch] = this.bs_add_harmonic_flag[ch];
+      for (i = 0; i < MAX_M; i++)
+      {
+        this.bs_add_harmonic_prev[ch, i] = this.bs_add_harmonic[ch, i];
+      }
+      this.bs_add_harmonic_flag_prev[ch] = this.bs_add_harmonic_flag[ch];
 
-    //if(this.l_A[ch]==this.L_E[ch])
-    //this.prevEnvIsShort[ch] = 0;
-    //else
-    //this.prevEnvIsShort[ch] = -1;
+      if (this.l_A[ch] == this.L_E[ch])
+        this.prevEnvIsShort[ch] = 0;
+      else
+        this.prevEnvIsShort[ch] = -1;
 
-    //return 0;
-    //}
+      return 0;
+    }
 
-    //private void sbr_save_matrix(int ch) {
-    //int i;
+    private void sbr_save_matrix(int ch)
+    {
+      for (int i = 0; i < this.tHFGen; i++)
+      {
+        for (int j = 0; j < 64; j++)
+        {
+          Xsbr[ch][i, j, 0] = Xsbr[ch][i + numTimeSlotsRate, j, 0];
+          Xsbr[ch][i, j, 1] = Xsbr[ch][i + numTimeSlotsRate, j, 1];
+        }
+      }
+      for (int i = this.tHFGen; i < MAX_NTSRHFG; i++)
+      {
+        for (int j = 0; j < 64; j++)
+        {
+          Xsbr[ch][i, j, 0] = 0;
+          Xsbr[ch][i, j, 1] = 0;
+        }
+      }
+    }
 
-    //for(i = 0; i<this.tHFGen; i++) {
-    //for(int j = 0; j<64; j++) {
-    //Xsbr[ch,i,j,0] = Xsbr[ch,i+numTimeSlotsRate,j,0];
-    //Xsbr[ch,i,j,1] = Xsbr[ch,i+numTimeSlotsRate,j,1];
-    //}
-    //}
-    //for(i = this.tHFGen; i<MAX_NTSRHFG; i++) {
-    //for(int j = 0; j<64; j++) {
-    //Xsbr[ch,i,j,0] = 0;
-    //Xsbr[ch,i,j,1] = 0;
-    //}
-    //}
-    //}
+    private int sbr_process_channel(float[] channel_buf, float[, ,] X, int ch, bool dont_process)
+    {
+      int k, l;
+      int ret = 0;
 
-    //private int sbr_process_channel(float[] channel_buf, float[,,] X,
-    //int ch, bool dont_process) {
-    //int k, l;
-    //int ret = 0;
+      this.bsco = 0;
 
-    //this.bsco = 0;
+      // subband analysis
+      if (dont_process)
+        qmfa[ch].sbr_qmf_analysis_32(this, channel_buf, this.Xsbr[ch], this.tHFGen, 32);
+      else
+        qmfa[ch].sbr_qmf_analysis_32(this, channel_buf, this.Xsbr[ch], this.tHFGen, this.kx);
 
-    // subband analysis */
-    //if(dont_process)
-    //qmfa[ch].sbr_qmf_analysis_32(this, channel_buf, this.Xsbr[ch], this.tHFGen, 32);
-    //else
-    //qmfa[ch].sbr_qmf_analysis_32(this, channel_buf, this.Xsbr[ch], this.tHFGen, this.kx);
-
-    //if(!dont_process) {
-    // insert high frequencies here */
-    // hf generation using patching */
-    //HFGeneration.hf_generation(this, this.Xsbr[ch], this.Xsbr[ch], ch);
+      if (!dont_process)
+      {
+        // insert high frequencies here hf generation using patching
+        throw new NotImplementedException();
+        //HFGeneration.hf_generation(this, this.Xsbr[ch], this.Xsbr[ch], ch);
 
 
-    // hf adjustment */
-    //ret = HFAdjustment.hf_adjustment(this, this.Xsbr[ch], ch);
-    //if(ret>0) {
-    //dont_process = true;
-    //}
-    //}
+        //// hf adjustment
+        //ret = HFAdjustment.hf_adjustment(this, this.Xsbr[ch], ch);
+        //if (ret > 0)
+        //{
+        //  dont_process = true;
+        //}
+      }
 
-    //if(this.just_seeked||dont_process) {
-    //for(l = 0; l<this.numTimeSlotsRate; l++) {
-    //for(k = 0; k<32; k++) {
-    //X[l,k,0] = this.Xsbr[ch,l+this.tHFAdj,k,0];
-    //X[l,k,1] = this.Xsbr[ch,l+this.tHFAdj,k,1];
-    //}
-    //for(k = 32; k<64; k++) {
-    //X[l,k,0] = 0;
-    //X[l,k,1] = 0;
-    //}
-    //}
-    //}
-    //else {
-    //for(l = 0; l<this.numTimeSlotsRate; l++) {
-    //int kx_band, M_band, bsco_band;
+      if (this.just_seeked || dont_process)
+      {
+        for (l = 0; l < this.numTimeSlotsRate; l++)
+        {
+          for (k = 0; k < 32; k++)
+          {
+            X[l, k, 0] = this.Xsbr[ch][l + this.tHFAdj, k, 0];
+            X[l, k, 1] = this.Xsbr[ch][l + this.tHFAdj, k, 1];
+          }
+          for (k = 32; k < 64; k++)
+          {
+            X[l, k, 0] = 0;
+            X[l, k, 1] = 0;
+          }
+        }
+      }
+      else
+      {
+        for (l = 0; l < this.numTimeSlotsRate; l++)
+        {
+          int kx_band, M_band, bsco_band;
 
-    //if(l<this.t_E[ch,0]) {
-    //kx_band = this.kx_prev;
-    //M_band = this.M_prev;
-    //bsco_band = this.bsco_prev;
-    //}
-    //else {
-    //kx_band = this.kx;
-    //M_band = this.M;
-    //bsco_band = this.bsco;
-    //}
+          if (l < this.t_E[ch, 0])
+          {
+            kx_band = this.kx_prev;
+            M_band = this.M_prev;
+            bsco_band = this.bsco_prev;
+          }
+          else
+          {
+            kx_band = this.kx;
+            M_band = this.M;
+            bsco_band = this.bsco;
+          }
 
-    //for(k = 0; k<kx_band+bsco_band; k++) {
-    //X[l,k,0] = this.Xsbr[ch,l+this.tHFAdj,k,0];
-    //X[l,k,1] = this.Xsbr[ch,l+this.tHFAdj,k,1];
-    //}
-    //for(k = kx_band+bsco_band; k<kx_band+M_band; k++) {
-    //X[l,k,0] = this.Xsbr[ch,l+this.tHFAdj,k,0];
-    //X[l,k,1] = this.Xsbr[ch,l+this.tHFAdj,k,1];
-    //}
-    //for(k = Math.max(kx_band+bsco_band, kx_band+M_band); k<64; k++) {
-    //X[l,k,0] = 0;
-    //X[l,k,1] = 0;
-    //}
-    //}
-    //}
+          for (k = 0; k < kx_band + bsco_band; k++)
+          {
+            X[l, k, 0] = this.Xsbr[ch][l + this.tHFAdj, k, 0];
+            X[l, k, 1] = this.Xsbr[ch][l + this.tHFAdj, k, 1];
+          }
+          for (k = kx_band + bsco_band; k < kx_band + M_band; k++)
+          {
+            X[l, k, 0] = this.Xsbr[ch][l + this.tHFAdj, k, 0];
+            X[l, k, 1] = this.Xsbr[ch][l + this.tHFAdj, k, 1];
+          }
+          for (k = Math.Max(kx_band + bsco_band, kx_band + M_band); k < 64; k++)
+          {
+            X[l, k, 0] = 0;
+            X[l, k, 1] = 0;
+          }
+        }
+      }
 
-    //return ret;
-    //}
+      return ret;
+    }
 
-    //public int process(float[] left_chan, float[] right_chan,
-    //bool just_seeked) {
-    //bool dont_process = false;
-    //int ret = 0;
-    //float[,,] X = new float[MAX_NTSR,64,2];
+    public int process(float[] left_chan, float[] right_chan, bool just_seeked)
+    {
+      bool dont_process = false;
+      int ret = 0;
+      var X = new float[MAX_NTSR, 64, 2];
 
-    // case can occur due to bit errors */
-    //if(!stereo) return 21;
+      // case can occur due to bit errors
+      if (!stereo) return 21;
 
-    //if(this.ret!=0||(this.header_count==0)) {
-    // don't process just upsample */
-    //dont_process = true;
+      if (this.ret != 0 || (this.header_count == 0))
+      {
+        // don't process just upsample
+        dont_process = true;
 
-    // Re-activate reset for next frame */
-    //if(this.ret!=0&&this.Reset)
-    //this.bs_start_freq_prev = -1;
-    //}
+        // Re-activate reset for next frame 
+        if (this.ret != 0 && this.Reset)
+          this.bs_start_freq_prev = -1;
+      }
 
-    //if(just_seeked) {
-    //this.just_seeked = true;
-    //}
-    //else {
-    //this.just_seeked = false;
-    //}
+      if (just_seeked)
+      {
+        this.just_seeked = true;
+      }
+      else
+      {
+        this.just_seeked = false;
+      }
 
-    //this.ret += sbr_process_channel(left_chan, X, 0, dont_process);
-    // subband synthesis */
-    //if(downSampledSBR) {
-    //qmfs[0].sbr_qmf_synthesis_32(this, X, left_chan);
-    //}
-    //else {
-    //qmfs[0].sbr_qmf_synthesis_64(this, X, left_chan);
-    //}
+      this.ret += sbr_process_channel(left_chan, X, 0, dont_process);
+      // subband synthesis
+      if (downSampledSBR)
+      {
+        qmfs[0].sbr_qmf_synthesis_32(this, X, left_chan);
+      }
+      else
+      {
+        qmfs[0].sbr_qmf_synthesis_64(this, X, left_chan);
+      }
 
-    //this.ret += sbr_process_channel(right_chan, X, 1, dont_process);
-    // subband synthesis */
-    //if(downSampledSBR) {
-    //qmfs[1].sbr_qmf_synthesis_32(this, X, right_chan);
-    //}
-    //else {
-    //qmfs[1].sbr_qmf_synthesis_64(this, X, right_chan);
-    //}
+      this.ret += sbr_process_channel(right_chan, X, 1, dont_process);
+      // subband synthesis
+      if (downSampledSBR)
+      {
+        qmfs[1].sbr_qmf_synthesis_32(this, X, right_chan);
+      }
+      else
+      {
+        qmfs[1].sbr_qmf_synthesis_64(this, X, right_chan);
+      }
 
-    //if(this.bs_header_flag)
-    //this.just_seeked = false;
+      if (this.bs_header_flag)
+        this.just_seeked = false;
 
-    //if(this.header_count!=0&&this.ret==0) {
-    //ret = sbr_save_prev_data(0);
-    //if(ret!=0) return ret;
-    //ret = sbr_save_prev_data(1);
-    //if(ret!=0) return ret;
-    //}
+      if (this.header_count != 0 && this.ret == 0)
+      {
+        ret = sbr_save_prev_data(0);
+        if (ret != 0) return ret;
+        ret = sbr_save_prev_data(1);
+        if (ret != 0) return ret;
+      }
 
-    //sbr_save_matrix(0);
-    //sbr_save_matrix(1);
+      sbr_save_matrix(0);
+      sbr_save_matrix(1);
 
-    //this.frame++;
+      this.frame++;
 
-    //return 0;
-    //}
+      return 0;
+    }
 
     //public int process(float[] channel,
     //bool just_seeked) {
