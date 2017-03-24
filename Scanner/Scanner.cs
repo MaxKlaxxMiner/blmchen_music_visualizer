@@ -28,6 +28,7 @@ namespace Scanner
     /// Dauer: 3:34
     /// </summary>
     //static readonly string TestFileM4A = Environment.ExpandEnvironmentVariables(MusicPathiTunes + @"Blümchen\Für immer und ewig\2-01 Heut' ist mein Tag.m4a");
+    static readonly string TestFileM4A = Environment.ExpandEnvironmentVariables(MusicPathiTunes + @"Karate Andi\Turbo (Deluxe Version)\03 Eckkneipenhustler.m4a");
 
     public Scanner()
     {
@@ -39,10 +40,18 @@ namespace Scanner
       string path = Environment.ExpandEnvironmentVariables(MusicPathiTunes);
       openFileDialog1.InitialDirectory = path;
 
-      if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
-      readFile = openFileDialog1.FileName;
-      if (saveFileDialog1.ShowDialog() != DialogResult.OK) return;
-      writeFile = saveFileDialog1.FileName;
+      if (Environment.MachineName == "MINI-PC")
+      {
+        readFile = TestFileM4A;
+        writeFile = @"C:\Users\Max\Desktop\prog\Spiele\blmchen_music_visualizer\TestFiles\output.wav";
+      }
+      else
+      {
+        if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
+        readFile = openFileDialog1.FileName;
+        if (saveFileDialog1.ShowDialog() != DialogResult.OK) return;
+        writeFile = saveFileDialog1.FileName;
+      }
 
       var finfo = new FileInfo(readFile);
       if (!finfo.Exists) throw new FileNotFoundException(finfo.FullName);

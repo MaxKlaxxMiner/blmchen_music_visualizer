@@ -118,6 +118,8 @@ namespace MultiWaveDecoder
           case BoxType.UNKNOWN_WAVE_BOX: return new BoxImpl("Unknown 'wave' Box");
           case BoxType.REQUIREMENT_BOX: return new RequirementBox();
           case BoxType.ENCODER_NAME_BOX: return new EncoderBox();
+          case BoxType.UNKNOWN_LINF_BOX: return new UnknownLinfBox();
+          case BoxType.CUSTOM_GENRE_BOX: return new BoxImpl("Custom Genre Box");
 
           default:
           {

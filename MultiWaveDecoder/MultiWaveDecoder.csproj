@@ -132,6 +132,7 @@
     <Compile Include="aac\mp4\boxes\impl\sampleentries\RTPHintSampleEntry.cs" />
     <Compile Include="aac\mp4\boxes\impl\sampleentries\MPEGSampleEntry.cs" />
     <Compile Include="aac\mp4\boxes\impl\sampleentries\VideoSampleEntry.cs" />
+    <Compile Include="aac\mp4\boxes\impl\unkown\UnknownLinfBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\unkown\UnknownSbtdBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\SampleDescriptionBox.cs" />
     <Compile Include="aac\mp4\boxes\impl\basic\DataEntryUrlBox.cs" />

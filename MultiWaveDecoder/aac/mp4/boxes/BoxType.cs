@@ -907,5 +907,9 @@ namespace MultiWaveDecoder
     /// wave
     /// </summary>
     UNKNOWN_WAVE_BOX = 2002876005,
+    /// <summary>
+    /// linf
+    /// </summary>
+    UNKNOWN_LINF_BOX = 1818848870,
   }
 }

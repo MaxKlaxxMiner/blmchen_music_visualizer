@@ -67,7 +67,6 @@ public class BoxFactory implements BoxTypes
 		BOX_CLASSES.put(CATEGORY_BOX, BoxImpl.class);
 		BOX_CLASSES.put(COMMENTS_BOX, BoxImpl.class);
 		BOX_CLASSES.put(COMPOSER_SORT_BOX, BoxImpl.class);
-		BOX_CLASSES.put(CUSTOM_GENRE_BOX, BoxImpl.class);
 		BOX_CLASSES.put(DESCRIPTION_BOX, BoxImpl.class);
 		BOX_CLASSES.put(EPISODE_GLOBAL_UNIQUE_ID_BOX, BoxImpl.class);
 		BOX_CLASSES.put(GROUPING_BOX, BoxImpl.class);
@@ -146,7 +145,6 @@ public class BoxFactory implements BoxTypes
 		PARAMETER.put(CATEGORY_BOX, new string[]{"Category Box"});
 		PARAMETER.put(COMMENTS_BOX, new string[]{"Comments Box"});
 		PARAMETER.put(COMPOSER_SORT_BOX, new string[]{"Composer Sort Box"});
-		PARAMETER.put(CUSTOM_GENRE_BOX, new string[]{"Custom Genre Box"});
 		PARAMETER.put(DESCRIPTION_BOX, new string[]{"Description Cover Box"});
 		PARAMETER.put(EPISODE_GLOBAL_UNIQUE_ID_BOX, new string[]{"Episode Global Unique ID Box"});
 		PARAMETER.put(GROUPING_BOX, new string[]{"Grouping Box"});
