@@ -29,16 +29,32 @@
     private void InitializeComponent()
     {
       this.pictureBox1 = new System.Windows.Forms.PictureBox();
+      this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+      this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
       this.SuspendLayout();
       // 
       // pictureBox1
       // 
+      this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.pictureBox1.Location = new System.Drawing.Point(12, 12);
       this.pictureBox1.Name = "pictureBox1";
-      this.pictureBox1.Size = new System.Drawing.Size(600, 600);
+      this.pictureBox1.Size = new System.Drawing.Size(1065, 600);
       this.pictureBox1.TabIndex = 0;
       this.pictureBox1.TabStop = false;
+      // 
+      // openFileDialog1
+      // 
+      this.openFileDialog1.DefaultExt = "mp4";
+      this.openFileDialog1.Filter = "M4A-Dateien|*.m4a";
+      this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+      // 
+      // saveFileDialog1
+      // 
+      this.saveFileDialog1.DefaultExt = "wav";
+      this.saveFileDialog1.Filter = "WAVE-Dateien|*.wav";
       // 
       // Scanner
       // 
@@ -57,6 +73,8 @@
     #endregion
 
     private System.Windows.Forms.PictureBox pictureBox1;
+    private System.Windows.Forms.OpenFileDialog openFileDialog1;
+    private System.Windows.Forms.SaveFileDialog saveFileDialog1;
   }
 }
 

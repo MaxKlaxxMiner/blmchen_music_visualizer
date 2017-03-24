@@ -27,22 +27,39 @@ namespace Scanner
     /// Größe: 7,43 MB (7.797.942 Bytes)
     /// Dauer: 3:34
     /// </summary>
-    static readonly string TestFileM4A = Environment.ExpandEnvironmentVariables(MusicPathiTunes + @"Blümchen\Für immer und ewig\2-01 Heut' ist mein Tag.m4a");
+    //static readonly string TestFileM4A = Environment.ExpandEnvironmentVariables(MusicPathiTunes + @"Blümchen\Für immer und ewig\2-01 Heut' ist mein Tag.m4a");
 
     public Scanner()
     {
       InitializeComponent();
 
-      var finfo = new FileInfo(TestFileM4A);
+      string readFile = "";
+      string writeFile = "";
+
+      string path = Environment.ExpandEnvironmentVariables(MusicPathiTunes);
+      openFileDialog1.InitialDirectory = path;
+
+      if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
+      readFile = openFileDialog1.FileName;
+      if (saveFileDialog1.ShowDialog() != DialogResult.OK) return;
+      writeFile = saveFileDialog1.FileName;
+
+      var finfo = new FileInfo(readFile);
       if (!finfo.Exists) throw new FileNotFoundException(finfo.FullName);
       //var m4AData = File.ReadAllBytes(finfo.FullName);
 
-      Main.main(new[] { "-mp4", finfo.FullName, "test.wav" });
+      Main.main(new[] { "-mp4", finfo.FullName, writeFile });
+      Console.WriteLine("read.");
 
       pictureBox1.Image = Main.coverPicture;
     }
 
     private void Scanner_Load(object sender, EventArgs e)
+    {
+
+    }
+
+    private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
     {
 
     }
