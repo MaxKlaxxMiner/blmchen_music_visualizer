@@ -82,16 +82,31 @@ namespace Sync1
     //}
     #endregion
 
+    /// <summary>
+    /// wird aufgerufen, wenn das Zeichnen eines neuen Bildes begonnen wird (gibt die aktuelle Bild-Nummer zurück)
+    /// </summary>
+    /// <param name="timeStamp">Zeitpunkt, welcher benutzt werden soll (darf immer nur aufsteigend gesetzt werden)</param>
+    /// <returns>aktuelle Bildnummer (aufwärts, beginnend bei 1)</returns>
     public long FrameStartDrawing(double timeStamp)
     {
       return ++frameCount;
     }
 
+    /// <summary>
+    /// wird aufgerufen, wenn das Zeichnen des Bildes abgeschlossen wurde
+    /// </summary>
+    /// <param name="timeStamp">Zeitpunkt, welcher benutzt werden soll (darf immer nur aufsteigend gesetzt werden)</param>
+    /// <param name="frameId">Nummer des Bildes, welches fertig gezeichnet wurde</param>
     public void FrameFinishDrawing(double timeStamp, long frameId)
     {
       if (frameId != frameCount) throw new NotSupportedException("async multiframe is not supported");
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="timeStamp">Zeitpunkt, welcher benutzt werden soll (darf immer nur aufsteigend gesetzt werden)</param>
+    /// <param name="frameId">Nummer des Bildes, welches angezeigt wurde</param>
     public void FrameDirectDisplayed(double timeStamp, long frameId)
     {
       if (frameId != frameCount) throw new NotSupportedException("async multiframe is not supported");
