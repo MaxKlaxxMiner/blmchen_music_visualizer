@@ -1,6 +1,9 @@
-﻿using System;
-using System.Diagnostics;
+﻿#region # using *.*
+using System;
 // ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable UnusedMember.Global
+// ReSharper disable UnusedParameter.Global
+#endregion
 
 namespace Sync1
 {
@@ -9,6 +12,7 @@ namespace Sync1
   /// </summary>
   public class TickSync
   {
+    #region # // --- fixe Werte ---
     /// <summary>
     /// merkt sich die Anzahl der Ticks, welche pro Sekunde berechnet werden sollen
     /// </summary>
@@ -35,16 +39,18 @@ namespace Sync1
     /// gibt an, ob pausierte Ticks normal weiter verarbeitet werden sollen (true) oder versucht werden soll die fehlende Zeit als Ticks wieder aufzuholen (false)
     /// </summary>
     readonly bool maxTickSkip;
+    #endregion
 
+    #region # // --- Variablen ---
     /// <summary>
     /// gibt die Anzahl der insgesamt berechneten Ticks zurück
     /// </summary>
-    long tickCount = 0;
+    long tickCount;
 
     /// <summary>
     /// gibt die Anzahl der insgesamt berechneten Bilder zurück
     /// </summary>
-    long frameCount = 0;
+    long frameCount;
 
     /// <summary>
     /// Zeitpunkt des letzten Ticks (in Sekunden seit Klassen-Initialisierung)
@@ -54,7 +60,9 @@ namespace Sync1
     /// Zeitpunkt des nächsten Ticks (in Sekunden seit Klassen-Initialisierung)
     /// </summary>
     double nextTickTime;
+    #endregion
 
+    #region # // --- Konstruktor ---
     /// <summary>
     /// Konstruktor
     /// </summary>
@@ -83,6 +91,7 @@ namespace Sync1
       lastTickTime = 0.0;
       nextTickTime = tickInterval;
     }
+    #endregion
 
     #region # // --- todo: automatic real-timing ---
     ///// <summary>
@@ -138,6 +147,8 @@ namespace Sync1
           lastTickTime = nextTickTime;
           nextTickTime += tickInterval;
           tickFunction(this); // Tick-Funktion aufrufen
+          tickCount++;
+
           if (nextTickTime > timeStamp) break; // genügend Ticks berechnet?
 
           if (nextTickTime > tickTimeLimit) // Zeit-Limit pro Bild überschritten?
@@ -146,7 +157,8 @@ namespace Sync1
           }
         }
 
-        if (tickCountLimit <= 0 && maxTickSkip && nextTickTime < timeStamp) // Limit überschritten? -> Zeitpunkte angleichen, sofern dies erlaubt ist (sonst beim nächsten Bild versuchen alle Ticks zu berechnen)
+        // Limit überschritten? -> Zeitpunkte angleichen, sofern dies erlaubt ist (sonst werden bei den nächsten Bild versuchen alle Ticks zu berechnen)
+        if (tickCountLimit <= 0 && maxTickSkip && nextTickTime < timeStamp)
         {
           nextTickTime = timeStamp;
           lastTickTime = timeStamp - tickInterval;
@@ -187,6 +199,17 @@ namespace Sync1
     {
       if (timeStamp < lastTickTime) throw new ArgumentOutOfRangeException("timeStamp");
       if (frameId != frameCount) throw new NotSupportedException("async multiframe is not supported");
+    }
+    #endregion
+
+    #region # public override string ToString() // gibt den Status als lesbare Zeichenkette zurück
+    /// <summary>
+    /// gibt den Status als lesbare Zeichenkette zurück
+    /// </summary>
+    /// <returns>lesbare Zeichenkette</returns>
+    public override string ToString()
+    {
+      return (new { tickCount, ticksPerSecond, tickTime = nextTickTime, frameCount }).ToString();
     }
     #endregion
   }
