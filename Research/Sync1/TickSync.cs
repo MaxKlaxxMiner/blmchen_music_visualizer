@@ -1,5 +1,7 @@
 ﻿#region # using *.*
 using System;
+using System.Collections.Generic;
+
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable UnusedMember.Global
 // ReSharper disable UnusedParameter.Global
@@ -10,7 +12,7 @@ namespace Sync1
   /// <summary>
   /// Klasse für eine vollständiges Tick-System
   /// </summary>
-  public class TickSync
+  public sealed class TickSync
   {
     #region # // --- fixe Werte ---
     /// <summary>
@@ -90,6 +92,10 @@ namespace Sync1
       tickInterval = 1.0 / ticksPerSecond;
       lastTickTime = 0.0;
       nextTickTime = tickInterval;
+
+      currentValues = new ValueContainer(0.0);
+
+      lastTicks = new[] { currentValues, new ValueContainer(-tickInterval), new ValueContainer(-tickInterval * 2), new ValueContainer(-tickInterval * 3) };
     }
     #endregion
 
@@ -199,6 +205,256 @@ namespace Sync1
     {
       if (timeStamp < lastTickTime) throw new ArgumentOutOfRangeException("timeStamp");
       if (frameId != frameCount) throw new NotSupportedException("async multiframe is not supported");
+    }
+    #endregion
+
+    #region # // --- Value-System ---
+    /// <summary>
+    /// Container zum speichern von mehreren Werten
+    /// </summary>
+    sealed class ValueContainer
+    {
+      /// <summary>
+      /// merkt sich den Zeitstempel der Werte
+      /// </summary>
+      double timeStamp;
+      /// <summary>
+      /// Array mit allen Werten
+      /// </summary>
+      double[] values;
+      /// <summary>
+      /// Array mit den Identifikationen und Längenangaben
+      /// 0: freies Feld
+      /// größer als 0: gültige Ident, stellt die Anzahl der Werte dar
+      /// kleiner als 0: Wert gehört zu einem anderen Ident (start-ident wird als offset angegeben)
+      /// </summary>
+      int[] ident;
+
+      /// <summary>
+      /// Start-Position, wo der nächste freie Platz gesucht werden soll
+      /// </summary>
+      int search;
+      /// <summary>
+      /// Gesamtzahl der Werte, welche noch frei sind
+      /// </summary>
+      int free;
+
+      /// <summary>
+      /// Konstruktor
+      /// </summary>
+      /// <param name="timeStamp">Zeitstempel, welcher verwendet werden soll</param>
+      public ValueContainer(double timeStamp)
+      {
+        this.timeStamp = timeStamp;
+        values = new double[16];
+        ident = new int[16];
+        search = 0;
+        free = 16;
+      }
+
+      /// <summary>
+      /// setzt alle Werte, welche in einem anderen Container gespeichert wurden
+      /// </summary>
+      /// <param name="container">Container, wovon die Werte verwendet werden sollen</param>
+      /// <param name="timeStamp">Zeitstempel, welcher verwendet werden soll</param>
+      public void SetAllValues(ValueContainer container, double timeStamp)
+      {
+        this.timeStamp = timeStamp;
+        search = container.search;
+        free = container.free;
+
+        var oldValues = container.values;
+        var oldIdent = container.ident;
+        var newValues = values;
+        var newIdent = ident;
+
+        if (newValues.Length != oldValues.Length) // müssen die Größen neu erstellt werden?
+        {
+          values = newValues = new double[oldValues.Length];
+          ident = newIdent = new int[oldIdent.Length];
+        }
+
+        // --- Inhalte kopieren ---
+        for (int i = 0; i < newValues.Length; i++)
+        {
+          newValues[i] = oldValues[i];
+        }
+
+        for (int i = 0; i < newIdent.Length; i++)
+        {
+          newIdent[i] = oldIdent[i];
+        }
+      }
+    }
+
+    /// <summary>
+    /// merkt sich die aktuellen Werte, welche während eines Ticks geändert werden können
+    /// </summary>
+    ValueContainer currentValues;
+
+    /// <summary>
+    /// merkt sich alle Werte der letzten berechneten Ticks, [0] == currentValues
+    /// </summary>
+    readonly ValueContainer[] lastTicks;
+
+    /// <summary>
+    /// reserviert den Platz für neue Werte und gibt die entsprechende ID zurück
+    /// </summary>
+    /// <param name="valueCount">Anzahl der Werte, welche reserviert werden sollen</param>
+    /// <returns>fertige ID</returns>
+    public int AllocValues(int valueCount)
+    {
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// gibt die Anzahl der gespeicherten Werte zurück, oder kleinergleich 0, wenn die ID ungültig ist oder die Werte bereits gelöscht wurden
+    /// </summary>
+    /// <param name="valueId">ID der Werte, welche abgefragt werden sollen</param>
+    /// <returns>Anzahl der gespeicherten Werte oder kleinergleich 0, wenn die ID ungültig ist oder die Werte bereits gelöscht wurden</returns>
+    public int GetValueCount(int valueId)
+    {
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// löscht die Werte einer bestimmten ID und gibt true zurück, falls erfolgreich
+    /// </summary>
+    /// <param name="valueId">ID der Werte, welche gelöscht werden sollen</param>
+    /// <returns>true, wenn die Werte erfolgreich gelöscht werden konnten</returns>
+    public bool DeleteValues(int valueId)
+    {
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// setzt einen bestimmten Wert und gibt true zurück, wenn das Zurücksetzen erfolgreich war
+    /// </summary>
+    /// <param name="valueId">ID der Werte, wo ein Wert zurückgesetzt werden soll</param>
+    /// <param name="valueOffset">Offset innerhalb der Werte</param>
+    /// <param name="value">Wert, welcher gesetzt werden soll</param>
+    /// <returns>true, wenn die Änderung erfolgreich war</returns>
+    public bool ResetValue(int valueId, int valueOffset, double value)
+    {
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// setzt alle Werte anhand einer ID und gibt true zurück, wenn das Zurücksetzen der Werte erfolgreich war
+    /// </summary>
+    /// <param name="valueId">ID der Werte, welche geändert werden sollen</param>
+    /// <param name="values">Werte, welche gesetzt werden sollen</param>
+    /// <returns>true, wenn das Zurücksetzen erfolgreich war</returns>
+    public bool ResetValues(int valueId, params double[] values)
+    {
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// aktualisiert einen der Werte anhand einer ID und gibt true zurück, wenn die Änderung erfolgreich war
+    /// </summary>
+    /// <param name="valueId">ID der Werte, welche geändert werden sollen</param>
+    /// <param name="valueOffset">Offset innerhalb der Werte</param>
+    /// <param name="value">Wert, welcher aktualisiert werden soll</param>
+    /// <returns>true, wenn das Update erfolgreich war</returns>
+    public bool UpdateValue(int valueId, int valueOffset, double value)
+    {
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// aktualisiert alle Werte anhand einer ID und gibt true zurück, wenn die Änderung erfolgreich war
+    /// </summary>
+    /// <param name="valueId">ID der Werte, welche geändert werden sollen</param>
+    /// <param name="values">Werte, welche aktualisiert werden sollen</param>
+    /// <returns>true, wenn das Update erfolgreich war</returns>
+    public bool UpdateValues(int valueId, params double[] values)
+    {
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// gibt den aktuell gespeicherten Wert anhand einer ID zurück (ohne Zwischenberechnung)
+    /// </summary>
+    /// <param name="valueId">ID der Werte, welche abgefragt werden sollen</param>
+    /// <param name="valueOffset">Offset innerhalb der Werte</param>
+    /// <returns>fertig ausgelesener Wert oder 0, wenn die ID ungültig ist bzw. der Wert bereits gelöscht wurde</returns>
+    public double GetOriginValue(int valueId, int valueOffset = 0)
+    {
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// gibt die gespeicherten Werte anhand einer ID zurück
+    /// </summary>
+    /// <param name="valueId">ID der Werte, welche gelesen werden sollen</param>
+    /// <param name="valueOffset">Offset innerhalb der Werte</param>
+    /// <param name="readArray">Array, wohin die Werte geschrieben werden sollen</param>
+    /// <param name="arrayOffset">Startposition innerhalb des Arrays</param>
+    /// <param name="count">Anzahl der zu lesenden Werte</param>
+    /// <returns>true, wenn der Lesevorgang erfolgreich war</returns>
+    public bool GetOriginValues(int valueId, int valueOffset, double[] readArray, int arrayOffset, int count)
+    {
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// gibt einen normal interpolierten Wert zurück, während ein Bild gezeichnet wird
+    /// </summary>
+    /// <param name="frameId">Nummer des Bildes, welches momentan gezeichnet wird</param>
+    /// <param name="valueId">ID der Werte, welche gelesen werden sollen</param>
+    /// <param name="valueOffset">Offset innerhalb der Werte</param>
+    /// <returns>fertig berechneter Wert oder 0, wenn die ID ungültig ist bzw. der Wert bereits gelöscht wurde</returns>
+    public double GetValue(long frameId, int valueId, int valueOffset = 0)
+    {
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// gibt einen normal interpolierten Wert mit Einschränkungen zurück, während ein Bild gezeichnet wird
+    /// </summary>
+    /// <param name="frameId">Nummer des Bildes, welches momentan gezeichnet wird</param>
+    /// <param name="valueId">ID der Werte, welche gelesen werden sollen</param>
+    /// <param name="minValue">minimal erlaubter Wert (das Ergebnis darf nicht kleiner sein)</param>
+    /// <param name="maxValue">maximal erlaubter Wert (das Ergebnis darf nicht größer sein)</param>
+    /// <param name="valueOffset">Offset innerhalb der Werte</param>
+    /// <returns>fertig berechneter Wert</returns>
+    public double GetValueTruncated(long frameId, int valueId, double minValue, double maxValue, int valueOffset = 0)
+    {
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// gibt einen normal interpolierten Wert mit Überundungsmöglichkeit zurück, während ein Bild gezeichnet wird
+    /// </summary>
+    /// <param name="frameId">Nummer des Bildes, welches momentan gezeichnet wird</param>
+    /// <param name="valueId">ID der Werte, welche gelesen werden sollen</param>
+    /// <param name="startValue">Start-Wert, welcher nicht unterschritten werden soll</param>
+    /// <param name="endValue">End-Wert, welcher nicht überschritten werden soll</param>
+    /// <param name="valueOffset">Offset innerhalb der Werte</param>
+    /// <returns>fertig berechneter Wert</returns>
+    public double GetValueWrapped(long frameId, int valueId, double startValue, double endValue, int valueOffset = 0)
+    {
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// [Debug] gibt alle gespeicherten Werte inkl. zugehörie ID zurück (langsam)
+    /// </summary>
+    /// <returns>Enumerable aller Werte</returns>
+    public IEnumerable<KeyValuePair<int, double[]>> DebugGetAllValues()
+    {
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// [Debug] gibt alle Werte anhand einer bestimmten ID zurück (oder null, falls die ID ungültig ist oder bereits gelöscht wurde)
+    /// </summary>
+    /// <param name="valueId">ID der Werte, welche gelesen werden sollen</param>
+    /// <returns>ausgelesene Werte oder null, wenn die ID ungültig war oder bereits gelöscht wurde</returns>
+    public double[] DebugGetValues(int valueId)
+    {
+      throw new NotImplementedException();
     }
     #endregion
 
