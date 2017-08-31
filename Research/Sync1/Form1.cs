@@ -33,22 +33,33 @@ namespace Sync1
     {
       const float CrossSize = 0.01f;
 
-      // --- Animationskurve zeichnen ---
-      var pBlue = new Pen(Color.CornflowerBlue, penSize);
-
+      // --- Animationskurve berechnen und zeichnen ---
       int testIndex = 0;
+      int valueId = 0;
       var sync = new TickSync(TicksPerSecond, t =>
       {
+        t.UpdateValue(valueId, 0, TestValues[testIndex]);
         testIndex++;
         if (testIndex == TestCount) testIndex = 0; // von vorne beginnen
       });
+      valueId = sync.AllocValues(1);
 
+      var pBlue = new Pen(Color.CornflowerBlue, penSize);
       const float FrameStep = (float)(1 / FramesPerSecond);
       for (int frame = 0; frame * FrameStep < MaxTime; frame++)
       {
-        float val = (float)TestValues[(int)(frame * TicksPerSecond / FramesPerSecond) % TestCount];
+        double ts = frame * FrameStep;
+        long frameId = sync.FrameInitialize(ts);
+        sync.FrameStartDrawing(frameId, ts);
+
+        //float val = (float)TestValues[(int)(frame * TicksPerSecond / FramesPerSecond) % TestCount];
+        float val = (float)sync.GetOriginValue(valueId);
+
         g.DrawLine(pBlue, frame * FrameStep - CrossSize, val - CrossSize, frame * FrameStep + CrossSize, val + CrossSize);
         g.DrawLine(pBlue, frame * FrameStep - CrossSize, val + CrossSize, frame * FrameStep + CrossSize, val - CrossSize);
+
+        sync.FrameFinishDrawing(frameId, ts);
+        sync.FrameDisplayed(frameId, ts);
       }
 
 

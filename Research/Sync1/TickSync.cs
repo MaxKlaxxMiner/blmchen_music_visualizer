@@ -1,7 +1,8 @@
 ﻿#region # using *.*
 using System;
 using System.Collections.Generic;
-
+using System.Diagnostics;
+// ReSharper disable UnusedMethodReturnValue.Global
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable UnusedMember.Global
 // ReSharper disable UnusedParameter.Global
@@ -90,8 +91,8 @@ namespace Sync1
       this.maxTickSkip = maxTickSkip;
 
       tickInterval = 1.0 / ticksPerSecond;
-      lastTickTime = 0.0;
-      nextTickTime = tickInterval;
+      lastTickTime = -tickInterval;
+      nextTickTime = 0.0;
 
       currentValues = new ValueContainer(0.0);
 
@@ -152,6 +153,7 @@ namespace Sync1
         {
           lastTickTime = nextTickTime;
           nextTickTime += tickInterval;
+          TickValueRotate(nextTickTime);
           tickFunction(this); // Tick-Funktion aufrufen
           tickCount++;
 
@@ -177,9 +179,9 @@ namespace Sync1
     /// <summary>
     /// wird aufgerufen, wenn das Zeichnen eines neuen Bildes begonnen wird
     /// </summary>
-    /// <param name="timeStamp">Zeitpunkt, welcher benutzt werden soll (darf immer nur aufsteigend gesetzt werden)</param>
     /// <param name="frameId">Nummer des Bildes, welches gezeichnet werden soll</param>
-    public void FrameStartDrawing(double timeStamp, long frameId)
+    /// <param name="timeStamp">Zeitpunkt, welcher benutzt werden soll (darf immer nur aufsteigend gesetzt werden)</param>
+    public void FrameStartDrawing(long frameId, double timeStamp)
     {
       if (timeStamp < lastTickTime) throw new ArgumentOutOfRangeException("timeStamp");
       if (frameId != frameCount) throw new NotSupportedException("async multiframe is not supported");
@@ -188,9 +190,9 @@ namespace Sync1
     /// <summary>
     /// wird aufgerufen, wenn das Zeichnen des Bildes abgeschlossen wurde
     /// </summary>
-    /// <param name="timeStamp">Zeitpunkt, welcher benutzt werden soll (darf immer nur aufsteigend gesetzt werden)</param>
     /// <param name="frameId">Nummer des Bildes, welches fertig gezeichnet wurde</param>
-    public void FrameFinishDrawing(double timeStamp, long frameId)
+    /// <param name="timeStamp">Zeitpunkt, welcher benutzt werden soll (darf immer nur aufsteigend gesetzt werden)</param>
+    public void FrameFinishDrawing(long frameId, double timeStamp)
     {
       if (timeStamp < lastTickTime) throw new ArgumentOutOfRangeException("timeStamp");
       if (frameId != frameCount) throw new NotSupportedException("async multiframe is not supported");
@@ -199,9 +201,9 @@ namespace Sync1
     /// <summary>
     /// wird genau dann aufgerufen, wenn das Bild auf dem Bildschirm angezeigt wurde (z.B. nach einer Wartephase durch vsync)
     /// </summary>
-    /// <param name="timeStamp">Zeitpunkt, welcher benutzt werden soll (darf immer nur aufsteigend gesetzt werden)</param>
     /// <param name="frameId">Nummer des Bildes, welches angezeigt wurde</param>
-    public void FrameDisplayed(double timeStamp, long frameId)
+    /// <param name="timeStamp">Zeitpunkt, welcher benutzt werden soll (darf immer nur aufsteigend gesetzt werden)</param>
+    public void FrameDisplayed(long frameId, double timeStamp)
     {
       if (timeStamp < lastTickTime) throw new ArgumentOutOfRangeException("timeStamp");
       if (frameId != frameCount) throw new NotSupportedException("async multiframe is not supported");
@@ -221,14 +223,14 @@ namespace Sync1
       /// <summary>
       /// Array mit allen Werten
       /// </summary>
-      double[] values;
+      public readonly double[] values;
       /// <summary>
       /// Array mit den Identifikationen und Längenangaben
       /// 0: freies Feld
       /// größer als 0: gültige Ident, stellt die Anzahl der Werte dar
       /// kleiner als 0: Wert gehört zu einem anderen Ident (start-ident wird als offset angegeben)
       /// </summary>
-      int[] ident;
+      public readonly int[] ident;
 
       /// <summary>
       /// Start-Position, wo der nächste freie Platz gesucht werden soll
@@ -263,27 +265,98 @@ namespace Sync1
         search = container.search;
         free = container.free;
 
-        var oldValues = container.values;
-        var oldIdent = container.ident;
-        var newValues = values;
-        var newIdent = ident;
-
-        if (newValues.Length != oldValues.Length) // müssen die Größen neu erstellt werden?
-        {
-          values = newValues = new double[oldValues.Length];
-          ident = newIdent = new int[oldIdent.Length];
-        }
+        Debug.Assert(values.Length == container.values.Length); // Größe muss übereinstimmen
 
         // --- Inhalte kopieren ---
-        for (int i = 0; i < newValues.Length; i++)
+        Array.Copy(container.values, values, values.Length);
+        Array.Copy(container.ident, ident, ident.Length);
+      }
+
+      /// <summary>
+      /// prüft, ob ein bestimmter Bereich genug freie Felder hat
+      /// </summary>
+      /// <param name="pos">Startposition, welche geprüft werden soll</param>
+      /// <param name="len">Länge des zu prüfenden Bereiches</param>
+      /// <returns>true, wenn der gesamte Bereich frei und verfügbar ist</returns>
+      bool CheckFree(int pos, int len)
+      {
+        if (pos + len > ident.Length) return false; // außerhalb des gültigen Bereiches
+        if (ident[pos] != 0) return false; // erste Element bereits belegt
+        len--;
+        for (; len > 0; len--)
         {
-          newValues[i] = oldValues[i];
+          if (ident[pos + len] != 0) return false; // ein hinteres Element bereits belegt
+        }
+        return true; // alle Elemente frei
+      }
+
+      /// <summary>
+      /// markiert einen bestimmten Bereich als markiert
+      /// </summary>
+      /// <param name="pos">Startposition, welche markiert werden soll</param>
+      /// <param name="len">Länge der Markierung</param>
+      void Alloc(int pos, int len)
+      {
+        ident[pos] = len; // erster Ident enthält immer die Länge der Kette
+        values[pos] = 0;
+
+        for (int i = 1; i < len; i++)
+        {
+          ident[pos + i] = -i; // weitere Idents mit offset auf den ersten Ident-Wert zeigen
+          values[pos + i] = 0;
         }
 
-        for (int i = 0; i < newIdent.Length; i++)
+        free -= len;
+      }
+
+      /// <summary>
+      /// reserviert den Platz für neue Werte und gibt die entsprechende ID zurück
+      /// </summary>
+      /// <param name="valueCount">Anzahl der Werte, welche reserviert werden soll</param>
+      /// <returns>fertige ID</returns>
+      public int AllocValues(int valueCount)
+      {
+        int p = search;
+        for (; p < ident.Length; )
         {
-          newIdent[i] = oldIdent[i];
+          if (CheckFree(p, valueCount)) // Platz frei?
+          {
+            while (p > 0 && ident[p - 1] == 0) p--; // normalisieren
+            Alloc(p, valueCount); // Platz reservieren
+            search = p + valueCount; // Suchpunkt für die nachfolgenden Suchen neu setzen
+            return p;
+          }
+          p += valueCount; // pauschal zum nächsten Platz springen
         }
+
+        throw new NotImplementedException("todo: loop search");
+      }
+
+      /// <summary>
+      /// aktualisiert einen reservierten Bereich in einem anderen Container, welcher parallel betrieben wird
+      /// </summary>
+      /// <param name="target">Container, welcher aktualisiert werden soll</param>
+      /// <param name="valueId">ID der Werte, welche erstellt wurden</param>
+      /// <param name="valueCount">Länge des reservierten Bereiches</param>
+      public void SendAllocValues(ValueContainer target, int valueId, int valueCount)
+      {
+        if (target.values.Length != values.Length) throw new NotImplementedException("todo: resize");
+
+        Array.Copy(ident, valueId, target.ident, valueId, valueCount);
+        Array.Copy(values, valueId, target.values, valueId, valueCount);
+        target.free -= valueCount;
+        target.search = search;
+
+        Debug.Assert(target.free == free);
+      }
+
+      /// <summary>
+      /// gibt den Inhalt als lesbare Zeichenkette aus
+      /// </summary>
+      /// <returns>lesbare Zeichenkette</returns>
+      public override string ToString()
+      {
+        return (new { timeStamp, values = values.Length - free }).ToString();
       }
     }
 
@@ -298,13 +371,31 @@ namespace Sync1
     readonly ValueContainer[] lastTicks;
 
     /// <summary>
+    /// rotiert die bisherigen Tick-Werte
+    /// </summary>
+    /// <param name="newTimeStamp">neue Zeitstempel für den aktuellen Tick</param>
+    void TickValueRotate(double newTimeStamp)
+    {
+      currentValues = lastTicks[lastTicks.Length - 1]; // ältesten letzten Tick-Stand nehmen, und diese Recyclen
+      for (int i = lastTicks.Length - 1; i > 0; i--) lastTicks[i] = lastTicks[i - 1]; // Ticks verschieben
+      lastTicks[0] = currentValues;
+      currentValues.SetAllValues(lastTicks[1], newTimeStamp); // die letzten Werte kopieren und Zeitstempel neu setzen
+    }
+
+    /// <summary>
     /// reserviert den Platz für neue Werte und gibt die entsprechende ID zurück
     /// </summary>
     /// <param name="valueCount">Anzahl der Werte, welche reserviert werden sollen</param>
     /// <returns>fertige ID</returns>
     public int AllocValues(int valueCount)
     {
-      throw new NotImplementedException();
+      if (valueCount < 1 || valueCount > 1000000000) throw new ArgumentOutOfRangeException("valueCount");
+      int valueId = currentValues.AllocValues(valueCount);
+      for (int i = 1; i < lastTicks.Length; i++)
+      {
+        currentValues.SendAllocValues(lastTicks[i], valueId, valueCount);
+      }
+      return valueId;
     }
 
     /// <summary>
@@ -359,7 +450,11 @@ namespace Sync1
     /// <returns>true, wenn das Update erfolgreich war</returns>
     public bool UpdateValue(int valueId, int valueOffset, double value)
     {
-      throw new NotImplementedException();
+      if ((uint)valueId >= (uint)currentValues.ident.Length) return false; // ID außerhalb des gültigen Bereiches
+      if ((uint)valueOffset >= (uint)currentValues.ident[valueId]) return false; // valueOffset außerhalb des Bereiches oder ID war nicht gültig
+
+      currentValues.values[valueId + valueOffset] = value; // Wert setzen
+      return true;
     }
 
     /// <summary>
@@ -381,7 +476,10 @@ namespace Sync1
     /// <returns>fertig ausgelesener Wert oder 0, wenn die ID ungültig ist bzw. der Wert bereits gelöscht wurde</returns>
     public double GetOriginValue(int valueId, int valueOffset = 0)
     {
-      throw new NotImplementedException();
+      if ((uint)valueId >= (uint)currentValues.ident.Length) throw new ArgumentOutOfRangeException("valueId"); // ID außerhalb des gültigen Bereiches
+      if ((uint)valueOffset >= (uint)currentValues.ident[valueId]) throw new ArgumentOutOfRangeException("valueOffset"); // valueOffset außerhalb des Bereiches oder ID war nicht gültig
+
+      return currentValues.values[valueId + valueOffset]; // Wert direkt abfragen und zurück geben
     }
 
     /// <summary>
