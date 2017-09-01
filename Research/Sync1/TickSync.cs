@@ -56,6 +56,10 @@ namespace Sync1
     long frameCount;
 
     /// <summary>
+    /// Zeitpunkt des aktuell zu zeichnenden Bildes
+    /// </summary>
+    double frameTickTime;
+    /// <summary>
     /// Zeitpunkt des letzten Ticks (in Sekunden seit Klassen-Initialisierung)
     /// </summary>
     double lastTickTime;
@@ -173,6 +177,8 @@ namespace Sync1
         }
       }
 
+      frameTickTime = timeStamp;
+
       return ++frameCount;
     }
 
@@ -185,6 +191,7 @@ namespace Sync1
     {
       if (timeStamp < lastTickTime) throw new ArgumentOutOfRangeException("timeStamp");
       if (frameId != frameCount) throw new NotSupportedException("async multiframe is not supported");
+      frameTickTime = timeStamp;
     }
 
     /// <summary>
@@ -219,7 +226,7 @@ namespace Sync1
       /// <summary>
       /// merkt sich den Zeitstempel der Werte
       /// </summary>
-      double timeStamp;
+      public double timeStamp;
       /// <summary>
       /// Array mit allen Werten
       /// </summary>
@@ -505,7 +512,18 @@ namespace Sync1
     /// <returns>fertig berechneter Wert oder 0, wenn die ID ungültig ist bzw. der Wert bereits gelöscht wurde</returns>
     public double GetValue(long frameId, int valueId, int valueOffset = 0)
     {
-      throw new NotImplementedException();
+      if (frameId != frameCount) throw new NotSupportedException("async multiframe is not supported");
+      if ((uint)valueId >= (uint)currentValues.ident.Length) throw new ArgumentOutOfRangeException("valueId"); // ID außerhalb des gültigen Bereiches
+      if ((uint)valueOffset >= (uint)currentValues.ident[valueId]) throw new ArgumentOutOfRangeException("valueOffset"); // valueOffset außerhalb des Bereiches oder ID war nicht gültig
+
+      double timOld = lastTicks[1].timeStamp;
+      double valOld = lastTicks[1].values[valueId + valueOffset];
+      double timNew = currentValues.timeStamp;
+      double valNew = currentValues.values[valueId + valueOffset];
+      double timDif = timNew - timOld;
+      double valDif = valNew - valOld;
+
+      return valOld + (frameTickTime - timOld) * (valDif / timDif);
     }
 
     /// <summary>

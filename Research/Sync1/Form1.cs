@@ -52,8 +52,8 @@ namespace Sync1
         long frameId = sync.FrameInitialize(ts);
         sync.FrameStartDrawing(frameId, ts);
 
-        //float val = (float)TestValues[(int)(frame * TicksPerSecond / FramesPerSecond) % TestCount];
-        float val = (float)sync.GetOriginValue(valueId);
+        // float val = (float)sync.GetOriginValue(valueId);
+        float val = (float)sync.GetValue(frameId, valueId);
 
         g.DrawLine(pBlue, frame * FrameStep - CrossSize, val - CrossSize, frame * FrameStep + CrossSize, val + CrossSize);
         g.DrawLine(pBlue, frame * FrameStep - CrossSize, val + CrossSize, frame * FrameStep + CrossSize, val - CrossSize);
